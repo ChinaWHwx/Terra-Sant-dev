@@ -12,7 +12,7 @@ class MyView extends GetView<MyController> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        drawer: NavigationDrawer(),
+        drawer: const NavigationDrawer(),
         bottomNavigationBar: ConvexAppBar(items: const [
           TabItem(icon: Icons.home, title: 'Acceuil'),
           TabItem(icon: Icons.search, title: 'Explorer'),
@@ -34,6 +34,9 @@ class MyView extends GetView<MyController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(
+                      height: 100,
+                    ),
                     TextButton(
                       child: Row(
                         children: const [
@@ -69,6 +72,15 @@ class MyView extends GetView<MyController> {
                         ],
                       ),
                       onPressed: () => controller.navigateToDocument(),
+                    ),
+                    TextButton(
+                      child: Row(
+                        children: const [
+                          Icon(Icons.favorite),
+                          Text("Mes favorites"),
+                        ],
+                      ),
+                      onPressed: () => controller.navigateToProfile(),
                     ),
                     TextButton(
                       child: Row(

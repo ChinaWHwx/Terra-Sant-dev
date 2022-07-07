@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/shared/widgets/drawer/navigation_draver.controller.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
-class NavigationDrawer extends StatelessWidget {
+class NavigationDrawer extends GetView<NavigationDrawerController> {
   const NavigationDrawer({Key? key}) : super(key: key);
 
   //var authController = Get.find<AuthController>();
@@ -71,13 +72,37 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   Widget buildDrawerHeader() {
-    return const UserAccountsDrawerHeader(
-      accountName: Text("wx"),
-      accountEmail: Text("wx@gmail.com"),
-      currentAccountPicture: CircleAvatar(
+    return UserAccountsDrawerHeader(
+      accountName: const Text("wx"),
+      accountEmail: const Text("wx@gmail.com"),
+      currentAccountPicture: Stack(
+        children: [
+          const CircleAvatar(
+            backgroundImage: AssetImage('assets/images/download.jpg'),
+            radius: 200,
+          ),
+          GestureDetector(
+            onTap: () {
+              controller.getPicture();
+            },
+          ),
+          Align(
+            // 编辑头像图片放在右下方。
+            alignment: Alignment.bottomRight,
+            child: Image.asset(
+              'assets/images/edit.png',
+              fit: BoxFit.contain,
+              height: 24.0,
+            ),
+          ),
+        ],
+      ),
+      /*
+      CircleAvatar(
         backgroundImage: AssetImage('assets/images/download.jpg'),
       ),
-      decoration: BoxDecoration(
+      */
+      decoration: const BoxDecoration(
           color: Colors.yellow,
           image: DecorationImage(
               image: AssetImage('assets/images/logo.png'),
@@ -107,9 +132,9 @@ class NavigationDrawer extends StatelessWidget {
 
   navigate(int index, context) {
     if (index == 0) {
-      Get.toNamed(Routes.auth);
+      Get.toNamed(Routes.setting);
     } else if (index == 1) {
-      Get.toNamed(Routes.auth);
+      Get.toNamed(Routes.bookmarksPage);
     } else if (index == 2) {
       Get.toNamed(Routes.recommend);
     } else if (index == 3) {

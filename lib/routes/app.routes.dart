@@ -45,6 +45,10 @@ class Routes {
   static const emailVerificationTimeOut = '/emailVerificationTimeOut';
   static const resetPassword = '/resetPassword';
   static const forgotPasswordSmsVerification = '/forgotPasswordSmsVerification';
+  static const favorite = '/favorite';
+  static const pharmacieFavorite = '/pharmacieFavorite';
+  static const bookmarksPage = '/bookmarksPage';
+  static const candidateFavorite = '/candidateFavorite';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -91,4 +95,7 @@ class Routes {
   static const resetPasswordRoute = resetPassword;
   static const forgotPasswordSmsVerificationRoute =
       forgotPasswordSmsVerification;
+  static const favoriteRoute = favorite;
+  static const pharmacieFavoriteRoute = pharmacieFavorite;
+  static const candidateFavoriteRoute = candidateFavorite;
 }

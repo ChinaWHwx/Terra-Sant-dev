@@ -29,12 +29,15 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/duty.controller.
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/favorite/Pharmacie/pharmacie_favotite.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
+import 'package:flutter_application_1/modules/app/online_shopee/pharmacie_controller.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.controller.dart';
+import 'package:flutter_application_1/shared/widgets/drawer/navigation_draver.controller.dart';
 import 'package:get/get.dart';
 
 class AppBindings extends Bindings {
@@ -79,5 +82,9 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => ResetPasswordController(), fenix: true);
     Get.lazyPut(() => ForgetPasswordController(), fenix: true);
     Get.lazyPut(() => ForgotPasswordSmsVerificationController(), fenix: true);
+    Get.lazyPut(() => PharmacieController(), fenix: true);
+    Get.lazyPut(() => CandidateController(), fenix: true);
+    Get.lazyPut(() => PharmacieFavoriteController(), fenix: true);
+    Get.lazyPut(() => NavigationDrawerController(), fenix: true);
   }
 }

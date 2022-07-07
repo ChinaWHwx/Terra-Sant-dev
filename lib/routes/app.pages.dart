@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/models/explorer_pharmacie.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/ForgetPassword/forget.view.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/ForgetPassword/forgotPasswordSmsVerification/forgotPasswordSmsVerification.view.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/ResetPassword/resetPassword.view.dart';
@@ -21,12 +22,15 @@ import 'package:flutter_application_1/modules/app/error/access/File/file_access.
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/duty.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/favorite/Pharmacie/pharmacie_favotite.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/favorite/bookmarks_page.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/logout/logout.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.view.dart';
@@ -34,6 +38,7 @@ import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.vi
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
+import 'package:flutter_application_1/modules/app/online_shopee/favorite_page.dart';
 import 'package:flutter_application_1/modules/app/timeout/EmailVerification/emailverification_timeout.view.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.view.dart';
 import 'package:get/get.dart';
@@ -135,5 +140,13 @@ class AppPages {
     GetPage(
         name: Routes.forgotPasswordSmsVerification,
         page: () => const ForgotPasswordSmsVerificationView()),
+    GetPage(name: Routes.favorite, page: () => FavoritePage()),
+    GetPage(
+        name: Routes.pharmacieFavorite,
+        page: () => const PharmacieFavoriteView()),
+    GetPage(
+        name: Routes.candidateFavorite,
+        page: () => const CandidateFavoriteView()),
+    GetPage(name: Routes.bookmarksPage, page: () => const BookmarksPageView()),
   ];
 }

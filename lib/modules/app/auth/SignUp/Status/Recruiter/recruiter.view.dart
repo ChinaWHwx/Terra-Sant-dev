@@ -15,6 +15,9 @@ class RecruiterView extends GetView<RecruiterController> {
       child: Center(
         child: ListView(
           children: <Widget>[
+            const SizedBox(
+              height: 50,
+            ),
             Text(controller.title,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,

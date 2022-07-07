@@ -45,16 +45,16 @@ class MyController extends GetxController {
         Get.toNamed(Routes.profile);
         break;
       case 1:
-        Get.toNamed(Routes.auth);
+        Get.toNamed(Routes.search);
         break;
       case 2:
         Get.toNamed(Routes.calendar);
         break;
       case 3:
-        Get.toNamed(Routes.auth);
+        Get.toNamed(Routes.duty);
         break;
       default:
-        Get.toNamed(Routes.menu);
+        Get.toNamed(Routes.my);
     }
   }
 }

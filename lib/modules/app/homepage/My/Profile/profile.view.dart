@@ -16,7 +16,7 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
         drawer: const NavigationDrawer(),
         appBar: AppBar(
-          title: const Text("xxx"),
+          title: const Text("Mon profil"),
           centerTitle: true,
         ),
         body: Padding(
@@ -30,7 +30,11 @@ class ProfileView extends GetView<ProfileController> {
                       'Select image from camera/galley',
                       style: TextStyle(fontSize: 20),
                     )
-                  : Image.file(File(controller.selectedImagePath.value))),
+                  : CircleAvatar(
+                      radius: 98,
+                      backgroundColor: Colors.white,
+                      child: Image.file(
+                          File(controller.selectedImagePath.value)))),
               const SizedBox(
                 height: 10,
               ),
