@@ -6,16 +6,19 @@ import 'package:iconsax/iconsax.dart';
 
 class DocumentView extends GetView<DocumentController> {
   const DocumentView({Key? key}) : super(key: key);
-  get top => null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Mes documents"),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             const SizedBox(
-              height: 100,
+              height: 50,
             ),
             Image.network(
               controller.image,
@@ -25,7 +28,7 @@ class DocumentView extends GetView<DocumentController> {
               height: 50,
             ),
             Text(
-              'Déposer votre ficher',
+              'Déposer vos fichers',
               style: TextStyle(
                   fontSize: 25,
                   color: Colors.grey.shade800,

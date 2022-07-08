@@ -80,7 +80,7 @@ class MyView extends GetView<MyController> {
                           Text("Mes favorites"),
                         ],
                       ),
-                      onPressed: () => controller.navigateToProfile(),
+                      onPressed: () => controller.navigateToBookmarksPage(),
                     ),
                     TextButton(
                       child: Row(

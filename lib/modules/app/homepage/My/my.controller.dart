@@ -39,6 +39,10 @@ class MyController extends GetxController {
     Get.toNamed(Routes.profileRoute);
   }
 
+  navigateToBookmarksPage() {
+    Get.toNamed(Routes.bookmarksPage);
+  }
+
   navigate(int i) {
     switch (i) {
       case 0:
