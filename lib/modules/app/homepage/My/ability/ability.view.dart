@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 class AbilityView extends GetView<AbilityController> {
   const AbilityView({Key? key}) : super(key: key);
 
-  get top => null;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,6 +14,7 @@ class AbilityView extends GetView<AbilityController> {
       appBar: AppBar(
         title: const Text("Mes Compétence"),
         centerTitle: true,
+        leading: const BackButton(color: Colors.white),
       ),
       body: Padding(
           padding: const EdgeInsets.all(16),

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class DutyView extends GetView<DutyController> {
   const DutyView({Key? key}) : super(key: key);
-  get top => null;
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,9 @@ class DutyView extends GetView<DutyController> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Mission'),
+          centerTitle: true,
           backgroundColor: Colors.blue,
-          leading: const BackButton(color: Colors.black),
+          leading: const BackButton(color: Colors.white),
         ),
         body: SafeArea(
             child: SingleChildScrollView(

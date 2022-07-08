@@ -14,6 +14,7 @@ class ExperienceView extends GetView<ExperienceController> {
       appBar: AppBar(
         title: const Text("Mes expériences"),
         centerTitle: true,
+        leading: const BackButton(color: Colors.white),
       ),
       body: Padding(
           padding: const EdgeInsets.all(36),

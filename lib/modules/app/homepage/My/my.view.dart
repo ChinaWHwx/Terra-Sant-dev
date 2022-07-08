@@ -6,23 +6,14 @@ import 'package:get/get.dart';
 
 class MyView extends GetView<MyController> {
   const MyView({Key? key}) : super(key: key);
-  get top => null;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-        drawer: const NavigationDrawer(),
-        bottomNavigationBar: ConvexAppBar(items: const [
-          TabItem(icon: Icons.home, title: 'Acceuil'),
-          TabItem(icon: Icons.search, title: 'Explorer'),
-          TabItem(icon: Icons.calendar_month, title: 'Calenderier'),
-          TabItem(icon: Icons.work, title: 'Mission'),
-          TabItem(icon: Icons.person, title: 'Moi'),
-        ], onTap: (int i) => controller.navigate(i)),
         appBar: AppBar(
           title: const Text("à propos de moi"),
           centerTitle: true,
+          leading: const BackButton(color: Colors.white),
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 50),

@@ -8,7 +8,6 @@ import 'profile.controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({Key? key}) : super(key: key);
-  get top => null;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +16,7 @@ class ProfileView extends GetView<ProfileController> {
         appBar: AppBar(
           title: const Text("Mon profil"),
           centerTitle: true,
+          leading: const BackButton(color: Colors.white),
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 16),

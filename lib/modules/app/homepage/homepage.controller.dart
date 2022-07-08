@@ -5,13 +5,13 @@ class HomepageController extends GetxController {
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.welcome);
+        Get.toNamed(Routes.homepage);
         break;
       case 1:
         Get.toNamed(Routes.search);
         break;
       case 2:
-        Get.toNamed(Routes.calendar);
+        Get.toNamed(Routes.candidateCalendar);
         break;
       case 3:
         Get.toNamed(Routes.duty);

@@ -46,13 +46,13 @@ class MyController extends GetxController {
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.profile);
+        Get.toNamed(Routes.homepage);
         break;
       case 1:
         Get.toNamed(Routes.search);
         break;
       case 2:
-        Get.toNamed(Routes.calendar);
+        Get.toNamed(Routes.recruiterCalendar);
         break;
       case 3:
         Get.toNamed(Routes.duty);

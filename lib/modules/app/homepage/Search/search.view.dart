@@ -5,11 +5,16 @@ import 'package:get/get.dart';
 
 class SearchView extends GetView<SearchController> {
   const SearchView({Key? key}) : super(key: key);
-  get top => null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Explorer'),
+        backgroundColor: Colors.blue,
+        leading: const BackButton(color: Colors.white),
+        centerTitle: true,
+      ),
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: Column(

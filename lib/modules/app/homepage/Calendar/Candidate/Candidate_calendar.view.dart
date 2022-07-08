@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/modules/app/homepage/Calendar/calendar.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
 import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class CalendarView extends GetView<CalendarController> {
-  final calendarController1 = CalendarController();
-  final calendarController2 = CalendarController();
-  final calendarController3 = CalendarController();
-  // ignore: non_constant_identifier_names
-  final CalendarController4 = CalendarController();
+class CandidateCalendarView extends GetView<CandidateCalendarController> {
+  final calendarController1 = CandidateCalendarController();
+  final calendarController2 = CandidateCalendarController();
+  final calendarController3 = CandidateCalendarController();
+  final CalendarController4 = CandidateCalendarController();
 
-  CalendarView({Key? key}) : super(key: key);
-  get top => null;
+  CandidateCalendarView({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +21,7 @@ class CalendarView extends GetView<CalendarController> {
         appBar: AppBar(
           title: const Text("Calendar"),
           centerTitle: true,
+          leading: const BackButton(color: Colors.white),
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -40,11 +40,24 @@ class CalendarView extends GetView<CalendarController> {
               Obx(
                 () => Text(
                   DateFormat("EEE, dd-MM-yyyy")
-                      .format(controller.selectedDate.value)
+                      .format(controller.selectedDateStart.value)
                       .toString(),
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
+              /*
+              const Card(
+                child: TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText:
+                          "Saisir ici des compétance que vous avez besoin",
+                      hintText: "ex. Je voudrais un dentist",
+                      prefixIcon: Icon(Icons.vaccines),
+                      // border: InputBorder.none
+                    )),
+              ),
+              */
               Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -53,9 +66,14 @@ class CalendarView extends GetView<CalendarController> {
                       () => ListTile(
                         leading: const Icon(Icons.work),
                         title: const Text("Choisiez votre temps libres"),
-                        subtitle: Text(calendarController1.chosenDate.value +
-                            ' - ' +
-                            calendarController1.chosenTime.value),
+                        subtitle: Text(
+                            calendarController1.chosenDateStart.value +
+                                ' - ' +
+                                calendarController1.chosenTimeStart.value +
+                                ' --> ' +
+                                calendarController1.chosenDateEnd.value +
+                                ' - ' +
+                                calendarController1.chosenTimeEnd.value),
                       ),
                     ),
                     Row(
@@ -64,14 +82,23 @@ class CalendarView extends GetView<CalendarController> {
                         TextButton(
                           child: const Text('Début'),
                           onPressed: () {
-                            calendarController1.chooseTime();
+                            calendarController1.chooseTime(
+                                calendarController1.selectedDateStart,
+                                calendarController1.selectedTimeStart,
+                                calendarController1.chosenDateStart,
+                                calendarController1.chosenTimeStart);
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
                           onPressed: () {
-                            calendarController1.chooseTime();
+                            calendarController1.chooseTime(
+                                calendarController1.selectedDateEnd,
+                                calendarController1.selectedTimeEnd,
+                                calendarController1.chosenDateEnd,
+                                calendarController1.chosenTimeEnd);
+                            //print(calendarController1.chosenDateEnd.toString());
                           },
                         ),
                         const SizedBox(width: 8),
@@ -88,9 +115,14 @@ class CalendarView extends GetView<CalendarController> {
                       () => ListTile(
                         leading: const Icon(Icons.work),
                         title: const Text("Choisiez votre temps libres"),
-                        subtitle: Text(calendarController2.chosenDate.value +
-                            ' - ' +
-                            calendarController2.chosenTime.value),
+                        subtitle: Text(
+                            calendarController2.chosenDateStart.value +
+                                ' - ' +
+                                calendarController2.chosenTimeStart.value +
+                                ' --> ' +
+                                calendarController2.chosenDateEnd.value +
+                                ' - ' +
+                                calendarController2.chosenTimeEnd.value),
                       ),
                     ),
                     Row(
@@ -99,16 +131,22 @@ class CalendarView extends GetView<CalendarController> {
                         TextButton(
                           child: const Text('Début'),
                           onPressed: () {
-                            calendarController2.chooseTime();
+                            calendarController2.chooseTime(
+                                calendarController2.selectedDateEnd,
+                                calendarController2.selectedTimeEnd,
+                                calendarController2.chosenDateEnd,
+                                calendarController2.chosenTimeEnd);
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
                           onPressed: () {
-                            Obx() {
-                              calendarController2.chooseTime();
-                            }
+                            calendarController2.chooseTime(
+                                calendarController2.selectedDateEnd,
+                                calendarController2.selectedTimeEnd,
+                                calendarController2.chosenDateEnd,
+                                calendarController2.chosenTimeEnd);
                           },
                         ),
                         const SizedBox(width: 8),
@@ -125,9 +163,14 @@ class CalendarView extends GetView<CalendarController> {
                       () => ListTile(
                         leading: const Icon(Icons.work),
                         title: const Text("Choisiez votre temps libres"),
-                        subtitle: Text(calendarController3.chosenDate.value +
-                            ' - ' +
-                            calendarController3.chosenTime.value),
+                        subtitle: Text(
+                            calendarController3.chosenDateStart.value +
+                                ' - ' +
+                                calendarController3.chosenTimeStart.value +
+                                ' --> ' +
+                                calendarController3.chosenDateEnd.value +
+                                ' - ' +
+                                calendarController3.chosenTimeEnd.value),
                       ),
                     ),
                     Row(
@@ -136,14 +179,22 @@ class CalendarView extends GetView<CalendarController> {
                         TextButton(
                           child: const Text('Début'),
                           onPressed: () {
-                            calendarController3.chooseTime();
+                            calendarController3.chooseTime(
+                                calendarController3.selectedDateEnd,
+                                calendarController3.selectedTimeEnd,
+                                calendarController3.chosenDateEnd,
+                                calendarController3.chosenTimeEnd);
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
                           onPressed: () {
-                            calendarController3.chooseTime();
+                            calendarController3.chooseTime(
+                                calendarController3.selectedDateEnd,
+                                calendarController3.selectedTimeEnd,
+                                calendarController3.chosenDateEnd,
+                                calendarController3.chosenTimeEnd);
                           },
                         ),
                         const SizedBox(width: 8),
@@ -160,9 +211,14 @@ class CalendarView extends GetView<CalendarController> {
                       () => ListTile(
                         leading: const Icon(Icons.work),
                         title: const Text("Choisiez votre temps libres"),
-                        subtitle: Text(CalendarController4.chosenDate.value +
-                            ' - ' +
-                            CalendarController4.chosenTime.value),
+                        subtitle: Text(
+                            CalendarController4.chosenDateStart.value +
+                                ' - ' +
+                                CalendarController4.chosenTimeStart.value +
+                                ' --> ' +
+                                CalendarController4.chosenDateEnd.value +
+                                ' - ' +
+                                CalendarController4.chosenTimeEnd.value),
                       ),
                     ),
                     Row(
@@ -171,16 +227,22 @@ class CalendarView extends GetView<CalendarController> {
                         TextButton(
                           child: const Text('Début'),
                           onPressed: () {
-                            CalendarController4.chooseTime();
+                            CalendarController4.chooseTime(
+                                CalendarController4.selectedDateEnd,
+                                CalendarController4.selectedTimeEnd,
+                                CalendarController4.chosenDateEnd,
+                                CalendarController4.chosenTimeEnd);
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
                           onPressed: () {
-                            Obx() {
-                              CalendarController4.chooseTime();
-                            }
+                            CalendarController4.chooseTime(
+                                CalendarController4.selectedDateEnd,
+                                CalendarController4.selectedTimeEnd,
+                                CalendarController4.chosenDateEnd,
+                                CalendarController4.chosenTimeEnd);
                           },
                         ),
                         const SizedBox(width: 8),

@@ -20,7 +20,8 @@ import 'package:flutter_application_1/modules/app/error/SmsVerification/sms_erro
 import 'package:flutter_application_1/modules/app/error/access/Camera/camera_access.controller.dart';
 import 'package:flutter_application_1/modules/app/error/access/File/file_access.controller.dart';
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/Calendar/calendar.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/Recruiter_calendar.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.controller.dart';
@@ -55,7 +56,6 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => InfoController(), fenix: true);
     Get.lazyPut(() => HomepageController(), fenix: true);
     Get.lazyPut(() => WelcomeController(), fenix: true);
-    Get.lazyPut(() => CalendarController(), fenix: true);
     Get.lazyPut(() => MyController(), fenix: true);
     Get.lazyPut(() => DocumentController(), fenix: true);
     Get.lazyPut(() => ExperienceController(), fenix: true);
@@ -86,5 +86,7 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => CandidateController(), fenix: true);
     Get.lazyPut(() => PharmacieFavoriteController(), fenix: true);
     Get.lazyPut(() => NavigationDrawerController(), fenix: true);
+    Get.lazyPut(() => CandidateCalendarController(), fenix: true);
+    Get.lazyPut(() => RecruiterCalendarController(), fenix: true);
   }
 }

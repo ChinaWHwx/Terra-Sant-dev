@@ -6,17 +6,13 @@ import 'package:get/get.dart';
 
 class HomepageView extends GetView<HomepageController> {
   const HomepageView({Key? key}) : super(key: key);
-  get top => null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavigationDrawer(),
       bottomNavigationBar: ConvexAppBar(items: const [
-        TabItem(
-          icon: Icons.home,
-          title: 'Acceuil',
-        ),
+        TabItem(icon: Icons.home, title: 'Acceuil'),
         TabItem(icon: Icons.search, title: 'Explorer'),
         TabItem(icon: Icons.calendar_month, title: 'Calenderier'),
         TabItem(icon: Icons.work, title: 'Mission'),

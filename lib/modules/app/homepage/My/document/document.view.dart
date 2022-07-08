@@ -13,6 +13,7 @@ class DocumentView extends GetView<DocumentController> {
       appBar: AppBar(
         title: const Text("Mes documents"),
         centerTitle: true,
+        leading: const BackButton(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Column(

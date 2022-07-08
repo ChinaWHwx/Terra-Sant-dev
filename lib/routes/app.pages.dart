@@ -19,7 +19,8 @@ import 'package:flutter_application_1/modules/app/error/SignIn/signin_error.view
 import 'package:flutter_application_1/modules/app/error/access/Camera/camera_access.view.dart';
 import 'package:flutter_application_1/modules/app/error/access/File/file_access.view.dart';
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Calendar/calendar.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/Recruiter_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.view.dart';
@@ -108,7 +109,6 @@ class AppPages {
     GetPage(name: Routes.password, page: () => const PasswordView()),
     GetPage(name: Routes.homepage, page: () => const HomepageView()),
     GetPage(name: Routes.welcome, page: () => const WelcomeView()),
-    GetPage(name: Routes.calendar, page: () => CalendarView()),
     GetPage(name: Routes.menu, page: () => const MyView()),
     GetPage(name: Routes.document, page: () => const DocumentView()),
     GetPage(name: Routes.experience, page: () => const ExperienceView()),
@@ -147,5 +147,9 @@ class AppPages {
         name: Routes.candidateFavorite,
         page: () => const CandidateFavoriteView()),
     GetPage(name: Routes.bookmarksPage, page: () => const BookmarksPageView()),
+    GetPage(
+        name: Routes.recruiterCalendar, page: () => RecruiterCalendarView()),
+    GetPage(
+        name: Routes.candidateCalendar, page: () => CandidateCalendarView()),
   ];
 }
