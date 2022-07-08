@@ -9,6 +9,7 @@ class CalendarView extends GetView<CalendarController> {
   final calendarController1 = CalendarController();
   final calendarController2 = CalendarController();
   final calendarController3 = CalendarController();
+  // ignore: non_constant_identifier_names
   final CalendarController4 = CalendarController();
 
   CalendarView({Key? key}) : super(key: key);
@@ -16,7 +17,6 @@ class CalendarView extends GetView<CalendarController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         drawer: const NavigationDrawer(),
         appBar: AppBar(

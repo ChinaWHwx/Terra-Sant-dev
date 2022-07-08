@@ -23,7 +23,7 @@ class GpsAccessView extends GetView<GpsAccessController> {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                     blurRadius: 25,
                     color: Colors.black.withOpacity(0.17),
                   ),

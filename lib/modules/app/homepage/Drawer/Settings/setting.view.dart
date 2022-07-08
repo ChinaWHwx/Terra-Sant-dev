@@ -9,7 +9,6 @@ class SettingView extends GetView<SettingController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),

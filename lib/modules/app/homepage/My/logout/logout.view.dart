@@ -8,13 +8,12 @@ class LogoutView extends GetView<LogoutController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
             child: Center(
                 child: SingleChildScrollView(
                     child: Column(children: <Widget>[
-      RaisedButton(
+      ElevatedButton(
         child: const Text('Logout'),
         onPressed: () {
           showDialog(

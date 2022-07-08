@@ -9,7 +9,6 @@ class GoogleMapView extends GetView<MapController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(

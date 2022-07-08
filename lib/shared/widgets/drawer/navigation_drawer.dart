@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/widgets/drawer/navigation_draver.controller.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 class NavigationDrawer extends GetView<NavigationDrawerController> {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -108,7 +107,7 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
               image: AssetImage('assets/images/logo.png'),
               fit: BoxFit.fill,
               colorFilter: ColorFilter.mode(Colors.grey, BlendMode.hardLight))),
-      currentAccountPictureSize: Size.square(72),
+      currentAccountPictureSize: const Size.square(72),
     );
   }
 

@@ -12,7 +12,6 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         drawer: const NavigationDrawer(),
         appBar: AppBar(
@@ -25,6 +24,7 @@ class ProfileView extends GetView<ProfileController> {
               child: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              // ignore: unrelated_type_equality_checks
               Obx(() => controller.selectedImagePath == ''
                   ? const Text(
                       'Select image from camera/galley',

@@ -82,8 +82,10 @@ class InfoView extends GetView<InfoController> {
                           showTitleActions: true,
                           minTime: DateTime(1958, 1, 1),
                           maxTime: DateTime(2098, 9, 10), onChanged: (date) {
+                        // ignore: avoid_print
                         print('change $date');
                       }, onConfirm: (date) {
+                        // ignore: avoid_print
                         print('confirm $date');
                       }, currentTime: DateTime.now(), locale: LocaleType.fr);
                     },

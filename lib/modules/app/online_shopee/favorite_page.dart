@@ -41,14 +41,14 @@ class FavoritePage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '${controller.products[index].productName}',
+                                        controller.products[index].productName,
                                         style: const TextStyle(fontSize: 24),
                                       ),
-                                      Text(
-                                          '${controller.products[index].productDescription}'),
+                                      Text(controller
+                                          .products[index].productDescription),
                                     ],
                                   ),
-                                  Text('${controller.products[index].time}',
+                                  Text(controller.products[index].time,
                                       style: const TextStyle(fontSize: 18)),
                                 ],
                               ),

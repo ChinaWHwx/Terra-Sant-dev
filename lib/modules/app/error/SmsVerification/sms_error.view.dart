@@ -8,7 +8,6 @@ class SmsErrorView extends GetView<SmsErrorController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Error"),
@@ -19,7 +18,8 @@ class SmsErrorView extends GetView<SmsErrorController> {
           child: SingleChildScrollView(
               child: Center(
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center, children: []),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const []),
           )),
         ));
   }

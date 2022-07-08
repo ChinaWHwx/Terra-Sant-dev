@@ -8,7 +8,6 @@ class NetWorkErrorView extends GetView<NetWorkErrorController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,

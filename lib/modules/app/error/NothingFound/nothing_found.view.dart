@@ -8,7 +8,6 @@ class NothingFindView extends GetView<NothingFoundController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Rien"),

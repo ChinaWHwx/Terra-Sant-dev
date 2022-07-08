@@ -8,11 +8,12 @@ import 'package:http/http.dart' as http;
 
 class GooglePlaceApiController extends GetxController
     with StateMixin<List<dynamic>> {
+  // ignore: non_constant_identifier_names
   String KPLACES_API_KEY = "AIzaSyD4U3Q0x6MR0ad-UXTwp6XVvaBsmlHkOhc";
   String baseURL =
       'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   TextEditingController controller = TextEditingController();
-  var uuid = Uuid();
+  var uuid = const Uuid();
   String? sessionToken;
   List<dynamic> placesList = [];
 
@@ -42,6 +43,7 @@ class GooglePlaceApiController extends GetxController
         '$baseURL?input=$input&key=$KPLACES_API_KEY&sessiontoken=$sessionToken';
 
     var response = await http.get(Uri.parse(request));
+    // ignore: unused_local_variable
     var data = response.body.toString();
 
     // print(data);

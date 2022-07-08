@@ -38,6 +38,7 @@ class TelephoneView extends GetView<TelephoneController> {
                   ),
                   initialCountryCode: 'FR',
                   onChanged: (phone) {
+                    // ignore: avoid_print
                     print(phone.completeNumber);
                   },
                 ),

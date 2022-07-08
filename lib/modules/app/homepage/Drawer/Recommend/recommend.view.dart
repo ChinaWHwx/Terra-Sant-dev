@@ -9,7 +9,6 @@ class RecommendView extends GetView<RecommendController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(

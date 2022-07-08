@@ -8,17 +8,6 @@ class CalendarController extends GetxController {
   var selectedTime = TimeOfDay.now().obs;
   var chosenDate = ''.obs;
   var chosenTime = ''.obs;
-  
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {}

@@ -8,7 +8,6 @@ class SignInErrorView extends GetView<SignInErrorController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Error"),

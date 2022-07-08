@@ -22,6 +22,7 @@ class BookmarkBloc extends ChangeNotifier {
 
   void removeItems(int id) {
     int index = items.indexWhere((element) => element.id == id);
+    // ignore: avoid_print
     print(items.removeAt(index));
     notifyListeners();
   }

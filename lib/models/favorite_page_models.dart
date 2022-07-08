@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/favorite_list_models.dart';
 
 class FavoritePageModel extends ChangeNotifier {
+  // ignore: non_constant_identifier_names
   late FavoriteListModel favorite_list;
 
   final List<int> _itemIds = [];

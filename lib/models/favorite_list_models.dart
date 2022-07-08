@@ -1,5 +1,3 @@
-import 'dart:html';
-
 class FavoriteListModel {
   static List<String> itemNames = [
     'Admob Ads',

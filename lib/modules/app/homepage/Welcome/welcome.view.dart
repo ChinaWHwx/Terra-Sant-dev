@@ -12,9 +12,8 @@ class WelcomeView extends GetView<WelcomeController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-        drawer: NavigationDrawer(),
+        drawer: const NavigationDrawer(),
         appBar: AppBar(
           title: const Text("xxx"),
           centerTitle: true,
@@ -25,6 +24,7 @@ class WelcomeView extends GetView<WelcomeController> {
               child: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              // ignore: unrelated_type_equality_checks
               Obx(() => controller.selectedImagePath == ''
                   ? const Text(
                       'Select image from camera/galley',

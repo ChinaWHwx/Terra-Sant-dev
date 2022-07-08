@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/items_model.dart';
 import 'package:flutter_application_1/models/bookmark_model.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.controller.dart';
 import 'package:get/get.dart';

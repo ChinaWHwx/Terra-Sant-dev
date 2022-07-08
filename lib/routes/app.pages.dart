@@ -1,4 +1,3 @@
-import 'package:flutter_application_1/models/explorer_pharmacie.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/ForgetPassword/forget.view.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/ForgetPassword/forgotPasswordSmsVerification/forgotPasswordSmsVerification.view.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/ResetPassword/resetPassword.view.dart';

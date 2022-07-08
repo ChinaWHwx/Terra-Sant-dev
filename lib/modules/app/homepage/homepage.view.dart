@@ -10,9 +10,8 @@ class HomepageView extends GetView<HomepageController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: NavigationDrawer(),
+      drawer: const NavigationDrawer(),
       bottomNavigationBar: ConvexAppBar(items: const [
         TabItem(
           icon: Icons.home,

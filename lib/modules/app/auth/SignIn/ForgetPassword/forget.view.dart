@@ -50,6 +50,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                   ),
                   initialCountryCode: 'FR',
                   onChanged: (phone) {
+                    // ignore: avoid_print
                     print(phone.completeNumber);
                   },
                 ),

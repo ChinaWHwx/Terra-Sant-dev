@@ -33,6 +33,7 @@ class GooglePlaceApiView extends GetView<GooglePlaceApiController> {
                         onTap: () async {
                           controller.controller.text =
                               controller.placesList[index]['description'];
+                          // ignore: unused_local_variable
                           List<Location> locations = await locationFromAddress(
                               controller.placesList[index]['description']);
                           //print(locations.last.longitude);
