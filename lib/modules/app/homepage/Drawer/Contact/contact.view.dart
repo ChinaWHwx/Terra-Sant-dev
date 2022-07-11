@@ -11,36 +11,40 @@ class ContactView extends GetView<ContactController> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Image.asset(
-                "assets/images/logo.png",
-                height: size.height * 0.35,
-              ),
-              const Text(
-                "Si vous voulez, vous purriez nous contacter directement",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-              ),
-              const SizedBox(
-                height: 80,
-                width: 80,
-              ),
-              ConstrainedBox(
-                  constraints: const BoxConstraints.tightFor(width: 200),
-                  child: ElevatedButton(
-                    child: const Text('Call'),
-                    onPressed: () {
-                      //launch('tel:0749660950');
-                      FlutterPhoneDirectCaller.callNumber("0749660950");
-                    },
-                  )),
-            ],
-          ),
+        appBar: AppBar(
+          title: const Text("Contacter"),
+          centerTitle: true,
         ),
-      ),
-    ));
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  Image.asset(
+                    "assets/images/logo.png",
+                    height: size.height * 0.35,
+                  ),
+                  const Text(
+                    "Si vous voulez, vous purriez nous contacter directement",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
+                  const SizedBox(
+                    height: 80,
+                    width: 80,
+                  ),
+                  ConstrainedBox(
+                      constraints: const BoxConstraints.tightFor(width: 200),
+                      child: ElevatedButton(
+                        child: const Text('Call'),
+                        onPressed: () {
+                          //launch('tel:0749660950');
+                          FlutterPhoneDirectCaller.callNumber("0749660950");
+                        },
+                      )),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

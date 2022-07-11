@@ -82,6 +82,7 @@ dependencies:
   floor: ^1.3.0
   floor_generator: ^1.3.0
   hive: ^2.2.3
+  swipeable_tile: ^2.0.0+1
 
 flutter_native_splash:
   android: true

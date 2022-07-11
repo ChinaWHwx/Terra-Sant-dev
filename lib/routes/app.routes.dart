@@ -51,6 +51,7 @@ class Routes {
   static const candidateFavorite = '/candidateFavorite';
   static const recruiterCalendar = '/recruiterCalendar';
   static const candidateCalendar = '/candidateCalendar';
+  static const result = '/result';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -101,4 +102,5 @@ class Routes {
   static const pharmacieFavoriteRoute = pharmacieFavorite;
   static const candidateFavoriteRoute = candidateFavorite;
   static const recruiterCalendarRoute = recruiterCalendar;
+  static const resultRoute = result;
 }

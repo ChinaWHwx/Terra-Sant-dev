@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 class DutyView extends GetView<DutyController> {
   const DutyView({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -36,7 +35,7 @@ class DutyView extends GetView<DutyController> {
                       ),
                       child: const Icon(Icons.lock_clock),
                       badgeColor: Colors.red,
-                      toAnimate: false,
+                      toAnimate: true,
                       showBadge: controller.recent > 0 ? true : false,
                     ),
                     title: const Text('Mes missions avant'),
@@ -78,7 +77,7 @@ class DutyView extends GetView<DutyController> {
                       ),
                       child: const Icon(Icons.work),
                       badgeColor: Colors.red,
-                      toAnimate: false,
+                      toAnimate: true,
                       showBadge: controller.now > 0 ? true : false,
                     ),
                     title: const Text('Mes missions maintenant'),
@@ -128,7 +127,7 @@ class DutyView extends GetView<DutyController> {
                       ),
                       child: const Icon(Icons.check),
                       badgeColor: Colors.red,
-                      toAnimate: false,
+                      toAnimate: true,
                       showBadge: controller.future > 0 ? true : false,
                     ),
                     title: const Text('Les missions peuvent choisir'),

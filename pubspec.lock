@@ -1223,6 +1223,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.2"
+  swipeable_tile:
+    dependency: "direct main"
+    description:
+      name: swipeable_tile
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+1"
   syncfusion_flutter_calendar:
     dependency: "direct main"
     description:

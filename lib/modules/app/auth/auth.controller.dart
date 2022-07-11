@@ -24,7 +24,7 @@ class AuthController extends GetxController {
   }
 
   navigateTest() {
-    Get.toNamed(Routes.homepage);
+    Get.toNamed(Routes.pharmacieFavoriteRoute);
   }
 
   navigateToHomePage() {
