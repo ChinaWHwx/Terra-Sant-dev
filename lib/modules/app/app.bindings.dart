@@ -33,6 +33,7 @@ import 'package:flutter_application_1/modules/app/homepage/My/experience/experie
 import 'package:flutter_application_1/modules/app/homepage/My/favorite/Pharmacie/pharmacie_favotite.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Recruiteur/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
@@ -88,5 +89,6 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => NavigationDrawerController(), fenix: true);
     Get.lazyPut(() => CandidateCalendarController(), fenix: true);
     Get.lazyPut(() => RecruiterCalendarController(), fenix: true);
+    Get.lazyPut(() => DeclarationController(), fenix: true);
   }
 }

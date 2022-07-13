@@ -35,6 +35,7 @@ import 'package:flutter_application_1/modules/app/homepage/My/logout/logout.view
 import 'package:flutter_application_1/modules/app/homepage/My/my.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Recruiteur/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
@@ -151,5 +152,6 @@ class AppPages {
         name: Routes.recruiterCalendar, page: () => RecruiterCalendarView()),
     GetPage(
         name: Routes.candidateCalendar, page: () => CandidateCalendarView()),
+    GetPage(name: Routes.declaration, page: () => const DeclarationView()),
   ];
 }

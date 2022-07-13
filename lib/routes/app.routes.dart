@@ -52,6 +52,7 @@ class Routes {
   static const recruiterCalendar = '/recruiterCalendar';
   static const candidateCalendar = '/candidateCalendar';
   static const result = '/result';
+  static const declaration = '/declaration';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -103,4 +104,5 @@ class Routes {
   static const candidateFavoriteRoute = candidateFavorite;
   static const recruiterCalendarRoute = recruiterCalendar;
   static const resultRoute = result;
+  static const declarationRoute = declaration;
 }
