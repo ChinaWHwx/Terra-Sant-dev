@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 class NavigationDrawerController extends GetxController {
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
-  RxString selectedImage = ''.obs;
+  var selectedImage = ''.obs;
 
   void getImage(ImageSource imageSource) async {
     final PickedFile = await ImagePicker().getImage(source: imageSource);

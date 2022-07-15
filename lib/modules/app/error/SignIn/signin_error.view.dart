@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 class SignInErrorView extends GetView<SignInErrorController> {
   const SignInErrorView({Key? key}) : super(key: key);
-  get top => null;
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,5 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my.controller.dart';
-import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.dart';
 import 'package:get/get.dart';
 
 class MyView extends GetView<MyController> {

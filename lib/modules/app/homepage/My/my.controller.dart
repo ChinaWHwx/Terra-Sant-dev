@@ -52,7 +52,7 @@ class MyController extends GetxController {
         Get.toNamed(Routes.search);
         break;
       case 2:
-        Get.toNamed(Routes.recruiterCalendar);
+        Get.toNamed(Routes.candidateCalendar);
         break;
       case 3:
         Get.toNamed(Routes.duty);

@@ -26,7 +26,7 @@ class HomepageView extends GetView<HomepageController> {
               SizedBox(height: getProportionateScreenWidth(30)),
               const NewsBanner(),
               SizedBox(height: getProportionateScreenWidth(30)),
-              Categories(),
+              const Categories(),
               SizedBox(height: getProportionateScreenWidth(30)),
               const SpecialOffers(),
               SizedBox(height: getProportionateScreenWidth(30)),

@@ -7,6 +7,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class HomepageController extends GetxController {
+  navigateToFavorite() {
+    Get.toNamed("Routes.favorite");
+  }
+
   navigate(int i) {
     switch (i) {
       case 0:
@@ -16,7 +20,7 @@ class HomepageController extends GetxController {
         Get.toNamed(Routes.search);
         break;
       case 2:
-        Get.toNamed(Routes.calendar);
+        Get.toNamed(Routes.candidateCalendar);
         break;
       case 3:
         Get.toNamed(Routes.duty);
@@ -441,16 +445,11 @@ class ProductCard extends StatelessWidget {
                             : Colors.black.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
-                      // child: SvgPicture.asset(
-                      //   "assets/icons/homme.svg",
-                      //   color: product.isFavourite
-                      //       ? Color(0xFFFF4848)
-                      //       : Color(0xFFDBDEE4),
-                      // ),
                       child: FavoriteButton(
                         iconSize: getProportionateScreenWidth(8),
                         valueChanged: (_isFavorite) {
                           print('Is Favorite $_isFavorite)');
+                          //navigateToFavorite();
                         },
                       )),
                 )
