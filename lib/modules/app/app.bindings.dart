@@ -39,6 +39,8 @@ import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.contr
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/online_shopee/pharmacie_controller.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.controller.dart';
+import 'package:flutter_application_1/repositories/login.repository.dart';
+import 'package:flutter_application_1/services/login.service.dart';
 import 'package:flutter_application_1/shared/widgets/drawer/navigation_draver.controller.dart';
 import 'package:get/get.dart';
 
@@ -90,5 +92,11 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => CandidateCalendarController(), fenix: true);
     Get.lazyPut(() => RecruiterCalendarController(), fenix: true);
     Get.lazyPut(() => DeclarationController(), fenix: true);
+
+    //Services
+    Get.lazyPut(() => LoginService(), fenix: true);
+
+    //Repositories
+    Get.lazyPut(() => LoginRepository(), fenix: true);
   }
 }
