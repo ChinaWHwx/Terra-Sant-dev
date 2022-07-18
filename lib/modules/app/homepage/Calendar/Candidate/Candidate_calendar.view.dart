@@ -9,10 +9,9 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
   final calendarController1 = CandidateCalendarController();
   final calendarController2 = CandidateCalendarController();
   final calendarController3 = CandidateCalendarController();
-  final CalendarController4 = CandidateCalendarController();
+  final calendarController4 = CandidateCalendarController();
 
   CandidateCalendarView({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +64,7 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                     Obx(
                       () => ListTile(
                         leading: const Icon(Icons.work),
-                        title: const Text("Choisiez votre temps libres"),
+                        title: const Text("Choisissez votre temps libre"),
                         subtitle: Text(
                             calendarController1.chosenDateStart.value +
                                 ' - ' +
@@ -81,24 +80,18 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                       children: <Widget>[
                         TextButton(
                           child: const Text('Début'),
-                          onPressed: () {
-                            calendarController1.chooseTime(
-                                calendarController1.selectedDateStart,
-                                calendarController1.selectedTimeStart,
-                                calendarController1.chosenDateStart,
-                                calendarController1.chosenTimeStart);
+                          onPressed: () async {
+                            await calendarController1.chooseTime("start");
+                            calendarController1.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
-                          onPressed: () {
-                            calendarController1.chooseTime(
-                                calendarController1.selectedDateEnd,
-                                calendarController1.selectedTimeEnd,
-                                calendarController1.chosenDateEnd,
-                                calendarController1.chosenTimeEnd);
+                          onPressed: () async {
+                            await calendarController1.chooseTime("end");
                             //print(calendarController1.chosenDateEnd.toString());
+                            calendarController1.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),
@@ -114,7 +107,7 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                     Obx(
                       () => ListTile(
                         leading: const Icon(Icons.work),
-                        title: const Text("Choisiez votre temps libres"),
+                        title: const Text("Choisissez votre temps libres"),
                         subtitle: Text(
                             calendarController2.chosenDateStart.value +
                                 ' - ' +
@@ -131,22 +124,16 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                         TextButton(
                           child: const Text('Début'),
                           onPressed: () {
-                            calendarController2.chooseTime(
-                                calendarController2.selectedDateEnd,
-                                calendarController2.selectedTimeEnd,
-                                calendarController2.chosenDateEnd,
-                                calendarController2.chosenTimeEnd);
+                            calendarController2.chooseTime("start");
+                            calendarController2.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
                           onPressed: () {
-                            calendarController2.chooseTime(
-                                calendarController2.selectedDateEnd,
-                                calendarController2.selectedTimeEnd,
-                                calendarController2.chosenDateEnd,
-                                calendarController2.chosenTimeEnd);
+                            calendarController2.chooseTime("end");
+                            calendarController2.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),
@@ -162,7 +149,7 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                     Obx(
                       () => ListTile(
                         leading: const Icon(Icons.work),
-                        title: const Text("Choisiez votre temps libres"),
+                        title: const Text("Choisissez votre temps libres"),
                         subtitle: Text(
                             calendarController3.chosenDateStart.value +
                                 ' - ' +
@@ -179,22 +166,16 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                         TextButton(
                           child: const Text('Début'),
                           onPressed: () {
-                            calendarController3.chooseTime(
-                                calendarController3.selectedDateEnd,
-                                calendarController3.selectedTimeEnd,
-                                calendarController3.chosenDateEnd,
-                                calendarController3.chosenTimeEnd);
+                            calendarController3.chooseTime("start");
+                            calendarController3.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
                           onPressed: () {
-                            calendarController3.chooseTime(
-                                calendarController3.selectedDateEnd,
-                                calendarController3.selectedTimeEnd,
-                                calendarController3.chosenDateEnd,
-                                calendarController3.chosenTimeEnd);
+                            calendarController3.chooseTime("end");
+                            calendarController3.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),
@@ -210,15 +191,15 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                     Obx(
                       () => ListTile(
                         leading: const Icon(Icons.work),
-                        title: const Text("Choisiez votre temps libres"),
+                        title: const Text("Choisissez votre temps libres"),
                         subtitle: Text(
-                            CalendarController4.chosenDateStart.value +
+                            calendarController4.chosenDateStart.value +
                                 ' - ' +
-                                CalendarController4.chosenTimeStart.value +
+                                calendarController4.chosenTimeStart.value +
                                 ' --> ' +
-                                CalendarController4.chosenDateEnd.value +
+                                calendarController4.chosenDateEnd.value +
                                 ' - ' +
-                                CalendarController4.chosenTimeEnd.value),
+                                calendarController4.chosenTimeEnd.value),
                       ),
                     ),
                     Row(
@@ -227,22 +208,16 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
                         TextButton(
                           child: const Text('Début'),
                           onPressed: () {
-                            CalendarController4.chooseTime(
-                                CalendarController4.selectedDateEnd,
-                                CalendarController4.selectedTimeEnd,
-                                CalendarController4.chosenDateEnd,
-                                CalendarController4.chosenTimeEnd);
+                            calendarController4.chooseTime("start");
+                            calendarController4.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
                           child: const Text('Fin'),
                           onPressed: () {
-                            CalendarController4.chooseTime(
-                                CalendarController4.selectedDateEnd,
-                                CalendarController4.selectedTimeEnd,
-                                CalendarController4.chosenDateEnd,
-                                CalendarController4.chosenTimeEnd);
+                            calendarController4.chooseTime("end");
+                            calendarController4.updateAvailability();
                           },
                         ),
                         const SizedBox(width: 8),

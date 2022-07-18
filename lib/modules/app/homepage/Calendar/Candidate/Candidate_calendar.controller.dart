@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/availability.model.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/availability.service.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CandidateCalendarController extends GetxController {
+  var signInController = Get.find<SignInController>();
+  AvailabilityService availabilityService = Get.find();
   var selectedDateStart = DateTime.now().obs;
   var selectedTimeStart = TimeOfDay.now().obs;
   var chosenDateStart = ''.obs;
@@ -16,30 +21,40 @@ class CandidateCalendarController extends GetxController {
   @override
   void onClose() {}
 
-  chooseTime(selectedDate, selectedTime, chosenDate, chosenTime) async {
+  chooseTime(type) async {
+    var dateNow = DateTime.now();
     DateTime? pickedDate = await showDatePicker(
       context: Get.context!,
-      initialDate: selectedDate.value,
+      initialDate: dateNow,
       firstDate: DateTime(2022),
       lastDate: DateTime(2050),
-      //initialEntryMode: DatePickerEntryMode.input,
-      //initialDatePickerMode: DatePickerMode.year,
-      helpText: 'Choissiez votre temps',
-      cancelText: 'Close',
-      confirmText: 'Confirm',
-      errorFormatText: "Enter valid date",
+      helpText: 'Choisissez votre temps',
+      cancelText: 'Fermer',
+      confirmText: 'Confirmer',
+      errorFormatText: "Entrez une date valide",
       errorInvalidText: 'Enter valid date range',
       fieldHintText: 'jj/mm/aaaa',
     );
-    //selectableDayPredicate: disableDate);
-    if (pickedDate != null && pickedDate != selectedDate.value) {
-      selectedDate.value = pickedDate;
+    if (pickedDate != null && pickedDate != dateNow) {
+      if (type == "start") {
+        selectedDateStart.value = pickedDate;
+      }
+      if (type == "end") {
+        selectedDateEnd.value = pickedDate;
+      }
     }
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    chosenDate(formatter.format(selectedDate.value));
+    if (type == "start") {
+      chosenDateStart(formatter.format(selectedDateStart.value));
+    }
+    if (type == "end") {
+      chosenDateEnd(formatter.format(selectedDateEnd.value));
+    }
+
+    var timeNow = TimeOfDay.now();
     TimeOfDay? pickedTime = await showTimePicker(
         context: Get.context!,
-        initialTime: selectedTime.value,
+        initialTime: timeNow,
         builder: (context, child) {
           return Theme(data: ThemeData.dark(), child: child!);
         },
@@ -50,12 +65,41 @@ class CandidateCalendarController extends GetxController {
         errorInvalidText: 'Provide valid time',
         hourLabelText: 'Select Hour',
         minuteLabelText: 'Select Minute');
-    if (pickedTime != null && pickedTime != selectedTime.value) {
-      selectedTime.value = pickedTime;
+    if (pickedTime != null && pickedTime != timeNow) {
+      if (type == "start") {
+        selectedTimeStart.value = pickedTime;
+      }
+      if (type == "end") {
+        selectedTimeEnd.value = pickedTime;
+      }
     }
-    chosenTime(selectedTime.value.hour.toString() +
-        'h' +
-        selectedTime.value.minute.toString());
+    if (type == "start") {
+      chosenTimeStart(selectedTimeStart.value.hour.toString() +
+          'h' +
+          selectedTimeStart.value.minute.toString());
+    }
+    if (type == "end") {
+      chosenTimeEnd(selectedTimeEnd.value.hour.toString() +
+          'h' +
+          selectedTimeEnd.value.minute.toString());
+    }
+  }
+
+  updateAvailability() async {
+    if (chosenDateStart.value != '' &&
+        chosenTimeStart.value != '' &&
+        chosenDateEnd.value != '' &&
+        chosenTimeStart.value != '') {
+      var avl = Availability(
+              dateStart: chosenDateStart.value,
+              dateEnd: chosenDateEnd.value,
+              timeStart: chosenTimeStart.value,
+              timeEnd: chosenTimeEnd.value,
+              userId: signInController.user.userId)
+          .toJson();
+      var response = await availabilityService.addAvl(avl);
+      print(response);
+    }
   }
 
   navigateToHomePage() {

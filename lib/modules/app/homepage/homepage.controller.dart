@@ -1,5 +1,6 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/ProductModel.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class HomepageController extends GetxController {
+  var signInController = Get.find<SignInController>();
+
   navigate(int i) {
     switch (i) {
       case 0:
@@ -16,7 +19,15 @@ class HomepageController extends GetxController {
         Get.toNamed(Routes.search);
         break;
       case 2:
-        Get.toNamed(Routes.calendar);
+        {
+          if (signInController.user.userType == "candidat") {
+            Get.toNamed(Routes.candidateCalendar);
+          }
+          if (signInController.user.userType == "recruteur") {
+            Get.toNamed(Routes.recruiterCalendar);
+          }
+        }
+
         break;
       case 3:
         Get.toNamed(Routes.duty);
