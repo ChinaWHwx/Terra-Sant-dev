@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 dddddddd*
 
 test git conflict
+=======
+dddddddd*
+
+test git conflict
+>>>>>>> a3477e959a2c38862081c97992bce475ce16ba0c
