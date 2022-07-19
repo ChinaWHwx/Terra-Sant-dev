@@ -20,13 +20,15 @@ import 'package:flutter_application_1/modules/app/error/access/Camera/camera_acc
 import 'package:flutter_application_1/modules/app/error/access/File/file_access.view.dart';
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/Recruiter_calendar.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/duty.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/Profile/modify/modify_profile.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/favorite/Pharmacie/pharmacie_favotite.view.dart';
@@ -34,8 +36,7 @@ import 'package:flutter_application_1/modules/app/homepage/My/favorite/bookmarks
 import 'package:flutter_application_1/modules/app/homepage/My/logout/logout.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Recruiteur/declaration.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/Profile/profile.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
@@ -116,7 +117,8 @@ class AppPages {
     GetPage(name: Routes.logout, page: () => const LogoutView()),
     GetPage(name: Routes.ability, page: () => const AbilityView()),
     GetPage(name: Routes.splash, page: () => const SplashView()),
-    GetPage(name: Routes.profile, page: () => const ProfileView()),
+    GetPage(name: Routes.profile, page: () => ProfileView()),
+    GetPage(name: Routes.modifyProfile, page: () => const ModifiyProfileView()),
     GetPage(name: Routes.contact, page: () => const ContactView()),
     GetPage(name: Routes.googleMap, page: () => const GoogleMapView()),
     GetPage(name: Routes.recommend, page: () => const RecommendView()),

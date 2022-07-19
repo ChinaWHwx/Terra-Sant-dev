@@ -21,19 +21,20 @@ import 'package:flutter_application_1/modules/app/error/access/Camera/camera_acc
 import 'package:flutter_application_1/modules/app/error/access/File/file_access.controller.dart';
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/Recruiter_calendar.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/Profile/modify/modify_profile.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/favorite/Pharmacie/pharmacie_favotite.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/Recruiteur/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
@@ -90,5 +91,7 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => CandidateCalendarController(), fenix: true);
     Get.lazyPut(() => RecruiterCalendarController(), fenix: true);
     Get.lazyPut(() => DeclarationController(), fenix: true);
+    Get.lazyPut(() => ProfileController(), fenix: true);
+    Get.lazyPut(() => ModifiyProfileController(), fenix: true);
   }
 }

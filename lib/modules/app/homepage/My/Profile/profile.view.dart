@@ -1,18 +1,16 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.controller.dart';
+import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'profile.controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
+  SignInController signInController = Get.find();
+  ProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const NavigationDrawer(),
         appBar: AppBar(
           title: const Text("Mon profil"),
           centerTitle: true,
@@ -21,42 +19,52 @@ class ProfileView extends GetView<ProfileController> {
         body: Padding(
           padding: const EdgeInsets.only(top: 16),
           child: SingleChildScrollView(
-              child: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              // ignore: unrelated_type_equality_checks
-              Obx(() => controller.selectedImagePath == ''
-                  ? const Text(
-                      'Select image from camera/galley',
-                      style: TextStyle(fontSize: 20),
-                    )
-                  : CircleAvatar(
-                      radius: 98,
-                      backgroundColor: Colors.white,
-                      child: Image.file(
-                          File(controller.selectedImagePath.value)))),
-              const SizedBox(
-                height: 10,
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Nom:",
+                textAlign: TextAlign.left,
               ),
-              Obx(
-                () => Text(
-                  controller.selectedImageSize.value,
-                  style: const TextStyle(fontSize: 20),
-                ),
+              const Divider(
+                height: 20,
+                thickness: 2,
+                indent: 20,
+                endIndent: 0,
+                color: Colors.black,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  controller.getImage(ImageSource.camera);
-                },
-                child: const Text("Camera"),
+              const Text(
+                "Prénom:",
+                textAlign: TextAlign.left,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  controller.getImage(ImageSource.gallery);
-                },
-                child: const Text("Gallery"),
+              const Divider(
+                height: 20,
+                thickness: 2,
+                indent: 20,
+                endIndent: 0,
+                color: Colors.black,
               ),
-            ]),
+              const Text(
+                "numéro de téléphone:",
+                textAlign: TextAlign.left,
+              ),
+              const Divider(
+                height: 20,
+                thickness: 2,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              const Text(
+                "Adresse:",
+                textAlign: TextAlign.left,
+              ),
+              Center(
+                child: RoundedButton(
+                    text: "Modifier",
+                    onTap: () => controller.navigateToModifierProfile()),
+              ),
+            ],
           )),
         ));
   }

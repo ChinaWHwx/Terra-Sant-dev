@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/modules/app/homepage/Recruiteur/declaration.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:get/get.dart';
 
 class DeclarationView extends GetView<DeclarationController> {

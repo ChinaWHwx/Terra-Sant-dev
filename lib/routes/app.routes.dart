@@ -26,6 +26,7 @@ class Routes {
   static const password = '/password';
   static const splash = '/splash';
   static const profile = '/profile';
+  static const modifyProfile = '/modifyProfile';
   static const contact = '/contact';
   static const googleMap = '/googleMap';
   static const googleMapPosition = '/googleMapPosition';
@@ -79,6 +80,7 @@ class Routes {
   static const signinerrorRoute = signinerror;
   static const splashRoute = splash;
   static const profileRoute = profile;
+  static const modifyProfileRoute = modifyProfile;
   static const contactRoute = contact;
   static const googleMapRoute = googleMap;
   static const googleMapPositionRoute = googleMapPosition;
