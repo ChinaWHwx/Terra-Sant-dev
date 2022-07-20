@@ -448,8 +448,8 @@ class ProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   child: Container(
                       padding: EdgeInsets.all(getProportionateScreenWidth(8)),
-                      width: getProportionateScreenWidth(28),
-                      height: getProportionateScreenWidth(28),
+                      width: getProportionateScreenWidth(35),
+                      height: getProportionateScreenWidth(35),
                       decoration: BoxDecoration(
                         color: product.isFavourite
                             ? Colors.black.withOpacity(0.15)
