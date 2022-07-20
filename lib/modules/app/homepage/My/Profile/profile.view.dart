@@ -22,30 +22,8 @@ class ProfileView extends GetView<ProfileController> {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Nom:",
-                textAlign: TextAlign.left,
-              ),
-              const Divider(
-                height: 20,
-                thickness: 2,
-                indent: 20,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              const Text(
-                "Prénom:",
-                textAlign: TextAlign.left,
-              ),
-              const Divider(
-                height: 20,
-                thickness: 2,
-                indent: 20,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              const Text(
-                "numéro de téléphone:",
+              Text(
+                "Nom:" + signInController.user.userName!,
                 textAlign: TextAlign.left,
               ),
               const Divider(
@@ -55,9 +33,27 @@ class ProfileView extends GetView<ProfileController> {
                 endIndent: 0,
                 color: Colors.black,
               ),
-              const Text(
-                "Adresse:",
+              Text(
+                "Prénom:" + signInController.user.userFname!,
                 textAlign: TextAlign.left,
+              ),
+              const Divider(
+                height: 20,
+                thickness: 2,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Text(
+                "numéro de téléphone:" + signInController.user.userPhone!,
+                textAlign: TextAlign.left,
+              ),
+              const Divider(
+                height: 20,
+                thickness: 2,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
               ),
               Center(
                 child: RoundedButton(

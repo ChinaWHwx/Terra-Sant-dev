@@ -36,7 +36,7 @@ class HomepageView extends GetView<HomepageController> {
           ),
         ),
       ),
-      drawer: const NavigationDrawer(),
+      drawer: NavigationDrawer(),
       bottomNavigationBar: ConvexAppBar(items: const [
         TabItem(
           icon: Icons.home,

@@ -16,7 +16,7 @@ class CandidateCalendarView extends GetView<CandidateCalendarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const NavigationDrawer(),
+        drawer: NavigationDrawer(),
         appBar: AppBar(
           title: const Text("Calendar"),
           centerTitle: true,

@@ -16,48 +16,46 @@ class ModifiyProfileView extends GetView<ModifiyProfileController> {
         body: Padding(
           padding: const EdgeInsets.only(top: 16),
           child: SingleChildScrollView(
-              child: Center(
-            child: Column(
-              children: const [
-                Text(
-                  "Nom:",
-                  textAlign: TextAlign.center,
-                ),
-                Divider(
-                  height: 20,
-                  thickness: 2,
-                  indent: 20,
-                  endIndent: 0,
-                  color: Colors.black,
-                ),
-                Text(
-                  "Prénom:",
-                  textAlign: TextAlign.center,
-                ),
-                Divider(
-                  height: 20,
-                  thickness: 2,
-                  indent: 20,
-                  endIndent: 0,
-                  color: Colors.black,
-                ),
-                Text(
-                  "numéro de téléphone:",
-                  textAlign: TextAlign.center,
-                ),
-                Divider(
-                  height: 20,
-                  thickness: 2,
-                  indent: 20,
-                  endIndent: 0,
-                  color: Colors.black,
-                ),
-                Text(
-                  "Adresse:",
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+              child: Column(
+            children: const [
+              Text(
+                "Nom:",
+                textAlign: TextAlign.center,
+              ),
+              Divider(
+                height: 20,
+                thickness: 2,
+                indent: 20,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Text(
+                "Prénom:",
+                textAlign: TextAlign.center,
+              ),
+              Divider(
+                height: 20,
+                thickness: 2,
+                indent: 20,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Text(
+                "numéro de téléphone:",
+                textAlign: TextAlign.center,
+              ),
+              Divider(
+                height: 20,
+                thickness: 2,
+                indent: 20,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Text(
+                "Adresse:",
+                textAlign: TextAlign.center,
+              ),
+            ],
           )),
         ));
   }

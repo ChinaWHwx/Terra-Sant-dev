@@ -8,151 +8,154 @@ class DutyView extends GetView<DutyController> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Mission'),
-          centerTitle: true,
-          backgroundColor: Colors.blue,
-          leading: const BackButton(color: Colors.white),
-        ),
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Column(children: [
-            const Text(
-              "Histoire",
-              textAlign: TextAlign.start,
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Badge(
-                      badgeContent: Text(
-                        controller.recent.toString(),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      child: const Icon(Icons.lock_clock),
-                      badgeColor: Colors.red,
-                      toAnimate: true,
-                      showBadge: controller.recent > 0 ? true : false,
-                    ),
-                    title: const Text('Mes missions avant'),
-                    subtitle: const Text(
-                        'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Mission'),
+            centerTitle: true,
+            backgroundColor: Colors.blue,
+            leading: const BackButton(color: Colors.white),
+            bottom: const TabBar(tabs: [
+              Tab(icon: Icon(Icons.directions_bike)),
+              Tab(icon: Icon(Icons.directions_car)),
+              Tab(icon: Icon(Icons.directions_transit)),
+            ]),
+          ),
+          body: TabBarView(children: [
+            ListView(
+              padding: const EdgeInsets.all(8),
+              children: [
+                Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('Voir les details'),
+                      ListTile(
+                        leading: Badge(
+                          badgeContent: Text(
+                            controller.recent.toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          child: const Icon(Icons.lock_clock),
+                          badgeColor: Colors.red,
+                          toAnimate: true,
+                          showBadge: controller.recent > 0 ? true : false,
+                        ),
+                        title: const Text('Mes missions avant'),
+                        subtitle: const Text(
+                            'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
                       ),
-                      const SizedBox(width: 8),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('supprimmer'),
-                      ),
-                      const SizedBox(width: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Voir les details'),
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('supprimmer'),
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: size.height * 0.03),
-            const Text(
-              "Mission à accomplir",
-              textAlign: TextAlign.start,
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Badge(
-                      badgeContent: Text(
-                        controller.now.toString(),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      child: const Icon(Icons.work),
-                      badgeColor: Colors.red,
-                      toAnimate: true,
-                      showBadge: controller.now > 0 ? true : false,
-                    ),
-                    title: const Text('Mes missions maintenant'),
-                    subtitle: const Text(
-                        'Pharmacie Auchan, 18 rue paul langevin, val de fontenay, 94120'),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                ),
+              ],
+            ),
+            ListView(
+              padding: const EdgeInsets.all(8),
+              children: [
+                Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('Voir les details'),
+                      ListTile(
+                        leading: Badge(
+                          badgeContent: Text(
+                            controller.recent.toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          child: const Icon(Icons.lock_clock),
+                          badgeColor: Colors.red,
+                          toAnimate: true,
+                          showBadge: controller.recent > 0 ? true : false,
+                        ),
+                        title: const Text('Mes missions avant'),
+                        subtitle: const Text(
+                            'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
                       ),
-                      const SizedBox(width: 8),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('supprimmer'),
-                      ),
-                      const SizedBox(width: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Voir les details'),
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('supprimmer'),
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: size.height * 0.03),
-            /*
-            FSuper(
-              redPointOffset: const Offset(185, -10),
-              backgroundColor: const Color(0xffeeeeee),
-              corner: FCorner.all(6),
-              redPoint: true,
-            ),
-            */
-            const Text(
-              "Mission peut choisir",
-              textAlign: TextAlign.start,
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Badge(
-                      badgeContent: Text(
-                        controller.future.toString(),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      child: const Icon(Icons.check),
-                      badgeColor: Colors.red,
-                      toAnimate: true,
-                      showBadge: controller.future > 0 ? true : false,
-                    ),
-                    title: const Text('Les missions peuvent choisir'),
-                    subtitle: const Text(
-                        'Pharmacie Auchan, 18 rue paul langevin, val de fontenay, 94120'),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('Voir les details'),
-                      ),
-                      const SizedBox(width: 8),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('supprimmer'),
-                      ),
-                      const SizedBox(width: 8),
-                    ],
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
+            ListView(
+              padding: const EdgeInsets.all(8),
+              children: [
+                Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ListTile(
+                        leading: Badge(
+                          badgeContent: Text(
+                            controller.recent.toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          child: const Icon(Icons.lock_clock),
+                          badgeColor: Colors.red,
+                          toAnimate: true,
+                          showBadge: controller.recent > 0 ? true : false,
+                        ),
+                        title: const Text('Mes missions avant'),
+                        subtitle: const Text(
+                            'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Voir les details'),
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('supprimmer'),
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            // Icon(Icons.directions_bike),
+            // Icon(Icons.directions_transit),
+            // Icon(Icons.directions_car),
           ]),
-        )));
+        ),
+      ),
+    );
   }
 }

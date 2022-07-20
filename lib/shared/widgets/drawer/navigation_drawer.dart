@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/widgets/drawer/navigation_draver.controller.dart';
 import 'package:get/get.dart';
 
 class NavigationDrawer extends GetView<NavigationDrawerController> {
-  const NavigationDrawer({Key? key}) : super(key: key);
-
+  NavigationDrawer({Key? key}) : super(key: key);
+  SignInController signInController = Get.find();
   //var authController = Get.find<AuthController>();
 
   @override
@@ -72,8 +73,8 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
 
   Widget buildDrawerHeader() {
     return UserAccountsDrawerHeader(
-      accountName: const Text("wx"),
-      accountEmail: const Text("wx@gmail.com"),
+      accountName: Text(signInController.user.userName!),
+      accountEmail: Text(signInController.user.userEmail!),
       currentAccountPicture: Stack(
         children: [
           const CircleAvatar(

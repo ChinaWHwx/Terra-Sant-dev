@@ -13,7 +13,7 @@ class WelcomeView extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const NavigationDrawer(),
+        drawer: NavigationDrawer(),
         appBar: AppBar(
           title: const Text("xxx"),
           centerTitle: true,
