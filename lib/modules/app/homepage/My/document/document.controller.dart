@@ -3,12 +3,13 @@ import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class DocumentController extends GetxController
     with GetSingleTickerProviderStateMixin {
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
+
+  RxList<File> selectedFiles = <File>[].obs;
 
   String image =
       'https://ouch-cdn2.icons8.com/84zU-uvFboh65geJMR5XIHCaNkx-BZ2TahEpE9TpVJM/rs:fit:784:784/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODU5/L2E1MDk1MmUyLTg1/ZTMtNGU3OC1hYzlh/LWU2NDVmMWRiMjY0/OS5wbmc.png';
@@ -16,18 +17,6 @@ class DocumentController extends GetxController
 
   File? file;
   PlatformFile? platformFile;
-
-  selectFile() async {
-    var uploadedFile = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['png', 'jpg', 'jpeg', 'pdf']);
-
-    if (uploadedFile != null) {
-      file = File(uploadedFile.files.single.path!);
-      platformFile = uploadedFile.files.first;
-    }
-    loadingController.forward();
-  }
 
   @override
   void onInit() {
@@ -45,19 +34,18 @@ class DocumentController extends GetxController
 
   navigateToFiles() {}
 
-  void getImage(ImageSource imageSource) async {
-    final PickedFile = await ImagePicker().getImage(source: imageSource);
-    if (PickedFile != null) {
-      selectedImagePath.value = PickedFile.path;
-      selectedImageSize.value =
-          ((File(selectedImagePath.value)).lengthSync() / 1024 / 1024)
-                  .toStringAsFixed(2) +
-              "MB";
+  Future selectFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc', 'png'],
+    );
+
+    if (result != null) {
+      List<File> files = result.paths.map((path) => File(path!)).toList();
+      selectedFiles.addAll(files);
     } else {
-      Get.snackbar('Error', 'No image selected',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      // User canceled the picker
     }
   }
 }

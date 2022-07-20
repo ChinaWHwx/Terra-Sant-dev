@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 
 class DocumentView extends GetView<DocumentController> {
   const DocumentView({Key? key}) : super(key: key);
+//PDFDocument doc = await PDFDocument.fromFile(file);
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,18 @@ class DocumentView extends GetView<DocumentController> {
             ),
             const SizedBox(
               height: 20,
+            ),
+            Obx(
+              () => controller.selectedFiles.isNotEmpty
+                  ? Column(
+                      children: controller.selectedFiles
+                          .map((element) => ListTile(
+                                leading: const Icon(Icons.list),
+                                title: Text(element.path),
+                              ))
+                          .toList(),
+                    )
+                  : const SizedBox(),
             ),
             GestureDetector(
               onTap: controller.selectFile,

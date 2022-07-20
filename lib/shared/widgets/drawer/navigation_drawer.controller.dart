@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 class NavigationDrawerController extends GetxController {
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
-  var selectedImage = ''.obs;
+  Rx<String?> selectedImage = ''.obs;
 
   void getImage(ImageSource imageSource) async {
     final PickedFile = await ImagePicker().getImage(source: imageSource);
@@ -27,7 +27,11 @@ class NavigationDrawerController extends GetxController {
 
   Future getPicture() async {
     final ImagePicker _picker = ImagePicker();
-    var image = await _picker.pickImage(source: ImageSource.gallery);
-    selectedImage = image as RxString;
+    try {
+      XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      selectedImage.value = image!.path;
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -44,7 +44,7 @@ import 'package:flutter_application_1/repositories/availability.repository.dart'
 import 'package:flutter_application_1/repositories/login.repository.dart';
 import 'package:flutter_application_1/services/availability.service.dart';
 import 'package:flutter_application_1/services/login.service.dart';
-import 'package:flutter_application_1/shared/widgets/drawer/navigation_draver.controller.dart';
+import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.controller.dart';
 import 'package:get/get.dart';
 
 class AppBindings extends Bindings {

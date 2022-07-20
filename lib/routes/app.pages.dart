@@ -112,7 +112,7 @@ class AppPages {
     GetPage(name: Routes.homepage, page: () => const HomepageView()),
     GetPage(name: Routes.welcome, page: () => const WelcomeView()),
     GetPage(name: Routes.menu, page: () => const MyView()),
-    GetPage(name: Routes.document, page: () => const DocumentView()),
+    GetPage(name: Routes.document, page: () => DocumentView()),
     GetPage(name: Routes.experience, page: () => const ExperienceView()),
     GetPage(name: Routes.logout, page: () => const LogoutView()),
     GetPage(name: Routes.ability, page: () => const AbilityView()),

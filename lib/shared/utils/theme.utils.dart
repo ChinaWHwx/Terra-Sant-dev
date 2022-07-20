@@ -12,6 +12,13 @@ class ThemeUtils {
           fontSize: 36.0,
         ),
       ));
+  static final themeDataDark = ThemeData(
+      scaffoldBackgroundColor: Colors.black,
+      textTheme: const TextTheme(
+          headline1: TextStyle(
+        color: Colors.white,
+        fontSize: 36.0,
+      )));
 }
 
 class ButtonStyles {
