@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
-import 'package:flutter_application_1/shared/widgets/drawer/navigation_draver.controller.dart';
+import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.controller.dart';
 import 'package:get/get.dart';
 
 class NavigationDrawer extends GetView<NavigationDrawerController> {
@@ -77,10 +79,14 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
       accountEmail: Text(signInController.user.userEmail!),
       currentAccountPicture: Stack(
         children: [
-          const CircleAvatar(
-            backgroundImage: AssetImage('assets/images/download.jpg'),
-            radius: 200,
-          ),
+          Obx(() => CircleAvatar(
+                backgroundImage: controller.selectedImage.value != null &&
+                        controller.selectedImage.value!.isNotEmpty
+                    ? FileImage(File(controller.selectedImage.value!))
+                    : const AssetImage('assets/images/download.jpg')
+                        as ImageProvider,
+                radius: 200,
+              )),
           GestureDetector(
             onTap: () {
               controller.getPicture();

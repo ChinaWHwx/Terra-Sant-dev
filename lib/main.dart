@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         title: 'TerraSante',
         theme: ThemeUtils.themeData,
+        darkTheme: ThemeUtils.themeDataDark,
         getPages: AppPages.routes,
         initialRoute: Routes.auth,
         initialBinding: AppBindings(),

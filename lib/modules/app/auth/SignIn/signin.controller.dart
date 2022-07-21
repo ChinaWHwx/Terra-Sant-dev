@@ -3,6 +3,7 @@ import 'package:flutter_application_1/models/login.model.dart';
 import 'package:flutter_application_1/models/user.model.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/login.service.dart';
+import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/widgets/methods/methods.shared.dart';
 import 'package:get/get.dart';
 
@@ -51,6 +52,7 @@ class SignInController extends GetxController with StateMixin {
         change(null, status: RxStatus.success());
       }
     } catch (e) {
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
       change(null, status: RxStatus.error(e.toString()));
     }
   }
@@ -77,7 +79,7 @@ class SignInController extends GetxController with StateMixin {
 
   manageResponse(var response) {
     if (response.containsKey("error")) {
-      showToast(response['error']);
+      HelperUtils.showSimpleSnackBar(response['error']);
       change(null, status: RxStatus.success());
     } else {
       user = User.fromJson(response);
