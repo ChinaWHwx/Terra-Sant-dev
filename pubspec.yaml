@@ -89,6 +89,8 @@ dependencies:
   favorite_button: ^0.0.4
   fluttertoast: ^8.0.9
   advance_pdf_viewer: ^2.0.1
+  
+  custom_refresh_indicator: ^1.2.1
 
 flutter_native_splash:
   android: true
