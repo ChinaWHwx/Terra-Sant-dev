@@ -18,15 +18,15 @@ class EmailView extends GetView<EmailController> {
           child: Center(
               child: Column(children: <Widget>[
         SizedBox(height: size.height * 0.05),
-        Text(
-          controller.title,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+        const Text(
+          "Saisissez votre adresse email",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
         ),
         SizedBox(height: size.height * 0.05),
         RoundedInputField(
           textEditingController: controller.textEditingController,
           icon: Icons.mail,
-          hintText: "Adress de mail*",
+          hintText: "Adresse Email*",
           onChanged: (value) {},
         ),
         Obx(() => controller.errorMessage.isNotEmpty
@@ -37,11 +37,11 @@ class EmailView extends GetView<EmailController> {
             : const SizedBox()),
         RoundedButton(
           text: "Vérifier",
-          onTap: () => controller.validateForm(),
+          onTap: () => controller.validateForm(1),
         ),
         RoundedButton(
-          text: "Précédent",
-          onTap: () => controller.navigateToSmsVerification(),
+          text: "Vérifier plus tard",
+          onTap: () => controller.validateForm(2),
         ),
       ]))),
     )));

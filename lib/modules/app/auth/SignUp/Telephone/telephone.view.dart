@@ -31,16 +31,13 @@ class TelephoneView extends GetView<TelephoneController> {
                   invalidNumberMessage: "",
                   controller: controller.textEditingController,
                   decoration: const InputDecoration(
-                    labelText: 'Phone Number',
+                    labelText: 'Numéro de téléphone',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(),
                     ),
                   ),
                   initialCountryCode: 'FR',
-                  onChanged: (phone) {
-                    // ignore: avoid_print
-                    print(phone.completeNumber);
-                  },
+                  onChanged: (phone) {},
                 ),
                 Obx(
                   (() => controller.errorMessage.isNotEmpty
@@ -51,12 +48,17 @@ class TelephoneView extends GetView<TelephoneController> {
                       : SizedBox(height: size.height * 0.03)),
                 ),
                 RoundedButton(
-                  text: controller.envoyer,
-                  onTap: () => controller.validateForm(),
+                  text: 'Vérifier le numéro',
+                  onTap: () async {
+                    await controller.validateForm(1);
+                  },
                 ),
                 RoundedButton(
-                    text: controller.rentrer,
-                    onTap: () => controller.navigateToStatus()),
+                  text: 'Vérifier plus tard',
+                  onTap: () {
+                    controller.validateForm(2);
+                  },
+                ),
               ],
             ),
           ),

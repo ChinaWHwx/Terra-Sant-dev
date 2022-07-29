@@ -42,8 +42,10 @@ import 'package:flutter_application_1/modules/app/online_shopee/pharmacie_contro
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.controller.dart';
 import 'package:flutter_application_1/repositories/availability.repository.dart';
 import 'package:flutter_application_1/repositories/login.repository.dart';
+import 'package:flutter_application_1/repositories/signUp.repository.dart';
 import 'package:flutter_application_1/services/availability.service.dart';
 import 'package:flutter_application_1/services/login.service.dart';
+import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.controller.dart';
 import 'package:get/get.dart';
 
@@ -101,9 +103,11 @@ class AppBindings extends Bindings {
     //Services
     Get.lazyPut(() => LoginService(), fenix: true);
     Get.lazyPut(() => AvailabilityService(), fenix: true);
+    Get.lazyPut(() => SignUpService(), fenix: true);
 
     //Repositories
     Get.lazyPut(() => LoginRepository(), fenix: true);
     Get.lazyPut(() => AvailabilityRepository(), fenix: true);
+    Get.lazyPut(() => SignUpRepository(), fenix: true);
   }
 }
