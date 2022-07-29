@@ -27,8 +27,7 @@ class CandidateView extends GetView<CandidateController> {
               fontSize: 16.0,
               image: "assets/images/c1.png",
               onTap: () {
-                controller.index(0);
-                controller.navigateToSignUpRoute();
+                controller.setStatus("ETD3");
               },
             ),
             RoundedImageTextButton(
@@ -36,8 +35,7 @@ class CandidateView extends GetView<CandidateController> {
               fontSize: 16.0,
               image: "assets/images/c2.png",
               onTap: () {
-                controller.index(1);
-                controller.navigateToSignUpRoute();
+                controller.setStatus("PR");
               },
             ),
             RoundedImageTextButton(
@@ -45,8 +43,7 @@ class CandidateView extends GetView<CandidateController> {
               fontSize: 16.0,
               image: "assets/images/c3.png",
               onTap: () {
-                controller.index(2);
-                controller.navigateToSignUpRoute();
+                controller.setStatus("PH");
               },
             ),
           ],
