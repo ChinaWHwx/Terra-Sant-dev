@@ -19,48 +19,64 @@ class ProfileView extends GetView<ProfileController> {
         body: Padding(
           padding: const EdgeInsets.only(top: 16),
           child: SingleChildScrollView(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Nom:" + signInController.user.userName!,
-                textAlign: TextAlign.left,
-              ),
-              const Divider(
-                height: 20,
-                thickness: 2,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              Text(
-                "Prénom:" + signInController.user.userFname!,
-                textAlign: TextAlign.left,
-              ),
-              const Divider(
-                height: 20,
-                thickness: 2,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              Text(
-                "numéro de téléphone:" + signInController.user.userPhone!,
-                textAlign: TextAlign.left,
-              ),
-              const Divider(
-                height: 20,
-                thickness: 2,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              Center(
-                child: RoundedButton(
-                    text: "Modifier",
-                    onTap: () => controller.navigateToModifierProfile()),
-              ),
-            ],
+              child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Nom:" + signInController.user.userName!,
+                  textAlign: TextAlign.left,
+                ),
+                const Divider(
+                  height: 20,
+                  thickness: 2,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+                Text(
+                  "Prénom:" + signInController.user.userFname!,
+                  textAlign: TextAlign.left,
+                ),
+                const Divider(
+                  height: 20,
+                  thickness: 2,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+                Text(
+                  "numéro de téléphone:" + signInController.user.userPhone!,
+                  textAlign: TextAlign.left,
+                ),
+                const Divider(
+                  height: 20,
+                  thickness: 2,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+                Text(
+                  "Adresse:" +
+                      signInController
+                          .user.userPhone!, //A modifier en user.adresse
+                  textAlign: TextAlign.left,
+                ),
+                const Divider(
+                  height: 20,
+                  thickness: 2,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+                Center(
+                  child: RoundedButton(
+                      text: "Modifier",
+                      onTap: () => controller.navigateToModifierProfile()),
+                ),
+              ],
+            ),
           )),
         ));
   }

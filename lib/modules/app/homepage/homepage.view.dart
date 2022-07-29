@@ -45,10 +45,22 @@ class HomepageView extends GetView<HomepageController> {
           icon: Icons.home,
           title: 'Acceuil',
         ),
-        TabItem(icon: Icons.search, title: 'Explorer'),
-        TabItem(icon: Icons.calendar_month, title: 'Calenderier'),
-        TabItem(icon: Icons.work, title: 'Mission'),
-        TabItem(icon: Icons.people, title: 'Moi'),
+        TabItem(
+          icon: Icons.search,
+          title: 'Explorer',
+        ),
+        TabItem(
+          icon: Icons.calendar_month,
+          title: 'Calenderier',
+        ),
+        TabItem(
+          icon: Icons.work,
+          title: 'Mission',
+        ),
+        TabItem(
+          icon: Icons.people,
+          title: 'Moi',
+        ),
       ], onTap: (int i) => controller.navigate(i)),
     );
   }

@@ -10,4 +10,13 @@ class DutyController extends GetxController {
   navigateToAuth() {
     Get.toNamed(Routes.homepageRoute);
   }
+
+  Rx<int> removeCard = 0.obs;
+  void incrementcard() {
+    if (removeCard.value >= 0) {
+      return;
+    }
+
+    removeCard.value--;
+  }
 }

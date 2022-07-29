@@ -91,6 +91,9 @@ dependencies:
   advance_pdf_viewer: ^2.0.1
   
   custom_refresh_indicator: ^1.2.1
+  table_calendar: ^3.0.6
+  flutter_polyline_points: ^1.0.0
+  geocode: ^1.0.2
 
 flutter_native_splash:
   android: true

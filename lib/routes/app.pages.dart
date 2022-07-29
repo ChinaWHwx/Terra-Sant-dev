@@ -19,7 +19,9 @@ import 'package:flutter_application_1/modules/app/error/SignIn/signin_error.view
 import 'package:flutter_application_1/modules/app/error/access/Camera/camera_access.view.dart';
 import 'package:flutter_application_1/modules/app/error/access/File/file_access.view.dart';
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
@@ -155,5 +157,7 @@ class AppPages {
     GetPage(
         name: Routes.candidateCalendar, page: () => CandidateCalendarView()),
     GetPage(name: Routes.declaration, page: () => const DeclarationView()),
+    GetPage(name: Routes.basicExemple, page: () => const BasicExempleView()),
+    GetPage(name: Routes.complexExemple, page: () => ComplexExempleView()),
   ];
 }

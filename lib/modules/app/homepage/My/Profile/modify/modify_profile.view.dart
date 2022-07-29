@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/modify/modify_profile.controller.dart';
+import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
 import 'package:get/get.dart';
 
 class ModifiyProfileView extends GetView<ModifiyProfileController> {
@@ -16,46 +17,66 @@ class ModifiyProfileView extends GetView<ModifiyProfileController> {
         body: Padding(
           padding: const EdgeInsets.only(top: 16),
           child: SingleChildScrollView(
-              child: Column(
-            children: const [
-              Text(
-                "Nom:",
-                textAlign: TextAlign.center,
-              ),
-              Divider(
-                height: 20,
-                thickness: 2,
-                indent: 20,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              Text(
-                "Prénom:",
-                textAlign: TextAlign.center,
-              ),
-              Divider(
-                height: 20,
-                thickness: 2,
-                indent: 20,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              Text(
-                "numéro de téléphone:",
-                textAlign: TextAlign.center,
-              ),
-              Divider(
-                height: 20,
-                thickness: 2,
-                indent: 20,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-              Text(
-                "Adresse:",
-                textAlign: TextAlign.center,
-              ),
-            ],
+              child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: controller.textEditingController,
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nom',
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: controller.textEditingController,
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Prénom',
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: controller.textEditingController,
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Numéro de téléphone',
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: controller.textEditingController,
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Adresse',
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: RoundedButton(
+                      text: "Valider",
+                      onTap: () => controller.navigateToModifierProfile()),
+                ),
+              ],
+            ),
           )),
         ));
   }
