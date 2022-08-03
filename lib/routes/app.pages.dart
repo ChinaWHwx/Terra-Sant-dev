@@ -26,6 +26,8 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/be
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/SearchingAddress/searching_address.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/ViewingMap/viewing_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.view.dart';
@@ -114,7 +116,7 @@ class AppPages {
     GetPage(name: Routes.homepage, page: () => const HomepageView()),
     GetPage(name: Routes.welcome, page: () => const WelcomeView()),
     GetPage(name: Routes.menu, page: () => const MyView()),
-    GetPage(name: Routes.document, page: () => DocumentView()),
+    GetPage(name: Routes.document, page: () => const DocumentView()),
     GetPage(name: Routes.experience, page: () => const ExperienceView()),
     GetPage(name: Routes.logout, page: () => const LogoutView()),
     GetPage(name: Routes.ability, page: () => const AbilityView()),
@@ -123,6 +125,10 @@ class AppPages {
     GetPage(name: Routes.modifyProfile, page: () => const ModifiyProfileView()),
     GetPage(name: Routes.contact, page: () => const ContactView()),
     GetPage(name: Routes.googleMap, page: () => const GoogleMapView()),
+    GetPage(
+        name: Routes.searchingAddress,
+        page: () => const SearchingAddressView()),
+    GetPage(name: Routes.viewingMap, page: () => ViewingMapView()),
     GetPage(name: Routes.recommend, page: () => const RecommendView()),
     GetPage(name: Routes.my, page: () => const MyView()),
     GetPage(name: Routes.duty, page: () => const DutyView()),

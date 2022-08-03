@@ -26,6 +26,8 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/comp
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/SearchingAddress/searching_address.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/ViewingMap/viewing_map.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.controller.dart';
@@ -99,6 +101,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => DeclarationController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => ModifiyProfileController(), fenix: true);
+    Get.lazyPut(() => SearchingAddressController(), fenix: true);
+    Get.lazyPut(() => ViewingMapController(), fenix: true);
 
     //Services
     Get.lazyPut(() => LoginService(), fenix: true);

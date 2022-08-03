@@ -30,7 +30,7 @@ class GoogleMapView extends GetView<MapController> {
                     polylines: <Polyline>{
                       Polyline(
                         polylineId: const PolylineId('iter'),
-                        points: controller.routePoints.value,
+                        points: controller.routePoints,
                         width: 4,
                         color: Colors.red,
                         startCap: Cap.roundCap,

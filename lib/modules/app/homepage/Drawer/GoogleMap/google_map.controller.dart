@@ -52,20 +52,13 @@ class MapController extends GetxController with StateMixin {
     }
   }
 
-  getDestination(double? lat, double? lang) async {
-    if (lat == null || lang == null) return "";
-    LocationData destinationPosition = await location.getLocation();
-  }
-
-  Future<Coordinates?> getCoordinates() async {
+  Future<Coordinates?> getCoordinates(adr) async {
     GeoCode geoCode = GeoCode();
 
     try {
-      Coordinates coordinates = await geoCode.forwardGeocoding(
-          address: addressEditingController.toString());
+      Coordinates coordinates = await geoCode.forwardGeocoding(address: adr);
       return coordinates;
     } catch (e) {
-      print(e);
       return null;
     }
   }
@@ -101,9 +94,9 @@ class MapController extends GetxController with StateMixin {
       travelMode: TravelMode.driving,
     );
 
-    result.points.forEach((element) {
+    for (var element in result.points) {
       routePoints.add(LatLng(element.latitude, element.longitude));
-    });
+    }
     routePoints.refresh();
   } //Créer une polylines
 
@@ -123,7 +116,7 @@ class MapController extends GetxController with StateMixin {
       showToast("C'est pas vide");
       createPolylines(
         LatLng(currentPosition.latitude!, currentPosition.longitude!),
-        LatLng(destinationPosition.latitude!, destinationPosition.latitude!),
+        LatLng(destinationPosition.latitude!, destinationPosition.longitude!),
       );
     }
   }

@@ -24,7 +24,7 @@ class AuthController extends GetxController {
   }
 
   navigateTest() {
-    Get.toNamed(Routes.googleMapRoute);
+    Get.toNamed(Routes.searchingAddressRoute);
   }
 
   navigateToHomePage() {
