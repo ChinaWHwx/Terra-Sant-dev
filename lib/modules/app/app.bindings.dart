@@ -20,16 +20,20 @@ import 'package:flutter_application_1/modules/app/error/SmsVerification/sms_erro
 import 'package:flutter_application_1/modules/app/error/access/Camera/camera_access.controller.dart';
 import 'package:flutter_application_1/modules/app/error/access/File/file_access.controller.dart';
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_exemple.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/ajouterPharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/SearchingAddress/searching_address.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/ViewingMap/viewing_map.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/duty.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/My/Profile/modify/modify_profile.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/profile/modify/modify_profile.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.controller.dart';
@@ -101,6 +105,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AjouterPharmacieController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => ModifiyProfileController(), fenix: true);
+    Get.lazyPut(() => SearchingAddressController(), fenix: true);
+    Get.lazyPut(() => ViewingMapController(), fenix: true);
 
     //Services
     Get.lazyPut(() => LoginService(), fenix: true);
@@ -111,5 +117,7 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => LoginRepository(), fenix: true);
     Get.lazyPut(() => AvailabilityRepository(), fenix: true);
     Get.lazyPut(() => SignUpRepository(), fenix: true);
+    Get.lazyPut(() => BasicExempleController(), fenix: true);
+    Get.lazyPut(() => ComplexExempleController(), fenix: true);
   }
 }

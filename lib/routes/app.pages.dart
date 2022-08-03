@@ -19,11 +19,15 @@ import 'package:flutter_application_1/modules/app/error/SignIn/signin_error.view
 import 'package:flutter_application_1/modules/app/error/access/Camera/camera_access.view.dart';
 import 'package:flutter_application_1/modules/app/error/access/File/file_access.view.dart';
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/SearchingAddress/searching_address.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/ViewingMap/viewing_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.view.dart';
@@ -113,7 +117,7 @@ class AppPages {
     GetPage(name: Routes.homepage, page: () => const HomepageView()),
     GetPage(name: Routes.welcome, page: () => const WelcomeView()),
     GetPage(name: Routes.menu, page: () => const MyView()),
-    GetPage(name: Routes.document, page: () => DocumentView()),
+    GetPage(name: Routes.document, page: () => const DocumentView()),
     GetPage(name: Routes.experience, page: () => const ExperienceView()),
     GetPage(name: Routes.logout, page: () => const LogoutView()),
     GetPage(name: Routes.ability, page: () => const AbilityView()),
@@ -122,6 +126,10 @@ class AppPages {
     GetPage(name: Routes.modifyProfile, page: () => const ModifiyProfileView()),
     GetPage(name: Routes.contact, page: () => const ContactView()),
     GetPage(name: Routes.googleMap, page: () => const GoogleMapView()),
+    GetPage(
+        name: Routes.searchingAddress,
+        page: () => const SearchingAddressView()),
+    GetPage(name: Routes.viewingMap, page: () => ViewingMapView()),
     GetPage(name: Routes.recommend, page: () => const RecommendView()),
     GetPage(name: Routes.my, page: () => const MyView()),
     GetPage(name: Routes.duty, page: () => const DutyView()),
@@ -159,5 +167,7 @@ class AppPages {
     GetPage(
         name: Routes.ajouterPharmacie,
         page: () => const AjouterPharmacieView()),
+    GetPage(name: Routes.basicExemple, page: () => const BasicExempleView()),
+    GetPage(name: Routes.complexExemple, page: () => ComplexExempleView()),
   ];
 }

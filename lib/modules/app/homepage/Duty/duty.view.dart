@@ -18,9 +18,9 @@ class DutyView extends GetView<DutyController> {
             backgroundColor: Colors.blue,
             leading: const BackButton(color: Colors.white),
             bottom: const TabBar(tabs: [
-              Tab(icon: Icon(Icons.directions_bike)),
-              Tab(icon: Icon(Icons.directions_car)),
-              Tab(icon: Icon(Icons.directions_transit)),
+              Tab(icon: Icon(Icons.lock_clock)),
+              Tab(icon: Icon(Icons.work)),
+              Tab(icon: Icon(Icons.check)),
             ]),
           ),
           body: TabBarView(children: [
@@ -42,9 +42,9 @@ class DutyView extends GetView<DutyController> {
                           toAnimate: true,
                           showBadge: controller.recent > 0 ? true : false,
                         ),
-                        title: const Text('Mes missions avant'),
+                        title: const Text('Pharmacie Casino'),
                         subtitle: const Text(
-                            'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
+                            '18 rue paul langevin, val de fontenay, 94120'),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
