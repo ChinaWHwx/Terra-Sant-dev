@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:get/get.dart';
 
-class DeclarationController extends GetxController {
+class PharmacieController extends GetxController {
   final TextEditingController textEditingController = TextEditingController();
   var name = <TextEditingController>[];
   var tel = <TextEditingController>[];
-  Rx<int> addCard = 0.obs;
-  Rx<int> reduceCard = 0.obs;
+  Rx<int> addCard = 1.obs;
+  SignInController signInController = Get.find();
 
-  judge() {
-    printInfo(info: 'Ajoutez vos infos');
+  navigateDecleration() {
+    Get.toNamed(Routes.declaration);
+  }
+
+  navigateToMyRecruiter() {
+    Get.toNamed(Routes.myRecruiter);
+  }
+
+  navigateToAjouterPharmacie() {
+    Get.toNamed(Routes.ajouterPharmacie);
   }
 
   void incrementcard() {
@@ -27,9 +36,5 @@ class DeclarationController extends GetxController {
     }
 
     addCard.value--;
-  }
-
-  navigateAjouter() {
-    Get.toNamed(Routes.pharmacieInfo);
   }
 }

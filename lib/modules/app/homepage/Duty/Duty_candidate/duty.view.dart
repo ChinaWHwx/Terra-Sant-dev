@@ -1,10 +1,9 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.controller.dart';
 import 'package:get/get.dart';
 
-class DutyView extends GetView<DutyController> {
-  const DutyView({Key? key}) : super(key: key);
+class DutyCandidateView extends GetView<DutyCandidateController> {
+  const DutyCandidateView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,32 +30,51 @@ class DutyView extends GetView<DutyController> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      ListTile(
-                        leading: Badge(
-                          badgeContent: Text(
-                            controller.recent.toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          child: const Icon(Icons.lock_clock),
-                          badgeColor: Colors.red,
-                          toAnimate: true,
-                          showBadge: controller.recent > 0 ? true : false,
-                        ),
-                        title: const Text('Pharmacie Casino'),
-                        subtitle: const Text(
+                      const ListTile(
+                        leading: Icon(Icons.lock_clock),
+                        title: Text('Pharmacie Casino'),
+                        subtitle: Text(
                             '18 rue paul langevin, val de fontenay, 94120'),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.navigateToDetailPass();
+                            },
                             child: const Text('Voir les details'),
                           ),
                           const SizedBox(width: 8),
+                          const SizedBox(width: 8),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            ListView(
+              padding: const EdgeInsets.all(8),
+              children: [
+                Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.work),
+                        title: Text('Mes missions avant'),
+                        subtitle: Text(
+                            'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
                           TextButton(
-                            onPressed: () {},
-                            child: const Text('supprimmer'),
+                            onPressed: () {
+                              controller.navigateToDetailNow();
+                            },
+                            child: const Text('Voir les details'),
                           ),
                           const SizedBox(width: 8),
                         ],
@@ -73,74 +91,20 @@ class DutyView extends GetView<DutyController> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      ListTile(
-                        leading: Badge(
-                          badgeContent: Text(
-                            controller.recent.toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          child: const Icon(Icons.lock_clock),
-                          badgeColor: Colors.red,
-                          toAnimate: true,
-                          showBadge: controller.recent > 0 ? true : false,
-                        ),
-                        title: const Text('Mes missions avant'),
-                        subtitle: const Text(
+                      const ListTile(
+                        leading: Icon(Icons.check),
+                        title: Text('Mes missions avant'),
+                        subtitle: Text(
                             'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.navigateToDetailFuture();
+                            },
                             child: const Text('Voir les details'),
-                          ),
-                          const SizedBox(width: 8),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text('supprimmer'),
-                          ),
-                          const SizedBox(width: 8),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ListView(
-              padding: const EdgeInsets.all(8),
-              children: [
-                Card(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ListTile(
-                        leading: Badge(
-                          badgeContent: Text(
-                            controller.recent.toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          child: const Icon(Icons.lock_clock),
-                          badgeColor: Colors.red,
-                          toAnimate: true,
-                          showBadge: controller.recent > 0 ? true : false,
-                        ),
-                        title: const Text('Mes missions avant'),
-                        subtitle: const Text(
-                            'Pharmacie Casino, 18 rue paul langevin, val de fontenay, 94120'),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text('Voir les details'),
-                          ),
-                          const SizedBox(width: 8),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text('supprimmer'),
                           ),
                           const SizedBox(width: 8),
                         ],

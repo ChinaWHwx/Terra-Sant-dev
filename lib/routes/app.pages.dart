@@ -22,6 +22,7 @@ import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.vi
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/PharmacieInfo/PharmacieInfo.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
@@ -29,7 +30,15 @@ import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candi
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/duty.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Future/detail_future_candidate.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Now/detail_now_candidate.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass_candidate.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/duty.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/Profile/modify/modify_profile.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.view.dart';
@@ -39,12 +48,16 @@ import 'package:flutter_application_1/modules/app/homepage/My/logout/logout.view
 import 'package:flutter_application_1/modules/app/homepage/My/my.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/Profile/profile.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
 import 'package:flutter_application_1/modules/app/online_shopee/favorite_page.dart';
 import 'package:flutter_application_1/modules/app/timeout/EmailVerification/emailverification_timeout.view.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.view.dart';
+
 import 'package:get/get.dart';
 
 part 'app.routes.dart';
@@ -114,7 +127,7 @@ class AppPages {
     GetPage(name: Routes.homepage, page: () => const HomepageView()),
     GetPage(name: Routes.welcome, page: () => const WelcomeView()),
     GetPage(name: Routes.menu, page: () => const MyView()),
-    GetPage(name: Routes.document, page: () => DocumentView()),
+    GetPage(name: Routes.document, page: () => const DocumentView()),
     GetPage(name: Routes.experience, page: () => const ExperienceView()),
     GetPage(name: Routes.logout, page: () => const LogoutView()),
     GetPage(name: Routes.ability, page: () => const AbilityView()),
@@ -125,7 +138,8 @@ class AppPages {
     GetPage(name: Routes.googleMap, page: () => const GoogleMapView()),
     GetPage(name: Routes.recommend, page: () => const RecommendView()),
     GetPage(name: Routes.my, page: () => const MyView()),
-    GetPage(name: Routes.duty, page: () => const DutyView()),
+    GetPage(name: Routes.dutyCandidate, page: () => const DutyCandidateView()),
+    GetPage(name: Routes.dutyRecruiter, page: () => const DutyRecruiterView()),
     GetPage(
         name: Routes.googlePlaceApi, page: () => const GooglePlaceApiView()),
     GetPage(name: Routes.setting, page: () => const SettingView()),
@@ -159,5 +173,28 @@ class AppPages {
     GetPage(name: Routes.declaration, page: () => const DeclarationView()),
     GetPage(name: Routes.basicExemple, page: () => const BasicExempleView()),
     GetPage(name: Routes.complexExemple, page: () => ComplexExempleView()),
+    GetPage(
+        name: Routes.detailFutureRecruiter,
+        page: () => DetailFutureRecruiterView()),
+    GetPage(
+        name: Routes.detailNowRecruiter, page: () => DetailNowRecruiterView()),
+    GetPage(
+        name: Routes.detailPassRecruiter,
+        page: () => DetailPassRecruiterView()),
+    GetPage(name: Routes.description, page: () => const DescriptionView()),
+    GetPage(
+        name: Routes.DetailFutureCandidate,
+        page: () => DetailFutureCandidateView()),
+    GetPage(
+        name: Routes.DetailNowCandidate, page: () => DetailNowCandidateView()),
+    GetPage(
+        name: Routes.DetailPassCandidate,
+        page: () => DetailPassCandidateView()),
+    GetPage(name: Routes.pharmacieInfo, page: () => const PharmacieInfoView()),
+    GetPage(name: Routes.pharmacie, page: () => const PharmacieView()),
+    GetPage(name: Routes.myRecruiter, page: () => const MyRecruiterView()),
+    GetPage(
+        name: Routes.ajouterPharmacie,
+        page: () => const AjouterPharmacieView()),
   ];
 }

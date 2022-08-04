@@ -1,10 +1,33 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:get/get.dart';
 
-class MyController extends GetxController {
+class MyRecruiterController extends GetxController {
   final String people = 'Mon profil';
   var signInController = Get.find<SignInController>();
+  final TextEditingController textEditingController = TextEditingController();
+  var name = <TextEditingController>[];
+  var tel = <TextEditingController>[];
+  Rx<int> addCard = 0.obs;
+  Rx<int> reduceCard = 0.obs;
+
+  int recent = 1;
+  int now = 1;
+  int future = 1;
+  var count = 0.obs;
+  navigateToAuth() {
+    Get.toNamed(Routes.homepageRoute);
+  }
+
+  Rx<int> removeCard = 0.obs;
+  void incrementcard() {
+    if (removeCard.value >= 0) {
+      return;
+    }
+
+    removeCard.value--;
+  }
 
   navigateToHomePage() {
     Get.toNamed(Routes.homepageRoute);
@@ -22,12 +45,8 @@ class MyController extends GetxController {
     Get.toNamed(Routes.documentRoute);
   }
 
-  navigateToExperience() {
-    Get.toNamed(Routes.experienceRoute);
-  }
-
-  navigateToAbility() {
-    Get.toNamed(Routes.abilityRoute);
+  navigateToPharmacie() {
+    Get.toNamed(Routes.pharmacie);
   }
 
   navigateToLogout() {

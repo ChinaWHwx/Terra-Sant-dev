@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/explorer_pharmacie.model.dart';
+import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
+import 'package:flutter_application_1/shared/utils/theme.utils.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class DeclarationView extends GetView<DeclarationController> {
@@ -9,13 +13,34 @@ class DeclarationView extends GetView<DeclarationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Card with Textfiled'),
+        title: const Text('Déclaration'),
+        centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.incrementcard();
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: Row(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            width: 130,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              controller.decreasecard();
+            },
+            child: const Icon(Icons.minimize_outlined),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              controller.incrementcard();
+            },
+            child: const Icon(Icons.add),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              controller.navigateAjouter();
+            },
+            child: const Icon(Icons.save),
+          ),
+        ],
       ),
       body: Obx(() => ListView.builder(
           itemCount: controller.addCard.value,
@@ -41,29 +66,42 @@ class DeclarationView extends GetView<DeclarationController> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                    margin: const EdgeInsets.all(10),
-                    child: const Text('Nom de pharmacie: ')),
                 SizedBox(
-                  height: 100,
+                  height: 50,
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.name[index],
                       decoration:
-                          const InputDecoration(hintText: 'Nom de pharmacie'),
+                          const InputDecoration(hintText: 'Nom de pharmacie:'),
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: const Text('Tel '),
+                SizedBox(
+                  height: 50,
+                  child: Expanded(
+                    child: TextFormField(
+                      controller: controller.name[index],
+                      decoration: const InputDecoration(
+                          hintText: 'Adresse de pharmacie:'),
+                    ),
+                  ),
                 ),
                 SizedBox(
-                  height: 100,
+                  height: 50,
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.tel[index],
                       decoration: const InputDecoration(hintText: 'Tel:'),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                  child: Expanded(
+                    child: TextFormField(
+                      controller: controller.name[index],
+                      decoration: const InputDecoration(
+                          hintText: 'Nom de responsable:'),
                     ),
                   ),
                 ),

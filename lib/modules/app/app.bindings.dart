@@ -23,13 +23,25 @@ import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.co
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_exemple.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/PharmacieInfo/PharmacieInfo.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Future/detail_future_candidate.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Now/detail_now_candidate.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass.candidate.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/modify/modify_profile.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.controller.dart';
@@ -40,7 +52,6 @@ import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.co
 import 'package:flutter_application_1/modules/app/homepage/Search/search.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
-import 'package:flutter_application_1/modules/app/online_shopee/pharmacie_controller.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.controller.dart';
 import 'package:flutter_application_1/repositories/availability.repository.dart';
 import 'package:flutter_application_1/repositories/login.repository.dart';
@@ -77,7 +88,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => MapController(), fenix: true);
     //Get.lazyPut(() => GoogleMapPositionController(), fenix: true);
     Get.lazyPut(() => RecommendController(), fenix: true);
-    Get.lazyPut(() => DutyController(), fenix: true);
+    Get.lazyPut(() => DutyRecruiterController(), fenix: true);
+    Get.lazyPut(() => DutyCandidateController(), fenix: true);
     Get.lazyPut(() => GooglePlaceApiController(), fenix: true);
     Get.lazyPut(() => SettingController(), fenix: true);
     Get.lazyPut(() => SearchController(), fenix: true);
@@ -109,5 +121,16 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AvailabilityRepository(), fenix: true);
     Get.lazyPut(() => BasicExempleController(), fenix: true);
     Get.lazyPut(() => ComplexExempleController(), fenix: true);
+    Get.lazyPut(() => DetailFutureRecruiterController(), fenix: true);
+    Get.lazyPut(() => DetailNowRecruiterController(), fenix: true);
+    Get.lazyPut(() => DetailPassRecruiterController(), fenix: true);
+    Get.lazyPut(() => DescriptionController(), fenix: true);
+    Get.lazyPut(() => DetailFutureCandidateController(), fenix: true);
+    Get.lazyPut(() => DetailNowCandidateController(), fenix: true);
+    Get.lazyPut(() => DetailPassCandidateController(), fenix: true);
+    Get.lazyPut(() => PharmacieInfoController(), fenix: true);
+    Get.lazyPut(() => PharmacieController(), fenix: true);
+    Get.lazyPut(() => MyRecruiterController(), fenix: true);
+    Get.lazyPut(() => AjouterPharmacieController(), fenix: true);
   }
 }

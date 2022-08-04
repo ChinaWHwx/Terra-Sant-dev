@@ -34,7 +34,14 @@ class HomepageController extends GetxController {
 
         break;
       case 3:
-        Get.toNamed(Routes.duty);
+        {
+          if (signInController.user.userType == "candidat") {
+            Get.toNamed(Routes.dutyCandidate);
+          }
+          if (signInController.user.userType == "recruteur") {
+            Get.toNamed(Routes.dutyRecruiter);
+          }
+        }
         break;
       default:
         Get.toNamed(Routes.my);
