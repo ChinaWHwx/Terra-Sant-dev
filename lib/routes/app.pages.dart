@@ -27,6 +27,8 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/be
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/SearchingAddress/searching_address.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/ViewingMap/viewing_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/google_map.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Recommend/recommend.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setting.view.dart';
@@ -136,6 +138,10 @@ class AppPages {
     GetPage(name: Routes.modifyProfile, page: () => const ModifiyProfileView()),
     GetPage(name: Routes.contact, page: () => const ContactView()),
     GetPage(name: Routes.googleMap, page: () => const GoogleMapView()),
+    GetPage(
+        name: Routes.searchingAddress,
+        page: () => const SearchingAddressView()),
+    GetPage(name: Routes.viewingMap, page: () => ViewingMapView()),
     GetPage(name: Routes.recommend, page: () => const RecommendView()),
     GetPage(name: Routes.my, page: () => const MyView()),
     GetPage(name: Routes.dutyCandidate, page: () => const DutyCandidateView()),

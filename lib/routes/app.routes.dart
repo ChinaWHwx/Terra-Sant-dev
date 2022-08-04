@@ -29,6 +29,8 @@ class Routes {
   static const modifyProfile = '/modifyProfile';
   static const contact = '/contact';
   static const googleMap = '/googleMap';
+  static const searchingAddress = '/searchingAddress';
+  static const viewingMap = '/viewingMap';
   static const googleMapPosition = '/googleMapPosition';
   static const recommend = '/recommend';
   static const my = '/my';
@@ -98,6 +100,8 @@ class Routes {
   static const modifyProfileRoute = modifyProfile;
   static const contactRoute = contact;
   static const googleMapRoute = googleMap;
+  static const searchingAddressRoute = searchingAddress;
+  static const viewingMapRoute = viewingMap;
   static const googleMapPositionRoute = googleMapPosition;
   static const recommendRoute = recommend;
   static const myRoute = my;
