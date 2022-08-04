@@ -42,7 +42,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   
   
-  permission_handler: ^9.2.0
+  permission_handler: ^10.0.0
   image_picker: ^0.8.5+3
   image_cropper: ^2.0.3
   flutter_image_compress: ^1.1.0
@@ -68,13 +68,13 @@ dependencies:
   uuid: ^3.0.6
   flutter_google_places: ^0.3.0
   qr_flutter: ^4.0.0
-  geolocator: ^8.2.1
+  geolocator: ^9.0.1
   geocoding: ^2.0.4
   flutter_typeahead: ^4.0.0
   settings_ui: ^2.0.2
   dotted_border: ^2.0.0+2
   iconsax: ^0.0.7
-  file_picker: ^4.6.1
+  file_picker: ^5.0.1
   simple_animations: ^4.1.0
   flutter_native_splash: ^2.2.3+1
   fsuper: ^2.1.1
@@ -112,7 +112,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
   build_runner: ^2.1.11
 
 # For information on the generic Dart part of this file, see the
