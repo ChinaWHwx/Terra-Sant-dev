@@ -14,7 +14,7 @@ class GooglePlaceApiView extends GetView<GooglePlaceApiController> {
       appBar: AppBar(
         elevation: 0,
         title: const Text(
-          'Google Search Places Api',
+          'Adresse',
         ),
       ),
       body: Padding(
@@ -23,8 +23,8 @@ class GooglePlaceApiView extends GetView<GooglePlaceApiController> {
           children: [
             TextFormField(
               controller: controller.controller,
-              decoration:
-                  const InputDecoration(hintText: 'Search places with name'),
+              decoration: const InputDecoration(
+                  hintText: 'Veuillez introduire votre adresse'),
             ),
             Expanded(
                 child: controller.obx((state) => ListView.builder(

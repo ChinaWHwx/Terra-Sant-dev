@@ -22,6 +22,7 @@ class User {
     this.userProfilePic,
     this.userProfileValidated,
     this.userRegistrationDate,
+    this.userStatus,
     this.userType,
   });
 
@@ -45,6 +46,7 @@ class User {
   dynamic userProfilePic;
   int? userProfileValidated;
   DateTime? userRegistrationDate;
+  String? userStatus;
   String? userType;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -72,6 +74,7 @@ class User {
         userRegistrationDate: json["user_registration_date"] == null
             ? null
             : DateTime.parse(json["user_registration_date"]),
+        userStatus: json["user_status"],
         userType: json["user_type"],
       );
 
@@ -100,6 +103,7 @@ class User {
         "user_registration_date": userRegistrationDate == null
             ? null
             : userRegistrationDate!.toLocal(),
+        "user_status": userStatus,
         "user_type": userType,
       };
 

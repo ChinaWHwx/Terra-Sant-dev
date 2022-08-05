@@ -1,7 +1,7 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/ProductModel.dart';
+import 'package:flutter_application_1/models/ProductModel.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';

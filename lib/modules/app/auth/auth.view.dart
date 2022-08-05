@@ -28,8 +28,8 @@ class AuthView extends GetView<AuthController> {
               ),
               RoundedButton(
                   text: controller.candidate,
-                  //onTap: () => controller.navigateToHomePage()),
-                  onTap: () => controller.navigateTest()),
+                  onTap: () => controller.navigateToCandidate()),
+              //onTap: () => controller.navigateTest()),
               RoundedButton(
                   text: controller.recruiter,
                   onTap: () => controller.navigateToRecruiter()),

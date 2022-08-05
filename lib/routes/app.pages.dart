@@ -61,7 +61,6 @@ import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
 import 'package:flutter_application_1/modules/app/online_shopee/favorite_page.dart';
 import 'package:flutter_application_1/modules/app/timeout/EmailVerification/emailverification_timeout.view.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.view.dart';
-
 import 'package:get/get.dart';
 
 part 'app.routes.dart';
@@ -179,6 +178,9 @@ class AppPages {
     GetPage(
         name: Routes.candidateCalendar, page: () => CandidateCalendarView()),
     GetPage(name: Routes.declaration, page: () => const DeclarationView()),
+    GetPage(
+        name: Routes.ajouterPharmacie,
+        page: () => const AjouterPharmacieView()),
     GetPage(name: Routes.basicExemple, page: () => const BasicExempleView()),
     GetPage(name: Routes.complexExemple, page: () => ComplexExempleView()),
     GetPage(

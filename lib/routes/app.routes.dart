@@ -128,6 +128,7 @@ class Routes {
   static const recruiterCalendarRoute = recruiterCalendar;
   static const resultRoute = result;
   static const declarationRoute = declaration;
+  static const ajouterPharmacieRoute = ajouterPharmacie;
   static const basicExempleRoute = basicExemple;
   static const complexExempleRoute = complexExemple;
   static const pharmacieInfoRoute = pharmacieInfo;

@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:get/get.dart';
 
-class DeclarationController extends GetxController {
+class AjouterPharmacieController extends GetxController {
   final TextEditingController textEditingController = TextEditingController();
   var name = <TextEditingController>[];
   var tel = <TextEditingController>[];
   Rx<int> addCard = 1.obs;
+  SignInController signInController = Get.find();
 
-  // void incrementcard() {
-  //   if (addCard.value >= 7) {
-  //     return;
-  //   }
-
-  //   addCard.value++;
-  // }
-  navigateAjouter() {
-    Get.toNamed(Routes.ajouterPharmacie);
+  navigateDecleration() {
+    Get.toNamed(Routes.declaration);
   }
 }
