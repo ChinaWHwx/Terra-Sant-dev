@@ -8,7 +8,7 @@ class DetailFutureRecruiterView
     extends GetView<DetailFutureRecruiterController> {
   DetailFutureRecruiterView({Key? key}) : super(key: key);
 
-  SignInController signInController = Get.find();
+  final SignInController signInController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,12 @@ class DetailFutureRecruiterView
             title: const Text('Mission'),
             centerTitle: true,
             backgroundColor: Colors.blue,
-            leading: const BackButton(color: Colors.white),
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: () {
+                controller.navigateToDuty();
+              },
+            ),
             bottom: const TabBar(tabs: [
               Tab(
                 icon: Icon(Icons.info),

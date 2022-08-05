@@ -37,6 +37,7 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass.candidate.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.controller.dart';
@@ -115,14 +116,6 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => ModifiyProfileController(), fenix: true);
     Get.lazyPut(() => SearchingAddressController(), fenix: true);
     Get.lazyPut(() => ViewingMapController(), fenix: true);
-
-    //Services
-    Get.lazyPut(() => LoginService(), fenix: true);
-    Get.lazyPut(() => AvailabilityService(), fenix: true);
-
-    //Repositories
-    Get.lazyPut(() => LoginRepository(), fenix: true);
-    Get.lazyPut(() => AvailabilityRepository(), fenix: true);
     Get.lazyPut(() => BasicExempleController(), fenix: true);
     Get.lazyPut(() => ComplexExempleController(), fenix: true);
     Get.lazyPut(() => DetailFutureRecruiterController(), fenix: true);
@@ -136,5 +129,14 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => PharmacieController(), fenix: true);
     Get.lazyPut(() => MyRecruiterController(), fenix: true);
     Get.lazyPut(() => AjouterPharmacieController(), fenix: true);
+    Get.lazyPut(() => AjouterMissionController(), fenix: true);
+
+    //Services
+    Get.lazyPut(() => LoginService(), fenix: true);
+    Get.lazyPut(() => AvailabilityService(), fenix: true);
+
+    //Repositories
+    Get.lazyPut(() => LoginRepository(), fenix: true);
+    Get.lazyPut(() => AvailabilityRepository(), fenix: true);
   }
 }

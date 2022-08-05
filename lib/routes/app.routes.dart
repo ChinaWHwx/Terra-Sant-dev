@@ -71,6 +71,7 @@ class Routes {
   static const myPharmacie = '/myPharmacie';
   static const myRecruiter = '/myRecruiter';
   static const ajouterPharmacie = '/ajoutePharmacie';
+  static const ajouterMission = '/ajouterMission';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -141,4 +142,5 @@ class Routes {
   static const myPharmacieRoute = myPharmacie;
   static const myRecruiterRoute = myRecruiter;
   static const ajoutePharmacieRoute = ajouterPharmacie;
+  static const ajouterMissionRoute = ajouterMission;
 }

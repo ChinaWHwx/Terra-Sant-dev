@@ -14,7 +14,12 @@ class DescriptionView extends GetView<DescriptionController> {
             title: const Text('Description'),
             centerTitle: true,
             backgroundColor: Colors.blue,
-            leading: const BackButton(color: Colors.white),
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: () {
+                controller.navigateToDuty();
+              },
+            ),
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),

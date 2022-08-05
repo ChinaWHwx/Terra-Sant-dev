@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class DetailNowRecruiterView extends GetView<DetailNowRecruiterController> {
   DetailNowRecruiterView({Key? key}) : super(key: key);
 
-  SignInController signInController = Get.find();
+  final SignInController signInController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,12 @@ class DetailNowRecruiterView extends GetView<DetailNowRecruiterController> {
             title: const Text('Mission'),
             centerTitle: true,
             backgroundColor: Colors.blue,
-            leading: const BackButton(color: Colors.white),
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: () {
+                controller.navigateToDuty();
+              },
+            ),
             bottom: const TabBar(tabs: [
               Tab(
                 icon: Icon(Icons.info),

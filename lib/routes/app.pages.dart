@@ -37,6 +37,8 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass_candidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.view.dart';
@@ -145,7 +147,7 @@ class AppPages {
     GetPage(name: Routes.recommend, page: () => const RecommendView()),
     GetPage(name: Routes.my, page: () => const MyView()),
     GetPage(name: Routes.dutyCandidate, page: () => const DutyCandidateView()),
-    GetPage(name: Routes.dutyRecruiter, page: () => const DutyRecruiterView()),
+    GetPage(name: Routes.dutyRecruiter, page: () => DutyRecruiterView()),
     GetPage(
         name: Routes.googlePlaceApi, page: () => const GooglePlaceApiView()),
     GetPage(name: Routes.setting, page: () => const SettingView()),
@@ -202,5 +204,7 @@ class AppPages {
     GetPage(
         name: Routes.ajouterPharmacie,
         page: () => const AjouterPharmacieView()),
+    GetPage(
+        name: Routes.ajouterMission, page: () => const AjouterMissionView()),
   ];
 }
