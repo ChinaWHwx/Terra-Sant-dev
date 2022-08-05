@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 
-class DutyController extends GetxController {
+class DutyCandidateController extends GetxController {
   final String duty = 'Mission';
   int recent = 1;
   int now = 1;
@@ -9,6 +9,18 @@ class DutyController extends GetxController {
   var count = 0.obs;
   navigateToAuth() {
     Get.toNamed(Routes.homepageRoute);
+  }
+
+  navigateToDetailFuture() {
+    Get.toNamed(Routes.DetailFutureCandidate);
+  }
+
+  navigateToDetailNow() {
+    Get.toNamed(Routes.DetailNowCandidate);
+  }
+
+  navigateToDetailPass() {
+    Get.toNamed(Routes.DetailPassCandidate);
   }
 
   Rx<int> removeCard = 0.obs;

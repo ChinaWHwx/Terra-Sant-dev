@@ -34,7 +34,8 @@ class Routes {
   static const googleMapPosition = '/googleMapPosition';
   static const recommend = '/recommend';
   static const my = '/my';
-  static const duty = '/duty';
+  static const dutyCandidate = '/dutyCandidate';
+  static const dutyRecruiter = '/dutyRecruiter';
   static const googlePlaceApi = '/googlePlaceApi';
   static const setting = '/setting';
   static const search = '/search';
@@ -56,9 +57,21 @@ class Routes {
   static const candidateCalendar = '/candidateCalendar';
   static const result = '/result';
   static const declaration = '/declaration';
-  static const ajouterPharmacie = '/ajouterPharmacie';
   static const basicExemple = '/basicExemple';
   static const complexExemple = '/complexExemple';
+  static const detailFutureRecruiter = '/detailFutureRecruiter';
+  static const detailNowRecruiter = '/detailNowRecruiter';
+  static const detailPassRecruiter = '/detailPassRecruiter';
+  static const description = '/description';
+  static const DetailFutureCandidate = '/detailFutureCandidate';
+  static const DetailNowCandidate = '/detailNowCandidate';
+  static const DetailPassCandidate = '/detailPassCandidate';
+  static const pharmacieInfo = '/PharmacieInfo';
+  static const pharmacie = '/Pharmacie';
+  static const myPharmacie = '/myPharmacie';
+  static const myRecruiter = '/myRecruiter';
+  static const ajouterPharmacie = '/ajoutePharmacie';
+  static const ajouterMission = '/ajouterMission';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -93,7 +106,8 @@ class Routes {
   static const googleMapPositionRoute = googleMapPosition;
   static const recommendRoute = recommend;
   static const myRoute = my;
-  static const dutyRoute = duty;
+  static const dutyCandidateRoute = dutyCandidate;
+  static const dutyRecruiterRoute = dutyRecruiter;
   static const googleplaceapiRoute = googlePlaceApi;
   static const settingRoute = setting;
   static const searchRoute = search;
@@ -117,4 +131,17 @@ class Routes {
   static const ajouterPharmacieRoute = ajouterPharmacie;
   static const basicExempleRoute = basicExemple;
   static const complexExempleRoute = complexExemple;
+  static const pharmacieInfoRoute = pharmacieInfo;
+  static const pharmacieRoute = pharmacie;
+  static const detailFutureRecruiterRoute = detailFutureRecruiter;
+  static const detailNowRecruiterRoute = detailFutureRecruiter;
+  static const detailPassRecruiterRoute = detailFutureRecruiter;
+  static const descriptionRoute = description;
+  static const DetailFutureCandidateRoute = DetailFutureCandidate;
+  static const DetailNowCandidateRoute = DetailNowCandidate;
+  static const DetailPassCandidateRoute = DetailPassCandidate;
+  static const myPharmacieRoute = myPharmacie;
+  static const myRecruiterRoute = myRecruiter;
+  static const ajoutePharmacieRoute = ajouterPharmacie;
+  static const ajouterMissionRoute = ajouterMission;
 }

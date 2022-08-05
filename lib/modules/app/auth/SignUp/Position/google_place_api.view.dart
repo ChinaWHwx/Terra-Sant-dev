@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/auth/SignUp/Position/google_place_api.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
+import 'package:flutter_application_1/shared/widgets/methods/methods.shared.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
@@ -36,6 +37,7 @@ class GooglePlaceApiView extends GetView<GooglePlaceApiController> {
                           // ignore: unused_local_variable
                           List<Location> locations = await locationFromAddress(
                               controller.placesList[index]['description']);
+                          showToast(index.toString());
                           //print(locations.last.longitude);
                           //print(locations.last.latitude);
                         },

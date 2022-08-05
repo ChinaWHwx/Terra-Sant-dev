@@ -1,56 +1,91 @@
 import 'dart:convert';
 
 class MissionRecent {
+  //pour recruiter
   MissionRecent({
-    this.misId,
-    this.dateEnd,
-    this.dateStart,
-    this.timeEnd,
-    this.timeStart,
-    this.userId,
-    this.phaId,
-    this.phaAdrs,
-    this.phaNom,
+    required this.dates,
+    required this.times,
+    required this.phAddress,
+    required this.phName,
+    required this.phPhone,
+    required this.status,
+    required this.description,
   });
 
-  int? misId;
-  String? dateEnd;
-  String? dateStart;
-  String? timeEnd;
-  String? timeStart;
-  int? userId;
-  int? phaId;
-  String? phaAdrs;
-  String? phaNom;
+  String dates;
+  String times;
+  String phAddress;
+  String phName;
+  String phPhone;
+  String status;
+  String description;
 
   factory MissionRecent.fromJson(Map<String, dynamic> json) => MissionRecent(
-        misId: json["mis_id"],
-        dateEnd: json["date_end"],
-        dateStart: json["date_start"],
-        timeEnd: json["time_end"],
-        timeStart: json["time_start"],
-        userId: json["user_id"],
-        phaId: json["pha_id"],
-        phaAdrs: json["pha_Adrs"],
-        phaNom: json["pha_Nom"],
+        dates: json["dates"],
+        times: json["times"],
+        phAddress: json["ph_address"],
+        phName: json["ph_name"],
+        phPhone: json["ph_phone"],
+        status: json["status"],
+        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
-        "mis_id": misId,
-        "date_end": dateEnd,
-        "date_start": dateStart,
-        "time_end": timeEnd,
-        "time_start": timeStart,
-        "user_id": userId,
-        "pha_id": phaId,
-        "pha_Adrs": phaAdrs,
-        "pha_Nom": phaNom,
+        "dates": dates,
+        "times": times,
+        "ph_address": phAddress,
+        "ph_name": phName,
+        "ph_phone": phPhone,
+        "status": status,
+        "description": description,
       };
 
-  static List<MissionRecent> missionFromJson(String str) =>
-      List<MissionRecent>.from(
-          json.decode(str).map((x) => MissionRecent.fromJson(x)));
-
-  static String missionToJson(List<MissionRecent> data) =>
-      json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+  List<MissionRecent> duties = [
+    MissionRecent(
+      dates: "04/04/2022",
+      times: "17h30--19h30",
+      phAddress: "1 rue de terra",
+      phName: "selma",
+      phPhone: "xin",
+      status: "étudiant",
+      description: "Une pharmacie à Bagnolet a besoin de stagiaires....",
+    ),
+    MissionRecent(
+      dates: "05/04/2022",
+      times: "7h30--9h30",
+      phAddress: "2 rue de terra",
+      phName: "selma",
+      phPhone: "xin",
+      status: "pharmacien",
+      description: "un étudiant qui peut travauller....",
+    ),
+    MissionRecent(
+      dates: "08/08/2022",
+      times: "21h30--23h30",
+      phAddress:
+          "1 rue de terraue de terraue de terra de terraue de terraue de terra de terraue de terraue de terra de terraue de terraue de terra de terraue de terraue de terra de terraue de terraue de terra de terraue de terraue de terra de terraue de terraue de terra",
+      phName: "selma",
+      phPhone: "xin",
+      status: "pharmacien",
+      description: "un étudiant qui peut travauller....",
+    ),
+    MissionRecent(
+      dates: "17/06/2022",
+      times: "17h30--19h30",
+      phAddress: "2 rue de terra",
+      phName: "selma",
+      phPhone: "xin",
+      status: "pharmacien",
+      description: "un étudiant qui peut travauller....",
+    ),
+    MissionRecent(
+      dates: "28/09/2022",
+      times: "17h45--23h30",
+      phAddress: "1 rue de terra",
+      phName: "selma",
+      phPhone: "xin",
+      status: "pharmacien",
+      description: "un étudiant qui peut travauller....",
+    ),
+  ];
 }
