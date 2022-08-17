@@ -88,7 +88,7 @@ class DutyRecruiterView extends GetView<DutyRecruiterController> {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           ListTile(
-                            leading: const Icon(Icons.lock_clock),
+                            leading: const Icon(Icons.work),
                             title: Text(
                               "Nom:" + value[index].phName,
                               textAlign: TextAlign.left,

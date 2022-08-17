@@ -37,7 +37,6 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass_candidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.view.dart';
@@ -58,7 +57,6 @@ import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmaci
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
-import 'package:flutter_application_1/modules/app/online_shopee/favorite_page.dart';
 import 'package:flutter_application_1/modules/app/timeout/EmailVerification/emailverification_timeout.view.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.view.dart';
 import 'package:get/get.dart';
@@ -165,7 +163,6 @@ class AppPages {
     GetPage(
         name: Routes.forgotPasswordSmsVerification,
         page: () => const ForgotPasswordSmsVerificationView()),
-    GetPage(name: Routes.favorite, page: () => FavoritePage()),
     GetPage(
         name: Routes.pharmacieFavorite,
         page: () => const PharmacieFavoriteView()),

@@ -166,20 +166,20 @@ class _CalendarHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final headerText = DateFormat.yMMM().format(focusedDay);
+    //final headerText = DateFormat.yMMM().format(focusedDay);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
           const SizedBox(width: 16.0),
-          SizedBox(
-            width: 120.0,
-            child: Text(
-              headerText,
-              style: const TextStyle(fontSize: 26.0),
-            ),
-          ),
+          //SizedBox(
+          //width: 120.0,
+          //child: Text(
+          //headerText,
+          //style: const TextStyle(fontSize: 26.0),
+          //),
+          //),
           IconButton(
             icon: const Icon(Icons.calendar_today, size: 20.0),
             visualDensity: VisualDensity.compact,

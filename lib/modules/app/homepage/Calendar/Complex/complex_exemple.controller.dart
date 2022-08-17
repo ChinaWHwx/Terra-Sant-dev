@@ -12,7 +12,7 @@ class ComplexExempleController extends GetxController {
   late final PageController pageController;
   late final ValueNotifier<List<Event>> selectedEvents;
   //final ValueNotifier<DateTime> focusedDay = ValueNotifier(DateTime.now());
-  Rx<DateTime> focusedDay = DateTime(2022, 7, 30).obs;
+  Rx<DateTime> focusedDay = DateTime.now().obs;
   final Rx<Set<DateTime>> selectedDays = LinkedHashSet<DateTime>(
     equals: isSameDay,
     hashCode: getHashCode,

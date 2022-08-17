@@ -29,7 +29,7 @@ class AuthController extends GetxController {
   }
 
   navigateTest() {
-    Get.toNamed(Routes.dutyRecruiter);
+    Get.toNamed(Routes.complexExemple);
   }
 
   navigateToHomePage() {

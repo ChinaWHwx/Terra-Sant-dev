@@ -56,6 +56,7 @@ class TelephoneController extends GetxController with StateMixin {
           }
         }
         if (response.containsKey('error')) {
+          signUpService.newUser.userPhone = "";
           errorMessage.value = response["error"];
         }
       }
