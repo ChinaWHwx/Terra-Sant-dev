@@ -47,7 +47,7 @@ class GooglePlaceApiView extends GetView<GooglePlaceApiController> {
                     }))),
             RoundedButton(
               text: "rengistrer",
-              onTap: () => controller.navigateToInfos(),
+              onTap: () => controller.validateForm(1),
             ),
           ],
         ),

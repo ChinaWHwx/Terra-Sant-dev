@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +17,8 @@ class GooglePlaceApiController extends GetxController
   var uuid = const Uuid();
   String? sessionToken;
   List<dynamic> placesList = [];
+  final errorMessage = "".obs;
+  SignUpService signUpService = Get.find();
 
   @override
   void onInit() {
@@ -30,6 +33,30 @@ class GooglePlaceApiController extends GetxController
     sessionToken ??= uuid.v4();
     if (controller.text.isNotEmpty) {
       getSuggesion(controller.text);
+    }
+  }
+
+  validateForm(n) async {
+    if (controller.text.isEmpty) {
+      errorMessage.value = 'Veuillez remplir le champs.';
+    } //  else if (!GetUtils.isEmail(controller.text)) {
+    //   errorMessage.value = 'Cette adresse est invalide !';
+    // }
+    else {
+      signUpService.newUser.userAddress = controller.text;
+
+      var response = await signUpService.addAddressUser();
+
+      if (response.containsKey("success")) {
+        if (response["success"] == 'true') {
+          change(null, status: RxStatus.success());
+          navigateToInfos();
+        }
+      }
+      if (response.containsKey('error')) {
+        signUpService.newUser.userAddress = '';
+        errorMessage.value = response["error"];
+      }
     }
   }
 

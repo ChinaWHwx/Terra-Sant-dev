@@ -23,4 +23,14 @@ class SignUpService {
       return Future.error(e.toString());
     }
   }
+
+  Future addAddressUser() async {
+    try {
+      var response = await signUpRepo.addAddressUser(newUser.toJson());
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
