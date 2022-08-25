@@ -10,4 +10,5 @@ class SignUpRepository extends GetConnect {
   Future addEmailUser(body) => post("/users/add_email", body);
   Future addAddressUser(body) => post("/users/add_address", body);
   Future addNameUser(body) => post("/users/add_personal_infos", body);
+  Future addPasswordUser(body) => post("/users/add_email_password", body);
 }

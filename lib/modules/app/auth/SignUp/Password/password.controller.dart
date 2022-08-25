@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
 
-class PasswordController extends GetxController {
+class PasswordController extends GetxController with StateMixin {
   Rx<String> errorMessage = ''.obs;
+  SignUpService signUpService = Get.find();
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController verificationController = TextEditingController();
@@ -34,13 +36,25 @@ class PasswordController extends GetxController {
     return '';
   }
 
-  validateForm() {
+  validateForm() async {
     errorMessage.value = '';
 
     errorMessage.value = isPasswordValid(passwordController.text);
 
     if (errorMessage.value == '') {
-      navigateToHomePage();
+      signUpService.newUser.userPassword = verificationController.text;
+      var response = await signUpService.addPasswordUser();
+
+      if (response.containsKey("success")) {
+        if (response["success"] == 'true') {
+          change(null, status: RxStatus.success());
+          navigateToHomePage();
+        }
+      }
+      if (response.containsKey('error')) {
+        signUpService.newUser.userPassword = '';
+        errorMessage.value = response["error"];
+      }
     }
   }
 }

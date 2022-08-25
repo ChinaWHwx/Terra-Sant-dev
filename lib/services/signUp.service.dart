@@ -43,4 +43,14 @@ class SignUpService {
       return Future.error(e.toString());
     }
   }
+
+  Future addPasswordUser() async {
+    try {
+      var response = await signUpRepo.addPasswordUser(newUser.toJson());
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
