@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 class InfoView extends GetView<InfoController> {
   const InfoView({Key? key}) : super(key: key);
+  get top => null;
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +232,7 @@ class InfoView extends GetView<InfoController> {
                       : SizedBox(height: size.height * 0.03)),
                   RoundedButton(
                     text: controller.enregistrer,
-                    onTap: () => controller.validateForm(),
+                    onTap: () => controller.validateForm(1),
                   ),
                 ]),
           ],
