@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 class PasswordController extends GetxController with StateMixin {
   Rx<String> errorMessage = ''.obs;
   SignUpService signUpService = Get.find();
+  AuthController authController = Get.find();
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController verificationController = TextEditingController();
@@ -48,7 +50,7 @@ class PasswordController extends GetxController with StateMixin {
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
-          navigateToHomePage();
+          authController.navigateToSignIn();
         }
       }
       if (response.containsKey('error')) {
