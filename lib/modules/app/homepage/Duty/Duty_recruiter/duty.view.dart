@@ -22,7 +22,7 @@ class DutyRecruiterView extends GetView<DutyRecruiterController> {
             leading: BackButton(
               color: Colors.white,
               onPressed: () {
-                controller.navigateToAuth();
+                controller.navigateToHome();
               },
             ),
             bottom: const TabBar(tabs: [

@@ -11,7 +11,12 @@ class MyView extends GetView<MyController> {
         appBar: AppBar(
           title: const Text("à propos de moi"),
           centerTitle: true,
-          leading: const BackButton(color: Colors.white),
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              controller.navigateToHome();
+            },
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 50),

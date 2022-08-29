@@ -7,7 +7,7 @@ class CandidateRepository extends GetConnect {
   void onInit() {
     //httpClient.defaultDecoder = User.userFromJson;
     //httpClient.defaultDecoder =
-    httpClient.baseUrl = 'http://192.168.1.162:5000';
+    httpClient.baseUrl = 'http://192.168.1.161:5000';
   }
 
   Future getInfos(body) => post("/candidate", body);

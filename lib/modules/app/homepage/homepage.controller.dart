@@ -37,7 +37,8 @@ class HomepageController extends GetxController {
         break;
       case 3:
         {
-          if (signInController.user.userType == "candidat") {
+          if (signInController.user.userType == "candidat" ||
+              signInController.user.userType == "etudiant") {
             Get.toNamed(Routes.dutyCandidate);
           }
           if (signInController.user.userType == "recruteur") {

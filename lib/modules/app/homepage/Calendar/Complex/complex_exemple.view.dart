@@ -18,6 +18,12 @@ class ComplexExempleView extends GetView<ComplexExempleController> {
       appBar: AppBar(
         title: const Text('Mes disponibilités'),
         centerTitle: true,
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {
+            controller.navigateToHome();
+          },
+        ),
       ),
       body: Column(
         children: [

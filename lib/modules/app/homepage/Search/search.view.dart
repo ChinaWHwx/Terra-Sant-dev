@@ -12,8 +12,12 @@ class SearchView extends GetView<SearchController> {
       appBar: AppBar(
         title: const Text('Explorer'),
         backgroundColor: Colors.blue,
-        leading: const BackButton(color: Colors.white),
-        centerTitle: true,
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {
+            controller.navigateToHome();
+          },
+        ),
       ),
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(

@@ -6,7 +6,7 @@ class MyController extends GetxController {
   final String people = 'Mon profil';
   var signInController = Get.find<SignInController>();
 
-  navigateToHomePage() {
+  navigateToHome() {
     Get.toNamed(Routes.homepageRoute);
   }
 

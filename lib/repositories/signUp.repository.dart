@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class SignUpRepository extends GetConnect {
   @override
   void onInit() {
-    httpClient.baseUrl = 'http://192.168.1.162:5000';
+    httpClient.baseUrl = 'http://192.168.1.161:5000';
   }
 
   Future createUser(body) => post("/register/add_type_status_phone", body);

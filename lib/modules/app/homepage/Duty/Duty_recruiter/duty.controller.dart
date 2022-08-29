@@ -21,8 +21,8 @@ class DutyRecruiterController extends GetxController {
     removeCard.value--;
   }
 
-  navigateToAuth() {
-    Get.toNamed(Routes.auth);
+  navigateToHome() {
+    Get.toNamed(Routes.homepage);
   }
 
   navigateToFutureDetail() {
