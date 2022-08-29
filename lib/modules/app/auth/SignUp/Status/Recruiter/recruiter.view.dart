@@ -30,8 +30,7 @@ class RecruiterView extends GetView<RecruiterController> {
               fontSize: 16.0,
               image: "assets/images/p1.png",
               onTap: () {
-                controller.index(0);
-                controller.navigateToSignUpRoute();
+                controller.setStatus("TP");
               },
             ),
             RoundedImageTextButton(
@@ -39,8 +38,7 @@ class RecruiterView extends GetView<RecruiterController> {
               fontSize: 16.0,
               image: "assets/images/p2.png",
               onTap: () {
-                controller.index(1);
-                controller.navigateToSignUpRoute();
+                controller.setStatus("TADJ");
               },
             ),
             RoundedImageTextButton(
@@ -48,8 +46,7 @@ class RecruiterView extends GetView<RecruiterController> {
               fontSize: 16.0,
               image: "assets/images/p3.png",
               onTap: () {
-                controller.index(2);
-                controller.navigateToSignUpRoute();
+                controller.setStatus("RES");
               },
             ),
           ],
