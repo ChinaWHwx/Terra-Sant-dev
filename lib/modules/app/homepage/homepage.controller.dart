@@ -17,7 +17,7 @@ class HomepageController extends GetxController {
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.welcome);
+        Get.toNamed(Routes.RecuAjouterPharmacie);
         break;
       case 1:
         Get.toNamed(Routes.search);
@@ -147,21 +147,21 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(50)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SearchField(),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/homme.svg",
-            num0fItems: 3,
-            press: () {},
-          ),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/homme.svg",
-            num0fItems: 3,
-            press: () {},
-          ),
+          // IconBtnWithCounter(
+          //   svgSrc: "assets/icons/homme.svg",
+          //   num0fItems: 3,
+          //   press: () {},
+          // ),
+          // IconBtnWithCounter(
+          //   svgSrc: "assets/icons/homme.svg",
+          //   num0fItems: 3,
+          //   press: () {},
+          // ),
         ],
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:get/get.dart';
 
-class AjouterPharmacieController extends GetxController {
+class RecuAjouterPharmacieController extends GetxController {
   final TextEditingController textEditingController = TextEditingController();
   var name = <TextEditingController>[];
   var tel = <TextEditingController>[];

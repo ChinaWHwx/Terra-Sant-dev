@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/ajouterPharmacie.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/RecuAjouterPharmacie.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
 import 'package:flutter_application_1/shared/widgets/field/rounded_input_field.dart';
 import 'package:get/get.dart';
 
-class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
-  const AjouterPharmacieView({Key? key}) : super(key: key);
+class RecuAjouterPharmacieView extends GetView<RecuAjouterPharmacieController> {
+  const RecuAjouterPharmacieView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

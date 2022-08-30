@@ -23,6 +23,8 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/PharmacieInfo/PharmacieInfo.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/RecuAjouterPharmacie.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/RecuAjouterPharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
@@ -204,6 +206,7 @@ class AppPages {
         name: Routes.ajouterPharmacie,
         page: () => const AjouterPharmacieView()),
     GetPage(
-        name: Routes.ajouterMission, page: () => const AjouterMissionView()),
+        name: Routes.RecuAjouterPharmacie,
+        page: () => const RecuAjouterPharmacieView()),
   ];
 }
