@@ -56,9 +56,12 @@ import 'package:flutter_application_1/modules/app/homepage/My/Profile/profile.vi
 import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Search/allPharmacy.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Search/allPharmacy.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/homepagePhar.view.dart';
 import 'package:flutter_application_1/modules/app/timeout/EmailVerification/emailverification_timeout.view.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.view.dart';
 import 'package:get/get.dart';
@@ -208,5 +211,7 @@ class AppPages {
     GetPage(
         name: Routes.RecuAjouterPharmacie,
         page: () => const RecuAjouterPharmacieView()),
+    GetPage(name: Routes.AllPharmacy, page: () => const AllPharmacyView()),
+    GetPage(name: Routes.homepagePhar, page: () => const HomepagePharView()),
   ];
 }

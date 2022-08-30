@@ -52,9 +52,11 @@ import 'package:flutter_application_1/modules/app/homepage/My/experience/experie
 import 'package:flutter_application_1/modules/app/homepage/My/favorite/Pharmacie/pharmacie_favotite.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Search/allPharmacy.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.controller.dart';
 import 'package:flutter_application_1/repositories/availability.repository.dart';
 import 'package:flutter_application_1/repositories/login.repository.dart';
@@ -132,6 +134,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => MyRecruiterController(), fenix: true);
     Get.lazyPut(() => AjouterPharmacieController(), fenix: true);
     Get.lazyPut(() => AjouterMissionController(), fenix: true);
+    Get.lazyPut(() => HomepagePharController(), fenix: true);
+    Get.lazyPut(() => AllPharmacyController(), fenix: true);
 
     //Services
     Get.lazyPut(() => LoginService(), fenix: true);

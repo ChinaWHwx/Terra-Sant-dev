@@ -73,6 +73,8 @@ class Routes {
   static const ajouterPharmacie = '/ajoutePharmacie';
   static const ajouterMission = '/ajouterMission';
   static const RecuAjouterPharmacie = '/RecuAjouterPharmacie';
+  static const AllPharmacy = '/allPharmacy';
+  static const homepagePhar = '/homepagePhar';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -146,4 +148,6 @@ class Routes {
   static const ajoutePharmacieRoute = ajouterPharmacie;
   static const ajouterMissionRoute = ajouterMission;
   static const RecuAjouterPharmacieRoute = RecuAjouterPharmacie;
+  static const AllPharmacyRoute = AllPharmacy;
+  static const homepagePharRoute = homepagePhar;
 }
