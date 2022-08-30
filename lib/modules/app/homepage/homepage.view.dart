@@ -42,15 +42,15 @@ class HomepageView extends GetView<HomepageController> {
       drawer: NavigationDrawer(),
       bottomNavigationBar: ConvexAppBar(items: const [
         TabItem(
-          icon: Icons.home,
+          icon: Icons.notifications,
           title: 'Acceuil',
         ),
         TabItem(
-          icon: Icons.search,
+          icon: Icons.list,
           title: 'Explorer',
         ),
         TabItem(
-          icon: Icons.calendar_month,
+          icon: Icons.event_available,
           title: 'Calenderier',
         ),
         TabItem(
