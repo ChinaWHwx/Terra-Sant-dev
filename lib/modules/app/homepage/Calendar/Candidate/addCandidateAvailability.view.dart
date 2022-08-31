@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/addCandidateAvailability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
-class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
-  const AjouterPharmacieView({Key? key}) : super(key: key);
+class AddCandidateAvailabilityView
+    extends GetView<AddCandidateAvailabilityController> {
+  const AddCandidateAvailabilityView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Déclaration'),
+          title: const Text('Add user availability'),
           centerTitle: true,
         ),
         body: Card(
@@ -27,8 +29,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.name,
-                      decoration:
-                          const InputDecoration(hintText: 'Nom de pharmacie:'),
+                      decoration: const InputDecoration(hintText: 'Date:'),
                     ),
                   ),
                 ),
@@ -59,7 +60,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.tel,
-                      decoration: const InputDecoration(hintText: 'Tel:'),
+                      decoration: const InputDecoration(hintText: 'repeat:'),
                     ),
                   ),
                 ),
@@ -68,8 +69,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.nameResponsable,
-                      decoration: const InputDecoration(
-                          hintText: 'Nom de responsable:'),
+                      decoration: const InputDecoration(hintText: 'time:'),
                     ),
                   ),
                 ),

@@ -22,6 +22,8 @@ import 'package:flutter_application_1/modules/app/error/access/File/file_access.
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_exemple.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/addCandidateAvailability.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/candidateAvailability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/PharmacieInfo/PharmacieInfo.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.controller.dart';
@@ -35,7 +37,7 @@ import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setti
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Future/detail_future_candidate.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Now/detail_now_candidate.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass.candidate.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/dutyCandidate.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.controller.dart';
@@ -136,6 +138,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AjouterMissionController(), fenix: true);
     Get.lazyPut(() => HomepagePharController(), fenix: true);
     Get.lazyPut(() => AllPharmacyController(), fenix: true);
+    Get.lazyPut(() => CandidateAvailabilityController(), fenix: true);
+    Get.lazyPut(() => AddCandidateAvailabilityController(), fenix: true);
 
     //Services
     Get.lazyPut(() => LoginService(), fenix: true);

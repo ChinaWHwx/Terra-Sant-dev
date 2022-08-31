@@ -19,17 +19,22 @@ class DetailPassCandidateView extends GetView<DetailPassCandidateController> {
             title: const Text('Mission'),
             centerTitle: true,
             backgroundColor: Colors.blue,
-            leading: const BackButton(color: Colors.white),
-            bottom: const TabBar(tabs: [
-              Tab(
-                icon: Icon(Icons.info),
-                text: "Informations",
-              ),
-              Tab(
-                icon: Icon(Icons.calendar_month),
-                text: "Temps",
-              ),
-            ]),
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: () {
+                controller.navigateToCandidateAvailability();
+              },
+            ),
+            // bottom: const TabBar(tabs: [
+            //   Tab(
+            //     icon: Icon(Icons.info),
+            //     text: "Informations",
+            //   ),
+            //   // Tab(
+            //   //   icon: Icon(Icons.calendar_month),
+            //   //   text: "Temps",
+            //   // ),
+            // ]),
           ),
           body: TabBarView(children: [
             ValueListenableBuilder<List<DutyRecent>>(

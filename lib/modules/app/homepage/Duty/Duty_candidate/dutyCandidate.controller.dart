@@ -7,7 +7,7 @@ class DutyCandidateController extends GetxController {
   int now = 1;
   int future = 1;
   var count = 0.obs;
-  navigateToAuth() {
+  navigateToHome() {
     Get.toNamed(Routes.homepageRoute);
   }
 

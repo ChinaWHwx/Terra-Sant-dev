@@ -21,6 +21,8 @@ import 'package:flutter_application_1/modules/app/error/access/File/file_access.
 import 'package:flutter_application_1/modules/app/error/access/GPS/gps_access.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Basic/basic_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/Candidate_calendar.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/addCandidateAvailability.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/candidateAvailability.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/PharmacieInfo/PharmacieInfo.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/RecuAjouterPharmacie.controller.dart';
@@ -37,7 +39,7 @@ import 'package:flutter_application_1/modules/app/homepage/Drawer/Settings/setti
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Future/detail_future_candidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Now/detail_now_candidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass_candidate.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/dutyCandidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.view.dart';
@@ -213,5 +215,11 @@ class AppPages {
         page: () => const RecuAjouterPharmacieView()),
     GetPage(name: Routes.AllPharmacy, page: () => const AllPharmacyView()),
     GetPage(name: Routes.homepagePhar, page: () => const HomepagePharView()),
+    GetPage(
+        name: Routes.candidateAvailability,
+        page: () => const CandidateAvailabilityView()),
+    GetPage(
+        name: Routes.addCandidateAvailability,
+        page: () => const AddCandidateAvailabilityView()),
   ];
 }

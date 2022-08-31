@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/shared/utils/theme.utils.dart';
+
 Pharmacy pharmacyFromJson(String str) => Pharmacy.fromJson(json.decode(str));
 
 String pharmacyToJson(Pharmacy data) => json.encode(data.toJson());
@@ -102,3 +105,83 @@ List<Pharmacy> demoPharmacies = [
     phPhoneConf: 333333,
   ),
 ];
+
+class Pharmacies extends StatelessWidget {
+  const Pharmacies({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...List.generate(
+              demoPharmacies.length,
+              (index) => PharmaciesCard(
+                    pharmacy: demoPharmacies[index],
+                  ))
+        ],
+      ),
+    );
+  }
+}
+
+class PharmaciesCard extends StatelessWidget {
+  const PharmaciesCard({
+    Key? key,
+    this.width = 140,
+    this.aspectRetio = 1.02,
+    required this.pharmacy,
+  }) : super(key: key);
+
+  final double width, aspectRetio;
+  final Pharmacy pharmacy;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
+      child: SizedBox(
+        // width: getProportionateScreenWidth(width),
+        child: Card(
+          color: const Color(0xFFA3FBF2),
+          child: Column(
+            children: [
+              const SizedBox(
+                width: 400,
+              ),
+              SizedBox(height: getProportionateScreenWidth(30)),
+              Text(
+                "Nom de pharmacie: " + pharmacy.phName,
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 4,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "Adresse: " + pharmacy.phAddress,
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
+              // Text(
+              //   "Tel: " + pharmacy.phPhone,
+              //   style: const TextStyle(color: Colors.black, fontSize: 18),
+              //   maxLines: 2,
+              // ),
+              // Text(
+              //   "Nom de responsable: " + pharmacy.phName,
+              //   style: const TextStyle(color: Colors.black, fontSize: 18),
+              //   maxLines: 2,
+              // ),
+              SizedBox(height: getProportionateScreenWidth(30)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

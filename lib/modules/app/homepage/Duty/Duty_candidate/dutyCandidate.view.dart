@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/dutyCandidate.controller.dart';
 import 'package:get/get.dart';
 
 class DutyCandidateView extends GetView<DutyCandidateController> {
@@ -15,7 +15,12 @@ class DutyCandidateView extends GetView<DutyCandidateController> {
             title: const Text('Mission'),
             centerTitle: true,
             backgroundColor: Colors.blue,
-            leading: const BackButton(color: Colors.white),
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: () {
+                controller.navigateToHome();
+              },
+            ),
             bottom: const TabBar(tabs: [
               Tab(icon: Icon(Icons.lock_clock)),
               Tab(icon: Icon(Icons.work)),
