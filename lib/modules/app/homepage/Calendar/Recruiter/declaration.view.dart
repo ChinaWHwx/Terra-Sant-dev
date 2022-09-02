@@ -5,6 +5,7 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/de
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:like_button/like_button.dart';
 
 class DeclarationView extends GetView<DeclarationController> {
   const DeclarationView({Key? key}) : super(key: key);
@@ -14,6 +15,12 @@ class DeclarationView extends GetView<DeclarationController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mes Pharmacies'),
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {
+            controller.navigateToHome();
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -134,6 +141,24 @@ class PharmaciesCard extends StatelessWidget {
               //   maxLines: 2,
               // ),
               SizedBox(height: getProportionateScreenWidth(30)),
+              LikeButton(
+                likeBuilder: (bool isLiked) {
+                  return Icon(
+                    Icons.mode_edit,
+                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                    size: 35,
+                  );
+                },
+              ),
+              LikeButton(
+                likeBuilder: (bool isLiked) {
+                  return Icon(
+                    Icons.delete,
+                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                    size: 35,
+                  );
+                },
+              ),
             ],
           ),
         ),

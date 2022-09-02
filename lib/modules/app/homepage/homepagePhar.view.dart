@@ -42,20 +42,20 @@ class HomepagePharView extends GetView<HomepagePharController> {
       drawer: NavigationDrawer(),
       bottomNavigationBar: ConvexAppBar(items: const [
         TabItem(
-          icon: Icons.notifications,
+          icon: Icons.groups,
           title: 'Acceuil',
         ),
         TabItem(
           icon: Icons.list,
-          title: 'Explorer',
+          title: 'MesPhars',
         ),
         TabItem(
-          icon: Icons.event_available,
-          title: 'Calenderier',
+          icon: Icons.person_search,
+          title: 'I Need',
         ),
         TabItem(
           icon: Icons.work,
-          title: 'Mission',
+          title: 'RDV',
         ),
         TabItem(
           icon: Icons.people,

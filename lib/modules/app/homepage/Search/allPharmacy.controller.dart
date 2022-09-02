@@ -13,6 +13,10 @@ class AllPharmacyController extends GetxController {
   }
 
   var signInController = Get.find<SignInController>();
+
+  void navigateToHome() {
+    Get.toNamed(Routes.homepage);
+  }
 }
 
 class IconBtnWithCounter extends StatelessWidget {

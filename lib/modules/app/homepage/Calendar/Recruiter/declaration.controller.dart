@@ -18,4 +18,8 @@ class DeclarationController extends GetxController {
   navigateAjouter() {
     Get.toNamed(Routes.ajouterPharmacie);
   }
+
+  navigateToHome() {
+    Get.toNamed(Routes.homepagePhar);
+  }
 }

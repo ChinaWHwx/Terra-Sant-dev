@@ -78,6 +78,6 @@ class AjouterPharmacieController extends GetxController
   }
 
   navigateToMyRecruiter() {
-    Get.toNamed(Routes.myRecruiter);
+    Get.toNamed(Routes.declaration);
   }
 }

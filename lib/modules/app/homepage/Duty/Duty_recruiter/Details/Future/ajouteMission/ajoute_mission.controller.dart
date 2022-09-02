@@ -50,8 +50,12 @@ class AjouterMissionController extends GetxController {
     Get.toNamed(Routes.dutyRecruiter);
   }
 
+  navigateToHome() {
+    Get.toNamed(Routes.homepagePhar);
+  }
+
   navigateToDetailFuture() {
-    Get.toNamed(Routes.detailFutureRecruiter);
+    Get.toNamed(Routes.recruAvailability);
   }
 
   validateForm() {

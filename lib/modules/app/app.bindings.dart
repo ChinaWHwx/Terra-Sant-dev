@@ -26,8 +26,10 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/ad
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/candidateAvailability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Complex/complex_exemple.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/PharmacieInfo/PharmacieInfo.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/RecuAjouterPharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/recruAvailability/recruAvailability.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/SearchingAddress/searching_address.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/ViewingMap/viewing_map.controller.dart';
@@ -43,7 +45,7 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/dutyRecruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.controller.dart';
@@ -140,6 +142,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AllPharmacyController(), fenix: true);
     Get.lazyPut(() => CandidateAvailabilityController(), fenix: true);
     Get.lazyPut(() => AddCandidateAvailabilityController(), fenix: true);
+    Get.lazyPut(() => RecuAjouterPharmacieController(), fenix: true);
+    Get.lazyPut(() => RecruAvailabilityController(), fenix: true);
 
     //Services
     Get.lazyPut(() => LoginService(), fenix: true);

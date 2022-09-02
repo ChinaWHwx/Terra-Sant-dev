@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/duty.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 
-import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/duty.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/dutyRecruiter.controller.dart';
 import 'package:get/get.dart';
 
 class DutyRecruiterView extends GetView<DutyRecruiterController> {
@@ -166,12 +166,12 @@ class DutyRecruiterView extends GetView<DutyRecruiterController> {
                               height: 800,
                               width: 300,
                             ),
-                            FloatingActionButton(
-                              onPressed: () {
-                                controller.navigateToAjouterMission();
-                              },
-                              child: const Icon(Icons.add),
-                            ),
+                            // FloatingActionButton(
+                            //   onPressed: () {
+                            //     controller.navigateToAjouterMission();
+                            //   },
+                            //   child: const Icon(Icons.add),
+                            // ),
                           ],
                         )
                       ],

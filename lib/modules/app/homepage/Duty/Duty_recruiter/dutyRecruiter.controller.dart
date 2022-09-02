@@ -22,7 +22,7 @@ class DutyRecruiterController extends GetxController {
   }
 
   navigateToHome() {
-    Get.toNamed(Routes.homepage);
+    Get.toNamed(Routes.homepagePhar);
   }
 
   navigateToFutureDetail() {

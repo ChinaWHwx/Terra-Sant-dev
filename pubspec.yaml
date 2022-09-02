@@ -94,6 +94,7 @@ dependencies:
   table_calendar: ^3.0.6
   flutter_polyline_points: ^1.0.0
   geocode: ^1.0.2
+  animated_icon_button: ^1.0.2
 
 flutter_native_splash:
   android: true

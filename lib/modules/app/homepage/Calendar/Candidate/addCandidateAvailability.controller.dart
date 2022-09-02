@@ -3,81 +3,77 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:http/http.dart' as http;
 
 class AddCandidateAvailabilityController extends GetxController
     with StateMixin<List<dynamic>> {
-  final TextEditingController textEditingController = TextEditingController();
-  TextEditingController placeController = TextEditingController();
-  String KPLACES_API_KEY = "AIzaSyD4U3Q0x6MR0ad-UXTwp6XVvaBsmlHkOhc";
-  String baseURL =
-      'https://maps.googleapis.com/maps/api/place/autocomplete/json';
-  var uuid = const Uuid();
-  String? sessionToken;
-  List<dynamic> placesList = [];
-  var name = TextEditingController();
-  var tel = TextEditingController();
-  var nameResponsable = TextEditingController();
-  final errorMessage = "".obs;
+  var selectedDateStart = DateTime.now().obs;
+  var selectedTimeStart = TimeOfDay.now().obs;
+  var chosenDateStart = ''.obs;
+  var chosenTimeStart = ''.obs;
+  var selectedDateEnd = DateTime.now().obs;
+  var selectedTimeEnd = TimeOfDay.now().obs;
+  var chosenDateEnd = ''.obs;
+  var chosenTimeEnd = ''.obs;
 
   @override
-  void onInit() {
-    change(null, status: RxStatus.empty());
-    super.onInit();
-    placeController.addListener(() {
-      onChange();
-    });
-  }
+  void onClose() {}
 
-  void onChange() {
-    sessionToken ??= uuid.v4();
-    if (placeController.text.isNotEmpty) {
-      getSuggesion(placeController.text);
+  chooseTime(selectedDate, selectedTime, chosenDate, chosenTime) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: Get.context!,
+      initialDate: selectedDate.value,
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2050),
+      //initialEntryMode: DatePickerEntryMode.input,
+      //initialDatePickerMode: DatePickerMode.year,
+      helpText: 'Choissiez votre temps',
+      cancelText: 'Close',
+      confirmText: 'Confirm',
+      errorFormatText: "Enter valid date",
+      errorInvalidText: 'Enter valid date range',
+      fieldHintText: 'jj/mm/aaaa',
+    );
+    //selectableDayPredicate: disableDate);
+    if (pickedDate != null && pickedDate != selectedDate.value) {
+      selectedDate.value = pickedDate;
     }
-  }
-
-  void getSuggesion(String input) async {
-    change(null, status: RxStatus.loading());
-    String request =
-        '$baseURL?input=$input&key=$KPLACES_API_KEY&sessiontoken=$sessionToken';
-
-    var response = await http.get(Uri.parse(request));
-    // ignore: unused_local_variable
-    var data = response.body.toString();
-
-    // print(data);
-    //print(response.body.toString());
-
-    if (response.statusCode == 200) {
-      placesList = jsonDecode(response.body.toString())['predictions'];
-      change(placesList, status: RxStatus.success());
-    } else {
-      change(null, status: RxStatus.error('Failed to load data'));
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    chosenDate(formatter.format(selectedDate.value));
+    TimeOfDay? pickedTime = await showTimePicker(
+        context: Get.context!,
+        initialTime: selectedTime.value,
+        builder: (context, child) {
+          return Theme(data: ThemeData.dark(), child: child!);
+        },
+        initialEntryMode: TimePickerEntryMode.input,
+        helpText: 'select Depature Time',
+        cancelText: 'Fermer',
+        confirmText: 'Valider',
+        errorInvalidText: 'Provide valid time',
+        hourLabelText: 'Select Hour',
+        minuteLabelText: 'Select Minute');
+    if (pickedTime != null && pickedTime != selectedTime.value) {
+      selectedTime.value = pickedTime;
     }
+    chosenTime(selectedTime.value.hour.toString() +
+        'h' +
+        selectedTime.value.minute.toString());
   }
 
-  validateForm() {
-    if (placeController.text.isEmpty ||
-        name.text.isEmpty ||
-        tel.text.isEmpty ||
-        nameResponsable.text.isEmpty) {
-      errorMessage.value = "Veuillez remplir tous les champs";
-    } else if (!GetUtils.isNumericOnly(tel.text)) {
-      errorMessage.value = 'Veuillez insérer des chiffres uniquement';
-    } else if (!GetUtils.isLengthEqualTo(tel.text, 9)) {
-      errorMessage.value = '9 chiffres requis';
-    } else {
-      navigateToCandidateAvailability();
-    }
-  }
-
-  checkEmpty(textEditinController) {
-    return textEditingController.text.isEmpty;
-  }
-
-  navigateToCandidateAvailability() {
+  navigateToHomePage() {
     Get.toNamed(Routes.candidateAvailability);
+  }
+
+  bool disableDate(DateTime day) {
+    if ((day.isAfter(DateTime.now().subtract(const Duration(days: 1))) &&
+        day.isBefore(DateTime.now().add(const Duration(days: 7))))) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

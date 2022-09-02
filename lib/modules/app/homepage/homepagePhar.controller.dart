@@ -6,6 +6,8 @@ import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:like_button/like_button.dart';
+import 'package:animated_icon_button/animated_icon_button.dart';
 
 class HomepagePharController extends GetxController {
   navigateToFavorite() {
@@ -17,11 +19,11 @@ class HomepagePharController extends GetxController {
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.RecuAjouterPharmacie);
+        Get.toNamed(Routes.pharmacieInfo);
         break;
       case 1:
         //Get.toNamed(Routes.search);
-        Get.toNamed(Routes.AllPharmacy);
+        Get.toNamed(Routes.declaration);
         break;
       case 2:
         {
@@ -31,7 +33,7 @@ class HomepagePharController extends GetxController {
           }
           if (signInController.user.userType == "recruteur") {
             //Get.toNamed(Routes.recruiterCalendar);
-            Get.toNamed(Routes.complexExemple);
+            Get.toNamed(Routes.recruAvailability);
           }
         }
 
@@ -179,19 +181,30 @@ class NewsBanner extends StatelessWidget {
             borderRadius: BorderRadius.circular(20)),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           const Text.rich(TextSpan(
-              text: "timeslot.date of pharmacy\ntype need\nadress\n",
+              text: "timeslot.date of candidates\ntype \nadress\n",
               style: TextStyle(color: Colors.white),
               children: [
                 TextSpan(
-                  text: "name of pharmacy",
+                  text: "name of candidates",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 )
               ])),
-          FavoriteButton(
-            iconSize: getProportionateScreenWidth(20),
-            valueChanged: (_isFavorite) {
-              print('Is Favorite $_isFavorite)');
-              //navigateToFavorite();
+          // FavoriteButton(
+          //   iconSize: getProportionateScreenWidth(20),
+          //   valueChanged: (_isFavorite) {
+          //     print('Is Favorite $_isFavorite)');
+          //     //navigateToFavorite();
+          //   },
+          // ),
+          LikeButton(),
+          LikeButton(
+            countPostion: CountPostion.left,
+            likeBuilder: (bool isLiked) {
+              return Icon(
+                Icons.phone_forwarded,
+                color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                size: 35,
+              );
             },
           )
         ]));

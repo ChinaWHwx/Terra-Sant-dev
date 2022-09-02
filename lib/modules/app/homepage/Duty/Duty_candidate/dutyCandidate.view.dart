@@ -48,7 +48,7 @@ class DutyCandidateView extends GetView<DutyCandidateController> {
                             onPressed: () {
                               controller.navigateToDetailPass();
                             },
-                            child: const Text('Voir les details'),
+                            child: const Text('See details'),
                           ),
                           const SizedBox(width: 8),
                           const SizedBox(width: 8),

@@ -14,6 +14,12 @@ class AjouterMissionView extends GetView<AjouterMissionController> {
         appBar: AppBar(
           title: const Text('Déclaration'),
           centerTitle: true,
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              controller.navigateToHome();
+            },
+          ),
         ),
         body: Container(
           margin:

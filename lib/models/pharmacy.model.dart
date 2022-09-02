@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
+import 'package:like_button/like_button.dart';
 
 Pharmacy pharmacyFromJson(String str) => Pharmacy.fromJson(json.decode(str));
 
@@ -178,6 +179,7 @@ class PharmaciesCard extends StatelessWidget {
               //   maxLines: 2,
               // ),
               SizedBox(height: getProportionateScreenWidth(30)),
+              LikeButton(),
             ],
           ),
         ),

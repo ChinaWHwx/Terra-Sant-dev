@@ -6,6 +6,7 @@ import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:like_button/like_button.dart';
 
 class HomepageController extends GetxController {
   navigateToFavorite() {
@@ -17,7 +18,7 @@ class HomepageController extends GetxController {
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.RecuAjouterPharmacie);
+        Get.toNamed(Routes.candidateCalendar);
         break;
       case 1:
         //Get.toNamed(Routes.search);
@@ -188,13 +189,23 @@ class NewsBanner extends StatelessWidget {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 )
               ])),
-          FavoriteButton(
-            iconSize: getProportionateScreenWidth(20),
-            valueChanged: (_isFavorite) {
-              print('Is Favorite $_isFavorite)');
-              //navigateToFavorite();
+          // FavoriteButton(
+          //   iconSize: getProportionateScreenWidth(20),
+          //   valueChanged: (_isFavorite) {
+          //     print('Is Favorite $_isFavorite)');
+          //     //navigateToFavorite();
+          //   },
+          // ),
+          LikeButton(),
+          LikeButton(
+            likeBuilder: (bool isLiked) {
+              return Icon(
+                Icons.hail,
+                color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                size: 35,
+              );
             },
-          )
+          ),
         ]));
   }
 }

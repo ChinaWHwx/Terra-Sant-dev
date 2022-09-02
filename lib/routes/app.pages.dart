@@ -29,6 +29,7 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/aj
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/ajouterPharmacie/RecuAjouterPharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/besoin/Recruiter_calendar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/recruAvailability/recruAvailability.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Contact/contact.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/Favorite/Candidate/candidate_favotite.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Drawer/GoogleMap/SearchingAddress/searching_address.view.dart';
@@ -45,7 +46,7 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/duty.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/dutyRecruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/Profile/modify/modify_profile.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.view.dart';
@@ -211,7 +212,7 @@ class AppPages {
         name: Routes.ajouterPharmacie,
         page: () => const AjouterPharmacieView()),
     GetPage(
-        name: Routes.RecuAjouterPharmacie,
+        name: Routes.recuAjouterPharmacieRoute,
         page: () => const RecuAjouterPharmacieView()),
     GetPage(name: Routes.AllPharmacy, page: () => const AllPharmacyView()),
     GetPage(name: Routes.homepagePhar, page: () => const HomepagePharView()),
@@ -220,6 +221,11 @@ class AppPages {
         page: () => const CandidateAvailabilityView()),
     GetPage(
         name: Routes.addCandidateAvailability,
-        page: () => const AddCandidateAvailabilityView()),
+        page: () => AddCandidateAvailabilityView()),
+    GetPage(
+        name: Routes.ajouterMission, page: () => const AjouterMissionView()),
+    GetPage(
+        name: Routes.recruAvailability,
+        page: () => const RecruAvailabilityView()),
   ];
 }

@@ -71,12 +71,13 @@ class Routes {
   static const myPharmacie = '/myPharmacie';
   static const myRecruiter = '/myRecruiter';
   static const ajouterPharmacie = '/ajoutePharmacie';
-  static const ajouterMission = '/ajouterMission';
+  static const ajouterMission = '/ajoute_Mission';
   static const RecuAjouterPharmacie = '/RecuAjouterPharmacie';
   static const AllPharmacy = '/allPharmacy';
   static const homepagePhar = '/homepagePhar';
   static const candidateAvailability = '/candidateAvailability';
   static const addCandidateAvailability = '/addCandidateAvailability';
+  static const recruAvailability = '/recruAvailability';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -149,9 +150,10 @@ class Routes {
   static const myRecruiterRoute = myRecruiter;
   static const ajoutePharmacieRoute = ajouterPharmacie;
   static const ajouterMissionRoute = ajouterMission;
-  static const RecuAjouterPharmacieRoute = RecuAjouterPharmacie;
+  static const recuAjouterPharmacieRoute = RecuAjouterPharmacie;
   static const AllPharmacyRoute = AllPharmacy;
   static const homepagePharRoute = homepagePhar;
   static const candidateAvailabilityRoute = candidateAvailability;
   static const addCandidateAvailabilityRoute = addCandidateAvailability;
+  static const recruAvailabilityRoute = recruAvailability;
 }

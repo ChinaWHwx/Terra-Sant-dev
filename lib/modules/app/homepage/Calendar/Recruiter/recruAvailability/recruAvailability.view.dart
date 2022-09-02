@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Candidate/candidateAvailability.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/recruAvailability/recruAvailability.controller.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 
-class CandidateAvailabilityView
-    extends GetView<CandidateAvailabilityController> {
-  const CandidateAvailabilityView({Key? key}) : super(key: key);
+class RecruAvailabilityView extends GetView<RecruAvailabilityController> {
+  const RecruAvailabilityView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My time available'),
+        title: const Text('My pharmacy need:'),
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
@@ -28,7 +28,7 @@ class CandidateAvailabilityView
           ),
           FloatingActionButton(
             onPressed: () {
-              controller.navigateToAddCandidateAvailability();
+              controller.navigateTorecruiterCalendar();
             },
             child: const Icon(Icons.add),
           ),
@@ -51,8 +51,8 @@ class CandidateAvailabilityView
                     children: <Widget>[
                       ListTile(
                         leading: Icon(Icons.watch),
-                        title: Text('availabilityuser.date_start'),
-                        subtitle: Text('availabilityuser.adress待添加'),
+                        title: Text('availabilityPhar.date_start'),
+                        subtitle: Text('availabilityPhar.adress待添加'),
                       ),
                       LikeButton(
                         likeBuilder: (bool isLiked) {

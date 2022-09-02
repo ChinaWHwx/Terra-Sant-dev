@@ -17,6 +17,12 @@ class AllPharmacyView extends GetView<AllPharmacyController> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("All the pharmacie"),
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              controller.navigateToHome();
+            },
+          ),
           //centerTitle: true,
         ),
         body: SafeArea(
