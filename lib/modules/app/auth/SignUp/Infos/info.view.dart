@@ -87,10 +87,10 @@ class InfoView extends GetView<InfoController> {
                         print('change $date');
                       }, onConfirm: (date) {
                         // ignore: avoid_print
-                        print('confirm $date');
+                        controller.birthdayEditingController = date;
                       }, currentTime: DateTime.now(), locale: LocaleType.fr);
                     },
-                    child: const Text('Calendrier'),
+                    child: const Text('Calender'),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

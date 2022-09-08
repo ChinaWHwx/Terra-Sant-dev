@@ -23,12 +23,13 @@ class HomepageController extends GetxController {
       case 1:
         //Get.toNamed(Routes.search);
         Get.toNamed(Routes.AllPharmacy);
+
         break;
       case 2:
         {
           if (signInController.user.userType == "candidat" ||
               signInController.user.userType == "etudiant") {
-            //Get.toNamed(Routes.candidateCalendar);
+            //Get.toNamed(Routes.complexExemple);
             Get.toNamed(Routes.candidateAvailability);
           }
           if (signInController.user.userType == "recruteur") {

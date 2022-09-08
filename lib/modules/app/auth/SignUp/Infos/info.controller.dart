@@ -9,6 +9,7 @@ class InfoController extends GetxController with StateMixin {
   final String enregistrer = "Enregistrez";
   final TextEditingController prenomEditingController = TextEditingController();
   final TextEditingController nomEditingController = TextEditingController();
+  late final DateTime birthdayEditingController;
   SignUpService signUpService = Get.find();
 
   final selected = "Monsieur".obs;
@@ -47,7 +48,12 @@ class InfoController extends GetxController with StateMixin {
     } else {
       signUpService.newUser.userFname = prenomEditingController.text;
       signUpService.newUser.userName = nomEditingController.text;
-      signUpService.newUser.userBirthdate = '1-1-1';
+      signUpService.newUser.userBirthdate =
+          birthdayEditingController.day.toString() +
+              '/' +
+              birthdayEditingController.month.toString() +
+              '/' +
+              birthdayEditingController.year.toString();
       //signUpService.newUser.userBirthdate = date as String?;
       var response = await signUpService.addNameUser();
       if (response.containsKey("success")) {

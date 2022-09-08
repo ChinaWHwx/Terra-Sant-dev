@@ -15,7 +15,7 @@ class HomepageView extends GetView<HomepageController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My alerte pharmacies"),
+        title: const Text("匹配到的所有药房"),
         //centerTitle: true,
       ),
       body: SafeArea(
@@ -23,8 +23,8 @@ class HomepageView extends GetView<HomepageController> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: getProportionateScreenWidth(20)),
-                const HomeHeader(),
+                // SizedBox(height: getProportionateScreenWidth(20)),
+                // const HomeHeader(),
                 SizedBox(height: getProportionateScreenWidth(30)),
                 const NewsBanner(),
                 // SizedBox(height: getProportionateScreenWidth(30)),
