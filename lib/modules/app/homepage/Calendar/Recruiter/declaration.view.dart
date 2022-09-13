@@ -24,144 +24,19 @@ class DeclarationView extends GetView<DeclarationController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.navigateAjouter();
+          controller.ShowMyPhars();
+          // controller.navigateAjouter();
         },
         child: const Icon(Icons.add),
       ),
+
       // body: Obx(() => ListView.builder(
       //         // itemCount: controller.addCard.value,
       //         itemBuilder: (context, index) {
       //       return cardslist(index);
       //     })),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: const [
-                SizedBox(height: 30),
-                Pharmacies(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Pharmacies extends StatelessWidget {
-  const Pharmacies({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ...List.generate(
-              demoPharmacies.length,
-              (index) => PharmaciesCard(
-                    pharmacy: demoPharmacies[index],
-                  ))
-        ],
-      ),
-    );
-  }
-}
-
-class PharmaciesCard extends StatelessWidget {
-  PharmaciesCard({
-    Key? key,
-    this.width = 140,
-    this.aspectRetio = 1.02,
-    required this.pharmacy,
-  }) : super(key: key);
-
-  final double width, aspectRetio;
-  final Pharmacy pharmacy;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
-      child: SizedBox(
-        // width: getProportionateScreenWidth(width),
-        child: Card(
-          color: Color(0xFFA3FBF2),
-          child: Column(
-            children: [
-              const SizedBox(
-                width: 400,
-              ),
-              SizedBox(height: getProportionateScreenWidth(30)),
-              // Text(
-              //   "ownerId: " + pharmacy.ownerId.toString(),
-              //   style: const TextStyle(color: Colors.black, fontSize: 18),
-              //   maxLines: 2,
-              // ),
-              Text(
-                "Address: " + pharmacy.phAddress,
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 4,
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "Email: " + pharmacy.phEmail,
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 2,
-                textAlign: TextAlign.center,
-              ),
-              // Text(
-              //   "phEmailConf: " + pharmacy.phEmailConf.toString(),
-              //   style: const TextStyle(color: Colors.black, fontSize: 18),
-              //   maxLines: 2,
-              // ),
-              // Text(
-              //   "phId: " + pharmacy.phId.toString(),
-              //   style: const TextStyle(color: Colors.black, fontSize: 18),
-              //   maxLines: 2,
-              // ),
-              Text(
-                "Nom: " + pharmacy.phName,
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 2,
-              ),
-              Text(
-                "Num Tél: " + pharmacy.phPhone,
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 2,
-              ),
-              // Text(
-              //   "phPhoneConf: " + pharmacy.phPhoneConf.toString(),
-              //   style: const TextStyle(color: Colors.black, fontSize: 18),
-              //   maxLines: 2,
-              // ),
-              SizedBox(height: getProportionateScreenWidth(30)),
-              LikeButton(
-                likeBuilder: (bool isLiked) {
-                  return Icon(
-                    Icons.mode_edit,
-                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-                    size: 35,
-                  );
-                },
-              ),
-              LikeButton(
-                likeBuilder: (bool isLiked) {
-                  return Icon(
-                    Icons.delete,
-                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-                    size: 35,
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
+        child: Pharmacies(),
       ),
     );
   }

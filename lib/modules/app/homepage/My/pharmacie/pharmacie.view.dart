@@ -98,24 +98,24 @@ class PharmaciesCard extends StatelessWidget {
               ),
               SizedBox(height: getProportionateScreenWidth(30)),
               Text(
-                "Nom de pharmacie: " + pharmacy.phName,
+                "Nom de pharmacie: ${pharmacy.phName}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "Adresse: " + pharmacy.phAddress,
+                "Adresse: " + (pharmacy.phAddress ?? ''),
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "Tel: " + pharmacy.phPhone,
+                "Tel: ${pharmacy.phPhone}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
               ),
               Text(
-                "Nom de responsable: " + pharmacy.phName,
+                "Nom de responsable: ${pharmacy.phName}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
               ),

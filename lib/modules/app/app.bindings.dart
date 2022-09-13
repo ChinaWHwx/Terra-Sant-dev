@@ -47,6 +47,7 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/dutyRecruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/EditMyPharmacy/editMyPharmacy.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/modify/modify_profile.controller.dart';
@@ -62,11 +63,23 @@ import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.contr
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/modules/app/timeout/SignIn/signin_timeout.controller.dart';
-import 'package:flutter_application_1/repositories/availability.repository.dart';
+import 'package:flutter_application_1/repositories/availabilityPhar.repository.dart';
+import 'package:flutter_application_1/repositories/availabilityUser.repository.dart';
+import 'package:flutter_application_1/repositories/candidate.repository.dart';
+import 'package:flutter_application_1/repositories/demande.repository.dart';
 import 'package:flutter_application_1/repositories/login.repository.dart';
+import 'package:flutter_application_1/repositories/offer.repository.dart';
+import 'package:flutter_application_1/repositories/pharmacy.repository.dart';
+import 'package:flutter_application_1/repositories/recruiter.repository.dart';
 import 'package:flutter_application_1/repositories/signUp.repository.dart';
-import 'package:flutter_application_1/services/availability.service.dart';
+import 'package:flutter_application_1/services/availabilityPhar.service.dart';
+import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/services/candidate.service.dart';
+import 'package:flutter_application_1/services/demande.service.dart';
 import 'package:flutter_application_1/services/login.service.dart';
+import 'package:flutter_application_1/services/offer.service.dart';
+import 'package:flutter_application_1/services/pharmacy.service.dart';
+import 'package:flutter_application_1/services/recruiter.service.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.controller.dart';
 import 'package:get/get.dart';
@@ -144,17 +157,29 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AddCandidateAvailabilityController(), fenix: true);
     Get.lazyPut(() => RecuAjouterPharmacieController(), fenix: true);
     Get.lazyPut(() => RecruAvailabilityController(), fenix: true);
+    Get.lazyPut(() => EditMyPharmacyController(), fenix: true);
 
     //Services
     Get.lazyPut(() => LoginService(), fenix: true);
-    Get.lazyPut(() => AvailabilityService(), fenix: true);
+    Get.lazyPut(() => AvailabilityUserService(), fenix: true);
     Get.lazyPut(() => SignUpService(), fenix: true);
-
+    Get.lazyPut(() => DemandeService(), fenix: true);
+    Get.lazyPut(() => AvailabilityPharService(), fenix: true);
+    Get.lazyPut(() => CandidateService(), fenix: true);
+    Get.lazyPut(() => OfferService(), fenix: true);
+    Get.lazyPut(() => PharmacyService(), fenix: true);
+    Get.lazyPut(() => RecruiterService(), fenix: true);
     //Repositories
     Get.lazyPut(() => LoginRepository(), fenix: true);
-    Get.lazyPut(() => AvailabilityRepository(), fenix: true);
+    Get.lazyPut(() => AvailabilityUserRepository(), fenix: true);
+    Get.lazyPut(() => AvailabilityPharRepository(), fenix: true);
     Get.lazyPut(() => SignUpRepository(), fenix: true);
     Get.lazyPut(() => BasicExempleController(), fenix: true);
     Get.lazyPut(() => ComplexExempleController(), fenix: true);
+    Get.lazyPut(() => DemandeRepository(), fenix: true);
+    Get.lazyPut(() => CandidateRepository(), fenix: true);
+    Get.lazyPut(() => OfferRepository(), fenix: true);
+    Get.lazyPut(() => PharmacyRepository(), fenix: true);
+    Get.lazyPut(() => RecruiterRepository(), fenix: true);
   }
 }

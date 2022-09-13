@@ -57,6 +57,7 @@ import 'package:flutter_application_1/modules/app/homepage/My/my.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/ability/ability.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/Profile/profile.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/EditMyPharmacy/editMyPharmacy.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/allPharmacy.controller.dart';
@@ -227,5 +228,7 @@ class AppPages {
     GetPage(
         name: Routes.recruAvailability,
         page: () => const RecruAvailabilityView()),
+    GetPage(
+        name: Routes.editMyPharmacy, page: () => const EditMyPharmacyView()),
   ];
 }

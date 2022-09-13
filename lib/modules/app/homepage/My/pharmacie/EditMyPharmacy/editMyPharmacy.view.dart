@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/EditMyPharmacy/editMyPharmacy.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
-class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
-  const AjouterPharmacieView({Key? key}) : super(key: key);
+class EditMyPharmacyView extends GetView<EditMyPharmacyController> {
+  const EditMyPharmacyView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

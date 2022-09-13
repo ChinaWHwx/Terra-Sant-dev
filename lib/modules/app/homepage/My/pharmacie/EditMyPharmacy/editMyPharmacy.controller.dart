@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 
 import 'package:http/http.dart' as http;
 
-class AjouterPharmacieController extends GetxController
+class EditMyPharmacyController extends GetxController
     with StateMixin<List<dynamic>> {
   final TextEditingController textEditingController = TextEditingController();
   TextEditingController placeController = TextEditingController();

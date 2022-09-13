@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class AvailabilityRepository extends GetConnect {
+class AvailabilityUserRepository extends GetConnect {
   @override
   void onInit() {
     //httpClient.defaultDecoder = Availability.availabilityFromJson;

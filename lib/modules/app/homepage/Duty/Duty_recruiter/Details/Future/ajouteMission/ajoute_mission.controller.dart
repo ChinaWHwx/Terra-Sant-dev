@@ -15,7 +15,8 @@ class AjouterMissionController extends GetxController {
 
   final TextEditingController tempsFinEditingController =
       TextEditingController();
-  List<String> dropdownText = demoPharmacies.map((x) => x.phName).toList();
+  List<String> dropdownText =
+      demoPharmacies.map((x) => x.phName ?? '').toList();
   List<String> dropdownTextForStatus = [
     'étudiant,e',
     'Préparateur,trice',
