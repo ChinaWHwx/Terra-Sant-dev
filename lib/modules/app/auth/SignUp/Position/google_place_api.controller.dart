@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class GooglePlaceApiController extends GetxController
   List<dynamic> placesList = [];
   final errorMessage = "".obs;
   SignUpService signUpService = Get.find();
-
+  AuthController authController = Get.find();
   @override
   void onInit() {
     change(null, status: RxStatus.empty());
@@ -43,9 +44,9 @@ class GooglePlaceApiController extends GetxController
     //   errorMessage.value = 'Cette adresse est invalide !';
     // }
     else {
-      signUpService.newUser.userAddress = controller.text;
+      authController.newUser.userAddress = controller.text;
 
-      var response = await signUpService.addAddressUser();
+      var response = await signUpService.addAddressUser(authController.newUser);
 
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
@@ -54,7 +55,7 @@ class GooglePlaceApiController extends GetxController
         }
       }
       if (response.containsKey('error')) {
-        signUpService.newUser.userAddress = '';
+        authController.newUser.userAddress = '';
         errorMessage.value = response["error"];
       }
     }

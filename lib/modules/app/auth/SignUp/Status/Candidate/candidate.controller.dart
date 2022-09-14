@@ -1,9 +1,11 @@
+import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
 
 class CandidateController extends GetxController {
   SignUpService signUpService = Get.find();
+  AuthController authController = Get.find();
   final String title = 'Choissiez votre status:';
   final String student = 'étudiant,e';
   final String preprer = 'Préparateur,trice';
@@ -11,9 +13,9 @@ class CandidateController extends GetxController {
   final String rentrer = 'Rentrer';
 
   setStatus(status) {
-    signUpService.newUser.userStatus = status;
+    authController.newUser.userStatus = status;
     if (status.contains("ETD")) {
-      signUpService.newUser.userType = "etudiant";
+      authController.newUser.userType = "etudiant";
     }
     navigateToSignUpRoute();
   }

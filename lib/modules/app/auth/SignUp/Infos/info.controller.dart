@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class InfoController extends GetxController with StateMixin {
   final TextEditingController nomEditingController = TextEditingController();
   late final DateTime birthdayEditingController;
   SignUpService signUpService = Get.find();
-
+  AuthController authController = Get.find();
   final selected = "Monsieur".obs;
   final nameErrorMessage = "".obs;
   Rx<String> errorMessage = "".obs;
@@ -46,16 +47,16 @@ class InfoController extends GetxController with StateMixin {
     } else if (isChecked.value == false) {
       errorMessage.value = "Il faut bien lire et valider";
     } else {
-      signUpService.newUser.userFname = prenomEditingController.text;
-      signUpService.newUser.userName = nomEditingController.text;
-      signUpService.newUser.userBirthdate =
+      authController.newUser.userFname = prenomEditingController.text;
+      authController.newUser.userName = nomEditingController.text;
+      authController.newUser.userBirthdate =
           birthdayEditingController.day.toString() +
               '/' +
               birthdayEditingController.month.toString() +
               '/' +
               birthdayEditingController.year.toString();
       //signUpService.newUser.userBirthdate = date as String?;
-      var response = await signUpService.addNameUser();
+      var response = await signUpService.addNameUser(authController.newUser);
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
@@ -65,8 +66,8 @@ class InfoController extends GetxController with StateMixin {
         }
       }
       if (response.containsKey('error')) {
-        signUpService.newUser.userName = '';
-        signUpService.newUser.userFname = '';
+        authController.newUser.userName = '';
+        authController.newUser.userFname = '';
         errorMessage.value = response["error"];
       }
     }

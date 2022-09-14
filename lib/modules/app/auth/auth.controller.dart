@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/models/user.model.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   SignUpService signUpService = Get.find();
+  var newUser = User();
   final String welcome = 'Bienvenue à Terra Santé';
   final String candidate = 'Je voudrais travailler';
   final String recruiter = 'Je souhaite recruter';
@@ -19,12 +21,12 @@ class AuthController extends GetxController {
   }
 
   navigateToCandidate() {
-    signUpService.newUser.userType = "candidat";
+    newUser.userType = "candidat";
     Get.toNamed(Routes.candidateRoute);
   }
 
   navigateToRecruiter() {
-    signUpService.newUser.userType = "recruteur";
+    newUser.userType = "recruteur";
     Get.toNamed(Routes.recruiterRoute);
   }
 

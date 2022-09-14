@@ -44,8 +44,9 @@ class PasswordController extends GetxController with StateMixin {
     errorMessage.value = isPasswordValid(passwordController.text);
 
     if (errorMessage.value == '') {
-      signUpService.newUser.userPassword = verificationController.text;
-      var response = await signUpService.addPasswordUser();
+      authController.newUser.userPassword = verificationController.text;
+      var response =
+          await signUpService.addPasswordUser(authController.newUser);
 
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
@@ -54,7 +55,7 @@ class PasswordController extends GetxController with StateMixin {
         }
       }
       if (response.containsKey('error')) {
-        signUpService.newUser.userPassword = '';
+        authController.newUser.userPassword = '';
         errorMessage.value = response["error"];
       }
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,7 @@ class EmailController extends GetxController with StateMixin {
   SignUpService signUpService = Get.find();
   final TextEditingController textEditingController = TextEditingController();
   final errorMessage = "".obs;
-
+  AuthController authController = Get.find();
   navigateToAuth() {
     Get.toNamed(Routes.auth);
   }
@@ -26,8 +27,8 @@ class EmailController extends GetxController with StateMixin {
     } else if (!GetUtils.isEmail(textEditingController.text)) {
       errorMessage.value = 'Cette adresse est invalide !';
     } else {
-      signUpService.newUser.userEmail = textEditingController.text;
-      var response = await signUpService.addEmailUser();
+      authController.newUser.userEmail = textEditingController.text;
+      var response = await signUpService.addEmailUser(authController.newUser);
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
@@ -39,7 +40,7 @@ class EmailController extends GetxController with StateMixin {
         }
       }
       if (response.containsKey('error')) {
-        signUpService.newUser.userEmail = '';
+        authController.newUser.userEmail = '';
         errorMessage.value = response["error"];
       }
     }

@@ -4,9 +4,8 @@ import 'package:get/get.dart';
 
 class SignUpService {
   SignUpRepository signUpRepo = Get.find();
-  var newUser = User();
 
-  Future createUser() async {
+  Future createUser(newUser) async {
     try {
       var response = await signUpRepo.createUser(newUser.toJson());
       return response.body;
@@ -15,7 +14,7 @@ class SignUpService {
     }
   }
 
-  Future addEmailUser() async {
+  Future addEmailUser(newUser) async {
     try {
       var response = await signUpRepo.addEmailUser(newUser.toJson());
       return response.body;
@@ -24,7 +23,7 @@ class SignUpService {
     }
   }
 
-  Future addAddressUser() async {
+  Future addAddressUser(newUser) async {
     try {
       var response = await signUpRepo.addAddressUser(newUser.toJson());
 
@@ -34,7 +33,7 @@ class SignUpService {
     }
   }
 
-  Future addNameUser() async {
+  Future addNameUser(newUser) async {
     try {
       var response = await signUpRepo.addNameUser(newUser.toJson());
 
@@ -44,7 +43,7 @@ class SignUpService {
     }
   }
 
-  Future addPasswordUser() async {
+  Future addPasswordUser(newUser) async {
     try {
       var response = await signUpRepo.addPasswordUser(newUser.toJson());
 

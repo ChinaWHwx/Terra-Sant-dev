@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
@@ -8,7 +9,7 @@ import 'package:get/get.dart';
 class TelephoneController extends GetxController with StateMixin {
   SignUpService signUpService = Get.find();
   final TextEditingController textEditingController = TextEditingController();
-
+  AuthController authController = Get.find();
   final errorMessage = "".obs;
 
   navigateToAuth() {
@@ -16,7 +17,7 @@ class TelephoneController extends GetxController with StateMixin {
   }
 
   navigateToStatus() {
-    String type = signUpService.newUser.userType ?? "indéfini";
+    String type = authController.newUser.userType ?? "indéfini";
     if (type == 'candidat' || type == "etudiant") {
       Get.toNamed(Routes.candidateRoute);
     } else if (type == "recruteur") {
@@ -42,11 +43,11 @@ class TelephoneController extends GetxController with StateMixin {
       } else if (!GetUtils.isPhoneNumber(textEditingController.text)) {
         errorMessage.value = 'Ce n\'est pas un numéro de téléphone!';
       } else {
-        signUpService.newUser.userPhone = textEditingController.text;
-        var response = await signUpService.createUser();
+        authController.newUser.userPhone = textEditingController.text;
+        var response = await signUpService.createUser(authController.newUser);
         if (response.containsKey("success")) {
           if (response["success"] == 'true') {
-            signUpService.newUser.userId = response['user_id'];
+            authController.newUser.userId = response['user_id'];
             change(null, status: RxStatus.success());
             if (n == 1) {
               navigateToSmsVerification();
@@ -56,7 +57,7 @@ class TelephoneController extends GetxController with StateMixin {
           }
         }
         if (response.containsKey('error')) {
-          signUpService.newUser.userPhone = "";
+          authController.newUser.userPhone = "";
           errorMessage.value = response["error"];
         }
       }
