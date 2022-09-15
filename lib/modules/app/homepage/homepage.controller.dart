@@ -1,19 +1,46 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/availabilityPhar.model.dart';
+import 'package:flutter_application_1/models/availabilityUser.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/models/ProductModel.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/availabilityPhar.service.dart';
+import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 
-class HomepageController extends GetxController {
+class HomepageController extends GetxController with StateMixin {
   navigateToFavorite() {
     Get.toNamed("Routes.favorite");
   }
 
+  AvailabilityUserService availabilityUserService = Get.find();
+
+  AvailabilityPharService availabilityPharService = Get.find();
+
   var signInController = Get.find<SignInController>();
+  List<AvailabilityPhar> _list1 = [];
+  List<AvailabilityUser> _list2 = [];
+
+  List<AvailabilityPhar> get list1 => _list1
+      // .where((element) =>
+      //     element.date_month_year_phar == signInController.user.userId ||
+      //     element.time_of_day_phar == signInController.user.userId)
+      // .toList()
+      ;
+  List<AvailabilityUser> get list2 => _list2
+      .where((element) => element.user_id == signInController.user.userId)
+      .toList();
+  @override
+  void onInit() {
+    super.onInit();
+    debugPrint('');
+    ShowPharAvl();
+  }
 
   navigate(int i) {
     switch (i) {
@@ -52,6 +79,56 @@ class HomepageController extends GetxController {
         break;
       default:
         Get.toNamed(Routes.my);
+    }
+  }
+
+  ShowPharAvl() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await availabilityPharService.getInfos();
+      manageResponse1(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse1(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+    } else {
+      _list1 =
+          (response as List).map((e) => AvailabilityPhar.fromJson(e)).toList();
+      change(null, status: RxStatus.success());
+      update();
+    }
+  }
+
+  ShowMyAvl_User() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await availabilityUserService.getInfos();
+      manageResponse2(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse2(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+    } else {
+      _list2 =
+          (response as List).map((e) => AvailabilityUser.fromJson(e)).toList();
+      change(null, status: RxStatus.success());
+      update();
     }
   }
 }

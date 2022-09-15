@@ -12,4 +12,13 @@ class AvailabilityUserService {
       return Future.error(e.toString());
     }
   }
+
+  Future getInfos() async {
+    try {
+      var response = await availabilityUserRepo.getInfos();
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

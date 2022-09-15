@@ -12,7 +12,7 @@ class AjouterMissionView extends GetView<AjouterMissionController> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Déclaration'),
+          title: const Text('加新avlP'),
           centerTitle: true,
           leading: BackButton(
             color: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/shared/plane_indicator.dart';
 import 'package:flutter_application_1/shared/widgets/drawer/navigation_drawer.dart';
@@ -18,26 +19,28 @@ class HomepageView extends GetView<HomepageController> {
         title: const Text("匹配到的所有药房"),
         //centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.ShowPharAvl();
+          controller.ShowMyAvl_User();
+          // controller.navigateAjouter();
+        },
+        child: const Icon(Icons.add),
+      ),
       body: SafeArea(
-        child: PlaneIndicator(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // SizedBox(height: getProportionateScreenWidth(20)),
-                // const HomeHeader(),
-                SizedBox(height: getProportionateScreenWidth(30)),
-                const NewsBanner(),
-                // SizedBox(height: getProportionateScreenWidth(30)),
-                // const Categories(),
-                // SizedBox(height: getProportionateScreenWidth(30)),
-                // const SpecialOffers(),
-                // SizedBox(height: getProportionateScreenWidth(30)),
-                // const PopularProducts(),
-                // SizedBox(height: getProportionateScreenWidth(50)),
-              ],
-            ),
-          ),
-        ),
+        // child: PlaneIndicator(
+        //   child: SingleChildScrollView(
+        //     child: Column(
+        //       children: [
+
+        //         SizedBox(height: getProportionateScreenWidth(30)),
+        //         const NewsBanner(),
+
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        child: AvailabilityPharsForUsers(),
       ),
       drawer: NavigationDrawer(),
       bottomNavigationBar: ConvexAppBar(items: const [

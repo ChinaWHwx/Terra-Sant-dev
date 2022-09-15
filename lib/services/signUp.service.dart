@@ -43,6 +43,25 @@ class SignUpService {
     }
   }
 
+  Future addRecruiter(id) async {
+    try {
+      var response = await signUpRepo.addRecruiter(id);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future addCandidat(id) async {
+    try {
+      var response = await signUpRepo.addCandidat(id);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   Future addPasswordUser(newUser) async {
     try {
       var response = await signUpRepo.addPasswordUser(newUser.toJson());

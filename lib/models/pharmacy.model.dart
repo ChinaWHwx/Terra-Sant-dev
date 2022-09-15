@@ -40,7 +40,7 @@ class Pharmacy {
         phId: json["ph_id"],
         phName: json["ph_name"],
         phPhoneConf: json["ph_phone_conf"],
-        // ph_region: json["ph_region"],
+        ph_region: json["ph_region"] == null ? null : json['ph_region'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -125,6 +125,12 @@ class PharmaciesCard extends StatelessWidget {
               // ),
               Text(
                 "Address: " + (pharmacy.phAddress ?? ''),
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 4,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "Code postal: ${pharmacy.ph_region}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,

@@ -8,4 +8,5 @@ class AvailabilityPharRepository extends GetConnect {
   }
 
   Future addAvl(body) => post("/availability/add", body);
+  Future getInfos() => get("/availabilitypharmacy");
 }

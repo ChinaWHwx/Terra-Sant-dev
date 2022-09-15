@@ -15,37 +15,35 @@ class AllPharmacyView extends GetView<AllPharmacyController> {
     SizeConfig().init(context);
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("All the pharmacie"),
-          leading: BackButton(
-            color: Colors.white,
-            onPressed: () {
-              controller.navigateToHome();
-            },
-          ),
-          //centerTitle: true,
+      appBar: AppBar(
+        title: const Text("All the pharmacie"),
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {
+            controller.navigateToHome();
+          },
         ),
-        body: SafeArea(
-          child: PlaneIndicator(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: getProportionateScreenWidth(20)),
-
-                  SizedBox(height: getProportionateScreenWidth(30)),
-                  const NewsBanner(),
-                  Pharmacies(),
+        //centerTitle: true,
+      ),
+      body: SafeArea(
+          // child: PlaneIndicator(
+          // child: SingleChildScrollView(
+          // child: Column(
+          child: (
                   // SizedBox(height: getProportionateScreenWidth(30)),
-                  // const Categories(),
-                  // SizedBox(height: getProportionateScreenWidth(30)),
-                  // const SpecialOffers(),
-                  // SizedBox(height: getProportionateScreenWidth(30)),
-                  // const PopularProducts(),
-                  // SizedBox(height: getProportionateScreenWidth(50)),
-                ],
-              ),
-            ),
-          ),
-        ));
+                  // const NewsBanner(),
+                  Pharmacies()
+              // SizedBox(height: getProportionateScreenWidth(30)),
+              // const Categories(),
+              // SizedBox(height: getProportionateScreenWidth(30)),
+              // const SpecialOffers(),
+              // SizedBox(height: getProportionateScreenWidth(30)),
+              // const PopularProducts(),
+              // SizedBox(height: getProportionateScreenWidth(50)),
+              )),
+      // ),
+      // ),
+      // )
+    );
   }
 }

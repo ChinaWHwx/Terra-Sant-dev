@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/availability.model.dart';
+import 'package:flutter_application_1/models/availabilityUser.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
@@ -90,12 +90,13 @@ class CandidateCalendarController extends GetxController {
         chosenTimeStart.value != '' &&
         chosenDateEnd.value != '' &&
         chosenTimeStart.value != '') {
-      var avl = Availability(
-              dateStart: chosenDateStart.value,
-              dateEnd: chosenDateEnd.value,
-              timeStart: chosenTimeStart.value,
-              timeEnd: chosenTimeEnd.value,
-              userId: signInController.user.userId)
+      var avl = AvailabilityUser(
+              // dateStart: chosenDateStart.value,
+              // dateEnd: chosenDateEnd.value,
+              // timeStart: chosenTimeStart.value,
+              // timeEnd: chosenTimeEnd.value,
+              // userId: signInController.user.userId
+              )
           .toJson();
       var response = await availabilityService.addAvl(avl);
       print(response);

@@ -56,19 +56,27 @@ class InfoController extends GetxController with StateMixin {
               '/' +
               birthdayEditingController.year.toString();
       //signUpService.newUser.userBirthdate = date as String?;
-      var response = await signUpService.addNameUser(authController.newUser);
-      if (response.containsKey("success")) {
-        if (response["success"] == 'true') {
+      var response1 = await signUpService.addNameUser(authController.newUser);
+      if (authController.newUser.userType == "candidat" ||
+          authController.newUser.userType == "etudiant") {
+        var response =
+            await signUpService.addCandidat(authController.newUser.userId);
+      } else {
+        var response =
+            await signUpService.addRecruiter(authController.newUser.userId);
+      }
+      if (response1.containsKey("success")) {
+        if (response1["success"] == 'true') {
           change(null, status: RxStatus.success());
           if (n == 1) {
             navigateToPassword();
           }
         }
       }
-      if (response.containsKey('error')) {
+      if (response1.containsKey('error')) {
         authController.newUser.userName = '';
         authController.newUser.userFname = '';
-        errorMessage.value = response["error"];
+        errorMessage.value = response1["error"];
       }
     }
   }
