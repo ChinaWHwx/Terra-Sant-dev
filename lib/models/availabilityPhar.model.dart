@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
@@ -56,19 +57,40 @@ class AvailabilityPharsForUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = Get.find<HomepageController>().list1;
     SizeConfig().init(context);
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: ListView.builder(
-          itemBuilder: (context, index) {
-            return AvailabilityPharsForShowCard(
-              availabilityPhars: list[index],
-            );
-          },
-          itemCount: list.length),
-    );
+    // final list = Get.find<HomepageController>().getList1();
+    // SizeConfig().init(context);
+    // return Padding(
+    //   padding:
+    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+    //   child: ListView.builder(
+    //       itemBuilder: (context, index) {
+    //         return AvailabilityPharsForShowCard(
+    //           availabilityPhars: list[index],
+    //         );
+    //       },
+    //       itemCount: list.length),
+    // );
+    return GetBuilder<HomepageController>(builder: (logic) {
+      final list = logic.getList1();
+      debugPrint('list: ${list.length}');
+      return EasyRefresh(
+        controller: logic.controller,
+        onRefresh: logic.onRefresh,
+        child: ListView.builder(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            itemBuilder: (context, index) {
+              return AvailabilityPharsForShowCard(
+                availabilityPhars: list[index],
+                onTapPhone: (phone) {
+                  debugPrint('phone: $phone');
+                },
+              );
+            },
+            itemCount: list.length),
+      );
+    });
   }
 }
 
@@ -99,11 +121,12 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     required this.availabilityPhars,
+    this.onTapPhone,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final AvailabilityPhar availabilityPhars;
-
+  final ValueChanged<String>? onTapPhone;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -140,6 +163,12 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
                 countPostion: CountPostion.left,
+                onTap: (b) {
+                  onTapPhone
+                      ?.call(availabilityPhars.date_month_year_phar ?? '');
+
+                  return Future.value(false);
+                },
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Icons.phone_forwarded,

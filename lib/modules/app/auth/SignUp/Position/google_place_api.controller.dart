@@ -74,8 +74,8 @@ class GooglePlaceApiController extends GetxController
     // ignore: unused_local_variable
     var data = response.body.toString();
 
-    // print(data);
-    //print(response.body.toString());
+    print(data);
+    print(response.body.toString());
 
     if (response.statusCode == 200) {
       placesList = jsonDecode(response.body.toString())['predictions'];

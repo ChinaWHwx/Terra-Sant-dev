@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
@@ -56,19 +57,27 @@ class AvailabilityUsersForPhars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = Get.find<HomepagePharController>().list1;
     SizeConfig().init(context);
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: ListView.builder(
-          itemBuilder: (context, index) {
-            return AvailabilityUsersForShowCard(
-              availabilityUsers: list[index],
-            );
-          },
-          itemCount: list.length),
-    );
+    return GetBuilder<HomepagePharController>(builder: (logic) {
+      final list = logic.getList1();
+      debugPrint('list: ${list.length}');
+      return EasyRefresh(
+        controller: logic.controller,
+        onRefresh: logic.onRefresh,
+        child: ListView.builder(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            itemBuilder: (context, index) {
+              return AvailabilityUsersForShowCard(
+                availabilityUsers: list[index],
+                onTapPhone: (phone) {
+                  debugPrint('phone: $phone');
+                },
+              );
+            },
+            itemCount: list.length),
+      );
+    });
   }
 }
 
@@ -170,10 +179,12 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     required this.availabilityUsers,
+    this.onTapPhone,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final AvailabilityUser availabilityUsers;
+  final ValueChanged<String>? onTapPhone;
 
   @override
   Widget build(BuildContext context) {
@@ -211,6 +222,11 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
                 countPostion: CountPostion.left,
+                onTap: (b) {
+                  onTapPhone?.call(availabilityUsers.region_candidate ?? '');
+
+                  return Future.value(false);
+                },
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Icons.phone_forwarded,

@@ -1,3 +1,4 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
@@ -18,18 +19,35 @@ class HomepagePharController extends GetxController with StateMixin {
   AvailabilityUserService availabilityUserService = Get.find();
   AvailabilityPharService availabilityPharService = Get.find();
   List<AvailabilityUser> _list1 = [];
-  List<AvailabilityPhar> _list2 = [];
+  List<AvailabilityPhar> list2 = [];
 
-  List<AvailabilityUser> get list1 => _list1 //AvailabilityUsersForPhars
-      // .where((element) =>
-      //     element.date_month_year_candidate == signInController.user.userId &&
-      //     element.region_candidate == signInController.user.userId)
-      // .toList()
-      ;
+  EasyRefreshController _controller =
+      EasyRefreshController(controlFinishRefresh: true);
+  EasyRefreshController get controller => _controller;
 
-  List<AvailabilityPhar> get list2 => _list2
-      .where((element) => element.owner_id == signInController.user.userId)
-      .toList();
+  List<AvailabilityUser> getList1() {
+    final newList = <AvailabilityUser>[];
+    for (final avlU in _list1) {
+      if (list2
+          .where((element) =>
+              element.date_month_year_phar == avlU.date_month_year_candidate)
+          .isNotEmpty) {
+        newList.add(avlU);
+      }
+    }
+    return newList;
+  }
+
+  // List<AvailabilityUser>  getList1 => _list1 //AvailabilityUsersForPhars
+  // .where((element) =>
+  //     element.date_month_year_candidate == signInController.user.userId &&
+  //     element.region_candidate == signInController.user.userId)
+  // .toList()
+  // ;
+
+  // List<AvailabilityPhar> get list2 => _list2
+  //     .where((element) => element.owner_id == signInController.user.userId)
+  //     .toList();
   @override
   void onInit() {
     super.onInit();
@@ -82,7 +100,7 @@ class HomepagePharController extends GetxController with StateMixin {
     }
   }
 
-  ShowUserAvl() async {
+  Future ShowUserAvl() async {
     try {
       change(null, status: RxStatus.loading());
       var response = await availabilityUserService.getInfos();
@@ -94,20 +112,27 @@ class HomepagePharController extends GetxController with StateMixin {
     }
   }
 
+  Future onRefresh() async {
+    await ShowUserAvl();
+    await ShowMyAvl_Phar();
+  }
+
   manageResponse1(var response) {
     debugPrint('response: $response');
     if (response.toString().contains("error")) {
       HelperUtils.showSimpleSnackBar(response['error']);
       change(null, status: RxStatus.success());
+      _controller.finishRefresh(IndicatorResult.fail);
     } else {
       _list1 =
           (response as List).map((e) => AvailabilityUser.fromJson(e)).toList();
       change(null, status: RxStatus.success());
       update();
+      _controller.finishRefresh();
     }
   }
 
-  ShowMyAvl_Phar() async {
+  Future ShowMyAvl_Phar() async {
     try {
       change(null, status: RxStatus.loading());
       var response = await availabilityPharService.getInfos();
@@ -124,11 +149,15 @@ class HomepagePharController extends GetxController with StateMixin {
     if (response.toString().contains("error")) {
       HelperUtils.showSimpleSnackBar(response['error']);
       change(null, status: RxStatus.success());
+      _controller.finishRefresh(IndicatorResult.fail);
     } else {
-      _list2 =
-          (response as List).map((e) => AvailabilityPhar.fromJson(e)).toList();
+      list2 = (response as List)
+          .map((e) => AvailabilityPhar.fromJson(e))
+          .where((element) => element.owner_id == signInController.user.userId)
+          .toList();
       change(null, status: RxStatus.success());
       update();
+      _controller.finishRefresh();
     }
   }
 }
