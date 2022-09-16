@@ -31,7 +31,7 @@ class AjouterMissionController extends GetxController {
     'Ne pas répéter'
   ];
 
-  final selected = "Pharma".obs;
+  final selected = "Pha2rssma".obs;
   final selectedForStatus = "Autre".obs;
   final selectedRepeate = "Ne pas répéter".obs;
 

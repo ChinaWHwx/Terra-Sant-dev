@@ -24,8 +24,8 @@ class DeclarationView extends GetView<DeclarationController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.ShowMyPhars();
-          // controller.navigateAjouter();
+          // controller.ShowMyPhars();
+          controller.navigateAjouter();
         },
         child: const Icon(Icons.add),
       ),

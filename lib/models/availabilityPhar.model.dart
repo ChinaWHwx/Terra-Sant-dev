@@ -99,19 +99,38 @@ class AvailabilityPharsForPhars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = Get.find<HomepagePharController>().list2;
-    SizeConfig().init(context);
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: ListView.builder(
-          itemBuilder: (context, index) {
-            return AvailabilityPharsForEditCard(
-              availabilityPhars: list[index],
-            );
-          },
-          itemCount: list.length),
-    );
+    // final list = Get.find<HomepagePharController>().list2;
+    // SizeConfig().init(context);
+    // return Padding(
+    //   padding:
+    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+    //   child: ListView.builder(
+    //       itemBuilder: (context, index) {
+    //         return AvailabilityPharsForEditCard(
+    //           availabilityPhars: list[index],
+    //         );
+    //       },
+    //       itemCount: list.length),
+    // );
+    return GetBuilder<HomepagePharController>(builder: (logic) {
+      final list = logic.list2;
+      return EasyRefresh(
+        controller: logic.controller,
+        onRefresh: logic.onRefresh,
+        child: ListView.builder(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            itemBuilder: (context, index) {
+              return AvailabilityPharsForEditCard(
+                availabilityPhars: list[index],
+                // onTapPhone: (phone) {
+                //   debugPrint('phone: $phone');
+                // },
+              );
+            },
+            itemCount: list.length),
+      );
+    });
   }
 }
 

@@ -3,11 +3,14 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
+import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/models/ProductModel.dart';
+import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/services/pharmacy.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,8 +21,10 @@ import 'package:animated_icon_button/animated_icon_button.dart';
 class HomepagePharController extends GetxController with StateMixin {
   AvailabilityUserService availabilityUserService = Get.find();
   AvailabilityPharService availabilityPharService = Get.find();
+  PharmacyService pharmacyService = Get.find();
   List<AvailabilityUser> _list1 = [];
   List<AvailabilityPhar> list2 = [];
+  List<Pharmacy> listMyPhar = [];
 
   EasyRefreshController _controller =
       EasyRefreshController(controlFinishRefresh: true);
@@ -38,16 +43,6 @@ class HomepagePharController extends GetxController with StateMixin {
     return newList;
   }
 
-  // List<AvailabilityUser>  getList1 => _list1 //AvailabilityUsersForPhars
-  // .where((element) =>
-  //     element.date_month_year_candidate == signInController.user.userId &&
-  //     element.region_candidate == signInController.user.userId)
-  // .toList()
-  // ;
-
-  // List<AvailabilityPhar> get list2 => _list2
-  //     .where((element) => element.owner_id == signInController.user.userId)
-  //     .toList();
   @override
   void onInit() {
     super.onInit();
@@ -115,6 +110,7 @@ class HomepagePharController extends GetxController with StateMixin {
   Future onRefresh() async {
     await ShowUserAvl();
     await ShowMyAvl_Phar();
+    await ShowMyPhars();
   }
 
   manageResponse1(var response) {
@@ -154,6 +150,35 @@ class HomepagePharController extends GetxController with StateMixin {
       list2 = (response as List)
           .map((e) => AvailabilityPhar.fromJson(e))
           .where((element) => element.owner_id == signInController.user.userId)
+          .toList();
+      change(null, status: RxStatus.success());
+      update();
+      _controller.finishRefresh();
+    }
+  }
+
+  Future ShowMyPhars() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await pharmacyService.getInfos();
+      manageResponse3(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse3(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+      _controller.finishRefresh(IndicatorResult.fail);
+    } else {
+      listMyPhar = (response as List)
+          .map((e) => Pharmacy.fromJson(e))
+          .where((element) => element.ownerId == signInController.user.userId)
           .toList();
       change(null, status: RxStatus.success());
       update();
@@ -216,107 +241,105 @@ class IconBtnWithCounter extends StatelessWidget {
     );
   }
 }
+  
+// class SearchField extends StatelessWidget {
+//   const SearchField({
+//     Key? key,
+//   }) : super(key: key);
 
-class SearchField extends StatelessWidget {
-  const SearchField({
-    Key? key,
-  }) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: SizeConfig.screenWidth * 0.6, //60% of our width
+//       decoration: BoxDecoration(
+//           color: const Color(0x00000000).withOpacity(0.15),
+//           borderRadius: BorderRadius.circular(15)),
+//       child: TextField(
+//         onChanged: (value) {
+//           //search value
+//         },
+//         decoration: InputDecoration(
+//           enabledBorder: InputBorder.none,
+//           focusedBorder: InputBorder.none,
+//           hintText: "Search ...",
+//           prefixIcon: const Icon(Icons.search),
+//           contentPadding: EdgeInsets.symmetric(
+//             horizontal: getProportionateScreenWidth(20),
+//             vertical: getProportionateScreenWidth(12),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: SizeConfig.screenWidth * 0.6, //60% of our width
-      decoration: BoxDecoration(
-          color: const Color(0x00000000).withOpacity(0.15),
-          borderRadius: BorderRadius.circular(15)),
-      child: TextField(
-        onChanged: (value) {
-          //search value
-        },
-        decoration: InputDecoration(
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          hintText: "Search ...",
-          prefixIcon: const Icon(Icons.search),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-            vertical: getProportionateScreenWidth(12),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class HomeHeader extends StatelessWidget {
+//   const HomeHeader({
+//     Key? key,
+//   }) : super(key: key);
 
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({
-    Key? key,
-  }) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding:
+//           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(50)),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: const [
+//           SearchField(),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(50)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SearchField(),
-        ],
-      ),
-    );
-  }
-}
+// class NewsBanner extends StatelessWidget {
+//   const NewsBanner({
+//     Key? key,
+//   }) : super(key: key);
 
-class NewsBanner extends StatelessWidget {
-  const NewsBanner({
-    Key? key,
-  }) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         margin:
+//             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+//         padding: EdgeInsets.symmetric(
+//             horizontal: getProportionateScreenWidth(20),
+//             vertical: getProportionateScreenWidth(15)),
+//         width: double.infinity,
+//         // height: 90,
+//         decoration: BoxDecoration(
+//             color: const Color.fromARGB(255, 58, 183, 187),
+//             borderRadius: BorderRadius.circular(20)),
+//         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+//           const Text.rich(TextSpan(
+//               text: "不显示名字，\n只显示药师的时间，\n地点，类型，\n点击按钮可以发送请求给药师\n弹窗显示请求已发送\n",
+//               style: TextStyle(color: Colors.white),
+//               children: [
+//                 TextSpan(
+//                   text: "timeslot.date ",
+//                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+//                 )
+//               ])),
+//           // FavoriteButton(
+//           //   iconSize: getProportionateScreenWidth(20),
+//           //   valueChanged: (_isFavorite) {
+//           //     print('Is Favorite $_isFavorite)');
+//           //     //navigateToFavorite();
+//           //   },
+//           // ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-        padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-            vertical: getProportionateScreenWidth(15)),
-        width: double.infinity,
-        // height: 90,
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 58, 183, 187),
-            borderRadius: BorderRadius.circular(20)),
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          const Text.rich(TextSpan(
-              text: "不显示名字，\n只显示药师的时间，\n地点，类型，\n点击按钮可以发送请求给药师\n弹窗显示请求已发送\n",
-              style: TextStyle(color: Colors.white),
-              children: [
-                TextSpan(
-                  text: "timeslot.date ",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                )
-              ])),
-          // FavoriteButton(
-          //   iconSize: getProportionateScreenWidth(20),
-          //   valueChanged: (_isFavorite) {
-          //     print('Is Favorite $_isFavorite)');
-          //     //navigateToFavorite();
-          //   },
-          // ),
-
-          LikeButton(
-            countPostion: CountPostion.left,
-            likeBuilder: (bool isLiked) {
-              return Icon(
-                Icons.phone_forwarded,
-                color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-                size: 35,
-              );
-            },
-          )
-        ]));
-  }
-}
+//           LikeButton(
+//             countPostion: CountPostion.left,
+//             likeBuilder: (bool isLiked) {
+//               return Icon(
+//                 Icons.phone_forwarded,
+//                 color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+//                 size: 35,
+//               );
+//             },
+//           )
+//         ]));
 
 // class Categories extends StatelessWidget {
 //   const Categories({Key? key}) : super(key: key);
@@ -632,3 +655,5 @@ class NewsBanner extends StatelessWidget {
 //     );
 //   }
 // }
+
+

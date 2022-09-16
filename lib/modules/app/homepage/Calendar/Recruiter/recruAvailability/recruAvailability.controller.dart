@@ -18,6 +18,10 @@ class RecruAvailabilityController extends GetxController {
     homepagePharController.ShowMyAvl_Phar();
   }
 
+  Future onRefresh() async {
+    homepagePharController.onRefresh();
+  }
+
   navigateDecleration() {
     Get.toNamed(Routes.declaration);
   }

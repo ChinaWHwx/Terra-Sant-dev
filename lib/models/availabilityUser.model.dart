@@ -86,19 +86,40 @@ class AvailabilityUsersForUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = Get.find<HomepageController>().list2;
+    // final list = Get.find<HomepageController>().list2;
+    // SizeConfig().init(context);
+    // return Padding(
+    //   padding:
+    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+    //   child: ListView.builder(
+    //       itemBuilder: (context, index) {
+    //         return AvailabilityUsersForEditCard(
+    //           availabilityUsers: list[index],
+    //         );
+    //       },
+    //       itemCount: list.length),
+    // );
     SizeConfig().init(context);
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: ListView.builder(
-          itemBuilder: (context, index) {
-            return AvailabilityUsersForEditCard(
-              availabilityUsers: list[index],
-            );
-          },
-          itemCount: list.length),
-    );
+    return GetBuilder<HomepageController>(builder: (logic) {
+      final list = logic.list2;
+
+      return EasyRefresh(
+        controller: logic.controller,
+        onRefresh: logic.onRefresh,
+        child: ListView.builder(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            itemBuilder: (context, index) {
+              return AvailabilityUsersForEditCard(
+                availabilityUsers: list[index],
+                // onTapPhone: (phone) {
+                //   debugPrint('phone: $phone');
+                // },
+              );
+            },
+            itemCount: list.length),
+      );
+    });
   }
 }
 

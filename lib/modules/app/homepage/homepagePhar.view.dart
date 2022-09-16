@@ -19,14 +19,6 @@ class HomepagePharView extends GetView<HomepagePharController> {
         title: const Text("匹配给药店的所有药师"),
         //centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.ShowUserAvl();
-          controller.ShowMyAvl_Phar();
-          // controller.navigateAjouter();
-        },
-        child: const Icon(Icons.add),
-      ),
       body: SafeArea(
         // child: PlaneIndicator(
         //   child: SingleChildScrollView(

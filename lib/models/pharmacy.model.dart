@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
@@ -59,15 +61,15 @@ class Pharmacy {
 // Our demo Pharmacies
 List<Pharmacy> demoPharmacies = [
   Pharmacy(
-    ownerId: 111111,
-    phAddress: "1 rue de terra",
-    phEmail: "email",
-    phEmailConf: 111111,
-    phId: 111111,
-    phName: "Pharsma",
-    phPhone: "xin",
-    phPhoneConf: 111111,
-    ph_region: '75011',
+    ownerId: 2,
+    phAddress: "1 2rue de terra",
+    phEmail: "emai2l",
+    phEmailConf: 1121111,
+    phId: 1111211,
+    phName: "Pha2rssma",
+    phPhone: "xi2n",
+    phPhoneConf: 1211111,
+    ph_region: '752011',
   ),
 ];
 
@@ -76,19 +78,38 @@ class Pharmacies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = Get.find<DeclarationController>().list2;
-    SizeConfig().init(context);
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: ListView.builder(
-          itemBuilder: (context, index) {
-            return PharmaciesCard(
-              pharmacy: list[index],
-            );
-          },
-          itemCount: list.length),
-    );
+    // final list = Get.find<HomepagePharController>().listMyPhar;
+    // SizeConfig().init(context);
+    // return Padding(
+    //   padding:
+    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+    //   child: ListView.builder(
+    //       itemBuilder: (context, index) {
+    //         return PharmaciesCard(
+    //           pharmacy: list[index],
+    //         );
+    //       },
+    //       itemCount: list.length),
+    // );
+    return GetBuilder<HomepagePharController>(builder: (logic) {
+      final list = logic.listMyPhar;
+      return EasyRefresh(
+        controller: logic.controller,
+        onRefresh: logic.onRefresh,
+        child: ListView.builder(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            itemBuilder: (context, index) {
+              return PharmaciesCard(
+                pharmacy: list[index],
+                // onTapPhone: (phone) {
+                //   debugPrint('phone: $phone');
+                // },
+              );
+            },
+            itemCount: list.length),
+      );
+    });
   }
 }
 

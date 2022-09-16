@@ -1,3 +1,4 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
@@ -14,6 +15,7 @@ class CandidateAvailabilityController extends GetxController with StateMixin {
   Rx<int> addCard = 1.obs;
   SignInController signInController = Get.find();
   HomepageController homepageController = Get.find();
+
   @override
   void onInit() {
     super.onInit();
@@ -51,5 +53,9 @@ class CandidateAvailabilityController extends GetxController with StateMixin {
     }
 
     addCard.value--;
+  }
+
+  Future onRefresh() async {
+    homepageController.onRefresh();
   }
 }
