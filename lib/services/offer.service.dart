@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 class OfferService {
   OfferRepository offerRepo = Get.find();
 
-  Future getInfos(body) async {
+  Future getInfos() async {
     try {
-      var response = await offerRepo.getInfos(body);
+      var response = await offerRepo.getInfos();
       return response.body;
     } catch (e) {
       return Future.error(e.toString());

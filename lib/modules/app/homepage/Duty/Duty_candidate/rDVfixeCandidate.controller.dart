@@ -10,7 +10,7 @@ import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/widgets/methods/methods.shared.dart';
 import 'package:get/get.dart';
 
-class DeclarationController extends GetxController with StateMixin {
+class RDVFixeCandidateController extends GetxController with StateMixin {
   final TextEditingController textEditingController = TextEditingController();
   var name = <TextEditingController>[];
   var tel = <TextEditingController>[];
@@ -19,6 +19,13 @@ class DeclarationController extends GetxController with StateMixin {
   SignInController signInController = Get.find();
   HomepagePharController homepagePharController = Get.find();
 
+  // void incrementcard() {
+  //   if (addCard.value >= 7) {
+  //     return;
+  //   }
+
+  //   addCard.value++;
+  // }
   Future onRefresh() async {
     homepagePharController.onRefresh();
   }
@@ -34,6 +41,6 @@ class DeclarationController extends GetxController with StateMixin {
   }
 
   navigateToHome() {
-    Get.toNamed(Routes.homepagePhar);
+    Get.toNamed(Routes.homepage);
   }
 }

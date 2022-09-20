@@ -25,7 +25,7 @@ class EditMyPharmacyController extends GetxController
   var uuid = const Uuid();
   String? sessionToken;
   List<dynamic> placesList = [];
-  var name = TextEditingController();
+  late TextEditingController name;
   var tel = TextEditingController();
   var nameResponsable = TextEditingController();
   var codePostal = TextEditingController();
@@ -33,11 +33,13 @@ class EditMyPharmacyController extends GetxController
   LoginService loginService = Get.find();
   SignInController signInController = Get.find();
   PharmacyService pharmacyService = Get.find();
-
+//这里获取上一个页面传来的数据
   @override
   void onInit() {
     change(null, status: RxStatus.empty());
     super.onInit();
+    final pharmacy = Get.arguments as Pharmacy;
+    name = TextEditingController(text: pharmacy.phName);
     placeController.addListener(() {
       onChange();
     });
@@ -87,7 +89,7 @@ class EditMyPharmacyController extends GetxController
       // pharmacyService.pharmacy.phPhone = tel.text;
       // pharmacyService.pharmacy.ph_region = codePostal.text;
       // pharmacyService.pharmacy.ownerId = signInController.user.userId;
-      // var response = await pharmacyService.addPhar();
+      // var response = await pharmacyService.editPhar();
       // if (response.containsKey("success")) {
       //   if (response["success"] == 'true') {
       //     change(null, status: RxStatus.success());

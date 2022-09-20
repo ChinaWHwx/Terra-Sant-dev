@@ -7,7 +7,7 @@ import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class AllPharmacyController extends GetxController {
+class DemandeController extends GetxController {
   navigateToFavorite() {
     Get.toNamed("Routes.favorite");
   }

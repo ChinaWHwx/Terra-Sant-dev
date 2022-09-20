@@ -4,6 +4,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
+import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
@@ -121,11 +122,13 @@ class AvailabilityPharsForPhars extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             itemBuilder: (context, index) {
+              final availabilityPhars = list[index];
               return AvailabilityPharsForEditCard(
-                availabilityPhars: list[index],
-                // onTapPhone: (phone) {
-                //   debugPrint('phone: $phone');
-                // },
+                availabilityPhars: availabilityPhars,
+                onTapPencil: () {
+                  Get.toNamed(Routes.editAVLP,
+                      arguments: availabilityPhars); //这里是可以给下一个编辑页面传东西
+                },
               );
             },
             itemCount: list.length),
@@ -210,10 +213,14 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     required this.availabilityPhars,
+    this.onTapPencil, //这里加属性
+    this.onTapPoubelle,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final AvailabilityPhar availabilityPhars;
+  final VoidCallback? onTapPencil; //这里加属性
+  final VoidCallback? onTapPoubelle;
 
   @override
   Widget build(BuildContext context) {
@@ -250,6 +257,10 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
               ),
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
+                onTap: (b) {
+                  onTapPencil?.call();
+                  return Future.value(false);
+                },
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Icons.mode_edit,
@@ -259,6 +270,10 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
                 },
               ),
               LikeButton(
+                onTap: (b) {
+                  onTapPoubelle?.call();
+                  return Future.value(false);
+                },
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Icons.delete,

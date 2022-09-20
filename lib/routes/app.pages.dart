@@ -41,12 +41,15 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Now/detail_now_candidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/Details/Pass/detail_pass_candidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/dutyCandidate.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/rDVFixeCandidate.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Description/description.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/detail_future_recruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/editAVLP/editAVLP.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/dutyRecruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/rDVFixeRecru.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/Profile/modify/modify_profile.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/document/document.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/experience/experience.view.dart';
@@ -60,8 +63,8 @@ import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.view.
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/EditMyPharmacy/editMyPharmacy.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.view.dart';
-import 'package:flutter_application_1/modules/app/homepage/Search/allPharmacy.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/Search/allPharmacy.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Search/demande.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Search/demande.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
@@ -215,7 +218,7 @@ class AppPages {
     GetPage(
         name: Routes.recuAjouterPharmacieRoute,
         page: () => const RecuAjouterPharmacieView()),
-    GetPage(name: Routes.AllPharmacy, page: () => const AllPharmacyView()),
+    GetPage(name: Routes.demande, page: () => const DemandeView()),
     GetPage(name: Routes.homepagePhar, page: () => const HomepagePharView()),
     GetPage(
         name: Routes.candidateAvailability,
@@ -230,5 +233,10 @@ class AppPages {
         page: () => const RecruAvailabilityView()),
     GetPage(
         name: Routes.editMyPharmacy, page: () => const EditMyPharmacyView()),
+    GetPage(
+        name: Routes.rDVFixeCandidate,
+        page: () => const RDVFixeCandidateView()),
+    GetPage(name: Routes.rDVFixeRecru, page: () => const RDVFixeRecruView()),
+    GetPage(name: Routes.editAVLP, page: () => const EditAVLPView()),
   ];
 }

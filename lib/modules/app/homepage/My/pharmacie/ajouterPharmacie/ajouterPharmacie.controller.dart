@@ -33,6 +33,7 @@ class AjouterPharmacieController extends GetxController
   LoginService loginService = Get.find();
   SignInController signInController = Get.find();
   PharmacyService pharmacyService = Get.find();
+  var newMyPhar = Pharmacy();
 
   @override
   void onInit() {
@@ -82,21 +83,21 @@ class AjouterPharmacieController extends GetxController
     } else if (!GetUtils.isLengthEqualTo(tel.text, 9)) {
       errorMessage.value = '9 chiffres requis';
     } else {
-      // pharmacyService.pharmacy.phName = name.text;
-      // pharmacyService.pharmacy.phAddress = placeController.text;
-      // pharmacyService.pharmacy.phPhone = tel.text;
-      // pharmacyService.pharmacy.ph_region = codePostal.text;
-      // pharmacyService.pharmacy.ownerId = signInController.user.userId;
-      // var response = await pharmacyService.addPhar();
-      // if (response.containsKey("success")) {
-      //   if (response["success"] == 'true') {
-      //     change(null, status: RxStatus.success());
-      //     navigateToMyRecruiter();
-      //   }
-      // }
-      // if (response.containsKey('error')) {
-      //   errorMessage.value = response["error"];
-      // }
+      newMyPhar.phName = name.text;
+      newMyPhar.phAddress = placeController.text;
+      newMyPhar.phPhone = tel.text;
+      newMyPhar.ph_region = codePostal.text;
+      newMyPhar.ownerId = signInController.user.userId;
+      var response = await pharmacyService.addPhar(newMyPhar);
+      if (response.containsKey("success")) {
+        if (response["success"] == 'true') {
+          change(null, status: RxStatus.success());
+          navigateToMyRecruiter();
+        }
+      }
+      if (response.containsKey('error')) {
+        errorMessage.value = response["error"];
+      }
     }
   }
 

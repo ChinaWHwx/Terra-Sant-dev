@@ -4,6 +4,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
+import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
@@ -92,6 +93,7 @@ class Pharmacies extends StatelessWidget {
     //       itemCount: list.length),
     // );
     return GetBuilder<HomepagePharController>(builder: (logic) {
+      //这个是用来刷新页面的
       final list = logic.listMyPhar;
       return EasyRefresh(
         controller: logic.controller,
@@ -100,8 +102,13 @@ class Pharmacies extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             itemBuilder: (context, index) {
+              final pharmacy = list[index];
               return PharmaciesCard(
-                pharmacy: list[index],
+                pharmacy: pharmacy,
+                onTapPencil: () {
+                  Get.toNamed(Routes.editMyPharmacy,
+                      arguments: pharmacy); //这里是可以给下一个编辑页面传东西
+                },
                 // onTapPhone: (phone) {
                 //   debugPrint('phone: $phone');
                 // },
@@ -118,11 +125,16 @@ class PharmaciesCard extends StatelessWidget {
     Key? key,
     this.width = 140,
     this.aspectRetio = 1.02,
+    this.onTapPencil, //这里加属性
+    this.onTapPoubelle,
     required this.pharmacy,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final Pharmacy pharmacy;
+
+  final VoidCallback? onTapPencil; //这里加属性
+  final VoidCallback? onTapPoubelle;
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +201,10 @@ class PharmaciesCard extends StatelessWidget {
               // ),
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
+                onTap: (b) {
+                  onTapPencil?.call();
+                  return Future.value(false);
+                },
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Icons.mode_edit,
@@ -198,6 +214,10 @@ class PharmaciesCard extends StatelessWidget {
                 },
               ),
               LikeButton(
+                onTap: (b) {
+                  onTapPoubelle?.call();
+                  return Future.value(false);
+                },
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Icons.delete,
@@ -212,4 +232,8 @@ class PharmaciesCard extends StatelessWidget {
       ),
     );
   }
+}
+
+navigateToEditMyPharmacy() {
+  Get.toNamed(Routes.editMyPharmacy);
 }

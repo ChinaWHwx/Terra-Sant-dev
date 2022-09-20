@@ -10,5 +10,5 @@ class OfferRepository extends GetConnect {
     httpClient.baseUrl = 'http://51.178.83.92:5000';
   }
 
-  Future getInfos(body) => post("/", body);
+  Future getInfos() => get("/offers");
 }

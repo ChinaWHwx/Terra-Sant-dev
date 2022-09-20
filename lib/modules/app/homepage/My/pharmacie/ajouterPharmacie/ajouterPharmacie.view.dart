@@ -11,7 +11,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Déclaration'),
+          title: const Text('添加药店'),
           centerTitle: true,
         ),
         body: Card(
@@ -36,7 +36,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
                   decoration: const InputDecoration(
                       hintText: 'Search places with name'),
                 ),
-                Expanded(
+                Flexible(
                     child: controller.obx((state) => ListView.builder(
                         itemCount: controller.placesList.length,
                         itemBuilder: (context, index) {
@@ -54,7 +54,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
                           );
                         }))),
                 SizedBox(
-                  height: 20,
+                  height: 40,
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.tel,
@@ -63,7 +63,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 40,
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.nameResponsable,
@@ -72,7 +72,7 @@ class AjouterPharmacieView extends GetView<AjouterPharmacieController> {
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 40,
                   child: Expanded(
                     child: TextFormField(
                       controller: controller.codePostal,

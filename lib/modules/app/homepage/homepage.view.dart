@@ -49,8 +49,8 @@ class HomepageView extends GetView<HomepageController> {
           title: 'Acceuil',
         ),
         TabItem(
-          icon: Icons.list,
-          title: 'Explorer',
+          icon: Icons.mail,
+          title: 'Messege',
         ),
         TabItem(
           icon: Icons.event_available,

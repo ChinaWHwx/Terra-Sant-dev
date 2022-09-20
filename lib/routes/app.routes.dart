@@ -79,6 +79,10 @@ class Routes {
   static const addCandidateAvailability = '/addCandidateAvailability';
   static const recruAvailability = '/recruAvailability';
   static const editMyPharmacy = '/editMyPharmacy';
+  static const rDVFixeRecru = '/rDVFixeRecru';
+  static const rDVFixeCandidate = '/rDVFixeCandidate';
+  static const demande = '/demande';
+  static const editAVLP = '/editAVLP';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -158,4 +162,8 @@ class Routes {
   static const addCandidateAvailabilityRoute = addCandidateAvailability;
   static const recruAvailabilityRoute = recruAvailability;
   static const editMyPharmacyRoute = editMyPharmacy;
+  static const rDVFixeCandidateRoute = rDVFixeCandidate;
+  static const rDVFixeRecruRoute = rDVFixeRecru;
+  static const demandeRoute = demande;
+  static const editAVLPRoute = editAVLP;
 }

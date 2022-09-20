@@ -3,11 +3,13 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
+import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/models/ProductModel.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/services/offer.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,12 +22,14 @@ class HomepageController extends GetxController with StateMixin {
   }
 
   AvailabilityUserService availabilityUserService = Get.find();
+  OfferService offerService = Get.find();
 
   AvailabilityPharService availabilityPharService = Get.find();
 
   var signInController = Get.find<SignInController>();
-  List<AvailabilityPhar> _list1 = [];
-  List<AvailabilityUser> list2 = [];
+  List<AvailabilityPhar> _list1 = []; //全部avlP
+  List<AvailabilityUser> list2 = []; //本用户的所有avlU
+  List<Offer> listAllOffer = [];
 
   EasyRefreshController _controller =
       EasyRefreshController(controlFinishRefresh: true);
@@ -45,6 +49,18 @@ class HomepageController extends GetxController with StateMixin {
     return newList;
   }
 
+  List<Offer> getMyOfferUser() {
+    final newList = <Offer>[];
+    for (final offer in listAllOffer) {
+      if (list2
+          .where((element) => element.avlUId == offer.avlU_id)
+          .isNotEmpty) {
+        newList.add(offer);
+      }
+    }
+    return newList;
+  }
+
   // List<AvailabilityUser> get list2 => _list2
   //     .where((element) => element.user_id == signInController.user.userId)
   //     .toList();
@@ -53,6 +69,7 @@ class HomepageController extends GetxController with StateMixin {
     super.onInit();
     debugPrint('');
     ShowPharAvl();
+    ShowAllOfferUser();
   }
 
   navigate(int i) {
@@ -62,7 +79,7 @@ class HomepageController extends GetxController with StateMixin {
         break;
       case 1:
         //Get.toNamed(Routes.search);
-        Get.toNamed(Routes.AllPharmacy);
+        Get.toNamed(Routes.demande);
 
         break;
       case 2:
@@ -110,6 +127,7 @@ class HomepageController extends GetxController with StateMixin {
   Future onRefresh() async {
     await ShowPharAvl();
     await ShowMyAvl_User();
+    await ShowAllOfferUser();
   }
 
   manageResponse1(var response) {
@@ -150,6 +168,32 @@ class HomepageController extends GetxController with StateMixin {
           .map((e) => AvailabilityUser.fromJson(e))
           .where((element) => element.user_id == signInController.user.userId)
           .toList();
+      change(null, status: RxStatus.success());
+      update();
+      _controller.finishRefresh();
+    }
+  }
+
+  Future ShowAllOfferUser() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await offerService.getInfos();
+      manageResponse3(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse3(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+      _controller.finishRefresh();
+    } else {
+      listAllOffer = (response as List).map((e) => Offer.fromJson(e)).toList();
       change(null, status: RxStatus.success());
       update();
       _controller.finishRefresh();

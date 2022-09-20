@@ -3,6 +3,7 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
+import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/models/ProductModel.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/de
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/services/offer.service.dart';
 import 'package:flutter_application_1/services/pharmacy.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
@@ -22,9 +24,12 @@ class HomepagePharController extends GetxController with StateMixin {
   AvailabilityUserService availabilityUserService = Get.find();
   AvailabilityPharService availabilityPharService = Get.find();
   PharmacyService pharmacyService = Get.find();
+  OfferService offerService = Get.find();
+
   List<AvailabilityUser> _list1 = [];
   List<AvailabilityPhar> list2 = [];
   List<Pharmacy> listMyPhar = [];
+  List<Offer> listAllOffer = [];
 
   EasyRefreshController _controller =
       EasyRefreshController(controlFinishRefresh: true);
@@ -43,12 +48,33 @@ class HomepagePharController extends GetxController with StateMixin {
     return newList;
   }
 
+  List<Offer> getMyOfferPhar() {
+    final newList = <Offer>[];
+    for (final offer in listAllOffer) {
+      if (list2
+          .where((element) => element.avlP_id == offer.avlP_id)
+          .isNotEmpty) {
+        newList.add(offer);
+      }
+    }
+    return newList;
+  }
+
   @override
   void onInit() {
     super.onInit();
     debugPrint('');
     ShowUserAvl();
     ShowMyAvl_Phar();
+    ShowMyPhars();
+    ShowAllOfferPhar();
+  }
+
+  Future onRefresh() async {
+    await ShowUserAvl();
+    await ShowMyAvl_Phar();
+    await ShowMyPhars();
+    await ShowAllOfferPhar();
   }
 
   navigateToFavorite() {
@@ -83,10 +109,10 @@ class HomepagePharController extends GetxController with StateMixin {
         {
           if (signInController.user.userType == "candidat" ||
               signInController.user.userType == "etudiant") {
-            Get.toNamed(Routes.dutyCandidate);
+            Get.toNamed(Routes.rDVFixeRecru);
           }
           if (signInController.user.userType == "recruteur") {
-            Get.toNamed(Routes.dutyRecruiter);
+            Get.toNamed(Routes.rDVFixeRecruRoute);
           }
         }
         break;
@@ -105,12 +131,6 @@ class HomepagePharController extends GetxController with StateMixin {
       HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
       change(null, status: RxStatus.error(e.toString()));
     }
-  }
-
-  Future onRefresh() async {
-    await ShowUserAvl();
-    await ShowMyAvl_Phar();
-    await ShowMyPhars();
   }
 
   manageResponse1(var response) {
@@ -180,6 +200,33 @@ class HomepagePharController extends GetxController with StateMixin {
           .map((e) => Pharmacy.fromJson(e))
           .where((element) => element.ownerId == signInController.user.userId)
           .toList();
+      change(null, status: RxStatus.success());
+      update();
+      _controller.finishRefresh();
+    }
+  }
+
+  Future ShowAllOfferPhar() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await offerService.getInfos();
+      manageResponse4(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse4(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+      _controller.finishRefresh();
+    } else {
+      listAllOffer = (response as List).map((e) => Offer.fromJson(e)).toList();
+
       change(null, status: RxStatus.success());
       update();
       _controller.finishRefresh();
