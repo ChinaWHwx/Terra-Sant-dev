@@ -105,6 +105,7 @@ class OfferForUsers extends StatelessWidget {
             itemBuilder: (context, index) {
               return OfferForUserCard(
                 offer: list[index],
+
                 // onTapPhone: (phone) {
                 //   debugPrint('phone: $phone');
                 // },

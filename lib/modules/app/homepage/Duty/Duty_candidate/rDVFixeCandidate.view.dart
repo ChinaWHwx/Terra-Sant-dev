@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/explorer_pharmacie.model.dart';
+import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_candidate/rDVfixeCandidate.controller.dart';
@@ -24,21 +25,8 @@ class RDVFixeCandidateView extends GetView<RDVFixeCandidateController> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // controller.ShowMyPhars();
-          controller.navigateAjouter();
-        },
-        child: const Icon(Icons.add),
-      ),
-
-      // body: Obx(() => ListView.builder(
-      //         // itemCount: controller.addCard.value,
-      //         itemBuilder: (context, index) {
-      //       return cardslist(index);
-      //     })),
       body: SafeArea(
-        child: Pharmacies(),
+        child: OfferForUsers(),
       ),
     );
   }

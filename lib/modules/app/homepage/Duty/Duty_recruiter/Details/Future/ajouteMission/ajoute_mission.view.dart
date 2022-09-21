@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/ajouteMission/ajoute_mission.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
@@ -86,33 +87,73 @@ class AjouterMissionView extends GetView<AjouterMissionController> {
                 const SizedBox(
                   height: 20,
                 ),
-                TextField(
-                  controller: controller.dateEditingController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Date:DD/MM/AAAA',
-                  ),
+                const Text(
+                  "Choissiez la date de début",
+                  style: TextStyle(color: Colors.black),
                 ),
+                TextButton(
+                  onPressed: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime.now(),
+                        maxTime: DateTime(2030, 9, 10), onChanged: (date) {
+                      // ignore: avoid_print
+                      print('change $date');
+                    }, onConfirm: (date) {
+                      // ignore: avoid_print
+                      controller.dateController = date;
+                    }, currentTime: DateTime.now(), locale: LocaleType.fr);
+                  },
+                  child: const Text('Calender'),
+                ),
+                const Text(
+                  "Choissiez la période de la journée:",
+                ),
+                Obx(() => DropdownButton(
+                      iconSize: 24,
+                      isExpanded: true,
+                      onChanged: (newValue) {
+                        controller.setSelected(3, newValue);
+                      },
+                      value: controller.selectedPeriodeJournee.value,
+                      items: controller.dropdownTextPeriodeJournee
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    )),
                 const SizedBox(
                   height: 20,
                 ),
-                TextField(
-                  controller: controller.tempsDebutEditingController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Temps de début: HH:MM en 24H',
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  controller: controller.tempsFinEditingController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Temps de fin: HH:MM en 24H',
-                  ),
-                ),
+                // TextField(
+                //   controller: controller.dateEditingController,
+                //   decoration: const InputDecoration(
+                //     border: OutlineInputBorder(),
+                //     labelText: 'Date:DD/MM/AAAA',
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // TextField(
+                //   controller: controller.tempsDebutEditingController,
+                //   decoration: const InputDecoration(
+                //     border: OutlineInputBorder(),
+                //     labelText: 'Temps de début: HH:MM en 24H',
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // TextField(
+                //   controller: controller.tempsFinEditingController,
+                //   decoration: const InputDecoration(
+                //     border: OutlineInputBorder(),
+                //     labelText: 'Temps de fin: HH:MM en 24H',
+                //   ),
+                // ),
                 Obx(() => controller.errorMessage.isNotEmpty
                     ? Text(
                         controller.errorMessage.value,

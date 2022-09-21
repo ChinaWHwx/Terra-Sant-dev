@@ -74,7 +74,7 @@ class AvailabilityPharsForUsers extends StatelessWidget {
     // );
     return GetBuilder<HomepageController>(builder: (logic) {
       final list = logic.getList1();
-      debugPrint('list: ${list.length}');
+      //debugPrint('list: ${list.length}');
       return EasyRefresh(
         controller: logic.controller,
         onRefresh: logic.onRefresh,
@@ -82,8 +82,9 @@ class AvailabilityPharsForUsers extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             itemBuilder: (context, index) {
+              final availabilityPhars = list[index];
               return AvailabilityPharsForShowCard(
-                availabilityPhars: list[index],
+                availabilityPhars: availabilityPhars,
                 onTapPhone: (phone) {
                   debugPrint('phone: $phone');
                 },

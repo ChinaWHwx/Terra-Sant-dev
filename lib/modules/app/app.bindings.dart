@@ -49,7 +49,6 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/dutyRecruiter.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/rDVfixeRecru.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/my_recruiter.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/EditMyPharmacy/editMyPharmacy.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/modify/modify_profile.controller.dart';

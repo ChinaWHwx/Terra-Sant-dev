@@ -30,7 +30,7 @@ class CandidateAvailabilityView
           ),
           FloatingActionButton(
             onPressed: () {
-              //controller.navigateToAddCandidateAvailability();
+              controller.navigateToAddCandidateAvailability();
 
               print(controller.signInController.user.userId);
             },

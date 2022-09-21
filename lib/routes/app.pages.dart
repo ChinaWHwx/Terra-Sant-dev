@@ -48,6 +48,7 @@ import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/D
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/editAVLP/editAVLP.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Now/detail_now_recruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Pass/detail_pass_recruiter.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/editAVLU/editAVLU.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/dutyRecruiter.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/rDVFixeRecru.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/Profile/modify/modify_profile.view.dart';
@@ -238,5 +239,6 @@ class AppPages {
         page: () => const RDVFixeCandidateView()),
     GetPage(name: Routes.rDVFixeRecru, page: () => const RDVFixeRecruView()),
     GetPage(name: Routes.editAVLP, page: () => const EditAVLPView()),
+    GetPage(name: Routes.editAVLU, page: () => const EditAVLUView()),
   ];
 }

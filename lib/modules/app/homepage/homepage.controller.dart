@@ -3,12 +3,14 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
+import 'package:flutter_application_1/models/demande.model.dart';
 import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/models/ProductModel.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/services/demande.service.dart';
 import 'package:flutter_application_1/services/offer.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
@@ -17,19 +19,16 @@ import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 
 class HomepageController extends GetxController with StateMixin {
-  navigateToFavorite() {
-    Get.toNamed("Routes.favorite");
-  }
-
   AvailabilityUserService availabilityUserService = Get.find();
   OfferService offerService = Get.find();
-
+  DemandeService demandeService = Get.find();
   AvailabilityPharService availabilityPharService = Get.find();
 
   var signInController = Get.find<SignInController>();
   List<AvailabilityPhar> _list1 = []; //全部avlP
   List<AvailabilityUser> list2 = []; //本用户的所有avlU
   List<Offer> listAllOffer = [];
+  List<Demande> listAllDemande = [];
 
   EasyRefreshController _controller =
       EasyRefreshController(controlFinishRefresh: true);
@@ -61,21 +60,34 @@ class HomepageController extends GetxController with StateMixin {
     return newList;
   }
 
+  getMyDemandeUser() {
+    final newList = <Demande>[];
+    for (final demande in listAllDemande) {
+      if (list2
+          .where((element) => element.avlUId == demande.avlU_id)
+          .isNotEmpty) {
+        newList.add(demande);
+      }
+    }
+    return newList;
+  }
+
   // List<AvailabilityUser> get list2 => _list2
   //     .where((element) => element.user_id == signInController.user.userId)
   //     .toList();
   @override
   void onInit() {
     super.onInit();
-    debugPrint('');
+    // debugPrint('');
     ShowPharAvl();
     ShowAllOfferUser();
+    ShowAllDemande();
   }
 
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.candidateCalendar);
+        Get.toNamed(Routes.infos);
         break;
       case 1:
         //Get.toNamed(Routes.search);
@@ -100,10 +112,10 @@ class HomepageController extends GetxController with StateMixin {
         {
           if (signInController.user.userType == "candidat" ||
               signInController.user.userType == "etudiant") {
-            Get.toNamed(Routes.dutyCandidate);
+            Get.toNamed(Routes.rDVFixeCandidate);
           }
           if (signInController.user.userType == "recruteur") {
-            Get.toNamed(Routes.dutyRecruiter);
+            Get.toNamed(Routes.rDVFixeCandidate);
           }
         }
         break;
@@ -128,6 +140,7 @@ class HomepageController extends GetxController with StateMixin {
     await ShowPharAvl();
     await ShowMyAvl_User();
     await ShowAllOfferUser();
+    await ShowAllDemande();
   }
 
   manageResponse1(var response) {
@@ -194,6 +207,33 @@ class HomepageController extends GetxController with StateMixin {
       _controller.finishRefresh();
     } else {
       listAllOffer = (response as List).map((e) => Offer.fromJson(e)).toList();
+      change(null, status: RxStatus.success());
+      update();
+      _controller.finishRefresh();
+    }
+  }
+
+  Future ShowAllDemande() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await demandeService.getInfos();
+      manageResponse4(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse4(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+      _controller.finishRefresh();
+    } else {
+      listAllDemande =
+          (response as List).map((e) => Demande.fromJson(e)).toList();
       change(null, status: RxStatus.success());
       update();
       _controller.finishRefresh();

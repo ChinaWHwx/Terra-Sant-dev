@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
+import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
@@ -68,10 +70,11 @@ class AvailabilityUsersForPhars extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             itemBuilder: (context, index) {
+              final availabilityUsers = list[index];
               return AvailabilityUsersForShowCard(
                 availabilityUsers: list[index],
                 onTapPhone: (phone) {
-                  debugPrint('phone: $phone');
+                  debugPrint('AVLU_id: $phone');
                 },
               );
             },
@@ -86,19 +89,6 @@ class AvailabilityUsersForUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final list = Get.find<HomepageController>().list2;
-    // SizeConfig().init(context);
-    // return Padding(
-    //   padding:
-    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-    //   child: ListView.builder(
-    //       itemBuilder: (context, index) {
-    //         return AvailabilityUsersForEditCard(
-    //           availabilityUsers: list[index],
-    //         );
-    //       },
-    //       itemCount: list.length),
-    // );
     SizeConfig().init(context);
     return GetBuilder<HomepageController>(builder: (logic) {
       final list = logic.list2;
@@ -110,11 +100,13 @@ class AvailabilityUsersForUsers extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             itemBuilder: (context, index) {
+              final availabilityUsers = list[index];
               return AvailabilityUsersForEditCard(
                 availabilityUsers: list[index],
-                // onTapPhone: (phone) {
-                //   debugPrint('phone: $phone');
-                // },
+                onTapPencil: () {
+                  Get.toNamed(Routes.editAVLU,
+                      arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+                },
               );
             },
             itemCount: list.length),
@@ -135,8 +127,8 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
 
   final double width, aspectRetio;
   final AvailabilityUser availabilityUsers;
-  final ValueChanged<int>? onTapPencil;
-  final ValueChanged<int>? onTapPoubelle;
+  final VoidCallback? onTapPencil;
+  final VoidCallback? onTapPoubelle;
 
   @override
   Widget build(BuildContext context) {
@@ -174,8 +166,7 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
                 onTap: (b) {
-                  onTapPencil?.call(availabilityUsers.avlUId ?? 0);
-
+                  onTapPencil?.call();
                   return Future.value(false);
                 },
                 likeBuilder: (bool isLiked) {
@@ -188,8 +179,8 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
               ),
               LikeButton(
                 onTap: (b) {
-                  onTapPoubelle?.call(availabilityUsers.avlUId ?? 0);
-                  Get.toNamed("Routes.editMyPharmacy");
+                  onTapPoubelle?.call();
+                  // Get.toNamed("Routes.editMyPharmacy");
                   return Future.value(false);
                 },
                 likeBuilder: (bool isLiked) {
@@ -219,7 +210,7 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
 
   final double width, aspectRetio;
   final AvailabilityUser availabilityUsers;
-  final ValueChanged<String>? onTapPhone;
+  final ValueChanged<int>? onTapPhone;
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +249,48 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
               LikeButton(
                 countPostion: CountPostion.left,
                 onTap: (b) {
-                  onTapPhone?.call(availabilityUsers.region_candidate ?? '');
+                  onTapPhone?.call(availabilityUsers.avlUId ?? 0);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text('Confirmation'),
+                            content: Text(('你用你的哪个时间段联系他？')),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: new Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              FlatButton(
+                                child: Text("Oui"),
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Text('Confirmation'),
+                                            content: Text(('如果她接受，我们会给你发合同')),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                child: new Text("Cancel"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              FlatButton(
+                                                child: Text("ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          ));
+
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ));
 
                   return Future.value(false);
                 },

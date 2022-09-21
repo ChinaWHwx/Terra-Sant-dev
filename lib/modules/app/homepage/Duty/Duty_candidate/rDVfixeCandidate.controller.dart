@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/explorer_pharmacie.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/pharmacy.service.dart';
@@ -17,27 +18,15 @@ class RDVFixeCandidateController extends GetxController with StateMixin {
   Rx<int> addCard = 1.obs;
 
   SignInController signInController = Get.find();
-  HomepagePharController homepagePharController = Get.find();
+  HomepageController homepageController = Get.find();
 
-  // void incrementcard() {
-  //   if (addCard.value >= 7) {
-  //     return;
-  //   }
-
-  //   addCard.value++;
-  // }
   Future onRefresh() async {
-    homepagePharController.onRefresh();
+    homepageController.onRefresh();
   }
 
   @override
   void onInit() {
     super.onInit();
-    homepagePharController.ShowMyPhars();
-  }
-
-  navigateAjouter() {
-    Get.toNamed(Routes.ajouterPharmacie);
   }
 
   navigateToHome() {

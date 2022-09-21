@@ -83,6 +83,7 @@ class Routes {
   static const rDVFixeCandidate = '/rDVFixeCandidate';
   static const demande = '/demande';
   static const editAVLP = '/editAVLP';
+  static const editAVLU = '/editAVLU';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -166,4 +167,5 @@ class Routes {
   static const rDVFixeRecruRoute = rDVFixeRecru;
   static const demandeRoute = demande;
   static const editAVLPRoute = editAVLP;
+  static const editAVLURoute = editAVLU;
 }

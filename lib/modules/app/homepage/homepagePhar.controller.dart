@@ -86,7 +86,7 @@ class HomepagePharController extends GetxController with StateMixin {
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.pharmacieInfo);
+        Get.toNamed(Routes.infoRoute);
         break;
       case 1:
         //Get.toNamed(Routes.search);

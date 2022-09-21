@@ -19,14 +19,14 @@ class HomepageView extends GetView<HomepageController> {
         title: const Text("匹配到的所有药房"),
         //centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.ShowPharAvl();
-          controller.ShowMyAvl_User();
-          // controller.navigateAjouter();
-        },
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     controller.ShowPharAvl();
+      //     controller.ShowMyAvl_User();
+      //     // controller.navigateAjouter();
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
       body: SafeArea(
         // child: PlaneIndicator(
         //   child: SingleChildScrollView(

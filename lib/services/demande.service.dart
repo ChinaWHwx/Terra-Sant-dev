@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 class DemandeService {
   DemandeRepository demandeRepo = Get.find();
 
-  Future getInfos(body) async {
+  Future getInfos() async {
     try {
-      var response = await demandeRepo.getInfos(body);
+      var response = await demandeRepo.getInfos();
       return response.body;
     } catch (e) {
       return Future.error(e.toString());
