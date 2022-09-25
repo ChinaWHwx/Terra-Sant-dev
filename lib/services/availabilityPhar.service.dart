@@ -14,6 +14,25 @@ class AvailabilityPharService {
     }
   }
 
+  Future updateAvl(id, body) async {
+    try {
+      var response = await availabilityPharRepo.updateAvl(id, body);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future deleteAvl(id) async {
+    try {
+      var response = await availabilityPharRepo.deleteAvl(id);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   Future getInfos() async {
     try {
       var response = await availabilityPharRepo.getInfos();

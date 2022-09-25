@@ -3,6 +3,7 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
+import 'package:flutter_application_1/models/demande.model.dart';
 import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
@@ -26,7 +27,7 @@ class HomepagePharController extends GetxController with StateMixin {
   PharmacyService pharmacyService = Get.find();
   OfferService offerService = Get.find();
 
-  List<AvailabilityUser> _list1 = [];
+  List<AvailabilityUser> _list1 = []; //所有的avlU
   List<AvailabilityPhar> list2 = [];
   List<Pharmacy> listMyPhar = [];
   List<Offer> listAllOffer = [];
@@ -230,6 +231,37 @@ class HomepagePharController extends GetxController with StateMixin {
       change(null, status: RxStatus.success());
       update();
       _controller.finishRefresh();
+    }
+  }
+
+  final selectedMyAVLP = 0.obs;
+  void setSelected(n, value) {
+    if (n == 1) {
+      selectedMyAVLP.value = value;
+    }
+  }
+
+  var demande = Demande();
+  List<int> get dropdownTextForMyAVLP =>
+      list2.map((e) => e.avlP_id ?? 0).toList()..add(0);
+  Rx<String> errorMessage = "".obs;
+  sendDemande(avlU_id, user_avlU_id) async {
+    if (selectedMyAVLP.value.toString() == '0') {
+      errorMessage.value = "Champs obligatoire";
+    } else {
+      demande.avlP_id = selectedMyAVLP.value;
+      demande.avlU_id = avlU_id;
+      demande.user_avlU_id = user_avlU_id;
+      var response = await demandeService.sendDemande(demande.toJson());
+      if (response.containsKey("success")) {
+        if (response["success"] == 'true') {
+          change(null, status: RxStatus.success());
+          onRefresh();
+        }
+      }
+      if (response.containsKey('error')) {
+        errorMessage.value = response["error"];
+      }
     }
   }
 }

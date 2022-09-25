@@ -18,6 +18,7 @@ class AjouterMissionView extends GetView<AjouterMissionController> {
           leading: BackButton(
             color: Colors.white,
             onPressed: () {
+              controller.homepagePharController.onRefresh();
               controller.navigateToHome();
             },
           ),
@@ -102,7 +103,9 @@ class AjouterMissionView extends GetView<AjouterMissionController> {
                     }, onConfirm: (date) {
                       // ignore: avoid_print
                       controller.dateController = date;
-                    }, currentTime: DateTime.now(), locale: LocaleType.fr);
+                    },
+                        currentTime: controller.dateController,
+                        locale: LocaleType.fr);
                   },
                   child: const Text('Calender'),
                 ),

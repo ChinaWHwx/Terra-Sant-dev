@@ -19,10 +19,10 @@ class NetWorkErrorView extends GetView<NetWorkErrorController> {
           Positioned(
             bottom: 100,
             left: 30,
-            child: FlatButton(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)),
+            child: TextButton(
+              // color: Colors.white,
+              // shape: RoundedRectangleBorder(
+              //     borderRadius: BorderRadius.circular(50)),
               onPressed: () {},
               child: Text("Retry".toUpperCase()),
             ),

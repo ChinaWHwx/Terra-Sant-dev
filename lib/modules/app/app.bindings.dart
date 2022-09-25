@@ -155,7 +155,6 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => HomepagePharController(), fenix: true);
     Get.lazyPut(() => DemandeController(), fenix: true);
     Get.lazyPut(() => CandidateAvailabilityController(), fenix: true);
-    Get.lazyPut(() => AddCandidateAvailabilityController(), fenix: true);
     Get.lazyPut(() => RecuAjouterPharmacieController(), fenix: true);
     Get.lazyPut(() => RecruAvailabilityController(), fenix: true);
     Get.lazyPut(() => RDVFixeCandidateController(), fenix: true);

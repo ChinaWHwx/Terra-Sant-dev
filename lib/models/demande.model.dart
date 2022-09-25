@@ -8,35 +8,53 @@ import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 
+HomepageController homepageController = Get.find();
+
 class Demande {
   Demande({
     this.demande_id,
     this.avlP_id,
     this.avlU_id,
     this.demande_time,
-    this.treated,
+    this.readed,
+    this.user_avlU_id,
+    this.accept,
+    this.refuse,
+    this.newOrNot,
   });
 
   int? demande_id;
   int? avlP_id;
   int? avlU_id;
   String? demande_time;
-  String? treated;
+  String? readed;
+  String? accept;
+  String? refuse;
+  String? newOrNot;
+  int? user_avlU_id;
 
   factory Demande.fromJson(Map<String, dynamic> json) => Demande(
-        demande_id: json["offer_id"],
-        demande_time: json["offer_title"],
-        treated: json["offer_description"],
+        demande_id: json["demande_id"],
+        demande_time: json["demande_time"],
+        readed: json["readed"],
+        newOrNot: json["newOrNot"],
         avlP_id: json["avlP_id"],
         avlU_id: json["avlU_id"],
+        user_avlU_id: json["user_avlU_id"],
+        accept: json["accept"],
+        refuse: json["refuse"],
       );
 
   Map<String, dynamic> toJson() => {
         "demande_id": demande_id,
         "demande_time": demande_time,
-        "treated": treated,
         "avlP_id": avlP_id,
         "avlU_id": avlU_id,
+        "user_avlU_id": user_avlU_id,
+        "newOrNot": newOrNot,
+        "readed": readed,
+        "accept": accept,
+        "refuse": refuse,
       };
 
   static List<Demande> DemandeFromJson(String str) =>
@@ -120,9 +138,11 @@ class DemandeForUserCard extends StatelessWidget {
 
   final double width, aspectRetio;
   final Demande demande;
-  final ValueChanged<String>? onTapPhone;
+  final ValueChanged<int>? onTapPhone;
   final VoidCallback? onTapPencil; //这里加属性
   final VoidCallback? onTapPoubelle;
+
+  // var newMessage = 'YES'.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +158,32 @@ class DemandeForUserCard extends StatelessWidget {
               const SizedBox(
                 width: 400,
               ),
+              // Positioned(
+              //   right: 0,
+              //   top: 0,
+              //   child: Obx(() {
+              //     return Visibility(
+              //       visible: newMessage.value == 'YES',
+              //       child: Transform.translate(
+              //         offset: const Offset(150, -60),
+              //         child: Container(
+              //           padding: const EdgeInsets.all(2),
+              //           decoration: const BoxDecoration(
+              //             shape: BoxShape.circle,
+              //             color: Colors.red,
+              //           ),
+              //           child: Text(
+              //             '${newMessage}',
+              //             style: const TextStyle(
+              //               fontSize: 10,
+              //               color: Colors.white,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     );
+              //   }),
+              // ),
               SizedBox(height: getProportionateScreenWidth(30)),
               Text(
                 "offer_description: ${demande.avlP_id}",
@@ -146,9 +192,68 @@ class DemandeForUserCard extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               LikeButton(
-                onTap: (b) {
-                  onTapPencil?.call();
-                  return Future.value(false);
+                countPostion: CountPostion.left,
+                onTap: (isLiked) {
+                  if (isLiked) {
+                    return Future.value(null);
+                  }
+                  onTapPhone?.call(demande.avlP_id ?? 0);
+                  final avlP = homepageController.list1.firstWhere(
+                      (element) => element.avlP_id == demande.avlP_id);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text('详情'),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    "详情:",
+                                  ),
+                                  Text(
+                                    "写avlP,phar更多信息: ${avlP.status_needed}",
+                                  ),
+                                ]),
+                            actions: <Widget>[
+                              TextButton(
+                                child: new Text("再考虑一下"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("接受"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  //发送邮件给terra 说接受这个请求。
+                                  //accept字段设为Yes
+                                  //不能再删除了
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Text('Confirmation'),
+                                            content: Text(('我们会给你发合同')),
+                                            actions: <Widget>[
+                                              // TextButton(
+                                              //   child: new Text("Cancel"),
+                                              //   onPressed: () {
+                                              //     Navigator.of(context).pop();
+                                              //   },
+                                              // ),
+                                              TextButton(
+                                                child: Text("ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          ));
+                                },
+                              ),
+                            ],
+                          ));
+
+                  return Future.value(!isLiked);
                 },
                 likeBuilder: (bool isLiked) {
                   return Icon(
@@ -159,9 +264,45 @@ class DemandeForUserCard extends StatelessWidget {
                 },
               ),
               LikeButton(
-                onTap: (b) {
-                  onTapPoubelle?.call();
-                  return Future.value(false);
+                countPostion: CountPostion.left,
+                onTap: (isLiked) {
+                  if (isLiked) {
+                    return Future.value(null);
+                  }
+                  onTapPhone?.call(demande.avlP_id ?? 0);
+                  final avlP = homepageController.list1.firstWhere(
+                      (element) => element.avlP_id == demande.avlP_id);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text('拒绝并不再显示？？？'),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "删除此条消息",
+                                  ),
+                                ]),
+                            actions: <Widget>[
+                              TextButton(
+                                child: new Text("再考虑一下"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("确认删除"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  //发送邮件给本avlP对应的邮箱 说拒绝这个请求。
+                                  //发邮件给terra说拒绝了
+                                  //refuse字段设为yes
+                                },
+                              ),
+                            ],
+                          ));
+
+                  return Future.value(!isLiked);
                 },
                 likeBuilder: (bool isLiked) {
                   return Icon(

@@ -29,10 +29,10 @@ class GpsAccessView extends GetView<GpsAccessController> {
                   ),
                 ],
               ),
-              child: FlatButton(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+              child: TextButton(
+                // color: Colors.white,
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(50)),
                 onPressed: () {},
                 child: Text("Refresh".toUpperCase()),
               ),

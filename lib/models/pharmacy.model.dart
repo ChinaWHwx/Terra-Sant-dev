@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/pharmacy.service.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
@@ -12,6 +13,8 @@ import 'package:like_button/like_button.dart';
 Pharmacy pharmacyFromJson(String str) => Pharmacy.fromJson(json.decode(str));
 
 String pharmacyToJson(Pharmacy data) => json.encode(data.toJson());
+PharmacyService pharmacyService = Get.find();
+HomepagePharController homepagePharController = Get.find();
 
 class Pharmacy {
   Pharmacy({
@@ -79,19 +82,6 @@ class Pharmacies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final list = Get.find<HomepagePharController>().listMyPhar;
-    // SizeConfig().init(context);
-    // return Padding(
-    //   padding:
-    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-    //   child: ListView.builder(
-    //       itemBuilder: (context, index) {
-    //         return PharmaciesCard(
-    //           pharmacy: list[index],
-    //         );
-    //       },
-    //       itemCount: list.length),
-    // );
     return GetBuilder<HomepagePharController>(builder: (logic) {
       //这个是用来刷新页面的
       final list = logic.listMyPhar;
@@ -109,7 +99,7 @@ class Pharmacies extends StatelessWidget {
                   Get.toNamed(Routes.editMyPharmacy,
                       arguments: pharmacy); //这里是可以给下一个编辑页面传东西
                 },
-                // onTapPhone: (phone) {
+                // onTapPoubelle: (phone) {
                 //   debugPrint('phone: $phone');
                 // },
               );
@@ -214,9 +204,59 @@ class PharmaciesCard extends StatelessWidget {
                 },
               ),
               LikeButton(
-                onTap: (b) {
-                  onTapPoubelle?.call();
-                  return Future.value(false);
+                countPostion: CountPostion.left,
+                onTap: (isLiked) {
+                  if (isLiked) {
+                    return Future.value(null);
+                  }
+                  //onTapPhone?.call(availabilityUsers.avlUId ?? 0);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text('Confirmation'),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [Text(('确认删除吗'))]),
+                            actions: <Widget>[
+                              TextButton(
+                                child: new Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Oui"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  pharmacyService.deletePhar(pharmacy.phId);
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Text('Confirmation'),
+                                            content: Text(('已经删除这个药店了')),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: new Text("Cancel"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text("ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                  homepagePharController
+                                                      .onRefresh();
+                                                },
+                                              ),
+                                            ],
+                                          ));
+                                },
+                              ),
+                            ],
+                          ));
+
+                  return Future.value(!isLiked);
                 },
                 likeBuilder: (bool isLiked) {
                   return Icon(

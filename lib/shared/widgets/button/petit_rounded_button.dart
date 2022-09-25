@@ -27,7 +27,7 @@ class PetitRoundedButton extends StatelessWidget {
     );
   }
 
-  //Used:ElevatedButton as FlatButton is deprecated.
+  //Used:ElevatedButton as TextButton is deprecated.
   //Here we have to apply customizations to Button by inheriting the styleFrom
 
   Widget newElevatedButton() {

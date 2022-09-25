@@ -17,39 +17,48 @@ class HomepageView extends GetView<HomepageController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("匹配到的所有药房"),
-        //centerTitle: true,
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     controller.ShowPharAvl();
-      //     controller.ShowMyAvl_User();
-      //     // controller.navigateAjouter();
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
       body: SafeArea(
-        // child: PlaneIndicator(
-        //   child: SingleChildScrollView(
-        //     child: Column(
-        //       children: [
-
-        //         SizedBox(height: getProportionateScreenWidth(30)),
-        //         const NewsBanner(),
-
-        //       ],
-        //     ),
-        //   ),
-        // ),
         child: AvailabilityPharsForUsers(),
       ),
       drawer: NavigationDrawer(),
-      bottomNavigationBar: ConvexAppBar(items: const [
+      bottomNavigationBar: ConvexAppBar(items: [
         TabItem(
           icon: Icons.notifications,
           title: 'Acceuil',
         ),
         TabItem(
-          icon: Icons.mail,
+          icon: Stack(
+            children: [
+              const Icon(Icons.mail, color: Colors.white),
+              Positioned(
+                right: 0,
+                top: 0,
+                child: Obx(() {
+                  return Visibility(
+                    visible: controller.unReadMessage.value != 0,
+                    child: Transform.translate(
+                      offset: const Offset(5, -5),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                        ),
+                        child: Text(
+                          '${controller.unReadMessage}',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              )
+            ],
+          ),
           title: 'Messege',
         ),
         TabItem(

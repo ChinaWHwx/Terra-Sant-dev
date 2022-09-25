@@ -68,14 +68,14 @@ class EditMyPharmacyView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 50,
-                        child: Expanded(
-                          child: TextFormField(
-                            controller: controller.nameResponsable,
-                            decoration:
-                                const InputDecoration(hintText: '负责人名字:'),
-                          ),
-                        ),
+                        height: 5,
+                        // child: Expanded(
+                        //   child: TextFormField(
+                        //     controller: controller.nameResponsable,
+                        //     decoration:
+                        //         const InputDecoration(hintText: '负责人名字:'),
+                        //   ),
+                        // ),
                       ),
                       SizedBox(
                         height: 50,

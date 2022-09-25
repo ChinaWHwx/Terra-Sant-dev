@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/Future/editAVLP/editAVLP.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/EditMyPharmacy/editMyPharmacy.controller.dart';
-import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
-import 'package:geocoding/geocoding.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
 //本页面已经改为 局部controller 像这样改完要在appbindings里面删除
@@ -86,32 +84,44 @@ class EditAVLPView extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      TextField(
-                        controller: controller.dateEditingController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Date:DD/MM/AAAA',
-                        ),
+                      TextButton(
+                        onPressed: () {
+                          DatePicker.showDatePicker(context,
+                              showTitleActions: true,
+                              minTime: DateTime.now(),
+                              maxTime: DateTime(2030, 9, 10),
+                              onChanged: (date) {
+                            // ignore: avoid_print
+                            print('change $date');
+                          }, onConfirm: (date) {
+                            // ignore: avoid_print
+                            controller.dateController = date;
+                          },
+                              currentTime: controller.dateController,
+                              locale: LocaleType.fr);
+                        },
+                        child: const Text('Calender'),
                       ),
+                      const Text(
+                        "Choissiez la période de la journée:",
+                      ),
+                      Obx(() => DropdownButton(
+                            iconSize: 24,
+                            isExpanded: true,
+                            onChanged: (newValue) {
+                              controller.setSelected(3, newValue);
+                            },
+                            value: controller.selectedPeriodeJournee.value,
+                            items: controller.dropdownTextPeriodeJournee
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )),
                       const SizedBox(
                         height: 20,
-                      ),
-                      TextField(
-                        controller: controller.tempsDebutEditingController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Temps de début: HH:MM en 24H',
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        controller: controller.tempsFinEditingController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Temps de fin: HH:MM en 24H',
-                        ),
                       ),
                       Obx(() => controller.errorMessage.isNotEmpty
                           ? Text(

@@ -44,6 +44,7 @@ class DocumentController extends GetxController
     if (result != null) {
       List<File> files = result.paths.map((path) => File(path!)).toList();
       selectedFiles.addAll(files);
+
     } else {
       // User canceled the picker
     }

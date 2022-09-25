@@ -13,6 +13,25 @@ class AvailabilityUserService {
     }
   }
 
+  Future updateAvl(id, body) async {
+    try {
+      var response = await availabilityUserRepo.updateAvl(id, body);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future deleteAvl(id) async {
+    try {
+      var response = await availabilityUserRepo.deleteAvl(id);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   Future getInfos() async {
     try {
       var response = await availabilityUserRepo.getInfos();

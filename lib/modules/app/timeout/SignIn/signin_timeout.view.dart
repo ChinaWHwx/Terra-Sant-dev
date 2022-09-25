@@ -29,10 +29,10 @@ class SigiInTimeOutView extends GetView<SignInTimeOutController> {
                   ),
                 ],
               ),
-              child: FlatButton(
-                color: const Color(0xFF6371AA),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+              child: TextButton(
+                //color: const Color(0xFF6371AA),
+                //shape: RoundedRectangleBorder(
+                //borderRadius: BorderRadius.circular(50)),
                 onPressed: () {},
                 child: Text(
                   "Retry".toUpperCase(),

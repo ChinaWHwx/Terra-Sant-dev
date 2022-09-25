@@ -30,10 +30,10 @@ class CameraAccessView extends GetView<CameraAccessController> {
                   ),
                 ],
               ),
-              child: FlatButton(
-                color: const Color(0xFFED72AD),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+              child: TextButton(
+                // color: const Color(0xFFED72AD),
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(50)),
                 onPressed: () {},
                 child: Text(
                   "Allow".toUpperCase(),

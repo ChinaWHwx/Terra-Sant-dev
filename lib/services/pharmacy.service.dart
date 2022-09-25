@@ -24,4 +24,24 @@ class PharmacyService {
       return Future.error(e.toString());
     }
   }
+
+  Future updatePhar(id, body) async {
+    try {
+      var response = await pharmacyRepo.updatePhar(id, body);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future deletePhar(id) async {
+    try {
+      var response = await pharmacyRepo.deletePhar(id);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

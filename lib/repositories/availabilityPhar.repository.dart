@@ -7,6 +7,8 @@ class AvailabilityPharRepository extends GetConnect {
     httpClient.baseUrl = 'http://51.178.83.92:5000';
   }
 
-  Future addAvl(body) => post("/availability/add", body);
+  Future addAvl(body) => post("/availabilitypharmacy/add", body);
   Future getInfos() => get("/availabilitypharmacy");
+  Future updateAvl(id, body) => patch("/availabilitypharmacy/up=${id}", body);
+  Future deleteAvl(id) => delete("/availabilitypharmacy/delete=${id}");
 }

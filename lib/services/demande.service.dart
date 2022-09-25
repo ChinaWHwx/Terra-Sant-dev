@@ -14,4 +14,58 @@ class DemandeService {
       return Future.error(e.toString());
     }
   }
+
+  Future setReaded(id) async {
+    try {
+      var response = await demandeRepo.setReaded(id);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future setNotNew(id) async {
+    try {
+      var response = await demandeRepo.setNotNew(id);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future setAcceptYES(id) async {
+    try {
+      var response = await demandeRepo.setAcceptYES(id);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future setRefuseYES(id) async {
+    try {
+      var response = await demandeRepo.setRefuseYES(id);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future sendDemande(body) async {
+    try {
+      var response = await demandeRepo.sendDemande(body);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future getHowManyUnread(id) async {
+    try {
+      var response = await demandeRepo.getHowManyUnread(id);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

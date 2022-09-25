@@ -1,25 +1,15 @@
-import 'dart:convert';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
-import 'package:flutter_application_1/models/explorer_pharmacie.model.dart';
-import 'package:flutter_application_1/models/pharmacy.model.dart';
-import 'package:flutter_application_1/models/user.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
-import 'package:flutter_application_1/services/login.service.dart';
-import 'package:flutter_application_1/services/pharmacy.service.dart';
-import 'package:flutter_application_1/services/recruiter.service.dart';
-import 'package:flutter_application_1/services/signUp.service.dart';
-
+import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
-
-import 'package:http/http.dart' as http;
 
 class EditAVLPController extends GetxController with StateMixin<List<dynamic>> {
   final String details = 'Détails';
   Rx<String> errorMessage = "".obs;
+  AvailabilityPharService availabilityPharService = Get.find();
   final TextEditingController dateEditingController = TextEditingController();
 
   final TextEditingController tempsDebutEditingController =
@@ -27,18 +17,29 @@ class EditAVLPController extends GetxController with StateMixin<List<dynamic>> {
 
   final TextEditingController tempsFinEditingController =
       TextEditingController();
+  DateTime? dateController;
   late String? oldStatus;
   late int? oldPharID;
   final homepagePharController = Get.find<HomepagePharController>();
   final signInController = Get.find<SignInController>();
+  final availabilityPhar = Get.arguments as AvailabilityPhar;
 //这里获取上一个页面传来的数据
   @override
   void onInit() {
     change(null, status: RxStatus.empty());
     super.onInit();
     final availabilityPhars = Get.arguments as AvailabilityPhar;
+//这里获取到listMyPhar中与传来的qvlP中phid相同的ph
     oldPharID = availabilityPhars.ph_id;
-    oldStatus = availabilityPhars.date_month_year_phar;
+    final phar1 = homepagePharController.listMyPhar
+        .firstWhere((element) => element.phId == availabilityPhars.ph_id);
+//然后就能得到本avlp的phNa
+    selected.value = phar1.phName ?? '';
+    dateController = DateTime.parse(availabilityPhars.date_month_year_phar!);
+    selectedForStatus.value = availabilityPhars.status_needed ?? 'Autre';
+    selectedRepeate.value = availabilityPhars.repeat_phar ?? 'Ne pas répéter';
+    selectedPeriodeJournee.value =
+        availabilityPhars.time_of_day_phar ?? 'Autre';
   }
 
   List<String> get dropdownText =>
@@ -52,16 +53,27 @@ class EditAVLPController extends GetxController with StateMixin<List<dynamic>> {
     'Autre'
   ];
   List<String> dropdownTextRepeate = [
-    'chaque jour',
-    'chaque semaine',
-    'chaque moi',
-    'chaque année',
+    'quotidiennement',
+    'hebdomadaire',
+    'chaque mois',
+    'chaque week-end',
+    'Autre',
     'Ne pas répéter'
+  ];
+  List<String> dropdownTextPeriodeJournee = [
+    'matin',
+    'midi',
+    'après-midi',
+    'soir',
+    'nuit',
+    'toute la journée',
+    'Autre'
   ];
 
   final selected = 'null'.obs;
   final selectedForStatus = "Autre".obs;
   final selectedRepeate = "Ne pas répéter".obs;
+  final selectedPeriodeJournee = "toute la journée".obs;
 
   void setSelected(n, value) {
     if (n == 0) {
@@ -73,6 +85,9 @@ class EditAVLPController extends GetxController with StateMixin<List<dynamic>> {
     if (n == 2) {
       selectedRepeate.value = value;
     }
+    if (n == 3) {
+      selectedPeriodeJournee.value = value;
+    }
   }
 
   navigateToDuty() {
@@ -80,21 +95,46 @@ class EditAVLPController extends GetxController with StateMixin<List<dynamic>> {
   }
 
   navigateToHome() {
-    Get.toNamed(Routes.homepagePhar);
+    Get.toNamed(Routes.recruAvailability);
   }
 
   navigateToDetailFuture() {
     Get.toNamed(Routes.recruAvailability);
   }
 
-  validateForm() {
-    if (dateEditingController.text.isEmpty ||
-        tempsDebutEditingController.text.isEmpty ||
-        tempsFinEditingController.text.isEmpty) {
+  validateForm() async {
+    if (dateController == null || selected.value.toString() == 'null'
+        // tempsDebutEditingController.text.isEmpty ||
+        // tempsFinEditingController.text.isEmpty
+        ) {
       errorMessage.value = "Champs obligatoire";
     } else {
-      errorMessage.value = "";
-      navigateToDetailFuture();
+      final phar = homepagePharController.listMyPhar
+          .firstWhere((element) => element.phName == selected.value);
+      availabilityPhar.ph_id = phar.phId;
+      availabilityPhar.owner_id =
+          homepagePharController.signInController.user.userId;
+      availabilityPhar.repeat_phar = selectedRepeate.value;
+      availabilityPhar.avlP_Email = phar.phEmail;
+      availabilityPhar.time_of_day_phar = selectedPeriodeJournee.value;
+      availabilityPhar.date_month_year_phar = dateController
+          .toString()
+          .substring(0, dateController.toString().length - 13);
+      availabilityPhar.status_needed = selectedForStatus.value;
+      //signUpService.newUser.userBirthdate = date as String?;
+      var response = await availabilityPharService.updateAvl(
+          availabilityPhar.avlP_id, availabilityPhar.toJson());
+
+      if (response.containsKey("success")) {
+        if (response["success"] == 'true') {
+          change(null, status: RxStatus.success());
+          homepagePharController.onRefresh();
+          navigateToHome();
+        }
+      }
+      if (response.containsKey('error')) {
+        errorMessage.value = response["error"];
+      }
     }
   }
 }

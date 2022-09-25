@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/duty.model.dart';
-import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
@@ -12,13 +11,13 @@ class AjouterMissionController extends GetxController with StateMixin {
   ValueNotifier<List<Duty>> demoList = ValueNotifier(duties);
   Rx<String> errorMessage = "".obs;
   final TextEditingController dateEditingController = TextEditingController();
-  late AvailabilityPhar availabilityPhar;
+  var availabilityPhar = AvailabilityPhar();
   // final TextEditingController tempsDebutEditingController =
   //     TextEditingController();
 
   // final TextEditingController tempsFinEditingController =
   //     TextEditingController();
-  late final DateTime dateController;
+  DateTime? dateController;
   final homepagePharController = Get.find<HomepagePharController>();
   AvailabilityPharService availabilityPharService = Get.find();
   List<String> get dropdownText =>
@@ -83,32 +82,37 @@ class AjouterMissionController extends GetxController with StateMixin {
   }
 
   validateForm() async {
-    if (dateController.year == 0 || selected.value.toString() == 'null'
+    if (dateController == null || selected.value.toString() == 'null'
         // tempsDebutEditingController.text.isEmpty ||
         // tempsFinEditingController.text.isEmpty
         ) {
       errorMessage.value = "Champs obligatoire";
     } else {
-      // List<int> PHid = homepagePharController.listMyPhar
-      //     .map((e) => e.phId ?? 0)
-      //     .where((element) => element.phname == selected.value);
-      // availabilityPhar.ph_id = '已知药店名selected.value，这里要它在listMyPhar对应的药店的id';
+      final phar = homepagePharController.listMyPhar
+          .firstWhere((element) => element.phName == selected.value);
+      availabilityPhar.ph_id = phar.phId;
       availabilityPhar.owner_id =
           homepagePharController.signInController.user.userId;
       availabilityPhar.repeat_phar = selectedRepeate.value;
       availabilityPhar.time_of_day_phar = selectedPeriodeJournee.value;
-      availabilityPhar.date_month_year_phar = dateController.day.toString() +
-          '/' +
-          dateController.month.toString() +
-          '/' +
-          dateController.year.toString();
+      availabilityPhar.avlP_Email = phar.phEmail;
+      availabilityPhar.date_month_year_phar = dateController
+          .toString()
+          .substring(0, dateController.toString().length - 13);
       //signUpService.newUser.userBirthdate = date as String?;
-      var response = await availabilityPharService.addAvl(availabilityPhar);
+      var response =
+          await availabilityPharService.addAvl(availabilityPhar.toJson());
+      // print(availabilityPhar.ph_id);
+      // print(availabilityPhar.owner_id);
+      // print(availabilityPhar.repeat_phar);
+      // print(availabilityPhar.time_of_day_phar);
+      // print(availabilityPhar.date_month_year_phar);
+      // print(availabilityPhar.toJson());
 
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
-
+          homepagePharController.onRefresh();
           navigateToHome();
         }
       }

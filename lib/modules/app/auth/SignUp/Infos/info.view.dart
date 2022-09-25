@@ -88,7 +88,9 @@ class InfoView extends GetView<InfoController> {
                       }, onConfirm: (date) {
                         // ignore: avoid_print
                         controller.birthdayEditingController = date;
-                      }, currentTime: DateTime.now(), locale: LocaleType.fr);
+                      },
+                          currentTime: controller.birthdayEditingController,
+                          locale: LocaleType.fr);
                     },
                     child: const Text('Calender'),
                   ),

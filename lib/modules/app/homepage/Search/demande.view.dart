@@ -22,6 +22,7 @@ class DemandeView extends GetView<DemandeController> {
           color: Colors.white,
           onPressed: () {
             controller.navigateToHome();
+            controller.homepageController.setReadedAllDemandeUser();
           },
         ),
       ),

@@ -19,6 +19,7 @@ class DeclarationView extends GetView<DeclarationController> {
           color: Colors.white,
           onPressed: () {
             controller.navigateToHome();
+            //controller.onRefresh();
           },
         ),
       ),

@@ -18,6 +18,8 @@ class Offer {
     this.avlP_id,
     this.avlU_id,
     this.offer_fixed_time,
+    this.newOrNot,
+    this.readed,
   });
 
   int? offer_id;
@@ -28,6 +30,8 @@ class Offer {
   int? avlP_id;
   int? avlU_id;
   String? offer_fixed_time;
+  String? readed;
+  String? newOrNot;
 
   factory Offer.fromJson(Map<String, dynamic> json) => Offer(
         offer_id: json["offer_id"],
@@ -38,6 +42,8 @@ class Offer {
         avlP_id: json["avlP_id"],
         avlU_id: json["avlU_id"],
         offer_fixed_time: json["offer_fixed_time"],
+        readed: json["readed"],
+        newOrNot: json["newOrNot"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +55,8 @@ class Offer {
         "avlP_id": avlP_id,
         "avlU_id": avlU_id,
         "offer_fixed_time": offer_fixed_time,
+        "newOrNot": newOrNot,
+        "readed": readed,
       };
 
   static List<Offer> OfferFromJson(String str) =>

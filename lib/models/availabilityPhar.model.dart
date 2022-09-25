@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
+
+AvailabilityPharService availabilityPharService = Get.find();
+HomepagePharController homepagePharController = Get.find();
 
 class AvailabilityPhar {
   AvailabilityPhar({
@@ -17,6 +21,8 @@ class AvailabilityPhar {
     this.time_of_day_phar,
     this.date_month_year_phar,
     this.owner_id,
+    this.status_needed,
+    this.avlP_Email,
   });
 
   int? avlP_id;
@@ -25,6 +31,8 @@ class AvailabilityPhar {
   String? time_of_day_phar;
   String? date_month_year_phar;
   int? owner_id;
+  String? status_needed;
+  String? avlP_Email;
 
   factory AvailabilityPhar.fromJson(Map<String, dynamic> json) =>
       AvailabilityPhar(
@@ -34,6 +42,8 @@ class AvailabilityPhar {
         repeat_phar: json["repeat_phar"],
         time_of_day_phar: json["time_of_day_phar"],
         date_month_year_phar: json["date_month_year_phar"],
+        status_needed: json["status_needed"],
+        avlP_Email: json["avlP_Email"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +53,8 @@ class AvailabilityPhar {
         "repeat_phar": repeat_phar,
         "time_of_day_phar": time_of_day_phar,
         "date_month_year_phar": date_month_year_phar,
+        "status_needed": status_needed,
+        "avlP_Email": avlP_Email,
       };
 
   static List<AvailabilityPhar> availabilityPharFromJson(String str) =>
@@ -59,19 +71,6 @@ class AvailabilityPharsForUsers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    // final list = Get.find<HomepageController>().getList1();
-    // SizeConfig().init(context);
-    // return Padding(
-    //   padding:
-    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-    //   child: ListView.builder(
-    //       itemBuilder: (context, index) {
-    //         return AvailabilityPharsForShowCard(
-    //           availabilityPhars: list[index],
-    //         );
-    //       },
-    //       itemCount: list.length),
-    // );
     return GetBuilder<HomepageController>(builder: (logic) {
       final list = logic.getList1();
       //debugPrint('list: ${list.length}');
@@ -101,19 +100,6 @@ class AvailabilityPharsForPhars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final list = Get.find<HomepagePharController>().list2;
-    // SizeConfig().init(context);
-    // return Padding(
-    //   padding:
-    //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-    //   child: ListView.builder(
-    //       itemBuilder: (context, index) {
-    //         return AvailabilityPharsForEditCard(
-    //           availabilityPhars: list[index],
-    //         );
-    //       },
-    //       itemCount: list.length),
-    // );
     return GetBuilder<HomepagePharController>(builder: (logic) {
       final list = logic.list2;
       return EasyRefresh(
@@ -149,7 +135,7 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
 
   final double width, aspectRetio;
   final AvailabilityPhar availabilityPhars;
-  final ValueChanged<String>? onTapPhone;
+  final ValueChanged<int>? onTapPhone;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -186,11 +172,67 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
                 countPostion: CountPostion.left,
-                onTap: (b) {
-                  onTapPhone
-                      ?.call(availabilityPhars.date_month_year_phar ?? '');
+                onTap: (isLiked) {
+                  if (isLiked) {
+                    return Future.value(null);
+                  }
+                  onTapPhone?.call(availabilityPhars.avlP_id ?? 0);
+                  final avlP = homepagePharController.list2.firstWhere(
+                      (element) =>
+                          element.avlP_id == availabilityPhars.avlP_id);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text('详情'),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    "详情:",
+                                  ),
+                                  Text(
+                                    "写avlP,phar更多信息: ${avlP.avlP_id}",
+                                  ),
+                                ]),
+                            actions: <Widget>[
+                              TextButton(
+                                child: new Text("cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  //show字段设为no
+                                },
+                              ),
+                              TextButton(
+                                child: Text("我想申请"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  //发送邮件给terra 说想去这个药店。
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Text('Confirmation'),
+                                            content: Text(('我们会帮你联系药店，请看邮箱')),
+                                            actions: <Widget>[
+                                              // TextButton(
+                                              //   child: new Text("Cancel"),
+                                              //   onPressed: () {
+                                              //     Navigator.of(context).pop();
+                                              //   },
+                                              // ),
+                                              TextButton(
+                                                child: Text("ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          ));
+                                },
+                              ),
+                            ],
+                          ));
 
-                  return Future.value(false);
+                  return Future.value(!isLiked);
                 },
                 likeBuilder: (bool isLiked) {
                   return Icon(
@@ -271,9 +313,60 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
                 },
               ),
               LikeButton(
-                onTap: (b) {
-                  onTapPoubelle?.call();
-                  return Future.value(false);
+                countPostion: CountPostion.left,
+                onTap: (isLiked) {
+                  if (isLiked) {
+                    return Future.value(null);
+                  }
+                  //onTapPhone?.call(availabilityUsers.avlUId ?? 0);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text('Confirmation'),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [Text(('确认删除吗'))]),
+                            actions: <Widget>[
+                              TextButton(
+                                child: new Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Oui"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  availabilityPharService
+                                      .deleteAvl(availabilityPhars.avlP_id);
+
+                                  homepagePharController.onRefresh();
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Text('Confirmation'),
+                                            content: Text(('已经删除这个avlP了')),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: new Text("Cancel"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text("ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          ));
+                                },
+                              ),
+                            ],
+                          ));
+
+                  return Future.value(!isLiked);
                 },
                 likeBuilder: (bool isLiked) {
                   return Icon(

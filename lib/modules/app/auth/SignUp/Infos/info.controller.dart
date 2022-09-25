@@ -10,7 +10,7 @@ class InfoController extends GetxController with StateMixin {
   final String enregistrer = "Enregistrez";
   final TextEditingController prenomEditingController = TextEditingController();
   final TextEditingController nomEditingController = TextEditingController();
-  late final DateTime birthdayEditingController;
+  DateTime? birthdayEditingController;
   SignUpService signUpService = Get.find();
   AuthController authController = Get.find();
   final selected = "Monsieur".obs;
@@ -42,7 +42,8 @@ class InfoController extends GetxController with StateMixin {
 
   validateForm(n) async {
     if (prenomEditingController.text.isEmpty ||
-        nomEditingController.text.isEmpty) {
+        nomEditingController.text.isEmpty ||
+        birthdayEditingController == null) {
       errorMessage.value = "Champs obligatoire";
     } else if (isChecked.value == false) {
       errorMessage.value = "Il faut bien lire et valider";
@@ -50,11 +51,7 @@ class InfoController extends GetxController with StateMixin {
       authController.newUser.userFname = prenomEditingController.text;
       authController.newUser.userName = nomEditingController.text;
       authController.newUser.userBirthdate =
-          birthdayEditingController.day.toString() +
-              '/' +
-              birthdayEditingController.month.toString() +
-              '/' +
-              birthdayEditingController.year.toString();
+          birthdayEditingController.toString();
       //signUpService.newUser.userBirthdate = date as String?;
       var response1 = await signUpService.addNameUser(authController.newUser);
       if (authController.newUser.userType == "candidat" ||

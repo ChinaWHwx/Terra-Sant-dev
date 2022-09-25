@@ -188,9 +188,7 @@ class AppPages {
     GetPage(
         name: Routes.candidateCalendar, page: () => CandidateCalendarView()),
     GetPage(name: Routes.declaration, page: () => const DeclarationView()),
-    GetPage(
-        name: Routes.ajouterPharmacie,
-        page: () => const AjouterPharmacieView()),
+    GetPage(name: Routes.ajouterPharmacie, page: () => AjouterPharmacieView()),
     GetPage(name: Routes.basicExemple, page: () => const BasicExempleView()),
     GetPage(name: Routes.complexExemple, page: () => ComplexExempleView()),
     GetPage(
@@ -213,9 +211,7 @@ class AppPages {
     GetPage(name: Routes.pharmacieInfo, page: () => const PharmacieInfoView()),
     GetPage(name: Routes.pharmacie, page: () => const PharmacieView()),
     GetPage(name: Routes.myRecruiter, page: () => const MyRecruiterView()),
-    GetPage(
-        name: Routes.ajouterPharmacie,
-        page: () => const AjouterPharmacieView()),
+    GetPage(name: Routes.ajouterPharmacie, page: () => AjouterPharmacieView()),
     GetPage(
         name: Routes.recuAjouterPharmacieRoute,
         page: () => const RecuAjouterPharmacieView()),

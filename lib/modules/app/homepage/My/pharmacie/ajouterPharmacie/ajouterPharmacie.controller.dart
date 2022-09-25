@@ -1,12 +1,8 @@
 import 'dart:convert';
-import 'package:flutter_application_1/models/explorer_pharmacie.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
-import 'package:flutter_application_1/models/user.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/services/login.service.dart';
 import 'package:flutter_application_1/services/pharmacy.service.dart';
-import 'package:flutter_application_1/services/recruiter.service.dart';
-import 'package:flutter_application_1/services/signUp.service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
@@ -18,7 +14,6 @@ import 'package:http/http.dart' as http;
 class AjouterPharmacieController extends GetxController
     with StateMixin<List<dynamic>> {
   final TextEditingController textEditingController = TextEditingController();
-  TextEditingController placeController = TextEditingController();
   String KPLACES_API_KEY = "AIzaSyD4U3Q0x6MR0ad-UXTwp6XVvaBsmlHkOhc";
   String baseURL =
       'https://maps.googleapis.com/maps/api/place/autocomplete/json';
@@ -27,8 +22,9 @@ class AjouterPharmacieController extends GetxController
   List<dynamic> placesList = [];
   var name = TextEditingController();
   var tel = TextEditingController();
-  var nameResponsable = TextEditingController();
   var codePostal = TextEditingController();
+  TextEditingController placeController = TextEditingController();
+  var nameResponsable = TextEditingController();
   final errorMessage = "".obs;
   LoginService loginService = Get.find();
   SignInController signInController = Get.find();
@@ -75,13 +71,15 @@ class AjouterPharmacieController extends GetxController
     if (placeController.text.isEmpty ||
         name.text.isEmpty ||
         tel.text.isEmpty ||
-        nameResponsable.text.isEmpty ||
+        //nameResponsable.text.isEmpty ||
         codePostal.text.isEmpty) {
       errorMessage.value = "Veuillez remplir tous les champs";
     } else if (!GetUtils.isNumericOnly(tel.text)) {
       errorMessage.value = 'Veuillez insérer des chiffres uniquement';
     } else if (!GetUtils.isLengthEqualTo(tel.text, 9)) {
       errorMessage.value = '9 chiffres requis';
+    } else if (!GetUtils.isLengthEqualTo(codePostal.text, 5)) {
+      errorMessage.value = '5 chiffres requis';
     } else {
       newMyPhar.phName = name.text;
       newMyPhar.phAddress = placeController.text;
@@ -93,6 +91,7 @@ class AjouterPharmacieController extends GetxController
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
           navigateToMyRecruiter();
+          homepagePharController.onRefresh();
         }
       }
       if (response.containsKey('error')) {
@@ -107,5 +106,14 @@ class AjouterPharmacieController extends GetxController
 
   navigateToMyRecruiter() {
     Get.toNamed(Routes.declaration);
+  }
+
+  @override
+  void dispose() {
+    debugPrint('dispose');
+    name.dispose();
+    tel.dispose();
+    codePostal.dispose();
+    super.dispose();
   }
 }

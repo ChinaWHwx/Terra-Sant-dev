@@ -6,9 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/services/demande.service.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
+
+AvailabilityUserService availabilityUserService = Get.find();
+DemandeService demandeService = Get.find();
+HomepageController homepageController = Get.find();
+HomepagePharController homepagePharController = Get.find();
 
 class AvailabilityUser {
   AvailabilityUser({
@@ -18,6 +25,7 @@ class AvailabilityUser {
     this.date_month_year_candidate,
     this.region_candidate,
     this.user_id,
+    this.competence,
   });
 
   int? avlUId;
@@ -26,6 +34,7 @@ class AvailabilityUser {
   String? date_month_year_candidate;
   String? region_candidate;
   int? user_id;
+  String? competence;
 
   factory AvailabilityUser.fromJson(Map<String, dynamic> json) =>
       AvailabilityUser(
@@ -35,6 +44,7 @@ class AvailabilityUser {
         date_month_year_candidate: json["date_month_year_candidate"],
         region_candidate: json["region_candidate"],
         user_id: json["user_id"],
+        competence: json["competence"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +54,7 @@ class AvailabilityUser {
         "date_month_year_candidate": date_month_year_candidate,
         "region_candidate": region_candidate,
         "user_id": user_id,
+        "competence": competence,
       };
 
   static List<AvailabilityUser> availabilityUserFromJson(String str) =>
@@ -178,10 +189,59 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
                 },
               ),
               LikeButton(
-                onTap: (b) {
-                  onTapPoubelle?.call();
-                  // Get.toNamed("Routes.editMyPharmacy");
-                  return Future.value(false);
+                onTap: (isLiked) {
+                  if (isLiked) {
+                    return Future.value(null);
+                  }
+                  //onTapPhone?.call(availabilityUsers.avlUId ?? 0);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text('Confirmation'),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [Text(('确认删除吗'))]),
+                            actions: <Widget>[
+                              TextButton(
+                                child: new Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Oui"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  availabilityUserService
+                                      .deleteAvl(availabilityUsers.avlUId);
+
+                                  homepageController.onRefresh();
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Text('Confirmation'),
+                                            content: Text(('已经删除这个avlU了')),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: new Text("Cancel"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text("ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          ));
+                                },
+                              ),
+                            ],
+                          ));
+
+                  return Future.value(!isLiked);
                 },
                 likeBuilder: (bool isLiked) {
                   return Icon(
@@ -248,36 +308,68 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
                 countPostion: CountPostion.left,
-                onTap: (b) {
+                onTap: (isLiked) {
+                  if (isLiked) {
+                    return Future.value(null);
+                  }
                   onTapPhone?.call(availabilityUsers.avlUId ?? 0);
                   showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
                             title: Text('Confirmation'),
-                            content: Text(('你用你的哪个时间段联系他？')),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    "选我的时间:",
+                                  ),
+                                  Obx(() => DropdownButton(
+                                        isExpanded: true,
+                                        iconSize: 24,
+                                        onChanged: (newValue) {
+                                          homepagePharController.setSelected(
+                                              1, newValue);
+                                        },
+                                        value: homepagePharController
+                                            .selectedMyAVLP.value,
+                                        items: homepagePharController
+                                            .dropdownTextForMyAVLP
+                                            .map<DropdownMenuItem<int>>(
+                                                (int value) {
+                                          return DropdownMenuItem<int>(
+                                            value: value,
+                                            child: Text(value.toString()),
+                                          );
+                                        }).toList(),
+                                      )),
+                                ]),
                             actions: <Widget>[
-                              FlatButton(
+                              TextButton(
                                 child: new Text("Cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                               ),
-                              FlatButton(
+                              TextButton(
                                 child: Text("Oui"),
                                 onPressed: () {
+                                  Navigator.of(context).pop();
+                                  homepagePharController.sendDemande(
+                                      availabilityUsers.avlUId,
+                                      availabilityUsers.user_id);
                                   showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
                                             content: Text(('如果她接受，我们会给你发合同')),
                                             actions: <Widget>[
-                                              FlatButton(
+                                              TextButton(
                                                 child: new Text("Cancel"),
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
                                               ),
-                                              FlatButton(
+                                              TextButton(
                                                 child: Text("ok"),
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
@@ -285,16 +377,15 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                                               ),
                                             ],
                                           ));
-
-                                  Navigator.of(context).pop();
                                 },
                               ),
                             ],
                           ));
 
-                  return Future.value(false);
+                  return Future.value(!isLiked);
                 },
                 likeBuilder: (bool isLiked) {
+                  debugPrint('isLiked: $isLiked');
                   return Icon(
                     Icons.phone_forwarded,
                     color: isLiked ? Colors.deepPurpleAccent : Colors.grey,

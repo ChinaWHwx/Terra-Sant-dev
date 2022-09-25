@@ -33,10 +33,10 @@ class SignInErrorView extends GetView<SignInErrorController> {
                   ),
                 ],
               ),
-              child: FlatButton(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+              child: TextButton(
+                // color: Colors.white,
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(50)),
                 onPressed: () {
                   controller.navigateToSignInPage();
                 },
