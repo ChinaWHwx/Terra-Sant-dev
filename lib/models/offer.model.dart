@@ -8,6 +8,9 @@ import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 
+HomepageController homepageController = Get.find();
+HomepagePharController homepagePharController = Get.find();
+
 class Offer {
   Offer({
     this.offer_id,
@@ -20,9 +23,15 @@ class Offer {
     this.offer_fixed_time,
     this.newOrNot,
     this.readed,
+    this.candidate_user_id,
+    this.newOrNotByPhar,
+    this.phar_user_id,
+    this.readedByPhar,
   });
 
   int? offer_id;
+  int? candidate_user_id;
+  int? phar_user_id;
   String? offer_title;
   String? offer_description;
   int? offer_pharmacy;
@@ -31,7 +40,9 @@ class Offer {
   int? avlU_id;
   String? offer_fixed_time;
   String? readed;
+  String? readedByPhar;
   String? newOrNot;
+  String? newOrNotByPhar;
 
   factory Offer.fromJson(Map<String, dynamic> json) => Offer(
         offer_id: json["offer_id"],
@@ -43,7 +54,11 @@ class Offer {
         avlU_id: json["avlU_id"],
         offer_fixed_time: json["offer_fixed_time"],
         readed: json["readed"],
+        readedByPhar: json["readedByPhar"],
         newOrNot: json["newOrNot"],
+        newOrNotByPhar: json["newOrNotByPhar"],
+        candidate_user_id: json["candidate_user_id"],
+        phar_user_id: json["phar_user_id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,7 +71,11 @@ class Offer {
         "avlU_id": avlU_id,
         "offer_fixed_time": offer_fixed_time,
         "newOrNot": newOrNot,
+        "newOrNotByPhar": newOrNotByPhar,
         "readed": readed,
+        "readedByPhar": readedByPhar,
+        "candidate_user_id": candidate_user_id,
+        "phar_user_id": phar_user_id,
       };
 
   static List<Offer> OfferFromJson(String str) =>
@@ -140,58 +159,103 @@ class OfferForPharCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
-      child: SizedBox(
-        // width: getProportionateScreenWidth(width),
-        child: Card(
-          color: Color(0xFFA3FBF2),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(
-                width: 400,
-              ),
-              SizedBox(height: getProportionateScreenWidth(30)),
-              Text(
-                "offer_description: ${offer.offer_description}",
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 4,
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "avlP_id: ${offer.avlP_id}",
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 4,
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "avlU_id: ${offer.avlU_id}",
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 2,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: getProportionateScreenWidth(30)),
-              LikeButton(
-                countPostion: CountPostion.left,
-                onTap: (b) {
-                  onTapPhone?.call(offer.offer_description ?? 'no description');
+    final avlP = homepagePharController.list2 //获取本offer对应的avlp信息
+        .firstWhere((element) => element.avlP_id == offer.avlP_id);
 
-                  return Future.value(false);
-                },
-                likeBuilder: (bool isLiked) {
-                  return Icon(
-                    Icons.phone_forwarded,
-                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-                    size: 35,
-                  );
-                },
-              ),
-            ],
+    final phar = homepagePharController.listMyPhar //获取本offer对应的我的药店的信息
+        .firstWhere((element) => element.phId == avlP.ph_id);
+
+    return Padding(
+        padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
+        child: SizedBox(
+          // width: getProportionateScreenWidth(width),
+          child: Card(
+            color: Color(0xFFA3FBF2),
+            child: Stack(
+              children: [
+                Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Visibility(
+                        visible: offer.newOrNotByPhar == "YES",
+                        child: Text('new'))),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      width: 400,
+                    ),
+                    SizedBox(height: getProportionateScreenWidth(30)),
+                    Text(
+                      "description: ${offer.offer_description}",
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      maxLines: 4,
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "avlP_id: ${offer.avlP_id}",
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      maxLines: 4,
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "avlU_id: ${offer.avlU_id}",
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: getProportionateScreenWidth(30)),
+                    LikeButton(
+                      countPostion: CountPostion.left,
+                      onTap: (isLiked) {
+                        if (isLiked) {
+                          return Future.value(null);
+                        }
+                        homepagePharController.setOfferNotNewByPhar(offer);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('Détail'),
+                                  content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Text(
+                                          "details:",
+                                        ),
+                                      ]),
+                                  actions: <Widget>[
+                                    // TextButton(
+                                    //   child: new Text("cancel"),
+                                    //   onPressed: () {
+                                    //     Navigator.of(context).pop();
+                                    //   },
+                                    // ),
+                                    TextButton(
+                                      child: Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                ));
+
+                        return Future.value(!isLiked);
+                      },
+                      likeBuilder: (bool isLiked) {
+                        return Icon(
+                          Icons.phone_forwarded,
+                          color:
+                              isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                          size: 35,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 
@@ -211,50 +275,92 @@ class OfferForUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
-      child: SizedBox(
-        // width: getProportionateScreenWidth(width),
-        child: Card(
-          color: Color(0xFFA3FBF2),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(
-                width: 400,
-              ),
-              SizedBox(height: getProportionateScreenWidth(30)),
-              Text(
-                "avlP_id: ${offer.avlP_id}",
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 4,
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "avlU_id: ${offer.avlU_id}",
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 4,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: getProportionateScreenWidth(30)),
-              LikeButton(
-                countPostion: CountPostion.left,
-                onTap: (b) {
-                  onTapPhone?.call(offer.offer_description ?? '');
+        padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
+        child: SizedBox(
+          // width: getProportionateScreenWidth(width),
+          child: Card(
+            color: Color(0xFFA3FBF2),
+            child: Stack(
+              children: [
+                Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Visibility(
+                        visible: offer.newOrNot == "YES", child: Text('new'))),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      width: 400,
+                    ),
+                    SizedBox(height: getProportionateScreenWidth(30)),
+                    Text(
+                      "avlP_id: ${offer.avlP_id}",
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      maxLines: 4,
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "avlU_id: ${offer.avlU_id}",
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      maxLines: 4,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: getProportionateScreenWidth(30)),
+                    LikeButton(
+                      countPostion: CountPostion.left,
+                      onTap: (isLiked) {
+                        if (isLiked) {
+                          return Future.value(null);
+                        }
+                        homepageController.setOfferNotNew(offer);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('Détail'),
+                                  content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Text(
+                                          "Détail:",
+                                        ),
+                                      ]),
+                                  actions: <Widget>[
+                                    // TextButton(
+                                    //   child: new Text("cancel"),
+                                    //   onPressed: () {
+                                    //     Navigator.of(context).pop();
+                                    //   },
+                                    // ),
+                                    TextButton(
+                                      child: Text("ok"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
 
-                  return Future.value(false);
-                },
-                likeBuilder: (bool isLiked) {
-                  return Icon(
-                    Icons.phone_forwarded,
-                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-                    size: 35,
-                  );
-                },
-              ),
-            ],
+                                        //发送邮件给terra 说接受这个请求。
+                                        //accept字段设为Yes
+                                        //不能再删除了
+                                      },
+                                    ),
+                                  ],
+                                ));
+
+                        return Future.value(!isLiked);
+                      },
+                      likeBuilder: (bool isLiked) {
+                        return Icon(
+                          Icons.phone_forwarded,
+                          color:
+                              isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                          size: 35,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

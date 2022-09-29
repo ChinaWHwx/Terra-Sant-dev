@@ -20,7 +20,7 @@ class EditAVLUView extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
               appBar: AppBar(
-                title: const Text('编辑我已经有的AVLU'),
+                title: const Text('Editer'),
                 centerTitle: true,
               ),
               body: Container(

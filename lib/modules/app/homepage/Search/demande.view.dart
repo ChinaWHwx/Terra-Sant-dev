@@ -15,20 +15,31 @@ class DemandeView extends GetView<DemandeController> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("My demande received"),
-        leading: BackButton(
-          color: Colors.white,
-          onPressed: () {
-            controller.navigateToHome();
-            controller.homepageController.setReadedAllDemandeUser();
-          },
+    return WillPopScope(
+      onWillPop: () async {
+        controller.homepageController.unReadMessage.value = 0;
+        controller.navigateToHome();
+        controller.homepageController.setReadedAllDemandeUser();
+
+        return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Mes Demande reçu"),
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              controller.navigateToHome();
+              controller.homepageController.setReadedAllDemandeUser();
+              controller.homepageController.unReadMessage.value = 0;
+            },
+          ),
+        ),
+        body: SafeArea(
+          child: DemandeForUsers(),
         ),
       ),
-      body: SafeArea(
-        child: DemandeForUsers(),
-      ),
     );
+    //);
   }
 }

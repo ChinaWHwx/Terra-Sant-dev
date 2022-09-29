@@ -16,7 +16,7 @@ class HomepageView extends GetView<HomepageController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("匹配到的所有药房"),
+        title: const Text("Des Pharmacies pour Vous"),
       ),
       body: SafeArea(
         child: AvailabilityPharsForUsers(),
@@ -65,9 +65,43 @@ class HomepageView extends GetView<HomepageController> {
           icon: Icons.event_available,
           title: 'Calenderier',
         ),
+        // TabItem(
+        //   icon: Icons.work,
+        //   title: 'Mission',
+        // ),
         TabItem(
-          icon: Icons.work,
-          title: 'Mission',
+          icon: Stack(
+            children: [
+              const Icon(Icons.work, color: Colors.white),
+              Positioned(
+                right: 0,
+                top: 0,
+                child: Obx(() {
+                  return Visibility(
+                    visible: controller.unReadOffer.value != 0,
+                    child: Transform.translate(
+                      offset: const Offset(5, -5),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                        ),
+                        child: Text(
+                          '${controller.unReadOffer}',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              )
+            ],
+          ),
+          title: 'Messege',
         ),
         TabItem(
           icon: Icons.people,

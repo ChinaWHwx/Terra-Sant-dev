@@ -18,6 +18,12 @@ class _AddCandidateAvailabilityViewState
     extends State<AddCandidateAvailabilityView> {
   // final calendarController1 = AddCandidateAvailabilityController();
 
+  // @override
+  // void dispose() {
+  //   Get.delete();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,7 +33,7 @@ class _AddCandidateAvailabilityViewState
           return Scaffold(
               //drawer: NavigationDrawer(),
               appBar: AppBar(
-                title: const Text("加新avlU"),
+                title: const Text("Ajouter un Carte"),
                 centerTitle: true,
                 leading: BackButton(
                   color: Colors.white,
@@ -143,8 +149,8 @@ class _AddCandidateAvailabilityViewState
                             height: 50,
                             child: TextFormField(
                               controller: controller.codePostal,
-                              decoration:
-                                  const InputDecoration(hintText: 'my邮编:'),
+                              decoration: const InputDecoration(
+                                  hintText: 'Code postal:'),
                             ),
                           ),
                           const SizedBox(

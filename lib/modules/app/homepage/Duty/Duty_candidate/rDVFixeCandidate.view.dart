@@ -10,11 +10,13 @@ class RDVFixeCandidateView extends GetView<RDVFixeCandidateController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('offer Candidate'),
+        title: const Text('Offre fixé'),
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
             controller.navigateToHome();
+            controller.homepageController.setReadedAllOfferUser();
+            controller.homepageController.unReadOffer.value = 0;
           },
         ),
       ),

@@ -15,7 +15,7 @@ class CandidateAvailabilityView
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My time available'),
+        title: const Text('Mes disponibilités'),
         leading: BackButton(
           color: Colors.white,
           onPressed: () {

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/models/user.model.dart';
 import 'package:flutter_application_1/repositories/demande.repository.dart';
 import 'package:flutter_application_1/repositories/pharmacy.repository.dart';
@@ -20,6 +21,7 @@ class DemandeService {
       var response = await demandeRepo.setReaded(id);
       return response.body;
     } catch (e) {
+      debugPrint('setReader error');
       return Future.error(e.toString());
     }
   }

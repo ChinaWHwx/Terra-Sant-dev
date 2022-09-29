@@ -117,9 +117,9 @@ class EditAVLPController extends GetxController with StateMixin<List<dynamic>> {
       availabilityPhar.repeat_phar = selectedRepeate.value;
       availabilityPhar.avlP_Email = phar.phEmail;
       availabilityPhar.time_of_day_phar = selectedPeriodeJournee.value;
-      availabilityPhar.date_month_year_phar = dateController
-          .toString()
-          .substring(0, dateController.toString().length - 13);
+      availabilityPhar.date_month_year_phar =
+          dateController.toString().substring(0, 10);
+      // .substring(0, dateController.toString().length - 13);
       availabilityPhar.status_needed = selectedForStatus.value;
       //signUpService.newUser.userBirthdate = date as String?;
       var response = await availabilityPharService.updateAvl(

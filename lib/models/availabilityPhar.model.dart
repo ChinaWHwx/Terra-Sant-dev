@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
@@ -12,6 +13,7 @@ import 'package:like_button/like_button.dart';
 
 AvailabilityPharService availabilityPharService = Get.find();
 HomepagePharController homepagePharController = Get.find();
+HomepageController homepageController = Get.find();
 
 class AvailabilityPhar {
   AvailabilityPhar({
@@ -73,7 +75,6 @@ class AvailabilityPharsForUsers extends StatelessWidget {
     SizeConfig().init(context);
     return GetBuilder<HomepageController>(builder: (logic) {
       final list = logic.getList1();
-      //debugPrint('list: ${list.length}');
       return EasyRefresh(
         controller: logic.controller,
         onRefresh: logic.onRefresh,
@@ -131,13 +132,19 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
     this.aspectRetio = 1.02,
     required this.availabilityPhars,
     this.onTapPhone,
+    // this.phar,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final AvailabilityPhar availabilityPhars;
   final ValueChanged<int>? onTapPhone;
+  // final Pharmacy? phar;
+
   @override
   Widget build(BuildContext context) {
+    final phar = homepageController.listAllPhar //获取本avlp对应的phar信息
+        .firstWhere((element) => element.phId == availabilityPhars.ph_id);
+
     return Padding(
       padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
       child: SizedBox(
@@ -152,19 +159,31 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
               ),
               SizedBox(height: getProportionateScreenWidth(30)),
               Text(
-                "time_of_day_phar: ${availabilityPhars.time_of_day_phar}",
+                "date: ${availabilityPhars.date_month_year_phar}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
+              // Text(
+              //   "Créneaux: ${availabilityPhars.time_of_day_phar}",
+              //   style: const TextStyle(color: Colors.black, fontSize: 18),
+              //   maxLines: 4,
+              //   textAlign: TextAlign.center,
+              // ),
               Text(
-                "date_month_year_phar: ${availabilityPhars.date_month_year_phar}",
+                "ph_adress: ${phar.phAddress}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 4,
+                maxLines: 2,
                 textAlign: TextAlign.center,
               ),
+              // Text(
+              //   "Répetition: ${availabilityPhars.repeat_phar}",
+              //   style: const TextStyle(color: Colors.black, fontSize: 18),
+              //   maxLines: 2,
+              //   textAlign: TextAlign.center,
+              // ),
               Text(
-                "ph_id: ${availabilityPhars.ph_id}",
+                "Status besoin: ${availabilityPhars.status_needed}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -177,21 +196,26 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                     return Future.value(null);
                   }
                   onTapPhone?.call(availabilityPhars.avlP_id ?? 0);
+
                   final avlP = homepagePharController.list2.firstWhere(
                       (element) =>
                           element.avlP_id == availabilityPhars.avlP_id);
+
                   showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                            title: Text('详情'),
+                            title: Text('Je veux y aller!'),
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   const Text(
-                                    "详情:",
+                                    "Détail:",
                                   ),
                                   Text(
-                                    "写avlP,phar更多信息: ${avlP.avlP_id}",
+                                    "Répetition: ${avlP.repeat_phar}",
+                                  ),
+                                  Text(
+                                    "Créneaux: ${avlP.time_of_day_phar}",
                                   ),
                                 ]),
                             actions: <Widget>[
@@ -199,11 +223,11 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                                 child: new Text("cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  //show字段设为no
+                                  //show字段设为no ，做不到因为是avlp，只能是如果重复申请就弹窗说已申请过了
                                 },
                               ),
                               TextButton(
-                                child: Text("我想申请"),
+                                child: Text("Demander"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   //发送邮件给terra 说想去这个药店。
@@ -211,7 +235,8 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
-                                            content: Text(('我们会帮你联系药店，请看邮箱')),
+                                            content: Text(
+                                                ('Nous allons vous aider de contacter ce Pharmacy,\nAttendez-vous notre E-mail!')),
                                             actions: <Widget>[
                                               // TextButton(
                                               //   child: new Text("Cancel"),
@@ -281,19 +306,25 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
               ),
               SizedBox(height: getProportionateScreenWidth(30)),
               Text(
-                "time_of_day_phar: ${availabilityPhars.time_of_day_phar}",
+                "Temps: ${availabilityPhars.time_of_day_phar}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "date_month_year_phar: ${availabilityPhars.date_month_year_phar}",
+                "date: ${availabilityPhars.date_month_year_phar}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "ph_id: ${availabilityPhars.ph_id}",
+                "Répetition: ${availabilityPhars.repeat_phar}",
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "Status besoin: ${availabilityPhars.status_needed}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -325,7 +356,7 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
                             title: Text('Confirmation'),
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [Text(('确认删除吗'))]),
+                                children: [Text(('Vous voulez supprimer'))]),
                             actions: <Widget>[
                               TextButton(
                                 child: new Text("Cancel"),
@@ -345,7 +376,7 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
-                                            content: Text(('已经删除这个avlP了')),
+                                            content: Text(('Déja Supprimé')),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: new Text("Cancel"),

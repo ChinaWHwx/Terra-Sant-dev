@@ -74,7 +74,7 @@ class AjouterMissionController extends GetxController with StateMixin {
   }
 
   navigateToHome() {
-    Get.toNamed(Routes.recruAvailability);
+    Get.back();
   }
 
   navigateToDetailFuture() {
@@ -96,9 +96,9 @@ class AjouterMissionController extends GetxController with StateMixin {
       availabilityPhar.repeat_phar = selectedRepeate.value;
       availabilityPhar.time_of_day_phar = selectedPeriodeJournee.value;
       availabilityPhar.avlP_Email = phar.phEmail;
-      availabilityPhar.date_month_year_phar = dateController
-          .toString()
-          .substring(0, dateController.toString().length - 13);
+      availabilityPhar.date_month_year_phar =
+          dateController.toString().substring(0, 10);
+      // .substring(0, dateController.toString().length - 13);
       //signUpService.newUser.userBirthdate = date as String?;
       var response =
           await availabilityPharService.addAvl(availabilityPhar.toJson());

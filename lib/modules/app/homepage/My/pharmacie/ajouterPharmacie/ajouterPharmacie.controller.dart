@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/services/login.service.dart';
 import 'package:flutter_application_1/services/pharmacy.service.dart';
 
@@ -30,6 +31,7 @@ class AjouterPharmacieController extends GetxController
   SignInController signInController = Get.find();
   PharmacyService pharmacyService = Get.find();
   var newMyPhar = Pharmacy();
+  final homepagePharController = Get.find<HomepagePharController>();
 
   @override
   void onInit() {
@@ -105,7 +107,7 @@ class AjouterPharmacieController extends GetxController
   }
 
   navigateToMyRecruiter() {
-    Get.toNamed(Routes.declaration);
+    Get.back();
   }
 
   @override

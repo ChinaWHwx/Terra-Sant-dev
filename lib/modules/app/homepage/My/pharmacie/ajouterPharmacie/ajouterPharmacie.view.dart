@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterPharmacie/ajouterPharmacie.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
 class AjouterPharmacieView extends StatefulWidget {
   AjouterPharmacieView({Key? key}) : super(key: key);
+
   @override
   State<AjouterPharmacieView> createState() => AjouterPharmacieViewState();
 }
 
 class AjouterPharmacieViewState extends State<AjouterPharmacieView> {
+  // @override
+  // void dispose() {
+  //   Get.delete();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AjouterPharmacieController>(
@@ -18,8 +26,15 @@ class AjouterPharmacieViewState extends State<AjouterPharmacieView> {
         builder: (controller) {
           return Scaffold(
               appBar: AppBar(
-                title: const Text('添加药店'),
+                title: const Text('Ajouter un Pharmacie'),
                 centerTitle: true,
+                leading: BackButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    controller.homepagePharController.onRefresh();
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
               body: Card(
                 margin: const EdgeInsets.only(
@@ -34,7 +49,8 @@ class AjouterPharmacieViewState extends State<AjouterPharmacieView> {
                         child: Expanded(
                           child: TextFormField(
                             controller: controller.name,
-                            decoration: const InputDecoration(hintText: '药店名:'),
+                            decoration:
+                                const InputDecoration(hintText: 'Nom du Phar:'),
                           ),
                         ),
                       ),
@@ -85,7 +101,7 @@ class AjouterPharmacieViewState extends State<AjouterPharmacieView> {
                           child: TextFormField(
                             controller: controller.codePostal,
                             decoration:
-                                const InputDecoration(hintText: '药店邮编:'),
+                                const InputDecoration(hintText: 'Code Postal:'),
                           ),
                         ),
                       ),

@@ -6,12 +6,14 @@ import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
 import 'package:flutter_application_1/models/demande.model.dart';
 import 'package:flutter_application_1/models/offer.model.dart';
+import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
 import 'package:flutter_application_1/services/demande.service.dart';
 import 'package:flutter_application_1/services/offer.service.dart';
+import 'package:flutter_application_1/services/pharmacy.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +22,7 @@ class HomepageController extends GetxController with StateMixin {
   OfferService offerService = Get.find();
   DemandeService demandeService = Get.find();
   AvailabilityPharService availabilityPharService = Get.find();
-
+  List<Pharmacy> listAllPhar = [];
   var signInController = Get.find<SignInController>();
   List<AvailabilityPhar> list1 = []; //全部avlP
   List<AvailabilityUser> list2 = []; //本用户的所有avlU
@@ -28,6 +30,7 @@ class HomepageController extends GetxController with StateMixin {
   List<Demande> listAllDemande = [];
 
   var unReadMessage = 0.obs;
+  var unReadOffer = 0.obs;
 
   Timer? _timer;
 
@@ -63,6 +66,7 @@ class HomepageController extends GetxController with StateMixin {
 
   getMyDemandeUser() {
     final newList = <Demande>[];
+    final notYetRefusedList = <Demande>[];
     for (final demande in listAllDemande) {
       if (list2
           .where((element) => element.avlUId == demande.avlU_id)
@@ -70,7 +74,12 @@ class HomepageController extends GetxController with StateMixin {
         newList.add(demande);
       }
     }
-    return newList;
+    for (final demande in newList) {
+      if (demande.refuse == 'NO') {
+        notYetRefusedList.add(demande);
+      }
+    }
+    return notYetRefusedList;
   }
 
   setReadedAllDemandeUser() {
@@ -78,7 +87,19 @@ class HomepageController extends GetxController with StateMixin {
       //这里还要判断一下是不是和我的id一样
       if (demande.readed == 'NO' &&
           demande.user_avlU_id == signInController.user.userId) {
+        debugPrint('set read id: ${demande.demande_id}');
         demandeService.setReaded(demande.demande_id);
+      }
+    }
+  }
+
+  setReadedAllOfferUser() {
+    final newList = getMyOfferUser();
+    for (final offer in getMyOfferUser()) {
+      //这里还要判断一下是不是和我的id一样
+      if (offer.readed == 'NO') {
+        debugPrint('set read id: ${offer.offer_id}');
+        offerService.setReaded(offer.offer_id);
       }
     }
   }
@@ -86,14 +107,15 @@ class HomepageController extends GetxController with StateMixin {
   @override
   void onInit() {
     super.onInit();
-    // debugPrint('');
+    _timer = Timer.periodic(3.seconds, (timer) {
+      queryUnReadMessage();
+      queryUnReadOffer();
+    }); // debugPrint('');
     ShowPharAvl();
     ShowMyAvl_User();
     ShowAllOfferUser();
     ShowAllDemande();
-    _timer = Timer.periodic(1.seconds, (timer) {
-      queryUnReadMessage();
-    });
+    ShowAllPhars();
   }
 
   Future onRefresh() async {
@@ -101,12 +123,37 @@ class HomepageController extends GetxController with StateMixin {
     await ShowMyAvl_User();
     await ShowAllOfferUser();
     await ShowAllDemande();
+    await ShowAllPhars();
+  }
+
+  void setDemandeNotNew(Demande demande) async {
+    final index = listAllDemande.indexOf(demande);
+    var response = await demandeService.setNotNew(demande.demande_id);
+    if (!response.toString().contains("error")) {
+      listAllDemande[index].newOrNot = "NO";
+      update();
+    }
+  }
+
+  void setOfferNotNew(Offer offer) async {
+    final index = listAllOffer.indexOf(offer);
+    var response = await offerService.setNotNew(offer.offer_id);
+    if (!response.toString().contains("error")) {
+      listAllOffer[index].newOrNot = "NO";
+      update();
+    }
   }
 
   void queryUnReadMessage() async {
     var response =
         await demandeService.getHowManyUnread(signInController.user.userId);
-    unReadMessage.value = int.parse(response);
+    unReadMessage.value = int.parse(response ?? "0");
+  }
+
+  void queryUnReadOffer() async {
+    var response =
+        await offerService.getHowManyUnreadOffer(signInController.user.userId);
+    unReadOffer.value = int.parse(response ?? "0");
   }
 
   navigate(int i) {
@@ -253,6 +300,34 @@ class HomepageController extends GetxController with StateMixin {
     } else {
       listAllDemande =
           (response as List).map((e) => Demande.fromJson(e)).toList();
+      change(null, status: RxStatus.success());
+      update();
+      _controller.finishRefresh();
+    }
+  }
+
+  PharmacyService pharmacyService = Get.find();
+  Future ShowAllPhars() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await pharmacyService.getInfos();
+      manageResponse5(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse5(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+      _controller.finishRefresh(IndicatorResult.fail);
+    } else {
+      listAllPhar =
+          (response as List).map((e) => Pharmacy.fromJson(e)).toList();
       change(null, status: RxStatus.success());
       update();
       _controller.finishRefresh();

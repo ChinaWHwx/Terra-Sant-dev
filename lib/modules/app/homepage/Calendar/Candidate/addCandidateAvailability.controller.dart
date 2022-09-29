@@ -112,9 +112,9 @@ class AddCandidateAvailabilityController extends GetxController
   //       selectedTime.value.minute.toString());
   // }
 
-  navigateToHomePage() {
-    Get.toNamed(Routes.candidateAvailability);
-  }
+  // navigateToHomePage() {
+  //   Get.bac(Routes.candidateAvailability);
+  // }
 
   // bool disableDate(DateTime day) {
   //   if ((day.isAfter(DateTime.now().subtract(const Duration(days: 1))) &&
@@ -140,9 +140,8 @@ class AddCandidateAvailabilityController extends GetxController
       availabilityUser.repeat_candidate = selectedRepeate.value;
       availabilityUser.region_candidate = codePostal.text;
       availabilityUser.time_of_day_candidate = selectedPeriodeJournee.value;
-      availabilityUser.date_month_year_candidate = dateController
-          .toString()
-          .substring(0, dateController.toString().length - 13);
+      availabilityUser.date_month_year_candidate =
+          dateController.toString().substring(0, 10);
       //signUpService.newUser.userBirthdate = date as String?;
       var response =
           await availabilityUserService.addAvl(availabilityUser.toJson());
@@ -157,7 +156,7 @@ class AddCandidateAvailabilityController extends GetxController
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
           homepageController.onRefresh();
-          navigateToHomePage();
+          Get.back();
         }
       }
       if (response.containsKey('error')) {

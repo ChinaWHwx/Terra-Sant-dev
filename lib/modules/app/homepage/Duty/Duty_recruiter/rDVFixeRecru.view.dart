@@ -13,11 +13,13 @@ class RDVFixeRecruView extends GetView<RDVFixeRecruController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("药师的rdv"),
+        title: const Text("RDV fixé pour vous"),
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
             controller.navigateToHome();
+            controller.homepagePharController.setReadedAllOfferUser();
+            controller.homepagePharController.unReadOffer.value = 0;
           },
         ),
       ),

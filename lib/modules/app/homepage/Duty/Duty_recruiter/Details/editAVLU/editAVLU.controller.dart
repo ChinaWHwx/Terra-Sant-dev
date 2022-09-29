@@ -117,9 +117,8 @@ class EditAVLUController extends GetxController with StateMixin<List<dynamic>> {
       availabilityUsers.repeat_candidate = selectedRepeate.value;
       availabilityUsers.time_of_day_candidate = selectedPeriodeJournee.value;
       availabilityUsers.region_candidate = codePostal.text;
-      availabilityUsers.date_month_year_candidate = dateController
-          .toString()
-          .substring(0, dateController.toString().length - 13);
+      availabilityUsers.date_month_year_candidate =
+          dateController.toString().substring(0, 10);
       var response = await availabilityUserService.updateAvl(
           availabilityUsers.avlUId, availabilityUsers.toJson());
 

@@ -20,22 +20,22 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
           const Divider(
             color: Colors.grey,
           ),
-          buildDrawerItem(
-            icon: Icons.settings,
-            text: "Settings",
-            onTap: () => navigate(0, context),
-            tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
-            textIconColor:
-                Get.currentRoute == Routes.auth ? Colors.white : Colors.black,
-          ),
-          buildDrawerItem(
-            icon: Icons.favorite,
-            text: "Favorite",
-            onTap: () => navigate(1, context),
-            tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
-            textIconColor:
-                Get.currentRoute == Routes.auth ? Colors.white : Colors.black,
-          ),
+          // buildDrawerItem(
+          //   icon: Icons.settings,
+          //   text: "Settings",
+          //   onTap: () => navigate(0, context),
+          //   tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
+          //   textIconColor:
+          //       Get.currentRoute == Routes.auth ? Colors.white : Colors.black,
+          // ),
+          // buildDrawerItem(
+          //   icon: Icons.favorite,
+          //   text: "Favorite",
+          //   onTap: () => navigate(1, context),
+          //   tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
+          //   textIconColor:
+          //       Get.currentRoute == Routes.auth ? Colors.white : Colors.black,
+          // ),
           buildDrawerItem(
               icon: Icons.share,
               text: "Partager",
@@ -52,14 +52,14 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
               textIconColor: Get.currentRoute == Routes.auth
                   ? Colors.white
                   : Colors.black),
-          buildDrawerItem(
-              icon: Icons.location_on,
-              text: "Google Map",
-              onTap: () => navigate(4, context),
-              tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
-              textIconColor: Get.currentRoute == Routes.auth
-                  ? Colors.white
-                  : Colors.black),
+          // buildDrawerItem(
+          //     icon: Icons.location_on,
+          //     text: "Google Map",
+          //     onTap: () => navigate(4, context),
+          //     tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
+          //     textIconColor: Get.currentRoute == Routes.auth
+          //         ? Colors.white
+          //         : Colors.black),
           buildDrawerItem(
               icon: Icons.logout,
               text: "Déconnecter",
@@ -77,32 +77,32 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
     return UserAccountsDrawerHeader(
       accountName: Text(signInController.user.userName!),
       accountEmail: Text(signInController.user.userEmail!),
-      currentAccountPicture: Stack(
-        children: [
-          Obx(() => CircleAvatar(
-                backgroundImage: controller.selectedImage.value != null &&
-                        controller.selectedImage.value!.isNotEmpty
-                    ? FileImage(File(controller.selectedImage.value!))
-                    : const AssetImage('assets/images/download.jpg')
-                        as ImageProvider,
-                radius: 200,
-              )),
-          GestureDetector(
-            onTap: () {
-              controller.getPicture();
-            },
-          ),
-          Align(
-            // 编辑头像图片放在右下方。
-            alignment: Alignment.bottomRight,
-            child: Image.asset(
-              'assets/images/edit.png',
-              fit: BoxFit.contain,
-              height: 24.0,
-            ),
-          ),
-        ],
-      ),
+      // currentAccountPicture: Stack(
+      //   children: [
+      //     Obx(() => CircleAvatar(
+      //           backgroundImage: controller.selectedImage.value != null &&
+      //                   controller.selectedImage.value!.isNotEmpty
+      //               ? FileImage(File(controller.selectedImage.value!))
+      //               : const AssetImage('assets/images/download.jpg')
+      //                   as ImageProvider,
+      //           radius: 200,
+      //         )),
+      //     GestureDetector(
+      //       onTap: () {
+      //         controller.getPicture();
+      //       },
+      //     ),
+      //     Align(
+      //       // 编辑头像图片放在右下方。
+      //       alignment: Alignment.bottomRight,
+      //       child: Image.asset(
+      //         'assets/images/edit.png',
+      //         fit: BoxFit.contain,
+      //         height: 24.0,
+      //       ),
+      //     ),
+      //   ],
+      // ),
       /*
       CircleAvatar(
         backgroundImage: AssetImage('assets/images/download.jpg'),

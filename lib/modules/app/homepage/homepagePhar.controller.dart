@@ -1,5 +1,6 @@
+import 'dart:async';
+
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
@@ -7,8 +8,6 @@ import 'package:flutter_application_1/models/demande.model.dart';
 import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
-import 'package:flutter_application_1/models/ProductModel.dart';
-import 'package:flutter_application_1/modules/app/homepage/Calendar/Recruiter/declaration.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
@@ -18,8 +17,6 @@ import 'package:flutter_application_1/shared/utils/helper.utils.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:like_button/like_button.dart';
-import 'package:animated_icon_button/animated_icon_button.dart';
 
 class HomepagePharController extends GetxController with StateMixin {
   AvailabilityUserService availabilityUserService = Get.find();
@@ -31,11 +28,12 @@ class HomepagePharController extends GetxController with StateMixin {
   List<AvailabilityPhar> list2 = [];
   List<Pharmacy> listMyPhar = [];
   List<Offer> listAllOffer = [];
-
+  var unReadOffer = 0.obs;
   EasyRefreshController _controller =
       EasyRefreshController(controlFinishRefresh: true);
   EasyRefreshController get controller => _controller;
 
+  Timer? _timer;
   List<AvailabilityUser> getList1() {
     final newList = <AvailabilityUser>[];
     for (final avlU in _list1) {
@@ -61,6 +59,26 @@ class HomepagePharController extends GetxController with StateMixin {
     return newList;
   }
 
+  setReadedAllOfferUser() {
+    final newList = getMyOfferPhar();
+    for (final offer in getMyOfferPhar()) {
+      //这里还要判断一下是不是和我的id一样
+      if (offer.readedByPhar == 'NO') {
+        debugPrint('set read id: ${offer.offer_id}');
+        offerService.setReadedByPhar(offer.offer_id);
+      }
+    }
+  }
+
+  void setOfferNotNewByPhar(Offer offer) async {
+    final index = listAllOffer.indexOf(offer);
+    var response = await offerService.setNotNewByPhar(offer.offer_id);
+    if (!response.toString().contains("error")) {
+      listAllOffer[index].newOrNotByPhar = "NO";
+      update();
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -69,6 +87,16 @@ class HomepagePharController extends GetxController with StateMixin {
     ShowMyAvl_Phar();
     ShowMyPhars();
     ShowAllOfferPhar();
+
+    _timer = Timer.periodic(1.seconds, (timer) {
+      queryUnReadOffer();
+    });
+  }
+
+  void queryUnReadOffer() async {
+    var response = await offerService
+        .getHowManyUnreadOfferByPhar(signInController.user.userId);
+    unReadOffer.value = int.parse(response ?? "0");
   }
 
   Future onRefresh() async {
@@ -87,7 +115,8 @@ class HomepagePharController extends GetxController with StateMixin {
   navigate(int i) {
     switch (i) {
       case 0:
-        Get.toNamed(Routes.infoRoute);
+        // Get.toNamed(Routes.infoRoute);
+        onRefresh();
         break;
       case 1:
         //Get.toNamed(Routes.search);
@@ -234,7 +263,7 @@ class HomepagePharController extends GetxController with StateMixin {
     }
   }
 
-  final selectedMyAVLP = 0.obs;
+  final selectedMyAVLP = "Choisir un creneaux".obs;
   void setSelected(n, value) {
     if (n == 1) {
       selectedMyAVLP.value = value;
@@ -242,16 +271,35 @@ class HomepagePharController extends GetxController with StateMixin {
   }
 
   var demande = Demande();
-  List<int> get dropdownTextForMyAVLP =>
-      list2.map((e) => e.avlP_id ?? 0).toList()..add(0);
+
+  // List<String> get dropdownTextForMyAVLP =>
+  //     list2.map((e) => e.date_month_year_phar ?? "Null").toList()..add("Null");
+
+  List<String> get dropdownTextForMyAVLPdate => list2
+      .map((e) =>
+          '${e.date_month_year_phar}, ${e.repeat_phar}, (id:${e.avlP_id})')
+      .toList()
+    ..add("Choisir un creneaux");
+
   Rx<String> errorMessage = "".obs;
+
   sendDemande(avlU_id, user_avlU_id) async {
     if (selectedMyAVLP.value.toString() == '0') {
       errorMessage.value = "Champs obligatoire";
     } else {
-      demande.avlP_id = selectedMyAVLP.value;
+      String str = //'37)'
+          selectedMyAVLP.value.substring(selectedMyAVLP.value.length - 3);
+      String str1 = str.substring(0, str.length - 1);
+      print(str);
+      print(str1);
+
+      demande.avlP_id = int.parse(str1);
       demande.avlU_id = avlU_id;
       demande.user_avlU_id = user_avlU_id;
+      // demande.readed = 'NO';
+      // demande.newOrNot = 'YES';
+      // demande.refuse = 'NO';
+      // demande.accept = 'NO';
       var response = await demandeService.sendDemande(demande.toJson());
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
@@ -261,6 +309,7 @@ class HomepagePharController extends GetxController with StateMixin {
       }
       if (response.containsKey('error')) {
         errorMessage.value = response["error"];
+        print('déja exist');
       }
     }
   }

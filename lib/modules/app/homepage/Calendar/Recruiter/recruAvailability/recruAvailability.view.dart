@@ -14,7 +14,7 @@ class RecruAvailabilityView extends GetView<RecruAvailabilityController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My pharmacy need:'),
+        title: const Text('Mes besoins:'),
         leading: BackButton(
           color: Colors.white,
           onPressed: () {

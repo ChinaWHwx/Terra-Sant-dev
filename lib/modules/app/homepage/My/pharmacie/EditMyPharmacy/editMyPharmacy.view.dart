@@ -16,7 +16,7 @@ class EditMyPharmacyView extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
               appBar: AppBar(
-                title: const Text('编辑我已经有的药店'),
+                title: const Text('Editer ce Pharmacy'),
                 centerTitle: true,
               ),
               body: Card(

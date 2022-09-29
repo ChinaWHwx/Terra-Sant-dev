@@ -147,6 +147,11 @@ class PharmaciesCard extends StatelessWidget {
               //   maxLines: 2,
               // ),
               Text(
+                "NomPhar: ${pharmacy.phName}",
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 2,
+              ),
+              Text(
                 "Address: " + (pharmacy.phAddress ?? ''),
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
@@ -174,11 +179,7 @@ class PharmaciesCard extends StatelessWidget {
               //   style: const TextStyle(color: Colors.black, fontSize: 18),
               //   maxLines: 2,
               // ),
-              Text(
-                "Nom: ${pharmacy.phName}",
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-                maxLines: 2,
-              ),
+
               Text(
                 "Num Tél: ${pharmacy.phPhone}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
@@ -216,7 +217,7 @@ class PharmaciesCard extends StatelessWidget {
                             title: Text('Confirmation'),
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [Text(('确认删除吗'))]),
+                                children: [Text(('Vous voulez supprimer?'))]),
                             actions: <Widget>[
                               TextButton(
                                 child: new Text("Cancel"),
@@ -233,7 +234,7 @@ class PharmaciesCard extends StatelessWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
-                                            content: Text(('已经删除这个药店了')),
+                                            content: Text(('Déja supprimé')),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: new Text("Cancel"),

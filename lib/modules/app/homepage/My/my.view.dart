@@ -31,15 +31,15 @@ class MyView extends GetView<MyController> {
                     const SizedBox(
                       height: 100,
                     ),
-                    TextButton(
-                      child: Row(
-                        children: const [
-                          Icon(Icons.people),
-                          Text("Mon profil"),
-                        ],
-                      ),
-                      onPressed: () => controller.navigateToProfile(),
-                    ),
+                    // TextButton(
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(Icons.people),
+                    //       Text("Mon profil"),
+                    //     ],
+                    //   ),
+                    //   onPressed: () => controller.navigateToProfile(),
+                    // ),
                     TextButton(
                       child: Row(
                         children: const [
@@ -58,24 +58,24 @@ class MyView extends GetView<MyController> {
                       ),
                       onPressed: () => controller.navigateToAbility(),
                     ),
-                    TextButton(
-                      child: Row(
-                        children: const [
-                          Icon(Icons.file_copy),
-                          Text("Mes documents"),
-                        ],
-                      ),
-                      onPressed: () => controller.navigateToDocument(),
-                    ),
-                    TextButton(
-                      child: Row(
-                        children: const [
-                          Icon(Icons.favorite),
-                          Text("Mes favorites"),
-                        ],
-                      ),
-                      onPressed: () => controller.navigateToBookmarksPage(),
-                    ),
+                    // TextButton(
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(Icons.file_copy),
+                    //       Text("Mes documents"),
+                    //     ],
+                    //   ),
+                    //   onPressed: () => controller.navigateToDocument(),
+                    // ),
+                    // TextButton(
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(Icons.favorite),
+                    //       Text("Mes favorites"),
+                    //     ],
+                    //   ),
+                    //   onPressed: () => controller.navigateToBookmarksPage(),
+                    // ),
                     TextButton(
                       child: Row(
                         children: const [

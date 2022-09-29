@@ -157,19 +157,19 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
               ),
               SizedBox(height: getProportionateScreenWidth(30)),
               Text(
-                "region_candidate: ${availabilityUsers.region_candidate}",
+                "région: ${availabilityUsers.region_candidate}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "date_month_year_candidate: ${availabilityUsers.date_month_year_candidate}",
+                "date: ${availabilityUsers.date_month_year_candidate}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "repeat_candidate: ${availabilityUsers.repeat_candidate}",
+                "repeat: ${availabilityUsers.repeat_candidate}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -200,7 +200,9 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
                             title: Text('Confirmation'),
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [Text(('确认删除吗'))]),
+                                children: [
+                                  Text(('Vous voulez le supprimer?'))
+                                ]),
                             actions: <Widget>[
                               TextButton(
                                 child: new Text("Cancel"),
@@ -220,7 +222,7 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
-                                            content: Text(('已经删除这个avlU了')),
+                                            content: Text(('déja supprimé')),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: new Text("Cancel"),
@@ -288,19 +290,19 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
               ),
               SizedBox(height: getProportionateScreenWidth(30)),
               Text(
-                "region_candidate: ${availabilityUsers.region_candidate}",
+                "region: ${availabilityUsers.region_candidate}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "date_month_year_candidate: ${availabilityUsers.date_month_year_candidate}",
+                "date: ${availabilityUsers.date_month_year_candidate}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
               Text(
-                "repeat_candidate: ${availabilityUsers.repeat_candidate}",
+                "Répetiton: ${availabilityUsers.repeat_candidate}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -321,7 +323,7 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   const Text(
-                                    "选我的时间:",
+                                    "Choisir entre mes besoins:",
                                   ),
                                   Obx(() => DropdownButton(
                                         isExpanded: true,
@@ -333,12 +335,12 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                                         value: homepagePharController
                                             .selectedMyAVLP.value,
                                         items: homepagePharController
-                                            .dropdownTextForMyAVLP
-                                            .map<DropdownMenuItem<int>>(
-                                                (int value) {
-                                          return DropdownMenuItem<int>(
+                                            .dropdownTextForMyAVLPdate
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value.toString()),
+                                            child: Text(value),
                                           );
                                         }).toList(),
                                       )),
@@ -361,7 +363,8 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
-                                            content: Text(('如果她接受，我们会给你发合同')),
+                                            content: Text(
+                                                ('Si il accepet, nous allons vous contacter par mail')),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: new Text("Cancel"),
