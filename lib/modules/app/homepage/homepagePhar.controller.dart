@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
 import 'package:flutter_application_1/models/demande.model.dart';
+import 'package:flutter_application_1/models/demandeToPhar.model.dart';
 import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
+import 'package:flutter_application_1/services/demandeToPhar.service.dart';
 import 'package:flutter_application_1/services/offer.service.dart';
 import 'package:flutter_application_1/services/pharmacy.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
@@ -23,12 +25,15 @@ class HomepagePharController extends GetxController with StateMixin {
   AvailabilityPharService availabilityPharService = Get.find();
   PharmacyService pharmacyService = Get.find();
   OfferService offerService = Get.find();
+  DemandeToPharService demandeToPharService = Get.find();
 
   List<AvailabilityUser> _list1 = []; //所有的avlU
   List<AvailabilityPhar> list2 = [];
   List<Pharmacy> listMyPhar = [];
   List<Offer> listAllOffer = [];
+  List<DemandeToPhar> listAllDemandeToPhar = [];
   var unReadOffer = 0.obs;
+  var unReadMessage = 0.obs;
   EasyRefreshController _controller =
       EasyRefreshController(controlFinishRefresh: true);
   EasyRefreshController get controller => _controller;
@@ -70,12 +75,51 @@ class HomepagePharController extends GetxController with StateMixin {
     }
   }
 
+  void setDemandeToPharNotNew(DemandeToPhar demandeToPhar) async {
+    final index = listAllDemandeToPhar.indexOf(demandeToPhar);
+    var response =
+        await demandeToPharService.setNotNew(demandeToPhar.demandeToPhar_id);
+    if (!response.toString().contains("error")) {
+      listAllDemandeToPhar[index].newOrNot = "NO";
+      update();
+    }
+  }
+
   void setOfferNotNewByPhar(Offer offer) async {
     final index = listAllOffer.indexOf(offer);
     var response = await offerService.setNotNewByPhar(offer.offer_id);
     if (!response.toString().contains("error")) {
       listAllOffer[index].newOrNotByPhar = "NO";
       update();
+    }
+  }
+
+  getMyDemandePhar() {
+    final newList = <DemandeToPhar>[];
+    final notYetRefusedList = <DemandeToPhar>[];
+    for (final demandeToPhar in listAllDemandeToPhar) {
+      if (list2
+          .where((element) => element.avlP_id == demandeToPhar.avlP_id)
+          .isNotEmpty) {
+        newList.add(demandeToPhar);
+      }
+    }
+    for (final demandeToPhar in newList) {
+      if (demandeToPhar.refuse == 'NO') {
+        notYetRefusedList.add(demandeToPhar);
+      }
+    }
+    return notYetRefusedList;
+  }
+
+  setReadedAllDemandePhars() {
+    for (final demandeToPhar in listAllDemandeToPhar) {
+      //这里还要判断一下是不是和我的id一样
+      if (demandeToPhar.readed == 'NO' &&
+          demandeToPhar.user_avlP_id == signInController.user.userId) {
+        debugPrint('set read id: ${demandeToPhar.demandeToPhar_id}');
+        demandeToPharService.setReaded(demandeToPhar.demandeToPhar_id);
+      }
     }
   }
 
@@ -87,16 +131,24 @@ class HomepagePharController extends GetxController with StateMixin {
     ShowMyAvl_Phar();
     ShowMyPhars();
     ShowAllOfferPhar();
+    ShowAllDemandeToPhar();
 
-    _timer = Timer.periodic(1.seconds, (timer) {
+    _timer = Timer.periodic(3.seconds, (timer) {
       queryUnReadOffer();
+      queryUnReadMessage();
     });
   }
 
   void queryUnReadOffer() async {
     var response = await offerService
         .getHowManyUnreadOfferByPhar(signInController.user.userId);
-    unReadOffer.value = int.parse(response ?? "0");
+    unReadOffer.value = int.parse(response ?? 0);
+  }
+
+  void queryUnReadMessage() async {
+    var response = await demandeToPharService
+        .getHowManyUnreadToPhar(signInController.user.userId);
+    unReadMessage.value = int.parse(response ?? 0);
   }
 
   Future onRefresh() async {
@@ -124,11 +176,11 @@ class HomepagePharController extends GetxController with StateMixin {
         break;
       case 2:
         {
-          if (signInController.user.userType == "candidat") {
+          if (signInController.user.user_type == "candidat") {
             //Get.toNamed(Routes.candidateCalendar);
             Get.toNamed(Routes.complexExemple);
           }
-          if (signInController.user.userType == "recruteur") {
+          if (signInController.user.user_type == "recruteur") {
             //Get.toNamed(Routes.recruiterCalendar);
             Get.toNamed(Routes.recruAvailability);
           }
@@ -137,17 +189,18 @@ class HomepagePharController extends GetxController with StateMixin {
         break;
       case 3:
         {
-          if (signInController.user.userType == "candidat" ||
-              signInController.user.userType == "etudiant") {
+          if (signInController.user.user_type == "candidat" ||
+              signInController.user.user_type == "etudiant") {
             Get.toNamed(Routes.rDVFixeRecru);
           }
-          if (signInController.user.userType == "recruteur") {
+          if (signInController.user.user_type == "recruteur") {
             Get.toNamed(Routes.rDVFixeRecruRoute);
           }
         }
         break;
+
       default:
-        Get.toNamed(Routes.my);
+        Get.toNamed(Routes.demandeToPhar);
     }
   }
 
@@ -257,6 +310,33 @@ class HomepagePharController extends GetxController with StateMixin {
     } else {
       listAllOffer = (response as List).map((e) => Offer.fromJson(e)).toList();
 
+      change(null, status: RxStatus.success());
+      update();
+      _controller.finishRefresh();
+    }
+  }
+
+  Future ShowAllDemandeToPhar() async {
+    try {
+      change(null, status: RxStatus.loading());
+      var response = await demandeToPharService.getInfos();
+      manageResponse5(response);
+    } on Error catch (e) {
+      debugPrint('e: ${e.stackTrace}');
+      HelperUtils.showSimpleSnackBar('Une erreur est survenue.');
+      change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  manageResponse5(var response) {
+    debugPrint('response: $response');
+    if (response.toString().contains("error")) {
+      HelperUtils.showSimpleSnackBar(response['error']);
+      change(null, status: RxStatus.success());
+      _controller.finishRefresh();
+    } else {
+      listAllDemandeToPhar =
+          (response as List).map((e) => DemandeToPhar.fromJson(e)).toList();
       change(null, status: RxStatus.success());
       update();
       _controller.finishRefresh();

@@ -197,25 +197,22 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                   }
                   onTapPhone?.call(availabilityPhars.avlP_id ?? 0);
 
-                  final avlP = homepagePharController.list2.firstWhere(
-                      (element) =>
-                          element.avlP_id == availabilityPhars.avlP_id);
+                  // final avlP = homepagePharController.list2.firstWhere(
+                  //     (element) =>
+                  //         element.avlP_id == availabilityPhars.avlP_id);
 
                   showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                            title: Text('Je veux y aller!'),
+                            title: Text('Détail: '),
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Text(
-                                    "Détail:",
+                                  Text(
+                                    "Répetition: ${availabilityPhars.repeat_phar}",
                                   ),
                                   Text(
-                                    "Répetition: ${avlP.repeat_phar}",
-                                  ),
-                                  Text(
-                                    "Créneaux: ${avlP.time_of_day_phar}",
+                                    "Créneaux: ${availabilityPhars.time_of_day_phar}",
                                   ),
                                 ]),
                             actions: <Widget>[
@@ -235,23 +232,108 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
-                                            content: Text(
-                                                ('Nous allons vous aider de contacter ce Pharmacy,\nAttendez-vous notre E-mail!')),
+                                            content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  const Text(
+                                                    "Choisir entre mes besoins:",
+                                                  ),
+                                                  Obx(() => DropdownButton(
+                                                        isExpanded: true,
+                                                        iconSize: 24,
+                                                        onChanged: (newValue) {
+                                                          homepageController
+                                                              .setSelected(
+                                                                  1, newValue);
+                                                        },
+                                                        value:
+                                                            homepageController
+                                                                .selectedMyAVLU
+                                                                .value,
+                                                        items: homepageController
+                                                            .dropdownTextForMyAVLUdate
+                                                            .map<
+                                                                DropdownMenuItem<
+                                                                    String>>((String
+                                                                value) {
+                                                          return DropdownMenuItem<
+                                                              String>(
+                                                            value: value,
+                                                            child: Text(value),
+                                                          );
+                                                        }).toList(),
+                                                      )),
+                                                ]),
                                             actions: <Widget>[
-                                              // TextButton(
-                                              //   child: new Text("Cancel"),
-                                              //   onPressed: () {
-                                              //     Navigator.of(context).pop();
-                                              //   },
-                                              // ),
                                               TextButton(
-                                                child: Text("ok"),
+                                                child: new Text("Cancel"),
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
                                               ),
+                                              TextButton(
+                                                child: Text("Oui"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                  homepageController
+                                                      .sendDemandeToPhar(
+                                                    availabilityPhars.avlP_id,
+                                                    availabilityPhars.owner_id,
+                                                  );
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                            title: Text(
+                                                                'Confirmation'),
+                                                            content: Text(
+                                                                ('Si il accepet, nous allons vous contacter par mail')),
+                                                            actions: <Widget>[
+                                                              TextButton(
+                                                                child: new Text(
+                                                                    "Cancel"),
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                              ),
+                                                              TextButton(
+                                                                child:
+                                                                    Text("ok"),
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ));
+                                                },
+                                              ),
                                             ],
                                           ));
+                                  // showDialog(
+                                  //     context: context,
+                                  //     builder: (context) => AlertDialog(
+                                  //           title: Text('Confirmation'),
+                                  //           content: Text(
+                                  //               ('Nous allons vous aider de contacter ce Pharmacy,\nAttendez-vous notre E-mail!')),
+                                  //           actions: <Widget>[
+                                  //             // TextButton(
+                                  //             //   child: new Text("Cancel"),
+                                  //             //   onPressed: () {
+                                  //             //     Navigator.of(context).pop();
+                                  //             //   },
+                                  //             // ),
+                                  //             TextButton(
+                                  //               child: Text("ok"),
+                                  //               onPressed: () {
+                                  //                 Navigator.of(context).pop();
+                                  //               },
+                                  //             ),
+                                  //           ],
+                                  //         ));
                                 },
                               ),
                             ],

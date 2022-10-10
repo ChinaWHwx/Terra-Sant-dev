@@ -27,13 +27,13 @@ class SignInController extends GetxController with StateMixin {
   }
 
   navigateToHome() {
-    if (user.userType == "candidat" || user.userType == "etudiant") {
+    if (user.user_type == "candidat" || user.user_type == "etudiant") {
       Get.toNamed(Routes.homepageRoute);
-      print(user.userType);
+      print(user.user_type);
     }
-    if (user.userType == "recruteur") {
+    if (user.user_type == "recruteur") {
       Get.toNamed(Routes.homepagePharRoute);
-      print(user.userType);
+      print(user.user_type);
     }
   }
 

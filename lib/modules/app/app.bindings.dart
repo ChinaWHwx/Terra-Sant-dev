@@ -59,6 +59,7 @@ import 'package:flutter_application_1/modules/app/homepage/My/favorite/Pharmacie
 import 'package:flutter_application_1/modules/app/homepage/My/my.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/My/profile/profile.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/demande.controller.dart';
+import 'package:flutter_application_1/modules/app/homepage/Search/demandeToPhar.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
@@ -68,6 +69,7 @@ import 'package:flutter_application_1/repositories/availabilityPhar.repository.d
 import 'package:flutter_application_1/repositories/availabilityUser.repository.dart';
 import 'package:flutter_application_1/repositories/candidate.repository.dart';
 import 'package:flutter_application_1/repositories/demande.repository.dart';
+import 'package:flutter_application_1/repositories/demandeToPhar.repository.dart';
 import 'package:flutter_application_1/repositories/login.repository.dart';
 import 'package:flutter_application_1/repositories/offer.repository.dart';
 import 'package:flutter_application_1/repositories/pharmacy.repository.dart';
@@ -77,6 +79,7 @@ import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
 import 'package:flutter_application_1/services/candidate.service.dart';
 import 'package:flutter_application_1/services/demande.service.dart';
+import 'package:flutter_application_1/services/demandeToPhar.service.dart';
 import 'package:flutter_application_1/services/login.service.dart';
 import 'package:flutter_application_1/services/offer.service.dart';
 import 'package:flutter_application_1/services/pharmacy.service.dart';
@@ -153,6 +156,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AjouterPharmacieController(), fenix: true);
     Get.lazyPut(() => HomepagePharController(), fenix: true);
     Get.lazyPut(() => DemandeController(), fenix: true);
+    Get.lazyPut(() => DemandeToPharController(), fenix: true);
+
     Get.lazyPut(() => CandidateAvailabilityController(), fenix: true);
     Get.lazyPut(() => RecuAjouterPharmacieController(), fenix: true);
     Get.lazyPut(() => RecruAvailabilityController(), fenix: true);
@@ -164,6 +169,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AvailabilityUserService(), fenix: true);
     Get.lazyPut(() => SignUpService(), fenix: true);
     Get.lazyPut(() => DemandeService(), fenix: true);
+    Get.lazyPut(() => DemandeToPharService(), fenix: true);
+
     Get.lazyPut(() => AvailabilityPharService(), fenix: true);
     Get.lazyPut(() => CandidateService(), fenix: true);
     Get.lazyPut(() => OfferService(), fenix: true);
@@ -177,6 +184,8 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => BasicExempleController(), fenix: true);
     Get.lazyPut(() => ComplexExempleController(), fenix: true);
     Get.lazyPut(() => DemandeRepository(), fenix: true);
+    Get.lazyPut(() => DemandeToPharRepository(), fenix: true);
+
     Get.lazyPut(() => CandidateRepository(), fenix: true);
     Get.lazyPut(() => OfferRepository(), fenix: true);
     Get.lazyPut(() => PharmacyRepository(), fenix: true);

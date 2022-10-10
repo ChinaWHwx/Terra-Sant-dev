@@ -27,7 +27,7 @@ class CandidateView extends GetView<CandidateController> {
               fontSize: 16.0,
               image: "assets/images/c1.png",
               onTap: () {
-                controller.setStatus("ETD3");
+                controller.setStatus("ETD");
               },
             ),
             RoundedImageTextButton(

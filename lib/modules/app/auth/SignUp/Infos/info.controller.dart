@@ -51,11 +51,11 @@ class InfoController extends GetxController with StateMixin {
       authController.newUser.userFname = prenomEditingController.text;
       authController.newUser.userName = nomEditingController.text;
       authController.newUser.userBirthdate =
-          birthdayEditingController.toString();
+          birthdayEditingController.toString().substring(0, 10);
       //signUpService.newUser.userBirthdate = date as String?;
       var response1 = await signUpService.addNameUser(authController.newUser);
-      if (authController.newUser.userType == "candidat" ||
-          authController.newUser.userType == "etudiant") {
+      if (authController.newUser.user_type == "candidat" ||
+          authController.newUser.user_type == "etudiant") {
         var response =
             await signUpService.addCandidat(authController.newUser.userId);
         if (response.containsKey("success")) {

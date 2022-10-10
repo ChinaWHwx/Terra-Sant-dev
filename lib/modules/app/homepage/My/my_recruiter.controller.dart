@@ -77,10 +77,10 @@ class MyRecruiterController extends GetxController {
         Get.toNamed(Routes.candidateCalendar);
         break;
       case 3:
-        if (signInController.user.userType == "candidat") {
+        if (signInController.user.user_type == "candidat") {
           Get.toNamed(Routes.dutyCandidate);
         }
-        if (signInController.user.userType == "recruteur") {
+        if (signInController.user.user_type == "recruteur") {
           Get.toNamed(Routes.dutyRecruiter);
         }
 

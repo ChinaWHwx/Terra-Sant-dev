@@ -66,6 +66,7 @@ import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/ajouterP
 import 'package:flutter_application_1/modules/app/homepage/My/pharmacie/pharmacie.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/demande.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/demande.view.dart';
+import 'package:flutter_application_1/modules/app/homepage/Search/demandeToPhar.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Search/search.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/Welcome/welcome.view.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.view.dart';
@@ -216,6 +217,7 @@ class AppPages {
         name: Routes.recuAjouterPharmacieRoute,
         page: () => const RecuAjouterPharmacieView()),
     GetPage(name: Routes.demande, page: () => const DemandeView()),
+    GetPage(name: Routes.demandeToPhar, page: () => const DemandeToPharView()),
     GetPage(name: Routes.homepagePhar, page: () => const HomepagePharView()),
     GetPage(
         name: Routes.candidateAvailability,

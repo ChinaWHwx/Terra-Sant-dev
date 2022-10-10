@@ -28,8 +28,9 @@
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
 
+        <!-- TODO: Add your Google Maps API key here -->
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyD4U3Q0x6MR0ad-UXTwp6XVvaBsmlHkOhc"/>
+               android:value="AIzaSyA3VDd9ZNfe7B5xrZNrLVqyBB-BlbQmyVw"/>
         <activity
                android:name="com.yalantis.ucrop.UCropActivity"
                android:screenOrientation="portrait"

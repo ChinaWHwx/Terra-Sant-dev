@@ -1,4 +1,3 @@
-import 'package:flutter_application_1/models/user.model.dart';
 import 'package:flutter_application_1/repositories/signUp.repository.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +7,7 @@ class SignUpService {
   Future createUser(newUser) async {
     try {
       var response = await signUpRepo.createUser(newUser.toJson());
+      print(newUser.toJson());
       return response.body;
     } catch (e) {
       return Future.error(e.toString());

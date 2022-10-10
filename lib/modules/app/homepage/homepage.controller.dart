@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/models/availabilityUser.model.dart';
 import 'package:flutter_application_1/models/demande.model.dart';
+import 'package:flutter_application_1/models/demandeToPhar.model.dart';
 import 'package:flutter_application_1/models/offer.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_application_1/routes/app.pages.dart';
 import 'package:flutter_application_1/services/availabilityPhar.service.dart';
 import 'package:flutter_application_1/services/availabilityUser.service.dart';
 import 'package:flutter_application_1/services/demande.service.dart';
+import 'package:flutter_application_1/services/demandeToPhar.service.dart';
 import 'package:flutter_application_1/services/offer.service.dart';
 import 'package:flutter_application_1/services/pharmacy.service.dart';
 import 'package:flutter_application_1/shared/utils/helper.utils.dart';
@@ -20,7 +22,7 @@ import 'package:get/get.dart';
 class HomepageController extends GetxController with StateMixin {
   AvailabilityUserService availabilityUserService = Get.find();
   OfferService offerService = Get.find();
-  DemandeService demandeService = Get.find();
+  DemandeToPharService demandeToPharService = Get.find();
   AvailabilityPharService availabilityPharService = Get.find();
   List<Pharmacy> listAllPhar = [];
   var signInController = Get.find<SignInController>();
@@ -169,12 +171,12 @@ class HomepageController extends GetxController with StateMixin {
         break;
       case 2:
         {
-          if (signInController.user.userType == "candidat" ||
-              signInController.user.userType == "etudiant") {
+          if (signInController.user.user_type == "candidat" ||
+              signInController.user.user_type == "etudiant") {
             //Get.toNamed(Routes.complexExemple);
             Get.toNamed(Routes.candidateAvailability);
           }
-          if (signInController.user.userType == "recruteur") {
+          if (signInController.user.user_type == "recruteur") {
             //Get.toNamed(Routes.recruiterCalendar);
             Get.toNamed(Routes.complexExemple);
           }
@@ -183,11 +185,11 @@ class HomepageController extends GetxController with StateMixin {
         break;
       case 3:
         {
-          if (signInController.user.userType == "candidat" ||
-              signInController.user.userType == "etudiant") {
+          if (signInController.user.user_type == "candidat" ||
+              signInController.user.user_type == "etudiant") {
             Get.toNamed(Routes.rDVFixeCandidate);
           }
-          if (signInController.user.userType == "recruteur") {
+          if (signInController.user.user_type == "recruteur") {
             Get.toNamed(Routes.rDVFixeCandidate);
           }
         }
@@ -338,6 +340,58 @@ class HomepageController extends GetxController with StateMixin {
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  final selectedMyAVLU = "Choisir un creneaux".obs;
+  void setSelected(n, value) {
+    if (n == 1) {
+      selectedMyAVLU.value = value;
+    }
+  }
+
+  var demandeToPhar = DemandeToPhar();
+
+  // List<String> get dropdownTextForMyAVLP =>
+  //     list2.map((e) => e.date_month_year_phar ?? "Null").toList()..add("Null");
+
+  List<String> get dropdownTextForMyAVLUdate => list2
+      .map((e) =>
+          '${e.date_month_year_candidate}, ${e.region_candidate}, (id:${e.avlUId})')
+      .toList()
+    ..add("Choisir un creneaux");
+
+  Rx<String> errorMessage = "".obs;
+
+  sendDemandeToPhar(avlP_id, user_avlP_id) async {
+    if (selectedMyAVLU.value.toString() == '0') {
+      errorMessage.value = "Champs obligatoire";
+    } else {
+      String str = //'37)'
+          selectedMyAVLU.value.substring(selectedMyAVLU.value.length - 3);
+      String str1 = str.substring(0, str.length - 1);
+      print(str);
+      print(str1);
+
+      demandeToPhar.avlU_id = int.parse(str1);
+      demandeToPhar.avlP_id = avlP_id;
+      demandeToPhar.user_avlP_id = user_avlP_id;
+      // demande.readed = 'NO';
+      // demande.newOrNot = 'YES';
+      // demande.refuse = 'NO';
+      // demande.accept = 'NO';
+      var response =
+          await demandeToPharService.sendDemandeToPhar(demandeToPhar.toJson());
+      if (response.containsKey("success")) {
+        if (response["success"] == 'true') {
+          change(null, status: RxStatus.success());
+          onRefresh();
+        }
+      }
+      if (response.containsKey('error')) {
+        errorMessage.value = response["error"];
+        print('déja exist');
+      }
+    }
   }
 }
 

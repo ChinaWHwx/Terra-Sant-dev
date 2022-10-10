@@ -21,12 +21,12 @@ class AuthController extends GetxController {
   }
 
   navigateToCandidate() {
-    newUser.userType = "candidat";
+    newUser.user_type = "candidat";
     Get.toNamed(Routes.candidateRoute);
   }
 
   navigateToRecruiter() {
-    newUser.userType = "recruteur";
+    newUser.user_type = "recruteur";
     Get.toNamed(Routes.recruiterRoute);
   }
 

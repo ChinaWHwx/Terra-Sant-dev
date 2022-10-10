@@ -17,7 +17,7 @@ class TelephoneController extends GetxController with StateMixin {
   }
 
   navigateToStatus() {
-    String type = authController.newUser.userType ?? "indéfini";
+    String type = authController.newUser.user_type ?? "indéfini";
     if (type == 'candidat' || type == "etudiant") {
       Get.toNamed(Routes.candidateRoute);
     } else if (type == "recruteur") {
@@ -45,6 +45,7 @@ class TelephoneController extends GetxController with StateMixin {
       } else {
         authController.newUser.userPhone = textEditingController.text;
         var response = await signUpService.createUser(authController.newUser);
+        print(authController.newUser.toJson());
         if (response.containsKey("success")) {
           if (response["success"] == 'true') {
             authController.newUser.userId = response['user_id'];

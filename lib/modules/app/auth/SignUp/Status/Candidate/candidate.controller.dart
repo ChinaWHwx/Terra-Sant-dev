@@ -7,16 +7,16 @@ class CandidateController extends GetxController {
   SignUpService signUpService = Get.find();
   AuthController authController = Get.find();
   final String title = 'Choissiez votre status:';
-  final String student = 'étudiant,e';
+  final String student = 'Etudiant,e';
   final String preprer = 'Préparateur,trice';
   final String pharmaciste = 'Pharmacien,ne';
   final String rentrer = 'Rentrer';
 
   setStatus(status) {
     authController.newUser.userStatus = status;
-    if (status.contains("ETD")) {
-      authController.newUser.userType = "etudiant";
-    }
+    // if (status.contains("ETD")) {
+    //   authController.newUser.user_type = "etudiant";
+    // }
     navigateToSignUpRoute();
   }
 

@@ -58,15 +58,15 @@ class MyView extends GetView<MyController> {
                       ),
                       onPressed: () => controller.navigateToAbility(),
                     ),
-                    // TextButton(
-                    //   child: Row(
-                    //     children: const [
-                    //       Icon(Icons.file_copy),
-                    //       Text("Mes documents"),
-                    //     ],
-                    //   ),
-                    //   onPressed: () => controller.navigateToDocument(),
-                    // ),
+                    TextButton(
+                      child: Row(
+                        children: const [
+                          Icon(Icons.file_copy),
+                          Text("Mes documents"),
+                        ],
+                      ),
+                      onPressed: () => controller.navigateToDocument(),
+                    ),
                     // TextButton(
                     //   child: Row(
                     //     children: const [
