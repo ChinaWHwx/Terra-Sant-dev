@@ -32,17 +32,17 @@ class EditAVLUView extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Card(
-                            child: TextField(
-                                controller: controller.competence,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  labelText: "Saisir ici vos compétance",
-                                  hintText: "ex. Je suis un dentist ...",
-                                  prefixIcon: Icon(Icons.vaccines),
-                                  // border: InputBorder.none
-                                )),
-                          ),
+                          // Card(
+                          //   child: TextField(
+                          //       controller: controller.competence,
+                          //       keyboardType: TextInputType.emailAddress,
+                          //       decoration: InputDecoration(
+                          //         labelText: "Saisir ici vos compétance",
+                          //         hintText: "ex. Je suis un dentist ...",
+                          //         prefixIcon: Icon(Icons.vaccines),
+                          //         // border: InputBorder.none
+                          //       )),
+                          // ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -126,13 +126,16 @@ class EditAVLUView extends StatelessWidget {
                                   );
                                 }).toList(),
                               )),
+                          const Text(
+                            "Saisir code postal:",
+                          ),
                           SizedBox(
                             height: 50,
                             child: Expanded(
                               child: TextFormField(
                                 controller: controller.codePostal,
-                                decoration:
-                                    const InputDecoration(hintText: 'my邮编:'),
+                                decoration: const InputDecoration(
+                                    hintText: 'ex: 75001'),
                               ),
                             ),
                           ),

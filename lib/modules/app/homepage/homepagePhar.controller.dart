@@ -44,7 +44,8 @@ class HomepagePharController extends GetxController with StateMixin {
     for (final avlU in _list1) {
       if (list2
           .where((element) =>
-              element.date_month_year_phar == avlU.date_month_year_candidate)
+              element.date_month_year_phar == avlU.date_month_year_candidate &&
+              element.ph_region == avlU.region_candidate)
           .isNotEmpty) {
         newList.add(avlU);
       }

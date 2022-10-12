@@ -138,7 +138,7 @@ class DemandeToPharForUserCard extends StatelessWidget {
                   ),
                   SizedBox(height: getProportionateScreenWidth(30)),
                   Text(
-                    "avlP.date: ${avlP.date_month_year_phar}",
+                    "demande date: ${avlP.date_month_year_phar}",
                     style: const TextStyle(color: Colors.black, fontSize: 18),
                     maxLines: 4,
                     textAlign: TextAlign.center,

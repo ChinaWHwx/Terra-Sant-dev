@@ -37,6 +37,29 @@ class AvailabilityUser {
   int? user_id;
   String? competence;
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AvailabilityUser &&
+          runtimeType == other.runtimeType &&
+          avlUId == other.avlUId &&
+          repeat_candidate == other.repeat_candidate &&
+          date_month_year_candidate == other.date_month_year_candidate &&
+          time_of_day_candidate == other.time_of_day_candidate &&
+          region_candidate == other.region_candidate &&
+          user_id == other.user_id &&
+          competence == other.competence;
+
+  @override
+  int get hashCode =>
+      avlUId.hashCode ^
+      repeat_candidate.hashCode ^
+      date_month_year_candidate.hashCode ^
+      time_of_day_candidate.hashCode ^
+      region_candidate.hashCode ^
+      user_id.hashCode ^
+      competence.hashCode;
+
   factory AvailabilityUser.fromJson(Map<String, dynamic> json) =>
       AvailabilityUser(
         avlUId: json["avlU_id"],
@@ -175,6 +198,12 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
+              Text(
+                "créneaux: ${availabilityUsers.time_of_day_candidate}",
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: getProportionateScreenWidth(30)),
               LikeButton(
                 onTap: (b) {
@@ -304,6 +333,12 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
               ),
               Text(
                 "Répetiton: ${availabilityUsers.repeat_candidate}",
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "Créneaux: ${availabilityUsers.time_of_day_candidate}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
                 maxLines: 2,
                 textAlign: TextAlign.center,

@@ -45,6 +45,7 @@ class Pharmacy {
         phEmailConf: json["ph_email_conf"],
         phId: json["ph_id"],
         phName: json["ph_name"],
+        phPhone: json["ph_phone"],
         phPhoneConf: json["ph_phone_conf"],
         ph_region: json["ph_region"] == null ? null : json['ph_region'],
       );

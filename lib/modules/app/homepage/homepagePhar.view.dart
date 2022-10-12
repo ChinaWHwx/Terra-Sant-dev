@@ -67,7 +67,7 @@ class HomepagePharView extends GetView<HomepagePharController> {
               )
             ],
           ),
-          title: 'Messege',
+          title: 'RDV',
         ),
         TabItem(
           icon: Stack(

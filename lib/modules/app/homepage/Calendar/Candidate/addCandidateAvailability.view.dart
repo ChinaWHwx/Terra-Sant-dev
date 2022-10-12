@@ -52,16 +52,16 @@ class _AddCandidateAvailabilityViewState
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Card(
-                            child: TextField(
-                                controller: controller.competence,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  labelText: "Saisir ici vos compétance",
-                                  hintText: "ex. Je suis un dentist ...",
-                                  prefixIcon: Icon(Icons.vaccines),
-                                )),
-                          ),
+                          // Card(
+                          //   child: TextField(
+                          //       controller: controller.competence,
+                          //       keyboardType: TextInputType.emailAddress,
+                          //       decoration: InputDecoration(
+                          //         labelText: "Saisir ici vos compétance",
+                          //         hintText: "ex. Je suis un dentist ...",
+                          //         prefixIcon: Icon(Icons.vaccines),
+                          //       )),
+                          // ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -145,12 +145,15 @@ class _AddCandidateAvailabilityViewState
                                   );
                                 }).toList(),
                               )),
+                          const Text(
+                            "Saisir code postal:",
+                          ),
                           SizedBox(
                             height: 50,
                             child: TextFormField(
                               controller: controller.codePostal,
-                              decoration: const InputDecoration(
-                                  hintText: 'Code postal:'),
+                              decoration:
+                                  const InputDecoration(hintText: 'ex: 75001'),
                             ),
                           ),
                           const SizedBox(

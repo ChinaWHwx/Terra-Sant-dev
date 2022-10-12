@@ -188,23 +188,23 @@ class OfferForPharCard extends StatelessWidget {
                     ),
                     SizedBox(height: getProportionateScreenWidth(30)),
                     Text(
-                      "description: ${offer.offer_description}",
+                      "offre: ${offer.offer_title}",
                       style: const TextStyle(color: Colors.black, fontSize: 18),
                       maxLines: 4,
                       textAlign: TextAlign.center,
                     ),
-                    Text(
-                      "avlP_id: ${offer.avlP_id}",
-                      style: const TextStyle(color: Colors.black, fontSize: 18),
-                      maxLines: 4,
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      "avlU_id: ${offer.avlU_id}",
-                      style: const TextStyle(color: Colors.black, fontSize: 18),
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                    ),
+                    // Text(
+                    //   "avlP_id: ${offer.avlP_id}",
+                    //   style: const TextStyle(color: Colors.black, fontSize: 18),
+                    //   maxLines: 4,
+                    //   textAlign: TextAlign.center,
+                    // ),
+                    // Text(
+                    //   "avlU_id: ${offer.avlU_id}",
+                    //   style: const TextStyle(color: Colors.black, fontSize: 18),
+                    //   maxLines: 2,
+                    //   textAlign: TextAlign.center,
+                    // ),
                     SizedBox(height: getProportionateScreenWidth(30)),
                     LikeButton(
                       countPostion: CountPostion.left,
@@ -220,8 +220,13 @@ class OfferForPharCard extends StatelessWidget {
                                   content: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        const Text(
-                                          "details:",
+                                        Text(
+                                          "description: ${offer.offer_description}",
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18),
+                                          maxLines: 4,
+                                          textAlign: TextAlign.center,
                                         ),
                                       ]),
                                   actions: <Widget>[
@@ -323,13 +328,7 @@ class OfferForUserCard extends StatelessWidget {
                     ),
                     SizedBox(height: getProportionateScreenWidth(30)),
                     Text(
-                      "avlP_id: ${offer.avlP_id}",
-                      style: const TextStyle(color: Colors.black, fontSize: 18),
-                      maxLines: 4,
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      "avlU_id: ${offer.avlU_id}",
+                      "offre: ${offer.offer_title}",
                       style: const TextStyle(color: Colors.black, fontSize: 18),
                       maxLines: 4,
                       textAlign: TextAlign.center,
@@ -349,8 +348,13 @@ class OfferForUserCard extends StatelessWidget {
                                   content: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        const Text(
-                                          "Détail:",
+                                        Text(
+                                          "description: ${offer.offer_description}",
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18),
+                                          maxLines: 4,
+                                          textAlign: TextAlign.center,
                                         ),
                                       ]),
                                   actions: <Widget>[

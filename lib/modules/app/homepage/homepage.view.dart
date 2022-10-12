@@ -59,7 +59,7 @@ class HomepageView extends GetView<HomepageController> {
               )
             ],
           ),
-          title: 'Messege',
+          title: 'Demande',
         ),
         TabItem(
           icon: Icons.event_available,
@@ -101,7 +101,7 @@ class HomepageView extends GetView<HomepageController> {
               )
             ],
           ),
-          title: 'Messege',
+          title: 'RDV',
         ),
         TabItem(
           icon: Icons.people,
