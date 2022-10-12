@@ -97,8 +97,7 @@ class HomepageController extends GetxController with StateMixin {
 
   setReadedAllOfferUser() {
     final newList = getMyOfferUser();
-    for (final offer in getMyOfferUser()) {
-      //这里还要判断一下是不是和我的id一样
+    for (final offer in newList) {
       if (offer.readed == 'NO') {
         debugPrint('set read id: ${offer.offer_id}');
         offerService.setReaded(offer.offer_id);
@@ -128,6 +127,28 @@ class HomepageController extends GetxController with StateMixin {
     await ShowAllPhars();
   }
 
+  void setDemandeAccepted(Demande demande) async {
+    final index = listAllDemande.indexOf(demande);
+    var response = await demandeService.setAcceptYES(demande.demande_id);
+    if (!response.toString().contains("error")) {
+      listAllDemande[index].accept = "YES";
+      update();
+    }
+  }
+
+  sendEmailDemandeFromPharToInter(demande_id) {
+    demandeService.sendEmailDemandeFromPharToInter(demande_id);
+  }
+
+  void setDemandeRefused(Demande demande) async {
+    final index = listAllDemande.indexOf(demande);
+    var response = await demandeService.setRefuseYES(demande.demande_id);
+    if (!response.toString().contains("error")) {
+      listAllDemande[index].refuse = "YES";
+      update();
+    }
+  }
+
   void setDemandeNotNew(Demande demande) async {
     final index = listAllDemande.indexOf(demande);
     var response = await demandeService.setNotNew(demande.demande_id);
@@ -149,13 +170,13 @@ class HomepageController extends GetxController with StateMixin {
   void queryUnReadMessage() async {
     var response =
         await demandeService.getHowManyUnread(signInController.user.userId);
-    unReadMessage.value = int.parse(response ?? "0");
+    unReadMessage.value = int.parse(response ?? 0);
   }
 
   void queryUnReadOffer() async {
     var response =
         await offerService.getHowManyUnreadOffer(signInController.user.userId);
-    unReadOffer.value = int.parse(response ?? "0");
+    unReadOffer.value = int.parse(response ?? 0);
   }
 
   navigate(int i) {
@@ -342,10 +363,11 @@ class HomepageController extends GetxController with StateMixin {
     super.dispose();
   }
 
-  final selectedMyAVLU = "Choisir un creneaux".obs;
+  AvailabilityUser? selectedMyAVLU = null;
   void setSelected(n, value) {
     if (n == 1) {
-      selectedMyAVLU.value = value;
+      selectedMyAVLU = value;
+      update();
     }
   }
 
@@ -353,26 +375,15 @@ class HomepageController extends GetxController with StateMixin {
 
   // List<String> get dropdownTextForMyAVLP =>
   //     list2.map((e) => e.date_month_year_phar ?? "Null").toList()..add("Null");
-
-  List<String> get dropdownTextForMyAVLUdate => list2
-      .map((e) =>
-          '${e.date_month_year_candidate}, ${e.region_candidate}, (id:${e.avlUId})')
-      .toList()
-    ..add("Choisir un creneaux");
+  List<AvailabilityUser> get dropdownTextForMyAVLUdate => list2;
 
   Rx<String> errorMessage = "".obs;
 
-  sendDemandeToPhar(avlP_id, user_avlP_id) async {
-    if (selectedMyAVLU.value.toString() == '0') {
+  sendDemandeToPhar(BuildContext context, avlP_id, user_avlP_id) async {
+    if (selectedMyAVLU.toString() == '0') {
       errorMessage.value = "Champs obligatoire";
     } else {
-      String str = //'37)'
-          selectedMyAVLU.value.substring(selectedMyAVLU.value.length - 3);
-      String str1 = str.substring(0, str.length - 1);
-      print(str);
-      print(str1);
-
-      demandeToPhar.avlU_id = int.parse(str1);
+      demandeToPhar.avlU_id = selectedMyAVLU?.avlUId;
       demandeToPhar.avlP_id = avlP_id;
       demandeToPhar.user_avlP_id = user_avlP_id;
       // demande.readed = 'NO';
@@ -390,8 +401,34 @@ class HomepageController extends GetxController with StateMixin {
       if (response.containsKey('error')) {
         errorMessage.value = response["error"];
         print('déja exist');
+        Navigator.of(context).pop();
+        showExisteDemandToPhar(context);
       }
     }
+  }
+
+  showExisteDemandToPhar(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Vous avez déja demandé'),
+              content: Text(
+                  ('Soyez patiente, si il accepet, nous allons vous contacter par mail')),
+              actions: <Widget>[
+                TextButton(
+                  child: new Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text("ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
   }
 }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/availabilityUser.model.dart';
 import 'package:flutter_application_1/models/pharmacy.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
@@ -25,6 +26,7 @@ class AvailabilityPhar {
     this.owner_id,
     this.status_needed,
     this.avlP_Email,
+    this.ph_region,
   });
 
   int? avlP_id;
@@ -35,6 +37,34 @@ class AvailabilityPhar {
   int? owner_id;
   String? status_needed;
   String? avlP_Email;
+  String? ph_region;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AvailabilityPhar &&
+          runtimeType == other.runtimeType &&
+          avlP_id == other.avlP_id &&
+          ph_id == other.ph_id &&
+          repeat_phar == other.repeat_phar &&
+          time_of_day_phar == other.time_of_day_phar &&
+          date_month_year_phar == other.date_month_year_phar &&
+          owner_id == other.owner_id &&
+          status_needed == other.status_needed &&
+          avlP_Email == other.avlP_Email &&
+          ph_region == other.ph_region;
+
+  @override
+  int get hashCode =>
+      avlP_id.hashCode ^
+      ph_id.hashCode ^
+      repeat_phar.hashCode ^
+      time_of_day_phar.hashCode ^
+      date_month_year_phar.hashCode ^
+      owner_id.hashCode ^
+      status_needed.hashCode ^
+      ph_region.hashCode ^
+      avlP_Email.hashCode;
 
   factory AvailabilityPhar.fromJson(Map<String, dynamic> json) =>
       AvailabilityPhar(
@@ -46,6 +76,7 @@ class AvailabilityPhar {
         date_month_year_phar: json["date_month_year_phar"],
         status_needed: json["status_needed"],
         avlP_Email: json["avlP_Email"],
+        ph_region: json["ph_region"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,6 +88,7 @@ class AvailabilityPhar {
         "date_month_year_phar": date_month_year_phar,
         "status_needed": status_needed,
         "avlP_Email": avlP_Email,
+        "ph_region": ph_region,
       };
 
   static List<AvailabilityPhar> availabilityPharFromJson(String str) =>
@@ -176,6 +208,12 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
+              Text(
+                "ph_region: ${availabilityPhars.ph_region}",
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
               // Text(
               //   "Répetition: ${availabilityPhars.repeat_phar}",
               //   style: const TextStyle(color: Colors.black, fontSize: 18),
@@ -238,31 +276,39 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                                                   const Text(
                                                     "Choisir entre mes besoins:",
                                                   ),
-                                                  Obx(() => DropdownButton(
-                                                        isExpanded: true,
-                                                        iconSize: 24,
-                                                        onChanged: (newValue) {
-                                                          homepageController
-                                                              .setSelected(
-                                                                  1, newValue);
-                                                        },
-                                                        value:
-                                                            homepageController
-                                                                .selectedMyAVLU
-                                                                .value,
-                                                        items: homepageController
-                                                            .dropdownTextForMyAVLUdate
-                                                            .map<
-                                                                DropdownMenuItem<
-                                                                    String>>((String
-                                                                value) {
-                                                          return DropdownMenuItem<
-                                                              String>(
-                                                            value: value,
-                                                            child: Text(value),
-                                                          );
-                                                        }).toList(),
-                                                      )),
+                                                  GetBuilder<
+                                                          HomepageController>(
+                                                      builder:
+                                                          (homepageController) {
+                                                    return DropdownButton<
+                                                        AvailabilityUser?>(
+                                                      isExpanded: true,
+                                                      iconSize: 24,
+                                                      onChanged: (newValue) {
+                                                        homepageController
+                                                            .setSelected(
+                                                                1, newValue);
+                                                      },
+                                                      hint: Text(
+                                                          'Choisir un creneaux'),
+                                                      value: homepageController
+                                                          .selectedMyAVLU,
+                                                      items: homepageController
+                                                          .dropdownTextForMyAVLUdate
+                                                          .map<
+                                                                  DropdownMenuItem<
+                                                                      AvailabilityUser>>(
+                                                              (AvailabilityUser
+                                                                  value) {
+                                                        return DropdownMenuItem<
+                                                            AvailabilityUser>(
+                                                          value: value,
+                                                          child: Text(
+                                                              '${value.date_month_year_candidate}, ${value.repeat_candidate}, (id:${value.avlUId})'),
+                                                        );
+                                                      }).toList(),
+                                                    );
+                                                  })
                                                 ]),
                                             actions: <Widget>[
                                               TextButton(
@@ -277,6 +323,7 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                                                   Navigator.of(context).pop();
                                                   homepageController
                                                       .sendDemandeToPhar(
+                                                    context,
                                                     availabilityPhars.avlP_id,
                                                     availabilityPhars.owner_id,
                                                   );

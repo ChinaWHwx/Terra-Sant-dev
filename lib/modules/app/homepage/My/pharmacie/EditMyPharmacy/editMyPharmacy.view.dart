@@ -59,7 +59,7 @@ class EditMyPharmacyView extends StatelessWidget {
                                 );
                               }))),
                       SizedBox(
-                        height: 50,
+                        height: 20,
                         child: Expanded(
                           child: TextFormField(
                             controller: controller.tel,

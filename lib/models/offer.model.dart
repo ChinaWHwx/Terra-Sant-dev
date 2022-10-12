@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 
@@ -224,12 +225,38 @@ class OfferForPharCard extends StatelessWidget {
                                         ),
                                       ]),
                                   actions: <Widget>[
-                                    // TextButton(
-                                    //   child: new Text("cancel"),
-                                    //   onPressed: () {
-                                    //     Navigator.of(context).pop();
-                                    //   },
-                                    // ),
+                                    TextButton(
+                                      child: Text("Question?"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                                  title: Text('Contact nous'),
+                                                  content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        const Text(
+                                                          "Par téléphone",
+                                                        ),
+                                                      ]),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: Text(
+                                                          "Call directement"),
+                                                      onPressed: () {
+                                                        FlutterPhoneDirectCaller
+                                                            .callNumber(
+                                                                "+33 0765291731");
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                    ),
+                                                  ],
+                                                ));
+                                      },
+                                    ),
                                     TextButton(
                                       child: Text("OK"),
                                       onPressed: () {
@@ -243,7 +270,7 @@ class OfferForPharCard extends StatelessWidget {
                       },
                       likeBuilder: (bool isLiked) {
                         return Icon(
-                          Icons.phone_forwarded,
+                          Icons.message,
                           color:
                               isLiked ? Colors.deepPurpleAccent : Colors.grey,
                           size: 35,
@@ -286,7 +313,8 @@ class OfferForUserCard extends StatelessWidget {
                     right: 0,
                     top: 0,
                     child: Visibility(
-                        visible: offer.newOrNot == "YES", child: Text('new'))),
+                        visible: offer.newOrNot == "YES",
+                        child: Text('Unread'))),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -326,20 +354,42 @@ class OfferForUserCard extends StatelessWidget {
                                         ),
                                       ]),
                                   actions: <Widget>[
-                                    // TextButton(
-                                    //   child: new Text("cancel"),
-                                    //   onPressed: () {
-                                    //     Navigator.of(context).pop();
-                                    //   },
-                                    // ),
                                     TextButton(
-                                      child: Text("ok"),
+                                      child: Text("Question?"),
                                       onPressed: () {
                                         Navigator.of(context).pop();
-
-                                        //发送邮件给terra 说接受这个请求。
-                                        //accept字段设为Yes
-                                        //不能再删除了
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                                  title: Text('Contact nous'),
+                                                  content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        const Text(
+                                                          "Par téléphone",
+                                                        ),
+                                                      ]),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: Text(
+                                                          "Call directement"),
+                                                      onPressed: () {
+                                                        FlutterPhoneDirectCaller
+                                                            .callNumber(
+                                                                "+33 0765291731");
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                    ),
+                                                  ],
+                                                ));
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
                                       },
                                     ),
                                   ],
@@ -349,7 +399,7 @@ class OfferForUserCard extends StatelessWidget {
                       },
                       likeBuilder: (bool isLiked) {
                         return Icon(
-                          Icons.phone_forwarded,
+                          Icons.message,
                           color:
                               isLiked ? Colors.deepPurpleAccent : Colors.grey,
                           size: 35,

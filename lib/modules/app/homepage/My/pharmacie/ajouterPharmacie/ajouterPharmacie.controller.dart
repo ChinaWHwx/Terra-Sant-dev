@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 class AjouterPharmacieController extends GetxController
     with StateMixin<List<dynamic>> {
   final TextEditingController textEditingController = TextEditingController();
-  String KPLACES_API_KEY = "AIzaSyD4U3Q0x6MR0ad-UXTwp6XVvaBsmlHkOhc";
+  String KPLACES_API_KEY = "AIzaSyC2x9yNNwsfuZxK6F4_QB8vDQvlw8tvP8A";
   String baseURL =
       'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   var uuid = const Uuid();

@@ -70,4 +70,14 @@ class DemandeService {
       return Future.error(e.toString());
     }
   }
+
+  Future sendEmailDemandeFromPharToInter(demandeid) async {
+    try {
+      var response =
+          await demandeRepo.sendEmailDemandeFromPharToInter(demandeid);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

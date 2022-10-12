@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 class SearchingAddressController extends GetxController
     with StateMixin<RxList<dynamic>> {
   // ignore: non_constant_identifier_names
-  String KPLACES_API_KEY = "AIzaSyD4U3Q0x6MR0ad-UXTwp6XVvaBsmlHkOhc";
+  String KPLACES_API_KEY = "AIzaSyC2x9yNNwsfuZxK6F4_QB8vDQvlw8tvP8A";
   String baseURL =
       'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   TextEditingController addressController = TextEditingController();

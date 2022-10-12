@@ -188,9 +188,14 @@ class DemandeToPharForUserCard extends StatelessWidget {
                                     child: Text("Accepte"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-
                                       //发送邮件给terra 说接受这个请求。
+                                      homepagePharController
+                                          .sendEmailDemandeFromInterToPhar(
+                                              demandeToPhar.demandeToPhar_id);
                                       //accept字段设为Yes
+                                      homepagePharController
+                                          .setDemandeToPharAccepted(
+                                              demandeToPhar);
                                       //不能再删除了
                                       showDialog(
                                           context: context,
@@ -229,56 +234,63 @@ class DemandeToPharForUserCard extends StatelessWidget {
                       );
                     },
                   ),
-                  LikeButton(
-                    countPostion: CountPostion.left,
-                    onTap: (isLiked) {
-                      if (isLiked) {
-                        return Future.value(null);
-                      }
-                      onTapPhone?.call(demandeToPhar.avlP_id ?? 0);
+                  Visibility(
+                    visible: demandeToPhar.accept != 'YES',
+                    child: LikeButton(
+                      countPostion: CountPostion.left,
+                      onTap: (isLiked) {
+                        if (isLiked) {
+                          return Future.value(null);
+                        }
+                        onTapPhone?.call(demandeToPhar.avlP_id ?? 0);
 
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Refuser et supprimé？？？'),
-                                content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "Refuser",
-                                      ),
-                                    ]),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: new Text("Pas mtn"),
-                                    onPressed: () {
-                                      // homepageController.userSendEmailToTerraAcceptDemandeToPhar(
-                                      // '');
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text("OUI"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      //发送邮件给本avlU对应的邮箱 说拒绝这个请求。
-                                      //发邮件给terra说拒绝了
-                                      //refuse字段设为yes
-                                      //如果已经接受了 就不能再删了
-                                    },
-                                  ),
-                                ],
-                              ));
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('Refuser et supprimé？？？'),
+                                  content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Refuser",
+                                        ),
+                                      ]),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: new Text("Pas mtn"),
+                                      onPressed: () {
+                                        // homepageController.userSendEmailToTerraAcceptDemandeToPhar(
+                                        // '');
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("OUI"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        //发送邮件给本avlU对应的邮箱 说拒绝这个请求。
+                                        //发邮件给terra说拒绝了
+                                        //refuse字段设为yes
+                                        homepagePharController
+                                            .setDemandeToPharRefused(
+                                                demandeToPhar);
+                                        //如果已经接受了 就不能再删了
+                                      },
+                                    ),
+                                  ],
+                                ));
 
-                      return Future.value(!isLiked);
-                    },
-                    likeBuilder: (bool isLiked) {
-                      return Icon(
-                        Icons.delete,
-                        color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-                        size: 35,
-                      );
-                    },
+                        return Future.value(!isLiked);
+                      },
+                      likeBuilder: (bool isLiked) {
+                        return Icon(
+                          Icons.delete,
+                          color:
+                              isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                          size: 35,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -287,7 +299,13 @@ class DemandeToPharForUserCard extends StatelessWidget {
                   top: 0,
                   child: Visibility(
                       visible: demandeToPhar.newOrNot == "YES",
-                      child: Text('new')))
+                      child: Text('new'))),
+              Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Visibility(
+                      visible: demandeToPhar.accept == "YES",
+                      child: Text('Accepté, En attends')))
             ],
           ),
         ),

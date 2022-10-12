@@ -17,4 +17,6 @@ class DemandeRepository extends GetConnect {
   Future setAcceptYES(id) => patch("/demande/setAcceptYES=${id}", id);
   Future setRefuseYES(id) => patch("/demande/setRefuseYES=${id}", id);
   Future sendDemande(body) => post("/demande/add", body);
+  Future sendEmailDemandeFromPharToInter(id) =>
+      patch("/demande/sendEmailDemandeFromPharToInter=${id}", id);
 }

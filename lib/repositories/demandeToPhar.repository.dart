@@ -18,4 +18,6 @@ class DemandeToPharRepository extends GetConnect {
   Future setAcceptYES(id) => patch("/demandeToPhar/setAcceptYES=${id}", id);
   Future setRefuseYES(id) => patch("/demandeToPhar/setRefuseYES=${id}", id);
   Future sendDemandeToPhar(body) => post("/demandeToPhar/add", body);
+  Future sendEmailDemandeFromInterToPhar(id) =>
+      patch("/demandeToPhar/sendEmailDemandeFromInterToPhar=${id}", id);
 }

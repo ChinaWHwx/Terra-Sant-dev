@@ -71,4 +71,14 @@ class DemandeToPharService {
       return Future.error(e.toString());
     }
   }
+
+  Future sendEmailDemandeFromInterToPhar(demandeToPharid) async {
+    try {
+      var response = await demandeToPharRepo
+          .sendEmailDemandeFromInterToPhar(demandeToPharid);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

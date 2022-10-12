@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/availabilityPhar.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
@@ -325,25 +326,33 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                                   const Text(
                                     "Choisir entre mes besoins:",
                                   ),
-                                  Obx(() => DropdownButton(
-                                        isExpanded: true,
-                                        iconSize: 24,
-                                        onChanged: (newValue) {
-                                          homepagePharController.setSelected(
-                                              1, newValue);
-                                        },
-                                        value: homepagePharController
-                                            .selectedMyAVLP.value,
-                                        items: homepagePharController
-                                            .dropdownTextForMyAVLPdate
-                                            .map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                          );
-                                        }).toList(),
-                                      )),
+                                  GetBuilder<HomepagePharController>(
+                                      builder: (homepagePharController) {
+                                    return DropdownButton<AvailabilityPhar?>(
+                                      isExpanded: true,
+                                      iconSize: 24,
+                                      onChanged: (newValue) {
+                                        homepagePharController.setSelected(
+                                            1, newValue);
+                                      },
+                                      hint: Text('Choisir un creneaux'),
+                                      value:
+                                          homepagePharController.selectedMyAVLP,
+                                      items: homepagePharController
+                                          .dropdownTextForMyAVLPdate
+                                          .map<
+                                                  DropdownMenuItem<
+                                                      AvailabilityPhar>>(
+                                              (AvailabilityPhar value) {
+                                        return DropdownMenuItem<
+                                            AvailabilityPhar>(
+                                          value: value,
+                                          child: Text(
+                                              '${value.date_month_year_phar}, ${value.repeat_phar}, (id:${value.avlP_id})'),
+                                        );
+                                      }).toList(),
+                                    );
+                                  })
                                 ]),
                             actions: <Widget>[
                               TextButton(
@@ -357,6 +366,7 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   homepagePharController.sendDemande(
+                                      context,
                                       availabilityUsers.avlUId,
                                       availabilityUsers.user_id);
                                   showDialog(

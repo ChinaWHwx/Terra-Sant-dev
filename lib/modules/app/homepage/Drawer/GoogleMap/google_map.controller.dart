@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController with StateMixin {
-  String KPLACES_API_KEY = "AIzaSyD4U3Q0x6MR0ad-UXTwp6XVvaBsmlHkOhc";
+  String KPLACES_API_KEY = "AIzaSyC2x9yNNwsfuZxK6F4_QB8vDQvlw8tvP8A";
   String baseURL =
       'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   TextEditingController addressEditingController = TextEditingController();

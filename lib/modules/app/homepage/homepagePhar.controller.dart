@@ -28,7 +28,7 @@ class HomepagePharController extends GetxController with StateMixin {
   DemandeToPharService demandeToPharService = Get.find();
 
   List<AvailabilityUser> _list1 = []; //所有的avlU
-  List<AvailabilityPhar> list2 = [];
+  List<AvailabilityPhar> list2 = []; //本phar的所有avlP
   List<Pharmacy> listMyPhar = [];
   List<Offer> listAllOffer = [];
   List<DemandeToPhar> listAllDemandeToPhar = [];
@@ -55,7 +55,7 @@ class HomepagePharController extends GetxController with StateMixin {
   List<Offer> getMyOfferPhar() {
     final newList = <Offer>[];
     for (final offer in listAllOffer) {
-      if (list2
+      if (list2 //本phar的所有avlP
           .where((element) => element.avlP_id == offer.avlP_id)
           .isNotEmpty) {
         newList.add(offer);
@@ -67,7 +67,6 @@ class HomepagePharController extends GetxController with StateMixin {
   setReadedAllOfferUser() {
     final newList = getMyOfferPhar();
     for (final offer in getMyOfferPhar()) {
-      //这里还要判断一下是不是和我的id一样
       if (offer.readedByPhar == 'NO') {
         debugPrint('set read id: ${offer.offer_id}');
         offerService.setReadedByPhar(offer.offer_id);
@@ -81,6 +80,26 @@ class HomepagePharController extends GetxController with StateMixin {
         await demandeToPharService.setNotNew(demandeToPhar.demandeToPhar_id);
     if (!response.toString().contains("error")) {
       listAllDemandeToPhar[index].newOrNot = "NO";
+      update();
+    }
+  }
+
+  void setDemandeToPharAccepted(DemandeToPhar demandeToPhar) async {
+    final index = listAllDemandeToPhar.indexOf(demandeToPhar);
+    var response =
+        await demandeToPharService.setAcceptYES(demandeToPhar.demandeToPhar_id);
+    if (!response.toString().contains("error")) {
+      listAllDemandeToPhar[index].accept = "YES";
+      update();
+    }
+  }
+
+  void setDemandeToPharRefused(DemandeToPhar demandeToPhar) async {
+    final index = listAllDemandeToPhar.indexOf(demandeToPhar);
+    var response =
+        await demandeToPharService.setRefuseYES(demandeToPhar.demandeToPhar_id);
+    if (!response.toString().contains("error")) {
+      listAllDemandeToPhar[index].refuse = "YES";
       update();
     }
   }
@@ -114,13 +133,16 @@ class HomepagePharController extends GetxController with StateMixin {
 
   setReadedAllDemandePhars() {
     for (final demandeToPhar in listAllDemandeToPhar) {
-      //这里还要判断一下是不是和我的id一样
       if (demandeToPhar.readed == 'NO' &&
           demandeToPhar.user_avlP_id == signInController.user.userId) {
         debugPrint('set read id: ${demandeToPhar.demandeToPhar_id}');
         demandeToPharService.setReaded(demandeToPhar.demandeToPhar_id);
       }
     }
+  }
+
+  sendEmailDemandeFromInterToPhar(demandeToPhar_id) {
+    demandeToPharService.sendEmailDemandeFromInterToPhar(demandeToPhar_id);
   }
 
   @override
@@ -343,10 +365,11 @@ class HomepagePharController extends GetxController with StateMixin {
     }
   }
 
-  final selectedMyAVLP = "Choisir un creneaux".obs;
+  AvailabilityPhar? selectedMyAVLP = null;
   void setSelected(n, value) {
     if (n == 1) {
-      selectedMyAVLP.value = value;
+      selectedMyAVLP = value;
+      update();
     }
   }
 
@@ -355,25 +378,15 @@ class HomepagePharController extends GetxController with StateMixin {
   // List<String> get dropdownTextForMyAVLP =>
   //     list2.map((e) => e.date_month_year_phar ?? "Null").toList()..add("Null");
 
-  List<String> get dropdownTextForMyAVLPdate => list2
-      .map((e) =>
-          '${e.date_month_year_phar}, ${e.repeat_phar}, (id:${e.avlP_id})')
-      .toList()
-    ..add("Choisir un creneaux");
+  List<AvailabilityPhar> get dropdownTextForMyAVLPdate => list2;
 
   Rx<String> errorMessage = "".obs;
 
-  sendDemande(avlU_id, user_avlU_id) async {
-    if (selectedMyAVLP.value.toString() == '0') {
+  sendDemande(BuildContext context, avlU_id, user_avlU_id) async {
+    if (selectedMyAVLP.toString() == '0') {
       errorMessage.value = "Champs obligatoire";
     } else {
-      String str = //'37)'
-          selectedMyAVLP.value.substring(selectedMyAVLP.value.length - 3);
-      String str1 = str.substring(0, str.length - 1);
-      print(str);
-      print(str1);
-
-      demande.avlP_id = int.parse(str1);
+      demande.avlP_id = selectedMyAVLP?.avlP_id;
       demande.avlU_id = avlU_id;
       demande.user_avlU_id = user_avlU_id;
       // demande.readed = 'NO';
@@ -381,6 +394,7 @@ class HomepagePharController extends GetxController with StateMixin {
       // demande.refuse = 'NO';
       // demande.accept = 'NO';
       var response = await demandeService.sendDemande(demande.toJson());
+      debugPrint('response: $response');
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
@@ -389,9 +403,35 @@ class HomepagePharController extends GetxController with StateMixin {
       }
       if (response.containsKey('error')) {
         errorMessage.value = response["error"];
-        print('déja exist');
+        print('已经存在');
+        Navigator.of(context).pop();
+        showExisteDemand(context);
       }
     }
+  }
+
+  showExisteDemand(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Vous avez déja demandé'),
+              content: Text(
+                  ('Soyez patiente, si il accepet, nous allons vous contacter par mail')),
+              actions: <Widget>[
+                TextButton(
+                  child: new Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text("ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
   }
 }
 

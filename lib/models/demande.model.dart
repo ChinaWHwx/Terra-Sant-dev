@@ -188,7 +188,12 @@ class DemandeForUserCard extends StatelessWidget {
                                       Navigator.of(context).pop();
 
                                       //发送邮件给terra 说接受这个请求。
+                                      homepageController
+                                          .sendEmailDemandeFromPharToInter(
+                                              demande.demande_id);
                                       //accept字段设为Yes
+                                      homepageController
+                                          .setDemandeAccepted(demande);
                                       //不能再删除了
                                       showDialog(
                                           context: context,
@@ -227,56 +232,62 @@ class DemandeForUserCard extends StatelessWidget {
                       );
                     },
                   ),
-                  LikeButton(
-                    countPostion: CountPostion.left,
-                    onTap: (isLiked) {
-                      if (isLiked) {
-                        return Future.value(null);
-                      }
-                      onTapPhone?.call(demande.avlP_id ?? 0);
+                  Visibility(
+                    visible: demande.accept != 'YES',
+                    child: LikeButton(
+                      countPostion: CountPostion.left,
+                      onTap: (isLiked) {
+                        if (isLiked) {
+                          return Future.value(null);
+                        }
+                        onTapPhone?.call(demande.avlP_id ?? 0);
 
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Refuser et supprimé？？？'),
-                                content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "Refuser",
-                                      ),
-                                    ]),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: new Text("Pas mtn"),
-                                    onPressed: () {
-                                      // homepageController.userSendEmailToTerraAcceptDemande(
-                                      // '');
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text("OUI"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      //发送邮件给本avlP对应的邮箱 说拒绝这个请求。
-                                      //发邮件给terra说拒绝了
-                                      //refuse字段设为yes
-                                      //如果已经接受了 就不能再删了
-                                    },
-                                  ),
-                                ],
-                              ));
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('Refuser et supprimé？？？'),
+                                  content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Refuser",
+                                        ),
+                                      ]),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: new Text("Pas mtn"),
+                                      onPressed: () {
+                                        // homepageController.userSendEmailToTerraAcceptDemande(
+                                        // '');
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("OUI"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        //发送邮件给本avlP对应的邮箱 说拒绝这个请求。
+                                        //发邮件给terra说拒绝了
+                                        //refuse字段设为yes
+                                        homepageController
+                                            .setDemandeRefused(demande);
+                                        //如果已经接受了 就不能再删了
+                                      },
+                                    ),
+                                  ],
+                                ));
 
-                      return Future.value(!isLiked);
-                    },
-                    likeBuilder: (bool isLiked) {
-                      return Icon(
-                        Icons.delete,
-                        color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-                        size: 35,
-                      );
-                    },
+                        return Future.value(!isLiked);
+                      },
+                      likeBuilder: (bool isLiked) {
+                        return Icon(
+                          Icons.delete,
+                          color:
+                              isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                          size: 35,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -284,7 +295,13 @@ class DemandeForUserCard extends StatelessWidget {
                   right: 0,
                   top: 0,
                   child: Visibility(
-                      visible: demande.newOrNot == "YES", child: Text('new')))
+                      visible: demande.newOrNot == "YES", child: Text('new'))),
+              Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Visibility(
+                      visible: demande.accept == "YES",
+                      child: Text('Accepté, En attends')))
             ],
           ),
         ),

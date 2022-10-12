@@ -14,9 +14,11 @@ class RDVFixeCandidateView extends GetView<RDVFixeCandidateController> {
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
-            controller.navigateToHome();
             controller.homepageController.setReadedAllOfferUser();
+
             controller.homepageController.unReadOffer.value = 0;
+
+            controller.navigateToHome();
           },
         ),
       ),
