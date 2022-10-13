@@ -25,9 +25,9 @@ class DemandeToPharView extends GetView<DemandeToPharController> {
           leading: BackButton(
             color: Colors.white,
             onPressed: () {
+              controller.homepagePharController.unReadMessage.value = 0;
               controller.navigateToHome();
               controller.homepagePharController.setReadedAllDemandePhars();
-              controller.homepagePharController.unReadMessage.value = 0;
             },
           ),
         ),

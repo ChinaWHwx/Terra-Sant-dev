@@ -73,7 +73,8 @@ class DemandeToPharForUsers extends StatelessWidget {
     SizeConfig().init(context);
     return GetBuilder<HomepagePharController>(builder: (logic) {
       final list = logic.getMyDemandePhar();
-      //debugPrint('list: ${list.length}');
+      debugPrint('list: ${list.length}');
+      print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
       return EasyRefresh(
         controller: logic.controller,
         onRefresh: logic.onRefresh,
@@ -175,6 +176,9 @@ class DemandeToPharForUserCard extends StatelessWidget {
                                       ),
                                       Text(
                                         "ph adress: ${phar.phAddress}",
+                                      ),
+                                      Text(
+                                        "CV: ",
                                       ),
                                     ]),
                                 actions: <Widget>[
@@ -299,7 +303,7 @@ class DemandeToPharForUserCard extends StatelessWidget {
                   top: 0,
                   child: Visibility(
                       visible: demandeToPhar.newOrNot == "YES",
-                      child: Text('new'))),
+                      child: Text('Unread'))),
               Positioned(
                   right: 0,
                   top: 0,

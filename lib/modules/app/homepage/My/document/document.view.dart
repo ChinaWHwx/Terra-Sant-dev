@@ -46,18 +46,27 @@ class DocumentView extends GetView<DocumentController> {
             const SizedBox(
               height: 20,
             ),
-            Obx(
-              () => controller.selectedFiles.isNotEmpty
-                  ? Column(
-                      children: controller.selectedFiles
-                          .map((element) => ListTile(
-                                leading: const Icon(Icons.list),
-                                title: Text(element.path),
-                              ))
-                          .toList(),
-                    )
-                  : const SizedBox(),
-            ),
+            //多文件
+            // Obx(
+            //   () => controller.selectedFiles.isNotEmpty
+            //       ? Column(
+            //           children: controller.selectedFiles
+            //               .map((element) => ListTile(
+            //                     leading: const Icon(Icons.list),
+            //                     title: Text(element.path),
+            //                   ))
+            //               .toList(),
+            //         )
+            //       : const SizedBox(),
+            // ),
+            //单文件
+            // Obx(
+            //   () => controller.file != null
+            //       ? Text(
+            //           controller.file!.path,
+            //         )
+            //       : const SizedBox(),
+            // ),
             GestureDetector(
               onTap: controller.selectFile,
               child: Padding(

@@ -118,7 +118,9 @@ class HomepagePharController extends GetxController with StateMixin {
     final newList = <DemandeToPhar>[];
     final notYetRefusedList = <DemandeToPhar>[];
     for (final demandeToPhar in listAllDemandeToPhar) {
-      if (list2
+      // print(demandeToPhar.avlP_id);
+      // print('qqqqqqqqqqq');
+      if (list2 //本phar的所有avlP
           .where((element) => element.avlP_id == demandeToPhar.avlP_id)
           .isNotEmpty) {
         newList.add(demandeToPhar);
@@ -149,17 +151,16 @@ class HomepagePharController extends GetxController with StateMixin {
   @override
   void onInit() {
     super.onInit();
-    debugPrint('');
+    _timer = Timer.periodic(3.seconds, (timer) {
+      queryUnReadMessage();
+      queryUnReadOffer();
+    });
+    // debugPrint('');
     ShowUserAvl();
     ShowMyAvl_Phar();
     ShowMyPhars();
     ShowAllOfferPhar();
     ShowAllDemandeToPhar();
-
-    _timer = Timer.periodic(3.seconds, (timer) {
-      queryUnReadOffer();
-      queryUnReadMessage();
-    });
   }
 
   void queryUnReadOffer() async {
@@ -179,6 +180,7 @@ class HomepagePharController extends GetxController with StateMixin {
     await ShowMyAvl_Phar();
     await ShowMyPhars();
     await ShowAllOfferPhar();
+    ShowAllDemandeToPhar();
   }
 
   navigateToFavorite() {
@@ -364,6 +366,12 @@ class HomepagePharController extends GetxController with StateMixin {
       update();
       _controller.finishRefresh();
     }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   AvailabilityPhar? selectedMyAVLP = null;

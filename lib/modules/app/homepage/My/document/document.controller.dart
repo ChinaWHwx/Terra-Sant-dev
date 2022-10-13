@@ -1,6 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'dart:io';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class DocumentController extends GetxController
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
 
-  RxList<File> selectedFiles = <File>[].obs;
+  //RxList<File> selectedFiles = <File>[].obs;
 
   String image =
       'https://ouch-cdn2.icons8.com/84zU-uvFboh65geJMR5XIHCaNkx-BZ2TahEpE9TpVJM/rs:fit:784:784/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODU5/L2E1MDk1MmUyLTg1/ZTMtNGU3OC1hYzlh/LWU2NDVmMWRiMjY0/OS5wbmc.png';
@@ -42,10 +43,24 @@ class DocumentController extends GetxController
     );
 
     if (result != null) {
-      List<File> files = result.paths.map((path) => File(path!)).toList();
-      selectedFiles.addAll(files);
+      //多文件
+      //List<File> files = result.paths.map((path) => File(path!)).toList();
+      //selectedFiles.addAll(files);
+
+      //单文件
+      file = File(result.files.single.path ?? "null");
+      onUploadImage(result);
     } else {
       // User canceled the picker
     }
+  }
+
+  onUploadImage(result) async {
+    var dio = Dio();
+    var multipart = MultipartFile.fromString(result.toString().split(",").last,
+        filename: file!.path);
+
+    var formData = FormData.fromMap({'file': multipart, 'data': 'data'});
+    dio.post('http://51.178.83.92:5000/upload=61', data: formData);
   }
 }
