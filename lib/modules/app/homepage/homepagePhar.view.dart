@@ -15,7 +15,7 @@ class HomepagePharView extends GetView<HomepagePharController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Des Phamaciens à vous"),
+        title: const Text("Colaborateur Disponible"),
         //centerTitle: true,
       ),
       body: SafeArea(

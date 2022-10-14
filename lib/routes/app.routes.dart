@@ -85,6 +85,7 @@ class Routes {
   static const demandeToPhar = '/demandeToPhar';
   static const editAVLP = '/editAVLP';
   static const editAVLU = '/editAVLU';
+  static const showUserCVtoPhar = '/showUserCVtoPhar';
 
   static const candidateRoute = auth + candidate;
   static const recruiterRoute = auth + recruiter;
@@ -170,4 +171,5 @@ class Routes {
   static const demandeToPharRoute = demandeToPhar;
   static const editAVLPRoute = editAVLP;
   static const editAVLURoute = editAVLU;
+  static const showUserCVtoPharRoute = showUserCVtoPhar;
 }

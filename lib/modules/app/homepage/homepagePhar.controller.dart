@@ -166,13 +166,13 @@ class HomepagePharController extends GetxController with StateMixin {
   void queryUnReadOffer() async {
     var response = await offerService
         .getHowManyUnreadOfferByPhar(signInController.user.userId);
-    unReadOffer.value = int.parse(response ?? 0);
+    unReadOffer.value = int.tryParse(response) ?? 0;
   }
 
   void queryUnReadMessage() async {
     var response = await demandeToPharService
         .getHowManyUnreadToPhar(signInController.user.userId);
-    unReadMessage.value = int.parse(response ?? 0);
+    unReadMessage.value = int.tryParse(response) ?? 0;
   }
 
   Future onRefresh() async {
@@ -425,7 +425,7 @@ class HomepagePharController extends GetxController with StateMixin {
         builder: (context) => AlertDialog(
               title: Text('Vous avez déja demandé'),
               content: Text(
-                  ('Soyez patiente, si il accepet, nous allons vous contacter par mail')),
+                  ('Votre demande est déja  prise en compte, on vous appelle dans les meilleurs délais')),
               actions: <Widget>[
                 TextButton(
                   child: new Text("Cancel"),

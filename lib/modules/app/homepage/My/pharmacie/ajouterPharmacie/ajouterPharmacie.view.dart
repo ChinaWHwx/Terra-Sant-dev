@@ -41,49 +41,39 @@ class AjouterPharmacieViewState extends State<AjouterPharmacieView> {
                     top: 40, bottom: 10, right: 10, left: 10),
                 child: Container(
                   padding: const EdgeInsets.all(30),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                  child: ListView(
                     children: [
-                      SizedBox(
-                        height: 30,
-                        child: Expanded(
-                          child: TextFormField(
-                            controller: controller.name,
-                            decoration:
-                                const InputDecoration(hintText: 'Nom du Phar:'),
-                          ),
-                        ),
+                      TextFormField(
+                        controller: controller.name,
+                        decoration: const InputDecoration(
+                            hintText: 'Nom du Pharmacie:'),
                       ),
                       TextFormField(
                         controller: controller.placeController,
                         decoration: const InputDecoration(
                             hintText: 'Search places with name'),
                       ),
-                      Flexible(
-                          child: controller.obx((state) => ListView.builder(
-                              itemCount: controller.placesList.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  onTap: () async {
-                                    controller.placeController.text = controller
-                                        .placesList[index]['description'];
-                                    // ignore: unused_local_variable
-                                    List<Location> locations =
-                                        await locationFromAddress(controller
-                                            .placesList[index]['description']);
-                                  },
-                                  title: Text(controller.placesList[index]
-                                      ['description']),
-                                );
-                              }))),
-                      SizedBox(
-                        height: 30,
-                        child: Expanded(
-                          child: TextFormField(
-                            controller: controller.tel,
-                            decoration: const InputDecoration(hintText: 'Tel:'),
-                          ),
-                        ),
+                      controller.obx((state) => ListView.builder(
+                          itemCount: controller.placesList.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              onTap: () async {
+                                controller.placeController.text =
+                                    controller.placesList[index]['description'];
+                                // ignore: unused_local_variable
+                                List<Location> locations =
+                                    await locationFromAddress(controller
+                                        .placesList[index]['description']);
+                              },
+                              title: Text(
+                                  controller.placesList[index]['description']),
+                            );
+                          })),
+                      TextFormField(
+                        controller: controller.tel,
+                        decoration: const InputDecoration(hintText: 'Tel:'),
                       ),
                       SizedBox(
                         height: 5,
@@ -95,15 +85,10 @@ class AjouterPharmacieViewState extends State<AjouterPharmacieView> {
                       //     ),
                       //   ),
                       // ),
-                      SizedBox(
-                        height: 50,
-                        child: Expanded(
-                          child: TextFormField(
-                            controller: controller.codePostal,
-                            decoration:
-                                const InputDecoration(hintText: 'Code Postal:'),
-                          ),
-                        ),
+                      TextFormField(
+                        controller: controller.codePostal,
+                        decoration:
+                            const InputDecoration(hintText: 'Code postal:'),
                       ),
                       Obx(() => controller.errorMessage.isNotEmpty
                           ? Text(

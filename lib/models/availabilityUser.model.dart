@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/availabilityPhar.model.dart';
+import 'package:flutter_application_1/models/user.model.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepage.controller.dart';
 import 'package:flutter_application_1/modules/app/homepage/homepagePhar.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
@@ -12,6 +15,7 @@ import 'package:flutter_application_1/services/demande.service.dart';
 import 'package:flutter_application_1/shared/utils/theme.utils.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
+import 'package:path_provider/path_provider.dart';
 
 AvailabilityUserService availabilityUserService = Get.find();
 DemandeService demandeService = Get.find();
@@ -108,8 +112,9 @@ class AvailabilityUsersForPhars extends StatelessWidget {
               final availabilityUsers = list[index];
               return AvailabilityUsersForShowCard(
                 availabilityUsers: list[index],
-                onTapPhone: (phone) {
-                  debugPrint('AVLU_id: $phone');
+                onTapCV: () {
+                  Get.toNamed(Routes.showUserCVtoPhar,
+                      arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
                 },
               );
             },
@@ -298,11 +303,13 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
     this.aspectRetio = 1.02,
     required this.availabilityUsers,
     this.onTapPhone,
+    this.onTapCV,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final AvailabilityUser availabilityUsers;
   final ValueChanged<int>? onTapPhone;
+  final VoidCallback? onTapCV;
 
   @override
   Widget build(BuildContext context) {
@@ -409,7 +416,7 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                                       builder: (context) => AlertDialog(
                                             title: Text('Confirmation'),
                                             content: Text(
-                                                ('Si il accepet, nous allons vous contacter par mail')),
+                                                ('Votre demande est prise en compte, on vous organise un RDV au plus vite')),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: new Text("Cancel"),
@@ -436,6 +443,19 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                   debugPrint('isLiked: $isLiked');
                   return Icon(
                     Icons.phone_forwarded,
+                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                    size: 35,
+                  );
+                },
+              ),
+              LikeButton(
+                onTap: (b) {
+                  onTapCV?.call();
+                  return Future.value(false);
+                },
+                likeBuilder: (bool isLiked) {
+                  return Icon(
+                    Icons.picture_as_pdf,
                     color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
                     size: 35,
                   );

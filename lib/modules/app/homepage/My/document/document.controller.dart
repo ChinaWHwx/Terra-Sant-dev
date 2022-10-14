@@ -16,7 +16,7 @@ class DocumentController extends GetxController
       'https://ouch-cdn2.icons8.com/84zU-uvFboh65geJMR5XIHCaNkx-BZ2TahEpE9TpVJM/rs:fit:784:784/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODU5/L2E1MDk1MmUyLTg1/ZTMtNGU3OC1hYzlh/LWU2NDVmMWRiMjY0/OS5wbmc.png';
   late AnimationController loadingController;
 
-  File? file;
+  File? get file => platformFile != null ? File(platformFile!.path!) : null;
   PlatformFile? platformFile;
 
   @override
@@ -48,19 +48,24 @@ class DocumentController extends GetxController
       //selectedFiles.addAll(files);
 
       //单文件
-      file = File(result.files.single.path ?? "null");
-      onUploadImage(result);
+      platformFile = result.files.first;
+      onUploadImage(result.files.first);
+      update();
     } else {
       // User canceled the picker
     }
   }
 
-  onUploadImage(result) async {
+  onUploadImage(PlatformFile result) async {
     var dio = Dio();
-    var multipart = MultipartFile.fromString(result.toString().split(",").last,
-        filename: file!.path);
+    var multipart = MultipartFile.fromFileSync(result.path ?? '',
+        filename: result.name);
 
-    var formData = FormData.fromMap({'file': multipart, 'data': 'data'});
-    dio.post('http://51.178.83.92:5000/upload=61', data: formData);
+    var formData = FormData.fromMap({'file': multipart});
+    try {
+     dio.post('http://51.178.83.92:5000/upload=61', data: formData);
+    } catch (e) {
+     debugPrint('e: $e');
+    }
   }
 }

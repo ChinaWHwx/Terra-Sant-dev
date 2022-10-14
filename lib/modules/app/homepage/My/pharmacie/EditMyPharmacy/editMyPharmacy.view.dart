@@ -24,48 +24,38 @@ class EditMyPharmacyView extends StatelessWidget {
                     top: 40, bottom: 10, right: 10, left: 10),
                 child: Container(
                   padding: const EdgeInsets.all(30),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                  child: ListView(
                     children: [
-                      SizedBox(
-                        height: 50,
-                        child: Expanded(
-                          child: TextFormField(
-                            controller: controller.name,
-                            decoration: const InputDecoration(hintText: '药店名:'),
-                          ),
-                        ),
+                      TextFormField(
+                        controller: controller.name,
+                        decoration: const InputDecoration(hintText: '药店名:'),
                       ),
                       TextFormField(
                         controller: controller.placeController,
                         decoration: const InputDecoration(
                             hintText: 'Search places with name'),
                       ),
-                      Flexible(
-                          child: controller.obx((state) => ListView.builder(
-                              itemCount: controller.placesList.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  onTap: () async {
-                                    controller.placeController.text = controller
-                                        .placesList[index]['description'];
-                                    // ignore: unused_local_variable
-                                    List<Location> locations =
-                                        await locationFromAddress(controller
-                                            .placesList[index]['description']);
-                                  },
-                                  title: Text(controller.placesList[index]
-                                      ['description']),
-                                );
-                              }))),
-                      SizedBox(
-                        height: 20,
-                        child: Expanded(
-                          child: TextFormField(
-                            controller: controller.tel,
-                            decoration: const InputDecoration(hintText: 'Tel:'),
-                          ),
-                        ),
+                      controller.obx((state) => ListView.builder(
+                          itemCount: controller.placesList.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              onTap: () async {
+                                controller.placeController.text = controller
+                                    .placesList[index]['description'];
+                                // ignore: unused_local_variable
+                                List<Location> locations =
+                                await locationFromAddress(controller
+                                    .placesList[index]['description']);
+                              },
+                              title: Text(controller.placesList[index]
+                              ['description']),
+                            );
+                          })),
+                      TextFormField(
+                        controller: controller.tel,
+                        decoration: const InputDecoration(hintText: 'Tel:'),
                       ),
                       SizedBox(
                         height: 5,
@@ -77,15 +67,10 @@ class EditMyPharmacyView extends StatelessWidget {
                         //   ),
                         // ),
                       ),
-                      SizedBox(
-                        height: 50,
-                        child: Expanded(
-                          child: TextFormField(
-                            controller: controller.codePostal,
-                            decoration:
-                                const InputDecoration(hintText: '药店邮编:'),
-                          ),
-                        ),
+                      TextFormField(
+                        controller: controller.codePostal,
+                        decoration:
+                            const InputDecoration(hintText: '药店邮编:'),
                       ),
                       Obx(() => controller.errorMessage.isNotEmpty
                           ? Text(

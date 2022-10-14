@@ -171,13 +171,13 @@ class HomepageController extends GetxController with StateMixin {
   void queryUnReadMessage() async {
     var response =
         await demandeService.getHowManyUnread(signInController.user.userId);
-    unReadMessage.value = int.parse(response ?? 0);
+    unReadMessage.value = int.tryParse(response) ?? 0;
   }
 
   void queryUnReadOffer() async {
     var response =
         await offerService.getHowManyUnreadOffer(signInController.user.userId);
-    unReadOffer.value = int.parse(response ?? 0);
+    unReadOffer.value = int.tryParse(response) ?? 0;
   }
 
   navigate(int i) {

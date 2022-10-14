@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modules/app/homepage/Duty/Duty_recruiter/Details/showUserCVtoPhar/showUserCVtoPhar.controller.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 import 'package:pdfx/pdfx.dart';
 
@@ -13,39 +10,21 @@ class ShowUserCVtoPharView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<ShowUserCVtoPharController>(
         init: ShowUserCVtoPharController(),
         builder: (controller) {
           return Scaffold(
               appBar: AppBar(
-                title: const Text('Editer'),
+                title: const Text('CV'),
                 centerTitle: true,
               ),
-              body: Container(
-                margin: const EdgeInsets.only(
+              body: Padding(
+                padding: const EdgeInsets.only(
                     top: 40, bottom: 10, right: 10, left: 10),
                 child: SafeArea(
-                  child: SingleChildScrollView(
-                      padding: const EdgeInsets.all(30),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GestureDetector(
-                            onTap: controller.getFile,
-                            // child: PdfView(
-                            //   controller: controller.getFile,
-                            // ),
-                            child: Text('22'),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Confirmez votre status:",
-                          ),
-                        ],
-                      )),
+                  child: controller.isLoading ? Center(child: Text('loading....')) : PdfView(
+                    controller: controller.pdfController!,
+                  ),
                 ),
               ));
         });

@@ -58,6 +58,9 @@ class EditMyPharmacyController extends GetxController
     sessionToken ??= uuid.v4();
     if (placeController.text.isNotEmpty) {
       getSuggesion(placeController.text);
+    } else {
+      placesList = [];
+      change(placesList, status: RxStatus.success());
     }
   }
 
