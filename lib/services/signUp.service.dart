@@ -23,6 +23,15 @@ class SignUpService {
     }
   }
 
+  Future sendValidateEmailUser(newUser) async {
+    try {
+      var response = await signUpRepo.sendValidateEmailUser(newUser.toJson());
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   Future addAddressUser(newUser) async {
     try {
       var response = await signUpRepo.addAddressUser(newUser.toJson());
@@ -55,6 +64,16 @@ class SignUpService {
   Future addCandidat(id) async {
     try {
       var response = await signUpRepo.addCandidat(id);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future ifMailActive_by_id(id) async {
+    try {
+      var response = await signUpRepo.ifMailActive_by_id(id);
 
       return response.body;
     } catch (e) {

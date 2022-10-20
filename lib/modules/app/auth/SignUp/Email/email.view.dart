@@ -37,12 +37,12 @@ class EmailView extends GetView<EmailController> {
             : const SizedBox()),
         RoundedButton(
           text: "Vérifier",
-          onTap: () => controller.validateForm(1),
+          onTap: () => controller.validateForm(context, 1),
         ),
-        RoundedButton(
-          text: "Vérifier plus tard",
-          onTap: () => controller.validateForm(2),
-        ),
+        // RoundedButton(
+        //   text: "Déja activé",
+        //   onTap: () => controller.validateForm(context, 2),
+        // ),
       ]))),
     )));
   }

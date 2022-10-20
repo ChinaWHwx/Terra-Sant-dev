@@ -8,9 +8,11 @@ class SignUpRepository extends GetConnect {
 
   Future createUser(body) => post("/register/add_type_status_phone", body);
   Future addEmailUser(body) => post("/users/add_email", body);
+  Future sendValidateEmailUser(body) => post("/register/email_valid", body);
   Future addAddressUser(body) => post("/users/add_address", body);
   Future addNameUser(body) => post("/users/add_personal_infos", body);
   Future addPasswordUser(body) => post("/users/add_email_password", body);
   Future addRecruiter(body) => post("/recruiters/add=${body}", body);
   Future addCandidat(body) => post("/candidates/add=${body}", body);
+  Future ifMailActive_by_id(id) => post("/users/ifMailActive=${id}", id);
 }
