@@ -37,7 +37,7 @@ class GooglePlaceApiView extends GetView<GooglePlaceApiController> {
                           // ignore: unused_local_variable
                           List<Location> locations = await locationFromAddress(
                               controller.placesList[index]['description']);
-                          showToast(index.toString());
+                          // showToast(index.toString());
                           //print(locations.last.longitude);
                           //print(locations.last.latitude);
                         },

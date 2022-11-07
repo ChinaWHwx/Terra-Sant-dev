@@ -131,12 +131,10 @@ class EditAVLUView extends StatelessWidget {
                           ),
                           SizedBox(
                             height: 50,
-                            child: Expanded(
-                              child: TextFormField(
-                                controller: controller.codePostal,
-                                decoration: const InputDecoration(
-                                    hintText: 'ex: 75001'),
-                              ),
+                            child: TextFormField(
+                              controller: controller.codePostal,
+                              decoration: const InputDecoration(
+                                  hintText: 'ex: 75001'),
                             ),
                           ),
                           const SizedBox(

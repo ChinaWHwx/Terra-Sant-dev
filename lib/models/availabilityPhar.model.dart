@@ -107,23 +107,125 @@ class AvailabilityPharsForUsers extends StatelessWidget {
     SizeConfig().init(context);
     return GetBuilder<HomepageController>(builder: (logic) {
       final list = logic.getList1();
-      return EasyRefresh(
-        controller: logic.controller,
-        onRefresh: logic.onRefresh,
-        child: ListView.builder(
-            padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20)),
-            itemBuilder: (context, index) {
-              final availabilityPhars = list[index];
-              return AvailabilityPharsForShowCard(
-                availabilityPhars: availabilityPhars,
-                onTapPhone: (phone) {
-                  debugPrint('phone: $phone');
-                },
-              );
-            },
-            itemCount: list.length),
-      );
+
+      return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        final availabilityPhars = list[index];
+
+        return AvailabilityPharsForShowCard(
+          availabilityPhars: list[index],
+          // onTapCV: () {
+          //   Get.toNamed(Routes.showUserCVtoPhar,
+          //       arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+          // },
+          onTapPhone: (phone) {
+            debugPrint('phone: $phone');
+          },
+        );
+      }, childCount: list.length));
+
+      // return EasyRefresh(
+      //   controller: logic.controller,
+      //   onRefresh: logic.onRefresh,
+      //   child: ListView.builder(
+      //       padding: EdgeInsets.symmetric(
+      //           horizontal: getProportionateScreenWidth(20)),
+      //       itemBuilder: (context, index) {
+      //         final availabilityPhars = list[index];
+      //         return AvailabilityPharsForShowCard(
+      //           availabilityPhars: availabilityPhars,
+      //           onTapPhone: (phone) {
+      //             debugPrint('phone: $phone');
+      //           },
+      //         );
+      //       },
+      //       itemCount: list.length),
+      // );
+    });
+  }
+}
+
+class AvailabilityPharsForUsersOnlyMatchWithRegion extends StatelessWidget {
+  const AvailabilityPharsForUsersOnlyMatchWithRegion({Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    return GetBuilder<HomepageController>(builder: (logic) {
+      final list = logic.getListAvlPOnlyMatchWithRegion();
+
+      return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        final availabilityPhars = list[index];
+
+        return AvailabilityPharsForShowCard(
+          availabilityPhars: list[index],
+          onTapPhone: (phone) {
+            debugPrint('phone: $phone');
+          },
+        );
+      }, childCount: list.length));
+      // return EasyRefresh(
+      //   controller: logic.controller,
+      //   onRefresh: logic.onRefresh,
+      //   child: ListView.builder(
+      //       padding: EdgeInsets.symmetric(
+      //           horizontal: getProportionateScreenWidth(20)),
+      //       itemBuilder: (context, index) {
+      //         final availabilityPhars = list[index];
+      //         return AvailabilityPharsForShowCard(
+      //           availabilityPhars: availabilityPhars,
+      //           onTapPhone: (phone) {
+      //             debugPrint('phone: $phone');
+      //           },
+      //         );
+      //       },
+      //       itemCount: list.length),
+      // );
+    });
+  }
+}
+
+class AvailabilityPharsForUsersOnlyMatchWithTimeAndDepartement
+    extends StatelessWidget {
+  const AvailabilityPharsForUsersOnlyMatchWithTimeAndDepartement({Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    return GetBuilder<HomepageController>(builder: (logic) {
+      final list = logic.getListAvlPOnlyMatchWithTimeAndDepartement();
+
+      return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        final availabilityPhars = list[index];
+
+        return AvailabilityPharsForShowCard(
+          availabilityPhars: list[index],
+          onTapPhone: (phone) {
+            debugPrint('phone: $phone');
+          },
+        );
+      }, childCount: list.length));
+      // return EasyRefresh(
+      //   controller: logic.controller,
+      //   onRefresh: logic.onRefresh,
+      //   child: ListView.builder(
+      //       padding: EdgeInsets.symmetric(
+      //           horizontal: getProportionateScreenWidth(20)),
+      //       itemBuilder: (context, index) {
+      //         final availabilityPhars = list[index];
+      //         return AvailabilityPharsForShowCard(
+      //           availabilityPhars: availabilityPhars,
+      //           onTapPhone: (phone) {
+      //             debugPrint('phone: $phone');
+      //           },
+      //         );
+      //       },
+      //       itemCount: list.length),
+      // );
     });
   }
 }
@@ -174,8 +276,12 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final phar = homepageController.listAllPhar //获取本avlp对应的phar信息
-        .firstWhere((element) => element.phId == availabilityPhars.ph_id);
+    final index = homepageController.listAllPhar //获取本avlp对应的phar信息
+        .indexWhere((element) => element.phId == availabilityPhars.ph_id);
+    final phar = index != -1 ? homepageController.listAllPhar[index] : null;
+    if (phar == null) {
+      return const SizedBox.shrink();
+    }
 
     return Padding(
       padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),

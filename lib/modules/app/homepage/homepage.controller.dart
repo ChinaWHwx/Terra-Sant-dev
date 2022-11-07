@@ -55,6 +55,38 @@ class HomepageController extends GetxController with StateMixin {
     return newList;
   }
 
+  List<AvailabilityPhar> getListAvlPOnlyMatchWithRegion() {
+    //所有的avlP中地点与本user的某avlU匹配的 但时间不匹配
+    final newList = <AvailabilityPhar>[];
+    for (final avlP in list1) {
+      if (list2
+          .where((element) =>
+              element.region_candidate == avlP.ph_region &&
+              element.date_month_year_candidate != avlP.date_month_year_phar)
+          .isNotEmpty) {
+        newList.add(avlP);
+      }
+    }
+    return newList;
+  }
+
+  List<AvailabilityPhar> getListAvlPOnlyMatchWithTimeAndDepartement() {
+    //所有的avlP中时间与本user的某avlU匹配的 但地点只匹配邮编前两位
+    final newList = <AvailabilityPhar>[];
+    for (final avlP in list1) {
+      if (list2
+          .where((element) =>
+              element.date_month_year_candidate == avlP.date_month_year_phar &&
+              element.region_candidate != avlP.ph_region &&
+              element.region_candidate.toString().substring(0, 2) ==
+                  avlP.ph_region.toString().substring(0, 2))
+          .isNotEmpty) {
+        newList.add(avlP);
+      }
+    }
+    return newList;
+  }
+
   List<Offer> getMyOfferUser() {
     final newList = <Offer>[];
     for (final offer in listAllOffer) {
@@ -171,13 +203,13 @@ class HomepageController extends GetxController with StateMixin {
   void queryUnReadMessage() async {
     var response =
         await demandeService.getHowManyUnread(signInController.user.userId);
-    unReadMessage.value = int.tryParse(response) ?? 0;
+    unReadMessage.value = int.tryParse('$response') ?? 0;
   }
 
   void queryUnReadOffer() async {
     var response =
         await offerService.getHowManyUnreadOffer(signInController.user.userId);
-    unReadOffer.value = int.tryParse(response) ?? 0;
+    unReadOffer.value = int.tryParse('$response') ?? 0;
   }
 
   navigate(int i) {

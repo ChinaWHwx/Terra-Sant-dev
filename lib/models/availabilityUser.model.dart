@@ -101,25 +101,143 @@ class AvailabilityUsersForPhars extends StatelessWidget {
     SizeConfig().init(context);
     return GetBuilder<HomepagePharController>(builder: (logic) {
       final list = logic.getList1();
-      debugPrint('list: ${list.length}');
-      return EasyRefresh(
-        controller: logic.controller,
-        onRefresh: logic.onRefresh,
-        child: ListView.builder(
-            padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20)),
-            itemBuilder: (context, index) {
-              final availabilityUsers = list[index];
-              return AvailabilityUsersForShowCard(
-                availabilityUsers: list[index],
-                onTapCV: () {
-                  Get.toNamed(Routes.showUserCVtoPhar,
-                      arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
-                },
-              );
-            },
-            itemCount: list.length),
-      );
+
+      // final listAvlUOnlyMatchWithTimeAndDepartement =
+      //     logic.getListAvlUOnlyMatchWithTimeAndDepartement();
+
+      return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        final availabilityUsers = list[index];
+
+        return AvailabilityUsersForShowCard(
+          availabilityUsers: list[index],
+          onTapCV: () {
+            Get.toNamed(Routes.showUserCVtoPhar,
+                arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+          },
+        );
+      }, childCount: list.length));
+
+      //debugPrint('list: ${list.length}');
+      // return EasyRefresh(
+      //   controller: logic.controller,
+      //   onRefresh: logic.onRefresh,
+      //   child: ListView.builder(
+      //       padding: EdgeInsets.symmetric(
+      //           horizontal: getProportionateScreenWidth(20)),
+      //       itemBuilder: (context, index) {
+      //         final availabilityUsers = list[index];
+
+      //         return AvailabilityUsersForShowCard(
+      //           availabilityUsers: list[index],
+      //           onTapCV: () {
+      //             Get.toNamed(Routes.showUserCVtoPhar,
+      //                 arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+      //           },
+      //         );
+      //       },
+      //       itemCount: list.length),
+      // );
+    });
+  }
+}
+
+class AvailabilityUsersForPharsOnlyMatchWithRegion extends StatelessWidget {
+  const AvailabilityUsersForPharsOnlyMatchWithRegion({Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    return GetBuilder<HomepagePharController>(builder: (logic) {
+      final listAvlUOnlyMatchWithRegion =
+          logic.getListAvlUOnlyMatchWithRegion();
+
+      return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        final availabilityUsers = listAvlUOnlyMatchWithRegion[index];
+
+        return AvailabilityUsersForShowCard(
+          availabilityUsers: listAvlUOnlyMatchWithRegion[index],
+          onTapCV: () {
+            Get.toNamed(Routes.showUserCVtoPhar,
+                arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+          },
+        );
+      }, childCount: listAvlUOnlyMatchWithRegion.length));
+
+      //debugPrint('list: ${list.length}');
+      // return EasyRefresh(
+      //   controller: logic.controller,
+      //   onRefresh: logic.onRefresh,
+      //   child: ListView.builder(
+      //       padding: EdgeInsets.symmetric(
+      //           horizontal: getProportionateScreenWidth(20)),
+      //       itemBuilder: (context, index) {
+      //         final availabilityUsers = listAvlUOnlyMatchWithRegion[index];
+
+      //         return AvailabilityUsersForShowCard(
+      //           availabilityUsers: listAvlUOnlyMatchWithRegion[index],
+      //           onTapCV: () {
+      //             Get.toNamed(Routes.showUserCVtoPhar,
+      //                 arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+      //           },
+      //         );
+      //       },
+      //       itemCount: listAvlUOnlyMatchWithRegion.length),
+      // );
+    });
+  }
+}
+
+class AvailabilityUsersForPharsOnlyMatchWithTimeAndDepartement
+    extends StatelessWidget {
+  const AvailabilityUsersForPharsOnlyMatchWithTimeAndDepartement({Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    return GetBuilder<HomepagePharController>(builder: (logic) {
+      final listAvlUOnlyMatchWithTimeAndDepartement =
+          logic.getListAvlUOnlyMatchWithTimeAndDepartement();
+
+      return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        final availabilityUsers =
+            listAvlUOnlyMatchWithTimeAndDepartement[index];
+
+        return AvailabilityUsersForShowCard(
+          availabilityUsers: listAvlUOnlyMatchWithTimeAndDepartement[index],
+          onTapCV: () {
+            Get.toNamed(Routes.showUserCVtoPhar,
+                arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+          },
+        );
+      }, childCount: listAvlUOnlyMatchWithTimeAndDepartement.length));
+
+      //debugPrint('list: ${list.length}');
+      // return EasyRefresh(
+      //   controller: logic.controller,
+      //   onRefresh: logic.onRefresh,
+      //   child: ListView.builder(
+      //       padding: EdgeInsets.symmetric(
+      //           horizontal: getProportionateScreenWidth(20)),
+      //       itemBuilder: (context, index) {
+      //         final availabilityUsers =
+      //             listAvlUOnlyMatchWithTimeAndDepartement[index];
+
+      //         return AvailabilityUsersForShowCard(
+      //           availabilityUsers:
+      //               listAvlUOnlyMatchWithTimeAndDepartement[index],
+      //           onTapCV: () {
+      //             Get.toNamed(Routes.showUserCVtoPhar,
+      //                 arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+      //           },
+      //         );
+      //       },
+      //       itemCount: listAvlUOnlyMatchWithTimeAndDepartement.length),
+      // );
     });
   }
 }

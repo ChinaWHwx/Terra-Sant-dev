@@ -39,13 +39,47 @@ class HomepagePharController extends GetxController with StateMixin {
   EasyRefreshController get controller => _controller;
 
   Timer? _timer;
+
   List<AvailabilityUser> getList1() {
+    //所有的avlU中地点和时间都与本phar的某avlP匹配的
     final newList = <AvailabilityUser>[];
     for (final avlU in _list1) {
       if (list2
           .where((element) =>
               element.date_month_year_phar == avlU.date_month_year_candidate &&
               element.ph_region == avlU.region_candidate)
+          .isNotEmpty) {
+        newList.add(avlU);
+      }
+    }
+    return newList;
+  }
+
+  List<AvailabilityUser> getListAvlUOnlyMatchWithRegion() {
+    //所有的avlU中地点与本phar的某avlP匹配的 但时间不匹配
+    final newList = <AvailabilityUser>[];
+    for (final avlU in _list1) {
+      if (list2
+          .where((element) =>
+              element.ph_region == avlU.region_candidate &&
+              element.date_month_year_phar != avlU.date_month_year_candidate)
+          .isNotEmpty) {
+        newList.add(avlU);
+      }
+    }
+    return newList;
+  }
+
+  List<AvailabilityUser> getListAvlUOnlyMatchWithTimeAndDepartement() {
+    //所有的avlU中时间与本phar的某avlP匹配的 但地点只匹配邮编前两位
+    final newList = <AvailabilityUser>[];
+    for (final avlU in _list1) {
+      if (list2
+          .where((element) =>
+              element.date_month_year_phar == avlU.date_month_year_candidate &&
+              element.ph_region != avlU.region_candidate &&
+              element.ph_region.toString().substring(0, 2) ==
+                  avlU.region_candidate.toString().substring(0, 2))
           .isNotEmpty) {
         newList.add(avlU);
       }
@@ -166,13 +200,13 @@ class HomepagePharController extends GetxController with StateMixin {
   void queryUnReadOffer() async {
     var response = await offerService
         .getHowManyUnreadOfferByPhar(signInController.user.userId);
-    unReadOffer.value = int.tryParse(response) ?? 0;
+    unReadOffer.value = int.tryParse('$response') ?? 0;
   }
 
   void queryUnReadMessage() async {
     var response = await demandeToPharService
         .getHowManyUnreadToPhar(signInController.user.userId);
-    unReadMessage.value = int.tryParse(response) ?? 0;
+    unReadMessage.value = int.tryParse('$response') ?? 0;
   }
 
   Future onRefresh() async {
