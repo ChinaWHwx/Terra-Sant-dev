@@ -161,7 +161,7 @@ class HomepagePharController extends GetxController with StateMixin {
       }
     }
     for (final demandeToPhar in newList) {
-      if (demandeToPhar.refuse == 'NO') {
+      if (demandeToPhar.refuse == 'NO' && demandeToPhar.treated == 'NO') {
         notYetRefusedList.add(demandeToPhar);
       }
     }

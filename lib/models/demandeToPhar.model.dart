@@ -21,6 +21,7 @@ class DemandeToPhar {
     this.accept,
     this.refuse,
     this.newOrNot,
+    this.treated,
   });
 
   int? demandeToPhar_id;
@@ -31,6 +32,7 @@ class DemandeToPhar {
   String? accept;
   String? refuse;
   String? newOrNot;
+  String? treated;
   int? user_avlP_id;
 
   factory DemandeToPhar.fromJson(Map<String, dynamic> json) => DemandeToPhar(
@@ -43,6 +45,7 @@ class DemandeToPhar {
         user_avlP_id: json["user_avlP_id"],
         accept: json["accept"],
         refuse: json["refuse"],
+        treated: json["treated"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,6 +58,7 @@ class DemandeToPhar {
         "readed": readed,
         "accept": accept,
         "refuse": refuse,
+        "treated": treated,
       };
 
   static List<DemandeToPhar> DemandeToPharFromJson(String str) =>

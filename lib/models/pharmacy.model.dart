@@ -43,6 +43,7 @@ class Pharmacy {
         ownerId: json["owner_id"],
         phAddress: json["ph_address"] == null ? null : json['ph_address'],
         phEmailConf: json["ph_email_conf"],
+        phEmail: json["ph_email"],
         phId: json["ph_id"],
         phName: json["ph_name"],
         phPhone: json["ph_phone"],

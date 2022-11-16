@@ -110,7 +110,7 @@ class HomepageController extends GetxController with StateMixin {
       }
     }
     for (final demande in newList) {
-      if (demande.refuse == 'NO') {
+      if (demande.refuse == 'NO' && demande.treated == 'NO') {
         notYetRefusedList.add(demande);
       }
     }
