@@ -472,87 +472,41 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
               LikeButton(
                 countPostion: CountPostion.left,
                 onTap: (isLiked) {
-                  if (isLiked) {
-                    return Future.value(null);
-                  }
                   onTapPhone?.call(availabilityUsers.avlUId ?? 0);
                   showDialog(
                       context: context,
-                      builder: (context) => AlertDialog(
-                            title: Text('Confirmation'),
-                            content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text(
-                                    "Choisir entre mes besoins:",
-                                  ),
-                                  GetBuilder<HomepagePharController>(
-                                      builder: (homepagePharController) {
-                                    return DropdownButton<AvailabilityPhar?>(
-                                      isExpanded: true,
-                                      iconSize: 24,
-                                      onChanged: (newValue) {
-                                        homepagePharController.setSelected(
-                                            1, newValue);
-                                      },
-                                      hint: Text('Choisir un creneaux'),
-                                      value:
-                                          homepagePharController.selectedMyAVLP,
-                                      items: homepagePharController
-                                          .dropdownTextForMyAVLPdate
-                                          .map<
-                                                  DropdownMenuItem<
-                                                      AvailabilityPhar>>(
-                                              (AvailabilityPhar value) {
-                                        return DropdownMenuItem<
-                                            AvailabilityPhar>(
-                                          value: value,
-                                          child: Text(
-                                              '${value.date_month_year_phar}, ${value.repeat_phar}, (id:${value.avlP_id})'),
-                                        );
-                                      }).toList(),
-                                    );
-                                  })
-                                ]),
-                            actions: <Widget>[
-                              TextButton(
-                                child: new Text("Cancel"),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text("Oui"),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  homepagePharController.sendDemande(
-                                      context,
-                                      availabilityUsers.avlUId,
-                                      availabilityUsers.user_id);
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                            title: Text('Confirmation'),
-                                            content: Text(
-                                                ('Votre demande est prise en compte, on vous organise un RDV au plus vite')),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child: new Text("Cancel"),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                              TextButton(
-                                                child: Text("ok"),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            ],
-                                          ));
-                                },
-                              ),
-                            ],
+                      builder: (_) => ADialog(
+                            initValue: null,
+                            list: homepagePharController
+                                .dropdownTextForMyAVLPdate,
+                            onSend: (selectedMyAVLP) {
+                              homepagePharController.sendDemande(
+                                  context,
+                                  availabilityUsers.avlUId,
+                                  availabilityUsers.user_id,
+                                  selectedMyAVLP);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text('Confirmation'),
+                                        content: Text(
+                                            ('Votre demande est prise en compte, on vous organise un RDV au plus vite')),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: new Text("Cancel"),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: Text("ok"),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      ));
+                            },
                           ));
 
                   return Future.value(!isLiked);
@@ -561,7 +515,7 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
                   debugPrint('isLiked: $isLiked');
                   return Icon(
                     Icons.phone_forwarded,
-                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                    color: Colors.grey,
                     size: 35,
                   );
                 },
@@ -583,6 +537,74 @@ class AvailabilityUsersForShowCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ADialog extends StatefulWidget {
+  const ADialog(
+      {Key? key, required this.initValue, required this.list, this.onSend})
+      : super(key: key);
+
+  final AvailabilityPhar? initValue;
+  final List<AvailabilityPhar> list;
+  final ValueChanged<AvailabilityPhar?>? onSend;
+
+  @override
+  State<ADialog> createState() => _ADialogState();
+}
+
+class _ADialogState extends State<ADialog> {
+  late AvailabilityPhar? _value;
+
+  @override
+  void initState() {
+    super.initState();
+    _value = widget.initValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Confirmation'),
+      content: Column(mainAxisSize: MainAxisSize.min, children: [
+        const Text(
+          "Choisir entre mes besoins:",
+        ),
+        DropdownButton<AvailabilityPhar?>(
+          isExpanded: true,
+          iconSize: 24,
+          onChanged: (newValue) {
+            _value = newValue;
+            setState(() {});
+          },
+          hint: const Text('Choisir un creneaux'),
+          value: _value,
+          items: widget.list.map<DropdownMenuItem<AvailabilityPhar>>(
+              (AvailabilityPhar value) {
+            return DropdownMenuItem<AvailabilityPhar>(
+              value: value,
+              child: Text(
+                  '${value.date_month_year_phar}, ${value.repeat_phar}, (id:${value.avlP_id})'),
+            );
+          }).toList(),
+        ),
+      ]),
+      actions: <Widget>[
+        TextButton(
+          child: new Text("Cancel"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          child: Text("Oui"),
+          onPressed: () {
+            Navigator.of(context).pop();
+            widget.onSend?.call(_value);
+          },
+        ),
+      ],
     );
   }
 }

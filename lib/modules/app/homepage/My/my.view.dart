@@ -94,7 +94,7 @@ class MyView extends GetView<MyController> {
                                   TextButton(
                                     child: const Text('Annuler'),
                                     onPressed: () {
-                                      controller.navigateToMy();
+                                      Navigator.of(context).pop();
                                     },
                                   ),
                                   TextButton(

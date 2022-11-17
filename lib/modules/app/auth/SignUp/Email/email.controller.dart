@@ -32,6 +32,7 @@ class EmailController extends GetxController with StateMixin {
     } else {
       authController.newUser.userEmail = textEditingController.text;
       var response = await signUpService.addEmailUser(authController.newUser);
+      debugPrint('response: $response');
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
@@ -53,11 +54,11 @@ class EmailController extends GetxController with StateMixin {
             }
           }
 
-          if (response.containsKey('error')) {
-            authController.newUser.userEmail = '';
-            errorMessage.value = response["error"];
-          }
+
         }
+      }if (response.containsKey('error')) {
+        authController.newUser.userEmail = '';
+        errorMessage.value = response["error"];
       }
     }
   }

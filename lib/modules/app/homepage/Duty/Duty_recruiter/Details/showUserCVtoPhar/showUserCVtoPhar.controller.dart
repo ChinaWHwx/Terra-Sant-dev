@@ -22,6 +22,9 @@ class ShowUserCVtoPharController extends GetxController
   bool _isLoading = true;
   bool get isLoading => _isLoading;
 
+  bool _isFileExist = true;
+  bool get isFileExist => _isFileExist;
+
   late String _path;
 
   PdfController? pdfController;
@@ -41,7 +44,7 @@ class ShowUserCVtoPharController extends GetxController
   Future getFile() async {
     var dio = Dio();
     try {
-      dio.download(
+      await dio.download(
           'http://51.178.83.92:5000/download=${availabilityUsers.user_id}',
           _path, onReceiveProgress: (count, total) {
         debugPrint('count: $count total: $total');
@@ -51,7 +54,12 @@ class ShowUserCVtoPharController extends GetxController
           update();
         }
       });
-    } catch (e) {
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 404) {
+        _isLoading = false;
+        _isFileExist = false;
+        update();
+      }
       debugPrint('e: $e');
     }
   }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/login.model.dart';
+import 'package:flutter_application_1/models/user.model.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/signin.controller.dart';
 import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/login.service.dart';
 import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +12,7 @@ class PasswordController extends GetxController with StateMixin {
   Rx<String> errorMessage = ''.obs;
   SignUpService signUpService = Get.find();
   AuthController authController = Get.find();
+  LoginService loginService = Get.find();
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController verificationController = TextEditingController();
@@ -16,9 +21,9 @@ class PasswordController extends GetxController with StateMixin {
     Get.toNamed(Routes.infoRoute);
   }
 
-  navigateToHomePage() {
-    Get.toNamed(Routes.homepage);
-  }
+  // navigateToHomePage() {
+  //   Get.toNamed(Routes.homepage);
+  // }
 
   String isPasswordValid(String password) {
     if (password.isEmpty) return 'le champs obligatoire!';
@@ -47,17 +52,39 @@ class PasswordController extends GetxController with StateMixin {
       authController.newUser.userPassword = verificationController.text;
       var response =
           await signUpService.addPasswordUser(authController.newUser);
-
+      Login data = getData();
+      var response2 = await loginService.getInfos(loginToJson(data));
       if (response.containsKey("success")) {
         if (response["success"] == 'true') {
           change(null, status: RxStatus.success());
-          authController.navigateToSignIn();
+          //authController.navigateToSignIn();
+          Get.find<SignInController>().user = User.fromJson(response2);
+          navigateToHome();
         }
       }
       if (response.containsKey('error')) {
         authController.newUser.userPassword = '';
         errorMessage.value = response["error"];
       }
+    }
+  }
+
+  Login getData() {
+    return Login(
+      userEmail: authController.newUser.userEmail!,
+      userPassword: authController.newUser.userPassword!,
+    );
+  }
+
+  navigateToHome() {
+    if (authController.newUser.user_type == "candidat" ||
+        authController.newUser.user_type == "etudiant") {
+      Get.toNamed(Routes.homepageRoute);
+      print(authController.newUser.user_type);
+    }
+    if (authController.newUser.user_type == "recruteur") {
+      Get.toNamed(Routes.homepagePharRoute);
+      print(authController.newUser.user_type);
     }
   }
 }

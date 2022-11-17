@@ -148,7 +148,7 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
     } else if (index == 4) {
       Get.toNamed(Routes.googleMap);
     } else if (index == 5) {
-      Get.toNamed(Routes.logout);
+      //Get.toNamed(Routes.logout);
       showDialog(
           context: context,
           builder: (context) {
@@ -159,7 +159,7 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
                 TextButton(
                   child: const Text('Annuler'),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/my');
+                    Navigator.of(context).pop();
                   },
                 ),
                 TextButton(

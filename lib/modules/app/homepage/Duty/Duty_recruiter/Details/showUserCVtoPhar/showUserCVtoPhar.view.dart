@@ -22,9 +22,13 @@ class ShowUserCVtoPharView extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 40, bottom: 10, right: 10, left: 10),
                 child: SafeArea(
-                  child: controller.isLoading ? Center(child: Text('loading....')) : PdfView(
-                    controller: controller.pdfController!,
-                  ),
+                  child: controller.isLoading
+                      ? Center(child: Text('loading....'))
+                      : controller.isFileExist
+                          ? PdfView(
+                              controller: controller.pdfController!,
+                            )
+                          : Center(child: Text('Empty....')),
                 ),
               ));
         });

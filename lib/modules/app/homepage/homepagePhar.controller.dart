@@ -408,14 +408,6 @@ class HomepagePharController extends GetxController with StateMixin {
     super.dispose();
   }
 
-  AvailabilityPhar? selectedMyAVLP = null;
-  void setSelected(n, value) {
-    if (n == 1) {
-      selectedMyAVLP = value;
-      update();
-    }
-  }
-
   var demande = Demande();
 
   // List<String> get dropdownTextForMyAVLP =>
@@ -425,7 +417,7 @@ class HomepagePharController extends GetxController with StateMixin {
 
   Rx<String> errorMessage = "".obs;
 
-  sendDemande(BuildContext context, avlU_id, user_avlU_id) async {
+  sendDemande(BuildContext context, avlU_id, user_avlU_id, AvailabilityPhar? selectedMyAVLP) async {
     if (selectedMyAVLP.toString() == '0') {
       errorMessage.value = "Champs obligatoire";
     } else {
