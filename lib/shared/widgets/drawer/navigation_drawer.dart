@@ -36,14 +36,14 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
           //   textIconColor:
           //       Get.currentRoute == Routes.auth ? Colors.white : Colors.black,
           // ),
-          buildDrawerItem(
-              icon: Icons.share,
-              text: "Partager",
-              onTap: () => navigate(2, context),
-              tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
-              textIconColor: Get.currentRoute == Routes.auth
-                  ? Colors.white
-                  : Colors.black),
+          // buildDrawerItem(
+          //     icon: Icons.share,
+          //     text: "Partager",
+          //     onTap: () => navigate(2, context),
+          //     tileColor: Get.currentRoute == Routes.auth ? Colors.blue : null,
+          //     textIconColor: Get.currentRoute == Routes.auth
+          //         ? Colors.white
+          //         : Colors.black),
           buildDrawerItem(
               icon: Icons.call,
               text: "Contacter",

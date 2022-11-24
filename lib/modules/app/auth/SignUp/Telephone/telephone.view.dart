@@ -53,12 +53,12 @@ class TelephoneView extends GetView<TelephoneController> {
                     await controller.validateForm(1);
                   },
                 ),
-                RoundedButton(
-                  text: 'Vérifier plus tard',
-                  onTap: () {
-                    controller.validateForm(2);
-                  },
-                ),
+                // RoundedButton(
+                //   text: 'Vérifier plus tard',
+                //   onTap: () {
+                //     controller.validateForm(2);
+                //   },
+                // ),
               ],
             ),
           ),

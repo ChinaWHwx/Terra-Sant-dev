@@ -40,24 +40,24 @@ class MyView extends GetView<MyController> {
                     //   ),
                     //   onPressed: () => controller.navigateToProfile(),
                     // ),
-                    TextButton(
-                      child: Row(
-                        children: const [
-                          Icon(Icons.work),
-                          Text("Mes expériences"),
-                        ],
-                      ),
-                      onPressed: () => controller.navigateToExperience(),
-                    ),
-                    TextButton(
-                      child: Row(
-                        children: const [
-                          Icon(Icons.light_mode_sharp),
-                          Text("Mes compétences"),
-                        ],
-                      ),
-                      onPressed: () => controller.navigateToAbility(),
-                    ),
+                    // TextButton(
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(Icons.work),
+                    //       Text("Mes expériences"),
+                    //     ],
+                    //   ),
+                    //   onPressed: () => controller.navigateToExperience(),
+                    // ),
+                    // TextButton(
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(Icons.light_mode_sharp),
+                    //       Text("Mes compétences"),
+                    //     ],
+                    //   ),
+                    //   onPressed: () => controller.navigateToAbility(),
+                    // ),
                     TextButton(
                       child: Row(
                         children: const [
