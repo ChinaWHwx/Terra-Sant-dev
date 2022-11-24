@@ -45,8 +45,11 @@ class TelephoneController extends GetxController with StateMixin {
       } else {
         authController.newUser.userPhone = textEditingController.text;
         var response = await signUpService.createUser(authController.newUser);
-        print(authController.newUser.toJson());
-        if (response.containsKey("success")) {
+        var response1 = await signUpService.phone_verif(authController.newUser);
+
+        
+        if (response.containsKey("success") &&
+            response1.containsKey("success")) {
           if (response["success"] == 'true') {
             authController.newUser.userId = response['user_id'];
             change(null, status: RxStatus.success());
@@ -57,7 +60,7 @@ class TelephoneController extends GetxController with StateMixin {
             }
           }
         }
-        if (response.containsKey('error')) {
+        if (response.containsKey('error') || response1.containsKey('error')) {
           authController.newUser.userPhone = "";
           errorMessage.value = response["error"];
         }

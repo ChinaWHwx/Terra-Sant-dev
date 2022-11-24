@@ -14,6 +14,44 @@ class SignUpService {
     }
   }
 
+  Future phone_verif(newUser) async {
+    try {
+      var response = await signUpRepo.phone_verif(newUser.toJson());
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future phone_verif_forgetPassword(phone) async {
+    try {
+      var response = await signUpRepo.phone_verif_forgetPassword(phone);
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future verifierCode(newUser) async {
+    try {
+      var response = await signUpRepo.verifierCode(newUser);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future update_password(body) async {
+    try {
+      var response = await signUpRepo.update_password(body);
+
+      return response.body;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   Future addEmailUser(newUser) async {
     try {
       var response = await signUpRepo.addEmailUser(newUser.toJson());

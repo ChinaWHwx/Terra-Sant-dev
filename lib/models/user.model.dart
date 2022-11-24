@@ -43,7 +43,7 @@ class User {
   int? userPhone2Conf;
   dynamic userPhone3;
   int? userPhone3Conf;
-  int? userPhoneConf;
+  String? userPhoneConf;
   dynamic userProfilePic;
   int? userProfileValidated;
   DateTime? userRegistrationDate;

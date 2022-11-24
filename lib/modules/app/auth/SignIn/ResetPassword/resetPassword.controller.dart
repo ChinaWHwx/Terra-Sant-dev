@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/app/auth/SignIn/ForgetPassword/forget.controller.dart';
+import 'package:flutter_application_1/modules/app/auth/auth.controller.dart';
 import 'package:flutter_application_1/routes/app.pages.dart';
+import 'package:flutter_application_1/services/signUp.service.dart';
 import 'package:get/get.dart';
 
-class ResetPasswordController extends GetxController {
+class ResetPasswordController extends GetxController with StateMixin {
   Rx<String> errorMessage = ''.obs;
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController verificationController = TextEditingController();
+
+  AuthController authController = Get.find();
+  SignUpService signUpService = Get.find();
+  ForgetPasswordController forgetPasswordController = Get.find();
 
   navigateToSignIn() {
     Get.toNamed(Routes.signInRoute);
@@ -34,13 +41,26 @@ class ResetPasswordController extends GetxController {
     return '';
   }
 
-  validateForm() {
+  validateForm() async {
     errorMessage.value = '';
 
     errorMessage.value = isPasswordValid(passwordController.text);
 
     if (errorMessage.value == '') {
-      navigateToSignIn();
+      Map<String, String> body = {
+        "user_phone": forgetPasswordController.phone,
+        "user_password": passwordController.text
+      };
+      var response = await signUpService.update_password(body);
+      if (response.containsKey("success")) {
+        if (response["success"] == 'true') {
+          change(null, status: RxStatus.success());
+          navigateToSignIn();
+        }
+      }
+      if (response.containsKey('error')) {
+        errorMessage.value = response["error"];
+      }
     }
   }
 }
