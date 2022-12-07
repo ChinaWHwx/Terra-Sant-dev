@@ -343,9 +343,9 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
               ),
               LikeButton(
                 onTap: (isLiked) {
-                  if (isLiked) {
-                    return Future.value(null);
-                  }
+                  // if (isLiked) {
+                  //   return Future.value(null);
+                  // }
                   //onTapPhone?.call(availabilityUsers.avlUId ?? 0);
                   showDialog(
                       context: context,
@@ -396,12 +396,12 @@ class AvailabilityUsersForEditCard extends StatelessWidget {
                             ],
                           ));
 
-                  return Future.value(!isLiked);
+                  return Future.value(false);
                 },
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Icons.delete,
-                    color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                    color: Colors.grey,
                     size: 35,
                   );
                 },

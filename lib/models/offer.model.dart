@@ -209,9 +209,9 @@ class OfferForPharCard extends StatelessWidget {
                     LikeButton(
                       countPostion: CountPostion.left,
                       onTap: (isLiked) {
-                        if (isLiked) {
-                          return Future.value(null);
-                        }
+                        // if (isLiked) {
+                        //   return Future.value(null);
+                        // }
                         homepagePharController.setOfferNotNewByPhar(offer);
                         showDialog(
                             context: context,
@@ -271,13 +271,12 @@ class OfferForPharCard extends StatelessWidget {
                                   ],
                                 ));
 
-                        return Future.value(!isLiked);
+                        return Future.value(false);
                       },
                       likeBuilder: (bool isLiked) {
                         return Icon(
                           Icons.message,
-                          color:
-                              isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                          color: Colors.grey,
                           size: 35,
                         );
                       },
@@ -337,9 +336,9 @@ class OfferForUserCard extends StatelessWidget {
                     LikeButton(
                       countPostion: CountPostion.left,
                       onTap: (isLiked) {
-                        if (isLiked) {
-                          return Future.value(null);
-                        }
+                        // if (isLiked) {
+                        //   return Future.value(null);
+                        // }
                         homepageController.setOfferNotNew(offer);
                         showDialog(
                             context: context,
@@ -399,13 +398,12 @@ class OfferForUserCard extends StatelessWidget {
                                   ],
                                 ));
 
-                        return Future.value(!isLiked);
+                        return Future.value(false);
                       },
                       likeBuilder: (bool isLiked) {
                         return Icon(
                           Icons.message,
-                          color:
-                              isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                          color: Colors.grey,
                           size: 35,
                         );
                       },

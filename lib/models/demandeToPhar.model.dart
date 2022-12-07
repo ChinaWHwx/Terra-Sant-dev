@@ -157,9 +157,9 @@ class DemandeToPharForUserCard extends StatelessWidget {
                   LikeButton(
                     countPostion: CountPostion.left,
                     onTap: (isLiked) {
-                      if (isLiked) {
-                        return Future.value(null);
-                      }
+                      // if (isLiked) {
+                      //   return Future.value(null);
+                      // }
                       onTapPhone?.call(demandeToPhar.avlP_id ?? 0);
 
                       homepagePharController
@@ -232,12 +232,12 @@ class DemandeToPharForUserCard extends StatelessWidget {
                                 ],
                               ));
 
-                      return Future.value(!isLiked);
+                      return Future.value(false);
                     },
                     likeBuilder: (bool isLiked) {
                       return Icon(
                         Icons.info,
-                        color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                        color: Colors.grey,
                         size: 35,
                       );
                     },
@@ -247,9 +247,9 @@ class DemandeToPharForUserCard extends StatelessWidget {
                     child: LikeButton(
                       countPostion: CountPostion.left,
                       onTap: (isLiked) {
-                        if (isLiked) {
-                          return Future.value(null);
-                        }
+                        // if (isLiked) {
+                        //   return Future.value(null);
+                        // }
                         onTapPhone?.call(demandeToPhar.avlP_id ?? 0);
 
                         showDialog(
@@ -288,13 +288,12 @@ class DemandeToPharForUserCard extends StatelessWidget {
                                   ],
                                 ));
 
-                        return Future.value(!isLiked);
+                        return Future.value(false);
                       },
                       likeBuilder: (bool isLiked) {
                         return Icon(
                           Icons.delete,
-                          color:
-                              isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                          color: Colors.grey,
                           size: 35,
                         );
                       },
