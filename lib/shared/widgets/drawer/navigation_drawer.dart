@@ -146,7 +146,7 @@ class NavigationDrawer extends GetView<NavigationDrawerController> {
     } else if (index == 3) {
       Get.toNamed(Routes.contact);
     } else if (index == 4) {
-      Get.toNamed(Routes.googleMap);
+      // Get.toNamed(Routes.googleMap);
     } else if (index == 5) {
       //Get.toNamed(Routes.logout);
       showDialog(

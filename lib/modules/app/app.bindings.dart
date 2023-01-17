@@ -113,7 +113,7 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => SplashController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => ContactController(), fenix: true);
-    Get.lazyPut(() => MapController(), fenix: true);
+    // Get.lazyPut(() => MapController(), fenix: true);
     //Get.lazyPut(() => GoogleMapPositionController(), fenix: true);
     Get.lazyPut(() => RecommendController(), fenix: true);
     Get.lazyPut(() => DutyRecruiterController(), fenix: true);

@@ -151,7 +151,7 @@ class AppPages {
     GetPage(name: Routes.profile, page: () => ProfileView()),
     GetPage(name: Routes.modifyProfile, page: () => const ModifiyProfileView()),
     GetPage(name: Routes.contact, page: () => const ContactView()),
-    GetPage(name: Routes.googleMap, page: () => const GoogleMapView()),
+    // GetPage(name: Routes.googleMap, page: () => const GoogleMapView()),
     GetPage(
         name: Routes.searchingAddress,
         page: () => const SearchingAddressView()),
