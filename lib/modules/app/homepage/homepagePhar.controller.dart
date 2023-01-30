@@ -597,7 +597,7 @@ class IconBtnWithCounter extends StatelessWidget {
 //             borderRadius: BorderRadius.circular(20)),
 //         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
 //           const Text.rich(TextSpan(
-//               text: "不显示名字，\n只显示药师时间，\n地点，类型，\n点击按钮可以发送请求给药师\n弹窗显示请求已发送\n",
+//               text: "\n",
 //               style: TextStyle(color: Colors.white),
 //               children: [
 //                 TextSpan(
