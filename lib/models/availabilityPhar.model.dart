@@ -116,7 +116,7 @@ class AvailabilityPharsForUsers extends StatelessWidget {
           availabilityPhars: list[index],
           // onTapCV: () {
           //   Get.toNamed(Routes.showUserCVtoPhar,
-          //       arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+          //       arguments: availabilityUsers); //Passing the information to the next page
           // },
           onTapPhone: (phone) {
             debugPrint('phone: $phone');
@@ -249,7 +249,7 @@ class AvailabilityPharsForPhars extends StatelessWidget {
                 availabilityPhars: availabilityPhars,
                 onTapPencil: () {
                   Get.toNamed(Routes.editAVLP,
-                      arguments: availabilityPhars); //这里是可以给下一个编辑页面传东西
+                      arguments: availabilityPhars); //Passing the information to the next page
                 },
               );
             },
@@ -276,7 +276,7 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final index = homepageController.listAllPhar //获取本avlp对应的phar信息
+    final index = homepageController.listAllPhar //get the information of the pharmacie which corresponds to this availabilityPharmacie
         .indexWhere((element) => element.phId == availabilityPhars.ph_id);
     final phar = index != -1 ? homepageController.listAllPhar[index] : null;
     if (phar == null) {
@@ -365,14 +365,14 @@ class AvailabilityPharsForShowCard extends StatelessWidget {
                                 child: new Text("cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  //show字段设为no ，做不到因为是avlp，只能是如果重复申请就弹窗说已申请过了
+                                  //set 'show' to no
                                 },
                               ),
                               TextButton(
                                   child: Text("Demander"),
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    //发送邮件给terra 说想去这个药店。
+                                    //set mail to terra sante 
 
                                     showDialog(
                                         context: context,
@@ -649,13 +649,13 @@ class AvailabilityPharsForEditCard extends StatelessWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     required this.availabilityPhars,
-    this.onTapPencil, //这里加属性
+    this.onTapPencil, 
     this.onTapPoubelle,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final AvailabilityPhar availabilityPhars;
-  final VoidCallback? onTapPencil; //这里加属性
+  final VoidCallback? onTapPencil; 
   final VoidCallback? onTapPoubelle;
 
   @override

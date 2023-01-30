@@ -39,7 +39,7 @@ class EditMyPharmacyController extends GetxController
   HomepagePharController homepagePharController = Get.find();
   PharmacyService pharmacyService = Get.find();
   final pharmacy = Get.arguments as Pharmacy;
-//这里获取上一个页面传来的数据
+//Here get the data from the last page
   @override
   void onInit() {
     change(null, status: RxStatus.empty());

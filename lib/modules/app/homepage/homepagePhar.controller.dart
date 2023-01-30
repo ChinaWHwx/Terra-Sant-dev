@@ -27,8 +27,8 @@ class HomepagePharController extends GetxController with StateMixin {
   OfferService offerService = Get.find();
   DemandeToPharService demandeToPharService = Get.find();
 
-  List<AvailabilityUser> _list1 = []; //所有的avlU
-  List<AvailabilityPhar> list2 = []; //本phar的所有avlP
+  List<AvailabilityUser> _list1 = []; //all avlU
+  List<AvailabilityPhar> list2 = []; //all avlP of this pharmacien
   List<Pharmacy> listMyPhar = [];
   List<Offer> listAllOffer = [];
   List<DemandeToPhar> listAllDemandeToPhar = [];
@@ -41,7 +41,8 @@ class HomepagePharController extends GetxController with StateMixin {
   Timer? _timer;
 
   List<AvailabilityUser> getList1() {
-    //所有的avlU中地点和时间都与本phar的某avlP匹配的
+    //get all avlU which correspond to one of the avlPs of this pharmacien match with date and region
+
     final newList = <AvailabilityUser>[];
     for (final avlU in _list1) {
       if (list2
@@ -56,7 +57,8 @@ class HomepagePharController extends GetxController with StateMixin {
   }
 
   List<AvailabilityUser> getListAvlUOnlyMatchWithRegion() {
-    //所有的avlU中地点与本phar的某avlP匹配的 但时间不匹配
+    //get all avlU which correspond to one of the avlPs of this pharmacien match only with  region
+
     final newList = <AvailabilityUser>[];
     for (final avlU in _list1) {
       if (list2
@@ -71,7 +73,7 @@ class HomepagePharController extends GetxController with StateMixin {
   }
 
   List<AvailabilityUser> getListAvlUOnlyMatchWithTimeAndDepartement() {
-    //所有的avlU中时间与本phar的某avlP匹配的 但地点只匹配邮编前两位
+    //get all avlU which correspond to one of the avlPs of this pharmacien match only with date and the first two number of region(for example '75002' and '75017' are all in region '75')
     final newList = <AvailabilityUser>[];
     for (final avlU in _list1) {
       if (list2
@@ -90,7 +92,7 @@ class HomepagePharController extends GetxController with StateMixin {
   List<Offer> getMyOfferPhar() {
     final newList = <Offer>[];
     for (final offer in listAllOffer) {
-      if (list2 //本phar的所有avlP
+      if (list2 //all avlP of this pharmacien
           .where((element) => element.avlP_id == offer.avlP_id)
           .isNotEmpty) {
         newList.add(offer);
@@ -152,9 +154,7 @@ class HomepagePharController extends GetxController with StateMixin {
     final newList = <DemandeToPhar>[];
     final notYetRefusedList = <DemandeToPhar>[];
     for (final demandeToPhar in listAllDemandeToPhar) {
-      // print(demandeToPhar.avlP_id);
-      // print('qqqqqqqqqqq');
-      if (list2 //本phar的所有avlP
+      if (list2 //all avlP of this pharmacien
           .where((element) => element.avlP_id == demandeToPhar.avlP_id)
           .isNotEmpty) {
         newList.add(demandeToPhar);
@@ -417,7 +417,8 @@ class HomepagePharController extends GetxController with StateMixin {
 
   Rx<String> errorMessage = "".obs;
 
-  sendDemande(BuildContext context, avlU_id, user_avlU_id, AvailabilityPhar? selectedMyAVLP) async {
+  sendDemande(BuildContext context, avlU_id, user_avlU_id,
+      AvailabilityPhar? selectedMyAVLP) async {
     if (selectedMyAVLP.toString() == '0') {
       errorMessage.value = "Champs obligatoire";
     } else {
@@ -438,7 +439,7 @@ class HomepagePharController extends GetxController with StateMixin {
       }
       if (response.containsKey('error')) {
         errorMessage.value = response["error"];
-        print('已经存在');
+        print('Déja exist');
         Navigator.of(context).pop();
         showExisteDemand(context);
       }
@@ -596,7 +597,7 @@ class IconBtnWithCounter extends StatelessWidget {
 //             borderRadius: BorderRadius.circular(20)),
 //         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
 //           const Text.rich(TextSpan(
-//               text: "不显示名字，\n只显示药师的时间，\n地点，类型，\n点击按钮可以发送请求给药师\n弹窗显示请求已发送\n",
+//               text: "不显示名字，\n只显示药师时间，\n地点，类型，\n点击按钮可以发送请求给药师\n弹窗显示请求已发送\n",
 //               style: TextStyle(color: Colors.white),
 //               children: [
 //                 TextSpan(

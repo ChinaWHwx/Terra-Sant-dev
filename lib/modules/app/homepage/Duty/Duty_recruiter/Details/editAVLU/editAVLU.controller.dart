@@ -26,13 +26,14 @@ class EditAVLUController extends GetxController with StateMixin<List<dynamic>> {
   final availabilityUsers = Get.arguments as AvailabilityUser;
   AvailabilityUserService availabilityUserService = Get.find();
 
-//这里获取上一个页面传来的数据
+//Here get the data from the last page
   @override
   void onInit() {
     change(null, status: RxStatus.empty());
     super.onInit();
     final availabilityUsers = Get.arguments as AvailabilityUser;
-//然后就能得到本avlp的phNa
+//then can get pharmacieName of this avlP
+
     //selected.value =  ?? '';
     dateController =
         DateTime.parse(availabilityUsers.date_month_year_candidate!);

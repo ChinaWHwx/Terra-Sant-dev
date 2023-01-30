@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:pdfx/pdfx.dart';
 
-//本页面已经改为 局部controller 像这样改完要在appbindings里面删除
+//this page has been changed to local controller, changement like this need to delete in appbindings
 class ShowUserCVtoPharView extends StatelessWidget {
   const ShowUserCVtoPharView({Key? key}) : super(key: key);
 

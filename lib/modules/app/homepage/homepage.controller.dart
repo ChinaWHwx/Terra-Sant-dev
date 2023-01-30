@@ -26,8 +26,8 @@ class HomepageController extends GetxController with StateMixin {
   AvailabilityPharService availabilityPharService = Get.find();
   List<Pharmacy> listAllPhar = [];
   var signInController = Get.find<SignInController>();
-  List<AvailabilityPhar> list1 = []; //全部avlP
-  List<AvailabilityUser> list2 = []; //本用户的所有avlU
+  List<AvailabilityPhar> list1 = []; //all avlP
+  List<AvailabilityUser> list2 = []; //all avlU of this user
   List<Offer> listAllOffer = [];
   List<Demande> listAllDemande = [];
 
@@ -41,7 +41,7 @@ class HomepageController extends GetxController with StateMixin {
   EasyRefreshController get controller => _controller;
 
   List<AvailabilityPhar> getList1() {
-    //获取到所有和本avlU的日期匹配的avlP
+    //get all avlP which correspond to this avlU match with date and region
     final newList = <AvailabilityPhar>[];
     for (final avlP in list1) {
       if (list2
@@ -56,7 +56,7 @@ class HomepageController extends GetxController with StateMixin {
   }
 
   List<AvailabilityPhar> getListAvlPOnlyMatchWithRegion() {
-    //所有的avlP中地点与本user的某avlU匹配的 但时间不匹配
+    //get all avlP which correspond to this avlU match only with date but not region
     final newList = <AvailabilityPhar>[];
     for (final avlP in list1) {
       if (list2
@@ -71,7 +71,7 @@ class HomepageController extends GetxController with StateMixin {
   }
 
   List<AvailabilityPhar> getListAvlPOnlyMatchWithTimeAndDepartement() {
-    //所有的avlP中时间与本user的某avlU匹配的 但地点只匹配邮编前两位
+    //get all avlP which correspond to this avlU match only with date and the first two number of region(for example '75002' and '75017' are all in region '75')
     final newList = <AvailabilityPhar>[];
     for (final avlP in list1) {
       if (list2
@@ -119,7 +119,6 @@ class HomepageController extends GetxController with StateMixin {
 
   setReadedAllDemandeUser() {
     for (final demande in listAllDemande) {
-      //这里还要判断一下是不是和我的id一样
       if (demande.readed == 'NO' &&
           demande.user_avlU_id == signInController.user.userId) {
         debugPrint('set read id: ${demande.demande_id}');

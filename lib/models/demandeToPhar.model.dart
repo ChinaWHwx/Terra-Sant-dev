@@ -92,7 +92,7 @@ class DemandeToPharForUsers extends StatelessWidget {
                 onTapPencil: () {
                   //debugPrint('phone: $phone');
                   // Get.toNamed(Routes.editAVLP,
-                  //     arguments: availabilityPhars); //这里是可以给下一个编辑页面传东西
+                  //     arguments: availabilityPhars); //Passing the information to the next page
                 },
               );
             },
@@ -109,22 +109,24 @@ class DemandeToPharForUserCard extends StatelessWidget {
     this.aspectRetio = 1.02,
     required this.demandeToPhar,
     this.onTapPhone,
-    this.onTapPencil, //这里加属性
+    this.onTapPencil,
     this.onTapPoubelle,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final DemandeToPhar demandeToPhar;
   final ValueChanged<int>? onTapPhone;
-  final VoidCallback? onTapPencil; //这里加属性
+  final VoidCallback? onTapPencil;
   final VoidCallback? onTapPoubelle;
 
   @override
   Widget build(BuildContext context) {
-    final avlP = homepagePharController.list2 //获取本demade对应的avlp信息
+    final avlP = homepagePharController
+        .list2 ////get infos of availabilityPhamacie which corresponds to this demade
         .firstWhere((element) => element.avlP_id == demandeToPhar.avlP_id);
 
-    final phar = homepagePharController.listMyPhar //获取本demade对应的avlp信息对应的phar信息
+    final phar = homepagePharController
+        .listMyPhar ////get infos of pharmacie which corresponds to this availability which corresponds to this demade
         .firstWhere((element) => element.phId == avlP.ph_id);
 
     return Padding(
@@ -196,15 +198,15 @@ class DemandeToPharForUserCard extends StatelessWidget {
                                     child: Text("Accepte"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-                                      //发送邮件给terra 说接受这个请求。
+                                      ////send mail to terra sante, tell them it's accepted
                                       homepagePharController
                                           .sendEmailDemandeFromInterToPhar(
                                               demandeToPhar.demandeToPhar_id);
-                                      //accept字段设为Yes
+                                      //set accept to Yes
                                       homepagePharController
                                           .setDemandeToPharAccepted(
                                               demandeToPhar);
-                                      //不能再删除了
+                                      //cannot delete anymore
                                       showDialog(
                                           context: context,
                                           builder: (context) => AlertDialog(
@@ -276,13 +278,14 @@ class DemandeToPharForUserCard extends StatelessWidget {
                                       child: Text("OUI"),
                                       onPressed: () {
                                         Navigator.of(context).pop();
-                                        //发送邮件给本avlU对应的邮箱 说拒绝这个请求。
-                                        //发邮件给terra说拒绝了
-                                        //refuse字段设为yes
+
+                                        //send mail to the mail of this availabilityUser to tell it's been refused
+                                        //send mail to terra sante to tell it's been refused
+                                        //refuse set to yes
                                         homepagePharController
                                             .setDemandeToPharRefused(
                                                 demandeToPhar);
-                                        //如果已经接受了 就不能再删了
+                                        //if accepted,cannot delete anymore
                                       },
                                     ),
                                   ],

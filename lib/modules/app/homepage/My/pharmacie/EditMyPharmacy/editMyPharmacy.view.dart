@@ -5,7 +5,7 @@ import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart'
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 
-//本页面已经改为 局部controller 像这样改完要在appbindings里面删除
+//this page has been changed to local controller, changement like this need to delete in appbindings
 class EditMyPharmacyView extends StatelessWidget {
   const EditMyPharmacyView({Key? key}) : super(key: key);
 
@@ -42,15 +42,15 @@ class EditMyPharmacyView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return ListTile(
                               onTap: () async {
-                                controller.placeController.text = controller
-                                    .placesList[index]['description'];
+                                controller.placeController.text =
+                                    controller.placesList[index]['description'];
                                 // ignore: unused_local_variable
                                 List<Location> locations =
-                                await locationFromAddress(controller
-                                    .placesList[index]['description']);
+                                    await locationFromAddress(controller
+                                        .placesList[index]['description']);
                               },
-                              title: Text(controller.placesList[index]
-                              ['description']),
+                              title: Text(
+                                  controller.placesList[index]['description']),
                             );
                           })),
                       TextFormField(
@@ -69,8 +69,7 @@ class EditMyPharmacyView extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: controller.codePostal,
-                        decoration:
-                            const InputDecoration(hintText: '药店邮编:'),
+                        decoration: const InputDecoration(hintText: '药店邮编:'),
                       ),
                       Obx(() => controller.errorMessage.isNotEmpty
                           ? Text(

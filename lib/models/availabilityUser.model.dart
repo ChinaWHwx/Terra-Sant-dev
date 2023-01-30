@@ -113,7 +113,8 @@ class AvailabilityUsersForPhars extends StatelessWidget {
           availabilityUsers: list[index],
           onTapCV: () {
             Get.toNamed(Routes.showUserCVtoPhar,
-                arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+                arguments:
+                    availabilityUsers); //Passing the information to the next page
           },
         );
       }, childCount: list.length));
@@ -132,7 +133,7 @@ class AvailabilityUsersForPhars extends StatelessWidget {
       //           availabilityUsers: list[index],
       //           onTapCV: () {
       //             Get.toNamed(Routes.showUserCVtoPhar,
-      //                 arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+      //                 arguments: availabilityUsers); //Passing the information to the next page
       //           },
       //         );
       //       },
@@ -161,7 +162,8 @@ class AvailabilityUsersForPharsOnlyMatchWithRegion extends StatelessWidget {
           availabilityUsers: listAvlUOnlyMatchWithRegion[index],
           onTapCV: () {
             Get.toNamed(Routes.showUserCVtoPhar,
-                arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+                arguments:
+                    availabilityUsers); //Passing the information to the next page
           },
         );
       }, childCount: listAvlUOnlyMatchWithRegion.length));
@@ -180,7 +182,7 @@ class AvailabilityUsersForPharsOnlyMatchWithRegion extends StatelessWidget {
       //           availabilityUsers: listAvlUOnlyMatchWithRegion[index],
       //           onTapCV: () {
       //             Get.toNamed(Routes.showUserCVtoPhar,
-      //                 arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+      //                 arguments: availabilityUsers); //Passing the information to the next page
       //           },
       //         );
       //       },
@@ -211,7 +213,8 @@ class AvailabilityUsersForPharsOnlyMatchWithTimeAndDepartement
           availabilityUsers: listAvlUOnlyMatchWithTimeAndDepartement[index],
           onTapCV: () {
             Get.toNamed(Routes.showUserCVtoPhar,
-                arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+                arguments:
+                    availabilityUsers); //Passing the information to the next page
           },
         );
       }, childCount: listAvlUOnlyMatchWithTimeAndDepartement.length));
@@ -232,7 +235,7 @@ class AvailabilityUsersForPharsOnlyMatchWithTimeAndDepartement
       //               listAvlUOnlyMatchWithTimeAndDepartement[index],
       //           onTapCV: () {
       //             Get.toNamed(Routes.showUserCVtoPhar,
-      //                 arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+      //                 arguments: availabilityUsers); //Passing the information to the next page
       //           },
       //         );
       //       },
@@ -263,7 +266,8 @@ class AvailabilityUsersForUsers extends StatelessWidget {
                 availabilityUsers: list[index],
                 onTapPencil: () {
                   Get.toNamed(Routes.editAVLU,
-                      arguments: availabilityUsers); //这里是可以给下一个编辑页面传东西
+                      arguments:
+                          availabilityUsers); //Passing the information to the next page
                 },
               );
             },

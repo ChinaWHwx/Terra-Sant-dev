@@ -160,10 +160,12 @@ class OfferForPharCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final avlP = homepagePharController.list2 //获取本offer对应的avlp信息
+    final avlP = homepagePharController
+        .list2 ////get infos of availabilityPharmacie which corresponds to this offer
         .firstWhere((element) => element.avlP_id == offer.avlP_id);
 
-    final phar = homepagePharController.listMyPhar //获取本offer对应的我的药店的信息
+    final phar = homepagePharController
+        .listMyPhar //get infos of this user's pharmacie which corresponds to this offer
         .firstWhere((element) => element.phId == avlP.ph_id);
 
     return Padding(

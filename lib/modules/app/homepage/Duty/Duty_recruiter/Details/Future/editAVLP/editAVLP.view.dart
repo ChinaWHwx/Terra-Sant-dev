@@ -4,7 +4,7 @@ import 'package:flutter_application_1/shared/widgets/button/rounded_button.dart'
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
-//本页面已经改为 局部controller 像这样改完要在appbindings里面删除
+//this page has been changed to local controller, changement like this need to delete in appbindings
 class EditAVLPView extends StatelessWidget {
   const EditAVLPView({Key? key}) : super(key: key);
 

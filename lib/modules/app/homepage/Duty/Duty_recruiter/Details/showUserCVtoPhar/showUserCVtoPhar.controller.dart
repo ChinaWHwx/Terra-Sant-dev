@@ -29,12 +29,13 @@ class ShowUserCVtoPharController extends GetxController
 
   PdfController? pdfController;
 
-//这里获取上一个页面传来的数据
+//Here get the data from the last page
   @override
   void onInit() async {
     super.onInit();
     final availabilityUsers = Get.arguments as AvailabilityUser;
-// //然后就能得到本avlp的phNa
+//then can get the phName of this avlP
+
 //     int user_id = availabilityUsers.user_id ?? 0;
     final directory = await getTemporaryDirectory();
     _path = '${directory.path}/test.pdf';

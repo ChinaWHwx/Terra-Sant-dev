@@ -85,7 +85,7 @@ class Pharmacies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomepagePharController>(builder: (logic) {
-      //这个是用来刷新页面的
+      //to refresh
       final list = logic.listMyPhar;
       return EasyRefresh(
         controller: logic.controller,
@@ -99,7 +99,8 @@ class Pharmacies extends StatelessWidget {
                 pharmacy: pharmacy,
                 onTapPencil: () {
                   Get.toNamed(Routes.editMyPharmacy,
-                      arguments: pharmacy); //这里是可以给下一个编辑页面传东西
+                      arguments:
+                          pharmacy); //Passing the information to the next page
                 },
                 // onTapPoubelle: (phone) {
                 //   debugPrint('phone: $phone');
@@ -117,7 +118,7 @@ class PharmaciesCard extends StatelessWidget {
     Key? key,
     this.width = 140,
     this.aspectRetio = 1.02,
-    this.onTapPencil, //这里加属性
+    this.onTapPencil,
     this.onTapPoubelle,
     required this.pharmacy,
   }) : super(key: key);
@@ -125,7 +126,7 @@ class PharmaciesCard extends StatelessWidget {
   final double width, aspectRetio;
   final Pharmacy pharmacy;
 
-  final VoidCallback? onTapPencil; //这里加属性
+  final VoidCallback? onTapPencil;
   final VoidCallback? onTapPoubelle;
 
   @override

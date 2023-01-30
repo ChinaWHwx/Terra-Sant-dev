@@ -23,17 +23,17 @@ class EditAVLPController extends GetxController with StateMixin<List<dynamic>> {
   final homepagePharController = Get.find<HomepagePharController>();
   final signInController = Get.find<SignInController>();
   final availabilityPhar = Get.arguments as AvailabilityPhar;
-//这里获取上一个页面传来的数据
+//Here get the data from the last page
   @override
   void onInit() {
     change(null, status: RxStatus.empty());
     super.onInit();
     final availabilityPhars = Get.arguments as AvailabilityPhar;
-//这里获取到listMyPhar中与传来的qvlP中phid相同的ph
+//Here get pharmacie from listMyPhar which correspond by phid from the sended avlP
     oldPharID = availabilityPhars.ph_id;
     final phar1 = homepagePharController.listMyPhar
         .firstWhere((element) => element.phId == availabilityPhars.ph_id);
-//然后就能得到本avlp的phNa
+//then can get the phName of this avlP
     selected.value = phar1.phName ?? '';
     dateController = DateTime.parse(availabilityPhars.date_month_year_phar!);
     selectedForStatus.value = availabilityPhars.status_needed ?? 'Autre';
